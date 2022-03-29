@@ -1,0 +1,27 @@
+Package: rWCVP
+Type: Package
+Title: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants
+Version: 0.1.0
+Authors@R: person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre"))
+Maintainer: Matilda Brown <m.brown2@kew.org>
+Description: An R interface to the World Checklist of 
+    Vascular Plants. It includes functions to generate maps and species lists, as 
+    well as match names to the WCVP. 
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
+RoxygenNote: 7.1.2
+Imports: 
+    dplyr,
+    ggplot2,
+    glue,
+    magrittr,
+    phonics,
+    RecordLinkage,
+    rWCVPdata,
+    sf
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
