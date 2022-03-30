@@ -25,7 +25,7 @@ wcvp_fuzzy_match <- function(x){
   if("taxon.name" %notin% colnames(x)) stop("There is no variable named taxon.name")
 
   wcvp_to_search <- dplyr::filter(rWCVPdata::wcvp_names, taxon_rank != "Genus") %>%
-    dplyr::select(dplyr::all_of(c("plant_name_id","genus","taxon_name","taxon_rank","taxon_status",
+    dplyr::select(dplyr::all_of(c("plant_name_id","genus","taxon_name","taxon_rank","taxon_status","taxon_authors",
                            "accepted_plant_name_id","homotypic_synonym")))
 
   x_phonetic <- phonetic_match(x, wcvp_to_search) %>%
@@ -59,7 +59,7 @@ x_matched <- dplyr::left_join(x, rbind(x_phonetic, x_fuzzy), by="id")
 #' names, see \code{fuzzy_match} for Levenshtein matching)
 
 phonetic_match <- function(x, wcvp_to_search){
-  genus <- id <- plant_name_id <- taxon_name <- taxon_rank <- taxon_status <- accepted_plant_name_id <- homotypic_synonym <- match_type <- match_similarity <-  NULL
+  genus <- id <- plant_name_id <- taxon_name <- taxon_rank <- taxon_status <- taxon_authors <- accepted_plant_name_id <- homotypic_synonym <- match_type <- match_similarity <-  NULL
 
   wcvp_to_search$mp <- phonics::metaphone(wcvp_to_search$taxon_name, maxCodeLen = 20, clean=FALSE)
 
@@ -69,6 +69,7 @@ phonetic_match <- function(x, wcvp_to_search){
   x_join <- dplyr::left_join(x, wcvp_to_search, by="mp")
 
   x_join$match_similarity <- round(RecordLinkage::levenshteinSim(x_join$taxon.name, x_join$taxon_name),3)
+  x_join$match_edit_distance <- diag(adist(x_join$taxon.name, x_join$taxon_name))
 
   x_join[which(x_join$match_similarity < 0.75),"match_type"] <- paste0("No phonetic match with similarity >0.75 found")
   x_join[which(x_join$match_similarity >= 0.75),"match_type"] <- "Phonetically matched (weak)"
@@ -76,8 +77,8 @@ phonetic_match <- function(x, wcvp_to_search){
 
 
   x_join <- x_join %>%
-    dplyr:: select(id, plant_name_id, taxon_name, taxon_rank, taxon_status,
-                   accepted_plant_name_id, homotypic_synonym, match_type, match_similarity)
+    dplyr:: select(id, plant_name_id, taxon_name, taxon_rank, taxon_status, taxon_authors,
+                   accepted_plant_name_id, homotypic_synonym, match_type, match_similarity, match_edit_distance)
 
   return(x_join)
 }
@@ -93,7 +94,7 @@ phonetic_match <- function(x, wcvp_to_search){
 #' implemented in the \code{RecordLinkage} package)
 
 fuzzy_match <- function(x,wcvp_to_search){
-  genus <- id <- plant_name_id <- taxon.name <-  taxon_name <- taxon_rank <- taxon_status <- accepted_plant_name_id <- homotypic_synonym <- match_type <- NULL
+  genus <- id <- plant_name_id <- taxon.name <-  taxon_name <- taxon_rank <- taxon_status <-taxon_authors <-  accepted_plant_name_id <- homotypic_synonym <- match_type <- NULL
 
   x <- x[!is.na(x$taxon.name),]
   x_genera <- strsplit(x$taxon.name," ")
@@ -143,11 +144,12 @@ fuzzy_match <- function(x,wcvp_to_search){
         }
     }
     matches <- dplyr::bind_rows(matches, bestname) %>%
-      dplyr:: select(id, plant_name_id,taxon.name, taxon_name, taxon_rank, taxon_status,
+      dplyr:: select(id, plant_name_id,taxon.name, taxon_name, taxon_rank, taxon_status, taxon_authors,
                      accepted_plant_name_id, homotypic_synonym, match_type)
   }
 
   matches$match_similarity <- round(RecordLinkage::levenshteinSim(matches$taxon.name, matches$taxon_name),3)
+  matches$match_edit_distance <- diag(adist(matches$taxon.name, matches$taxon_name))
   matches <- matches %>% dplyr::select(-taxon.name)
 
 

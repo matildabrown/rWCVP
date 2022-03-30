@@ -76,7 +76,7 @@ wcvp_name_match <- function(x,
 
   #column names of input (modified as above) and output
   new.cols <- colnames(x)
-  end.cols <- c(new.cols, "plant_name_id","taxon_name","taxon_rank","taxon_status","accepted_plant_name_id","homotypic_synonym")
+  end.cols <- c(new.cols, "plant_name_id","taxon_name","taxon_rank","taxon_status","taxon_authors","accepted_plant_name_id","homotypic_synonym")
 
   message(glue::glue("________________________________________________________________________________
                      Matching {length(unique(x$taxon.name))} names..."))
@@ -94,15 +94,17 @@ wcvp_name_match <- function(x,
     # Match names
     matched_inwcvp_auth <- x_inwcvp_auth %>%
       dplyr::left_join(., rWCVPdata::wcvp_names %>%
-                         dplyr::mutate(taxon_name2=taxon_name),
+                         dplyr::mutate(taxon_name2=taxon_name,
+                                       taxon_authors2=taxon_authors),
                 by=c("taxon.name"="taxon_name2",
-                     "taxon.authors"="taxon_authors"))
+                     "taxon.authors"="taxon_authors2"))
 
     res_inwcvp_auth <-  matched_inwcvp_auth %>%
       dplyr::select(dplyr::all_of(end.cols)) %>%
       dplyr::filter(!is.na(plant_name_id)) %>%
       dplyr::mutate(match_type = "Matched in WCVP (with author)",
-                    match_similarity = 1)
+                    match_similarity = 1,
+                    match_edit_distance = 0)
 
     multi_matches <- unique(res_inwcvp_auth$id[which(duplicated(res_inwcvp_auth$id)==TRUE)])
 
@@ -138,7 +140,8 @@ wcvp_name_match <- function(x,
   res_inwcvp_noauth <-  matched_inwcvp_noauth %>%
     dplyr::select(dplyr::all_of(end.cols)) %>%
     dplyr::mutate(match_type = "Matched in WCVP (without author)",
-                  match_similarity = 0)
+                  match_similarity = 1,
+                  match_edit_distance = 0)
 
   multi_matches <- unique(res_inwcvp_noauth$id[which(duplicated(res_inwcvp_noauth$id)==TRUE)])
 
@@ -193,12 +196,22 @@ if(length(multi_matches)>0)   message(glue::glue("Multiple matches found for {le
     colnames(matches)[which(colnames(matches)==id)] <- "id"
   } else { matches <- dplyr::select(matches, -id)}
 
-matches <- dplyr::select(matches, -full.col)
+matches <- dplyr::select(matches, -full.col) %>%
+  dplyr::select(-row.order)
 
   # rename authors
   if(!is.null(authors)) {
     colnames(matches)[which(colnames(matches)=="taxon.authors")] <- authors
   }
+
+  matches <- matches %>%
+    dplyr::rename(wcvp_plant_name_id = plant_name_id,
+                  wcvp_taxon_name = taxon_name,
+                  wcvp_taxon_rank = taxon_rank,
+                  wcvp_taxon_status = taxon_status,
+                  wcvp_taxon_authors = taxon_authors,
+                  wcvp_accepted_plant_name_id = accepted_plant_name_id,
+                  wcvp_homotypic_synonym = homotypic_synonym)
 
   return(matches)
 
