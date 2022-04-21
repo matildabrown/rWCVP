@@ -17,6 +17,7 @@
 #'     infraspecific rank (e.g. subsp., var.). Defaults to NULL.
 #' @param infra Character. The name of the variable in \code{x} containing the
 #'     infraspecific epithet. Defaults to NULL.
+#' @param fuzzy Logical. Perform fuzzy matching? Defaults to TRUE.
 #' @return data.frame consisting of the input \code{x} with name matching variables appended
 #' @export
 #' @import rWCVPdata
@@ -33,7 +34,8 @@ wcvp_name_match <- function(x,
                             genus = NULL,
                             spec = NULL,
                             infra.rank = NULL,
-                            infra = NULL){
+                            infra = NULL,
+                            fuzzy = TRUE){
 
   taxon.authors <- . <- plant_name_id <- row.order <- taxon_name <- full.col <-   NULL
 
@@ -165,18 +167,22 @@ if(length(multi_matches)>0)   message(glue::glue("Multiple matches found for {le
   #_____________________________________________________________________________
   x_notinwcvp <-  x[which(x$taxon.name %notin% rWCVPdata::wcvp_names$taxon_name),]
 
+  if(fuzzy==TRUE){
 
   # 3. Fuzzy matching  ####
   message(glue::glue("---
                      Fuzzy matching {length(unique(x_notinwcvp$taxon.name))} names...this may take some time"))
   fuzzy_matches <- wcvp_fuzzy_match(x_notinwcvp)
-  message(glue::glue("Fuzzy matched {length(unique(which(!is.na(fuzzy_matches$taxon_name))))} ",
+  message(glue::glue("Fuzzy matched {length(which(!is.na(unique(fuzzy_matches$taxon_name))))} ",
                      "out of {length(unique(x_notinwcvp$taxon.name))} names."))
+
+  matches <- dplyr::bind_rows(matches, fuzzy_matches)
+  }
 #_____________________________________________________________________________
 #
 #   # Compilation of matched results  ####
 
-  matches <- dplyr::bind_rows(matches, fuzzy_matches) %>%
+  matches <- matches %>%
     dplyr::arrange(dplyr::all_of(row.order)) %>%
     dplyr::select(-dplyr::all_of(row.order))
   message(glue::glue("---
