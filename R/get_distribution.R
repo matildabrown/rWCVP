@@ -1,6 +1,6 @@
 #' Generate spatial distribution objects for species, genera or families
 #'
-#' @param taxon Character. The taxon (or taxa) to be mapped
+#' @param taxon Character. The taxon to be mapped.
 #' @param rank Character. The rank of \code{taxon}. Note: if multiple taxa are
 #' to be mapped, they must be of the same rank.
 #' @param native Logical. Include native range? Defaults to TRUE.
@@ -46,6 +46,8 @@ get_distribution <- function(taxon, rank, native = TRUE, introduced = TRUE,
     if (is.null(wcvp_names)) stop("Pointer to wcvp_names missing.")
     if (is.null(wcvp_distributions)) stop("Pointer to wcvp_distributions missing.")
   }
+
+  if(length(taxon)>1) stop("'taxon' argument must be a single name")
 
   df <- dplyr::right_join(wcvp_names %>% dplyr::select(plant_name_id, taxon_rank, taxon_status,family, genus,species, taxon_name, taxon_authors),
     wcvp_distributions)
