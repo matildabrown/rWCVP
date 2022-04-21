@@ -1,7 +1,7 @@
 Package: rWCVP
 Type: Package
 Title: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre"))
 Maintainer: Matilda Brown <m.brown2@kew.org>
 Description: An R interface to the World Checklist of 
