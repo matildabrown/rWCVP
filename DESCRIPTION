@@ -23,7 +23,9 @@ Imports:
     sf
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP
 BugReports: https://github.com/matildabrown/rWCVP/issues
+Config/testthat/edition: 3
