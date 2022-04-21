@@ -24,13 +24,15 @@
 #' p <- plot_distribution(r)
 #' p[[1]]
 #' p[[2]]
-get_distribution <- function(taxon, rank, native = TRUE, introduced = TRUE,
+get_distribution <- function(taxon, rank=c("species", "genus", "family"), native = TRUE, introduced = TRUE,
                               extinct = TRUE, location_doubtful = TRUE,
                               local_wcvp=FALSE, wcvp_names=NULL,
                               wcvp_distributions=NULL){
 
   LEVEL3_COD <- df <- doubt <- intro <- occurrence_type <- plant_name_id <- NULL
   species <- taxon_authors <- taxon_rank <- taxon_status <- NULL
+
+  rank <- match.arg(rank)
 
   shown <- native
   showi <- introduced
