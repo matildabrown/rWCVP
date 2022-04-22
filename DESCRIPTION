@@ -20,7 +20,8 @@ Imports:
     phonics,
     RecordLinkage,
     rWCVPdata,
-    sf
+    sf,
+    tidyr
 Suggests: 
     rmarkdown,
     knitr,
