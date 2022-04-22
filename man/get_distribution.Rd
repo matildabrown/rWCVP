@@ -6,7 +6,7 @@
 \usage{
 get_distribution(
   taxon,
-  rank,
+  rank = c("species", "genus", "family"),
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -17,7 +17,7 @@ get_distribution(
 )
 }
 \arguments{
-\item{taxon}{Character. The taxon (or taxa) to be mapped}
+\item{taxon}{Character. The taxon to be mapped.}
 
 \item{rank}{Character. The rank of \code{taxon}. Note: if multiple taxa are
 to be mapped, they must be of the same rank.}

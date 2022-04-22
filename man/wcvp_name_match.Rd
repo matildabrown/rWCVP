@@ -12,7 +12,8 @@ wcvp_name_match(
   genus = NULL,
   spec = NULL,
   infra.rank = NULL,
-  infra = NULL
+  infra = NULL,
+  fuzzy = TRUE
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ infraspecific rank (e.g. subsp., var.). Defaults to NULL.}
 
 \item{infra}{Character. The name of the variable in \code{x} containing the
 infraspecific epithet. Defaults to NULL.}
+
+\item{fuzzy}{Logical. Perform fuzzy matching? Defaults to TRUE.}
 }
 \value{
 data.frame consisting of the input \code{x} with name matching variables appended
