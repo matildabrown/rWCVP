@@ -69,7 +69,7 @@ phonetic_match <- function(x, wcvp_to_search){
   x_join <- dplyr::left_join(x, wcvp_to_search, by="mp")
 
   x_join$match_similarity <- round(RecordLinkage::levenshteinSim(x_join$taxon.name, x_join$taxon_name),3)
-  x_join$match_edit_distance <- diag(adist(x_join$taxon.name, x_join$taxon_name))
+  x_join$match_edit_distance <- diag(utils::adist(x_join$taxon.name, x_join$taxon_name))
 
   x_join[which(x_join$match_similarity < 0.75),"match_type"] <- paste0("No phonetic match with similarity >0.75 found")
   x_join[which(x_join$match_similarity >= 0.75),"match_type"] <- "Phonetically matched (weak)"
@@ -149,7 +149,7 @@ fuzzy_match <- function(x,wcvp_to_search){
   }
 
   matches$match_similarity <- round(RecordLinkage::levenshteinSim(matches$taxon.name, matches$taxon_name),3)
-  matches$match_edit_distance <- diag(adist(matches$taxon.name, matches$taxon_name))
+  matches$match_edit_distance <- diag(utils::adist(matches$taxon.name, matches$taxon_name))
   matches <- matches %>% dplyr::select(-taxon.name)
 
 
