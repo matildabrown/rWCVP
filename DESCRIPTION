@@ -2,7 +2,8 @@ Package: rWCVP
 Type: Package
 Title: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants
 Version: 0.2.0
-Authors@R: person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre"))
+Authors@R: c(person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre")),
+             person("Barnaby","Walker",,"b.walker@kew.org",role=c("aut")))
 Maintainer: Matilda Brown <m.brown2@kew.org>
 Description: An R interface to the World Checklist of 
     Vascular Plants. It includes functions to generate maps and species lists, as 
@@ -16,15 +17,17 @@ Imports:
     dplyr,
     ggplot2,
     glue,
+    gt,
     magrittr,
     phonics,
     RecordLinkage,
+    rmarkdown,
     rWCVPdata,
     sf,
     tidyr
 Suggests: 
-    rmarkdown,
     knitr,
+    purrr,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP
