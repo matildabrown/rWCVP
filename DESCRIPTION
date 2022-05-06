@@ -19,13 +19,13 @@ Imports:
     magrittr,
     phonics,
     RecordLinkage,
-    rWCVPdata,
     sf,
     tidyr
 Suggests: 
     rmarkdown,
     knitr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rWCVPdata
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP
 BugReports: https://github.com/matildabrown/rWCVP/issues

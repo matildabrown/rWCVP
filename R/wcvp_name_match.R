@@ -20,7 +20,6 @@
 #' @param fuzzy Logical. Perform fuzzy matching? Defaults to TRUE.
 #' @return data.frame consisting of the input \code{x} with name matching variables appended
 #' @export
-#' @import rWCVPdata
 #'
 #' @examples
 #' # without author
