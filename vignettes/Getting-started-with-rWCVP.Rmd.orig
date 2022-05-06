@@ -1,7 +1,7 @@
 ---
 title: Getting started with rWCVP
 author: "Matilda Brown"
-date: "06 May, 2022"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting started with rWCVP}
@@ -9,10 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
 
-
-
-```r
+```{r libraries}
 library(rWCVP)
 ```
 
@@ -22,49 +25,34 @@ This R package has been designed to facilitate use of the World Checklist of Vas
 
 We may want to generate a range map for a species, genus or family, like from POWO.
 
-
-```r
+```{r generate-callitris-plot}
 p <- plot_distribution(get_distribution("Callitris", rank="genus"))
 ```
 
-
-```r
+```{r callitris-global-distribution}
 p[[1]] #global
 ```
-
-![plot of chunk callitris-global-distribution](figure/callitris-global-distribution-1.png)
 
 We can filter this map to only the native range by using introduced=FALSE (there are also location_doubtful and extinct that can be switched on and off).
 
-
-```r
+```{r generate-callitris-native-plot}
 p <- plot_distribution(get_distribution("Callitris", rank="genus", introduced=FALSE))
 ```
 
-
-```r
+```{r callitris-native-global-distribution}
 p[[1]] #global
 ```
 
-![plot of chunk callitris-native-global-distribution](figure/callitris-native-global-distribution-1.png)
-
-
-```r
+```{r callitris-native-zoomed-distribution}
 p[[2]] #zoomed in
 ```
 
-![plot of chunk callitris-native-zoomed-distribution](figure/callitris-native-zoomed-distribution-1.png)
-
 Here's a family example:
-
-```r
+```{r generate-melastomataceae}
 p <- plot_distribution(get_distribution("Melastomataceae", rank="family"))
 ```
 
-
-```r
+```{r melastomataceae-global-distribution}
 p[[1]] #global
 ```
-
-![plot of chunk melastomataceae-global-distribution](figure/melastomataceae-global-distribution-1.png)
 
