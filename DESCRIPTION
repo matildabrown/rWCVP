@@ -26,7 +26,7 @@ Imports:
     tidyr
 Suggests: 
     knitr,
-    rWCVPdata
+    rWCVPdata,
     purrr,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
