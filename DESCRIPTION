@@ -18,12 +18,15 @@ Imports:
     ggplot2,
     glue,
     gt,
+    htmltools,
     magrittr,
     phonics,
     RecordLinkage,
+    rlang,
     rmarkdown,
     rWCVPdata,
     sf,
+    stringr,
     tidyr
 Suggests: 
     knitr,
