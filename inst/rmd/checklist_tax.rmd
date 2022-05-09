@@ -71,7 +71,7 @@ if(synonyms==TRUE) {
 
 ```{r, echo = FALSE, results = "asis"}
   cat("\n")
-if(input.area != "global")  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n") else cat("### Geography: Global","\n")
+if(!identical(input.area, "global"))  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n") else cat("### Geography: Global","\n")
 ```
 ```{r warning=FALSE, fig.asp=0.4822878, results="hide", message=FALSE}
 shp <- rWCVPdata::wgsprd3
@@ -122,7 +122,7 @@ data.frame(v1= c("E","e","x","i","?"),
 ```{r results='asis'}
 df %>% 
   dplyr::select(area_code_l3, area, region, continent) %>% 
-  {if(input.area != "global") dplyr::filter(.,area_code_l3 %in% input.area) else unique(.)} %>% 
+  {if(!identical(input.area, "global")) dplyr::filter(.,area_code_l3 %in% input.area) else unique(.)} %>% 
   unique() %>% 
   na.omit() %>% 
   dplyr::arrange(continent, region, area_code_l3) %>% 

@@ -59,8 +59,9 @@ For compilers and reviewers of the dataset, see: https://wcsp.science.kew.org/co
 ___
 
 ```{r, echo = FALSE, results = "asis"}
-if(!is.null(taxa))  taxa = "All taxa"
+if(!is.null(taxa)){
   cat("### Taxa: ", paste(taxa, collapse = " + "),  "\n")
+  } else {cat("### Taxa: All \n") }
   cat("\n")
 if(synonyms==TRUE) {
   cat("**Including synonyms, illegitimate, invalid and other non-accepted names.**") 
@@ -70,7 +71,7 @@ if(synonyms==TRUE) {
 
 ```{r, echo = FALSE, results = "asis"}
   cat("\n")
-  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n")
+if(!identical(input.area, "global"))  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n") else cat("### Geography: Global","\n")
 ```
 ```{r warning=FALSE, fig.asp=0.4822878, results="hide", message=FALSE}
 shp <- rWCVPdata::wgsprd3
@@ -98,20 +99,30 @@ if("X" %in% colnames(df)) df <- select(df, -X)
 
 
 ### Symbols used in species list
+```{r}
+data.frame(v1= c("E","e","x","i","?"), 
+                      v2=c("Endemic to a single WGSPRD Level 3 area",
+                           "Regionally endemic (to the input geography, above)",
+                           "Considered extinct or eradicated",
+                           "Introduced and naturalised",
+                           "Occurrence doubtful"
+                           )) %>% 
+  gt::gt() %>% 
+    gt::tab_options(
+    data_row.padding = gt::px(1),
+    data_row.padding.horizontal = gt::px(15),
+    column_labels.hidden = TRUE,
+    table.align = "left")
+  
+```
 
---------------   ----------------
-E                Endemic to a single WGSPRD Level 3 area
-e                Regionally endemic (to the set of areas shown in **Geography** above)
-x                Considered extinct or eradicated
-i                Introduced and naturalised
-?                Occurrence doubtful
- --------------   ----------------
+
 
 ### Key to regions
 ```{r results='asis'}
 df %>% 
   dplyr::select(area_code_l3, area, region, continent) %>% 
-  dplyr::filter(area_code_l3 %in% input.area) %>% 
+  {if(!identical(input.area, "global")) dplyr::filter(.,area_code_l3 %in% input.area) else unique(.)} %>% 
   unique() %>% 
   na.omit() %>% 
   dplyr::arrange(continent, region, area_code_l3) %>% 
@@ -142,6 +153,10 @@ df %>%
 ### Basic statistics
 
 ``` {r results = 'asis', message=FALSE}
+if(!"in_geography" %in% colnames(df)) {
+  df$in_geography <- 1
+  df$area_endemic <- 1
+}
 
 summ_df <- data.frame(area_code_l3="Region",
            cat=c("Total", "Endemic (to region)"),
@@ -158,6 +173,7 @@ n.sp= c(nrow(unique(df %>%
 
 if(identical(input.area,"global")) {
   cat("**Total number of species: **", as.numeric(summ_df[1,2]))
+  input.area <- unique(df$area_code_l3)
 } else {
   cat("**Total number of species: **", as.numeric(summ_df[1,2], "\n"))
   cat('\n') 
@@ -248,7 +264,7 @@ suppressMessages(summ %>%
   
 ```
 
-    
+     
     
     
 ### List of species
