@@ -45,7 +45,7 @@ infraspecific epithet. Defaults to NULL.}
 \item{fuzzy}{Logical. Perform fuzzy matching? Defaults to TRUE.}
 }
 \value{
-data.frame consisting of the input \code{x} with name matching variables appended
+data.frame consisting of the input \code{x} with name matching variables appended (see Details)
 }
 \description{
 Match names to the WCVP

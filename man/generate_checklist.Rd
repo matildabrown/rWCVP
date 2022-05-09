@@ -6,7 +6,7 @@
 \usage{
 generate_checklist(
   taxon = NULL,
-  taxon.rank = c("species", "genus", "family"),
+  rank = c("species", "genus", "family"),
   area = NULL,
   synonyms = TRUE,
   render.report = FALSE,
@@ -15,6 +15,7 @@ generate_checklist(
   extinct = TRUE,
   location_doubtful = TRUE,
   report.filename = NULL,
+  report.type = c("alphabetical", "taxonomic"),
   local_wcvp = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
@@ -23,7 +24,7 @@ generate_checklist(
 \arguments{
 \item{taxon}{Character. One or many taxa to be included. Defaults to NULL (all species)}
 
-\item{taxon.rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.}
+\item{rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to NULL (global).}
 
@@ -39,7 +40,9 @@ generate_checklist(
 
 \item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
 
-\item{report.filename}{Character. Filename for the HTML file generated. Defaults to requiring user input.}
+\item{report.filename}{Character. Filename for the HTML file generated. Defaults to "[taxon]_[area]_[checklist.type].html".}
+
+\item{report.type}{Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
 \item{local_wcvp}{Logical. If FALSE (the default), use data from \code{rWCVPdata}.
 If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
@@ -50,8 +53,11 @@ version of the checklist).}
 \item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
 }
 \value{
-
+Data.frame with filtered data and, if render.report=TRUE. a report HTML file.
 }
 \description{
 Generate a species checklist from WCVP
+}
+\examples{
+generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
 }

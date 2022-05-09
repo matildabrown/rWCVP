@@ -13,7 +13,7 @@
 #' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #'
-#'
+#' @importFrom rlang .data
 #' @return A data.frame containing the \code{taxon_name} and \code{plant_name_id}
 #' of all species that are present in the \code{area}, plus one variable for each WGSPRD level 3 region in \code{area}, with species presences marked as 1 and absences marked as 0.
 #' @export
@@ -47,22 +47,22 @@ generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genu
   if (is.null(taxon)) message("No taxon specified. Generating occurrence matrix for all species.")
 
    df <- suppressMessages(dplyr::left_join(wcvp_names %>%
-                     dplyr::select(plant_name_id, taxon_name, taxon_status, taxon_rank, family, genus),
+                     dplyr::select(.data$plant_name_id, .data$taxon_name, .data$taxon_status, .data$taxon_rank, .data$family, .data$genus),
                    wcvp_distributions)) %>%
-     dplyr::filter(taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
-                   taxon_rank == "Species")
+     dplyr::filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
+                   .data$taxon_rank == "Species")
 
   if(!is.null(taxon)) df <- df %>% dplyr::filter(dplyr::if_any(taxon.rank) %in% taxon)
-  if(int==FALSE) df <- dplyr::filter(df, introduced==0)
-  if(ext==FALSE) df <- dplyr::filter(df, extinct==0)
-  if(dou==FALSE) df <- dplyr::filter(df, location_doubtful==0)
+  if(int==FALSE) df <- dplyr::filter(df, .data$introduced==0)
+  if(ext==FALSE) df <- dplyr::filter(df, .data$extinct==0)
+  if(dou==FALSE) df <- dplyr::filter(df, .data$location_doubtful==0)
 
 
-   species_total <- dplyr::filter(df, area_code_l3 %in% omarea) %>%
-     dplyr::select(plant_name_id, taxon_name, area_code_l3) %>%
+   species_total <- dplyr::filter(df, .data$area_code_l3 %in% omarea) %>%
+     dplyr::select(.data$plant_name_id, .data$taxon_name, .data$area_code_l3) %>%
      dplyr::mutate(present = 1)
 
-   ocmat <-  tidyr::pivot_wider(species_total, names_from=area_code_l3, values_from=present, values_fill=0) %>%
+   ocmat <-  tidyr::pivot_wider(species_total, names_from=.data$area_code_l3, values_from=.data$present, values_fill=0) %>%
      unique()
 
  return(ocmat)

@@ -7,7 +7,7 @@
 get_area_name(area.codes)
 }
 \arguments{
-\item{area.codes}{}
+\item{area.codes}{Character vector containing the set of codes to be mapped to a name.}
 }
 \value{
 Character. Either a vector of length one, with a name for the set of

@@ -11,6 +11,8 @@
 
 get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 
+  wgsrpd_mapping <- rWCVP::wgsrpd_mapping
+
   levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
                   COUNTRY = "Country (political)",
                   LEVEL2_NAM = "Region (Level 2)",
@@ -42,12 +44,12 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
   }
 
   wgsrpd_mapping %>%
-  dplyr::filter(LEVEL1_NAM %in% geography |
-                LEVEL1_NAM %in% toupper(geography) |
-                LEVEL2_NAM %in% geography |
-                LEVEL3_NAM %in% geography |
-                HEMISPHERE %in% geography) %>%
-  dplyr::pull(LEVEL3_COD) %>%
+  dplyr::filter(.data$LEVEL1_NAM %in% geography |
+                  .data$LEVEL1_NAM %in% toupper(geography) |
+                  .data$LEVEL2_NAM %in% geography |
+                  .data$LEVEL3_NAM %in% geography |
+                  .data$HEMISPHERE %in% geography) %>%
+  dplyr::pull(.data$LEVEL3_COD) %>%
   return()
 
 }
@@ -56,7 +58,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 
 #' Get area description from vector of area codes
 #'
-#' @param area.codes
+#' @param area.codes Character vector containing the set of codes to be mapped to a name.
 #'
 #' @return Character. Either a vector of length one, with a name for the set of
 #' Level 3 areas, or (if no name exists for that set of areas) the input vector of codes.
@@ -64,7 +66,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 #'
 #' @examples get_area_name(get_wgsrpd3_codes("Brazil"))
 get_area_name <- function(area.codes){
-
+  wgsrpd_mapping <- rWCVP::wgsrpd_mapping
   nhi <-   c("ABT", "AFG", "ALA", "ALB", "ALG", "ALT", "ALU", "AMU", "AND",
              "ARI", "ARK", "ARU", "ASK", "ASS", "AUT", "AZO", "BAH", "BAL",
              "BAN", "BEN", "BER", "BGM", "BKN", "BLR", "BLT", "BLZ", "BOR",
@@ -164,7 +166,7 @@ get_area_name <- function(area.codes){
   )
 
   levelvals <- wgsrpd_mapping %>%
-    dplyr::filter(LEVEL3_COD %in% area.codes) %>%
+    dplyr::filter(.data$LEVEL3_COD %in% area.codes) %>%
     dplyr::summarise(dplyr::across(1:8, function(x){length(unique(x))})) %>%
     t() %>%
     data.frame() %>%
@@ -178,15 +180,15 @@ get_area_name <- function(area.codes){
   }
 
   bestlevelval <- wgsrpd_mapping %>%
-    dplyr::filter(LEVEL3_COD %in% area.codes) %>%
+    dplyr::filter(.data$LEVEL3_COD %in% area.codes) %>%
     dplyr::select(dplyr::any_of(bestlevel)) %>%
     unique() %>%
     dplyr::pull()
 
  allcodesforname <-  wgsrpd_mapping %>%
     dplyr::filter(dplyr::if_any(bestlevel) %in% bestlevelval) %>%
-    dplyr::arrange(LEVEL3_COD) %>%
-    dplyr::pull(LEVEL3_COD)
+    dplyr::arrange(.data$LEVEL3_COD) %>%
+    dplyr::pull(.data$LEVEL3_COD)
 
 
   if(identical(allcodesforname, area.codes[order(area.codes)])) {

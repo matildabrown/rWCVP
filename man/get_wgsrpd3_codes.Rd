@@ -2,7 +2,7 @@
 % Please edit documentation in R/wgsrpd3_code_mapping.R
 \name{get_wgsrpd3_codes}
 \alias{get_wgsrpd3_codes}
-\title{Extract WGSRPD}
+\title{Extract WGSRPD Level 3 (area) codes.}
 \usage{
 get_wgsrpd3_codes(geography, include.equatorial = NULL)
 }
@@ -15,7 +15,7 @@ get_wgsrpd3_codes(geography, include.equatorial = NULL)
 Character with area codes (Level 3) that fall within the geography.
 }
 \description{
-Extract WGSRPD
+Extract WGSRPD Level 3 (area) codes.
 }
 \examples{
 get_wgsrpd3_codes("Brazil")
