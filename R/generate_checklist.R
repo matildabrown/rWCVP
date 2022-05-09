@@ -157,24 +157,26 @@ if(render.report==TRUE){
 
 if(report.type=="alphabetical"){
 message(glue::glue("Saving report as: ", report.filename))
-rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
+  suppressWarnings(rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
                   quiet = TRUE,
        params=list( version = "New Phytologist Special Issue",
                     taxa = taxon,
                     area_delim = area,
                     mydata = df,
                     synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
+  )
 }
 
   if(report.type=="taxonomic"){
     message(glue::glue("Saving report as: ", report.filename))
-    rmarkdown::render(system.file("rmd", "checklist_tax.Rmd", package = "rWCVP"),
+    suppressWarnings(rmarkdown::render(system.file("rmd", "checklist_tax.Rmd", package = "rWCVP"),
                       quiet = TRUE,
                       params=list( version = "New Phytologist Special Issue",
                                    taxa = taxon,
                                    area_delim = area,
                                    mydata = df,
                                    synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
+    )
   }
        }
 
