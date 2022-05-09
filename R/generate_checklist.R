@@ -36,18 +36,6 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family"),
 report.type <- match.arg(report.type)
 rank <- match.arg(rank)
 
-if(render.report==TRUE & is.null(report.filename)){
-  if(!is.null(taxon)) n1 <- taxon else n1 <- NULL
-  if(!is.null(area)) {
-    n2 <- get_area_name(area)
-    if(length(n2)>1) n2 <- paste(n2, sep="-")
-    } else n2 <- NULL
-    report.filename <- paste(n1,n2,report.type,"checklist.html", sep="_")
-    report.filename <- gsub(" ", "_",report.filename)
-    report.filename <- sub("_$","",report.filename)
-    report.filename <- sub("^_","",report.filename)
-    report.filename <- sub("__","_",report.filename)
-}
 
 occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
 show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
@@ -107,7 +95,7 @@ if (!is.null(area)){
 
   df_summ <- df %>%
     filter(!is.na(.data$area_code_l3)) %>%
-    group_by(.data$plant_name_id, in_geography) %>%
+    group_by(.data$plant_name_id, .data$in_geography) %>%
     summarise(counts=n(), .groups = "drop_last") %>%
     mutate(in_geography=paste0("in.geography.",.data$in_geography)) %>%
     tidyr::pivot_wider(names_from = .data$in_geography, values_from = .data$counts) %>%
@@ -124,6 +112,7 @@ if (!is.null(area)){
 } else {
   area <- "global"
   df$area_endemic <- NA
+  df$in_geography <- 1
 }
 
 
@@ -138,16 +127,32 @@ df <- df %>%
     TRUE ~ "native",
   )) %>%
   filter(.data$occurrence_type %in% show_types) %>%
-  filter(taxon_rank != "Genus") %>%
+  filter(.data$taxon_rank != "Genus") %>%
   arrange(.data$genus, .data$species, .data$infraspecies) %>%
   relocate(.data$accepted_name, .after = .data$accepted_plant_name_id) %>%
   relocate(.data$occurrence_type, .before = .data$introduced) %>%
   relocate(.data$in_geography, .after = .data$location_doubtful)
 
+
 if(nrow(df)==0) stop("No occurrences after filtering by occurrence type.")
 
 
 if(render.report==TRUE){
+  if(report.type =="taxonomic" & length(unique(df$family))>1) warning("Taxonomic checklist format does not display family information.")
+
+    if(is.null(report.filename)){
+      if(!is.null(taxon)) n1 <- taxon else n1 <- NULL
+      if(!is.null(area)) {
+        n2 <- get_area_name(area)
+        if(length(n2)>1) n2 <- paste(n2, sep="-")
+      } else n2 <- NULL
+      report.filename <- paste(n1,n2,report.type,"checklist.html", sep="_")
+      report.filename <- gsub(" ", "_",report.filename)
+      report.filename <- sub("_$","",report.filename)
+      report.filename <- sub("^_","",report.filename)
+      report.filename <- sub("__","_",report.filename)
+    }
+
 
 
 if(report.type=="alphabetical"){
@@ -160,6 +165,17 @@ rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
                     mydata = df,
                     synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
 }
+
+  if(report.type=="taxonomic"){
+    message(glue::glue("Saving report as: ", report.filename))
+    rmarkdown::render(system.file("rmd", "checklist_tax.Rmd", package = "rWCVP"),
+                      quiet = TRUE,
+                      params=list( version = "New Phytologist Special Issue",
+                                   taxa = taxon,
+                                   area_delim = area,
+                                   mydata = df,
+                                   synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
+  }
        }
 
 return(df)
