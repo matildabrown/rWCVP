@@ -47,16 +47,16 @@ x_matched <- dplyr::left_join(x, rbind(x_phonetic, x_fuzzy), by="id")
 
 
 
-#' Phonetic matching - DEEXPORT WHEN FINISHED
-#'
-#' @param x data.frame containing the variable \code{taxon.name} to match
-#' @param wcvp_to_search data.frame containing selected variables from the WVCP,
-#' without genus-level names
-#'
-#' @return data.frame with relevant WCVP information, plus match_type - an
-#' informative column giving the match result and Levenshtein similarity to
-#' original name (note that this is not the metric that is used to link the
-#' names, see \code{fuzzy_match} for Levenshtein matching)
+# Phonetic matching of taxon names
+#
+# @param x data.frame containing the variable \code{taxon.name} to match
+# @param wcvp_to_search data.frame containing selected variables from the WVCP,
+# without genus-level names
+#
+# @return data.frame with relevant WCVP information, plus match_type - an
+# informative column giving the match result and Levenshtein similarity to
+# original name (note that this is not the metric that is used to link the
+# names, see \code{fuzzy_match} for Levenshtein matching)
 
 phonetic_match <- function(x, wcvp_to_search){
 
@@ -83,15 +83,15 @@ phonetic_match <- function(x, wcvp_to_search){
   return(x_join)
 }
 
-#' Distance-based matching using Levenshtein similarity DEEXPORT WHEN FINISHED
-#'
-#' @param x data.frame containing the variable \code{taxon.name} to match
-#' @param wcvp_to_search data.frame containing selected variables from the WVCP,
-#' without genus-level names
-#'
-#' @return data.frame with relevant WCVP information, plus match_type - an
-#' informative column giving the match result and Levenshtein similarity (as
-#' implemented in the \code{RecordLinkage} package)
+# Distance-based matching using Levenshtein similarity
+#
+# @param x data.frame containing the variable \code{taxon.name} to match
+# @param wcvp_to_search data.frame containing selected variables from the WVCP,
+# without genus-level names
+#
+# @return data.frame with relevant WCVP information, plus match_type - an
+# informative column giving the match result and Levenshtein similarity (as
+# implemented in the \code{RecordLinkage} package)
 
 fuzzy_match <- function(x,wcvp_to_search){
 
