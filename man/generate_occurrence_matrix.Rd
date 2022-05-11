@@ -47,6 +47,9 @@ of all species that are present in the \code{area}, plus one variable for each W
 \description{
 Generate occurrence matrix for taxa and areas
 }
+\details{
+See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
+}
 \examples{
 generate_occurrence_matrix(taxon="Poa",taxon.rank="genus",
 area=c("TAS", "VIC","NSW"), introduced=FALSE)

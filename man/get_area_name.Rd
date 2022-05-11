@@ -16,6 +16,9 @@ Level 3 areas, or (if no name exists for that set of areas) the input vector of 
 \description{
 Get area description from vector of area codes
 }
+\details{
+Usually used as an inverse function for \code{get_wgsrpd3_codes}. Useful for condensing sets of codes for e.g. file names, plotting and table formatting.
+}
 \examples{
 get_area_name(get_wgsrpd3_codes("Brazil"))
 }

@@ -1,8 +1,10 @@
 #' Extract WGSRPD Level 3 (area) codes.
 #'
-#' @param geography Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")
+#' @param geography Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country (political) or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")
 #' @param include.equatorial Logical. Include Level 3 areas that span the equator? Defaults to Null, which generates a message and includes these areas. Ignored if geography is not a hemisphere.
+#' @details Country mapping follows Gallagher et al. (2020).
 #'
+#' Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 #' @return Character with area codes (Level 3) that fall within the geography.
 #' @export
 #'
@@ -62,6 +64,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 #'
 #' @return Character. Either a vector of length one, with a name for the set of
 #' Level 3 areas, or (if no name exists for that set of areas) the input vector of codes.
+#' @details Usually used as an inverse function for \code{get_wgsrpd3_codes}. Useful for condensing sets of codes for e.g. file names, plotting and table formatting.
 #' @export
 #'
 #' @examples get_area_name(get_wgsrpd3_codes("Brazil"))

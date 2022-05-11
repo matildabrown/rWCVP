@@ -6,6 +6,7 @@
 \usage{
 plot_distribution(
   range,
+  crop.map = FALSE,
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -14,6 +15,8 @@ plot_distribution(
 }
 \arguments{
 \item{range}{sf object of the type output by \code{get_distribution()}.}
+
+\item{crop.map}{Logical. Crop map extent to distribution? Defaults to FALSE.}
 
 \item{native}{Logical. Include native range? Defaults to TRUE.}
 
@@ -25,22 +28,24 @@ plot_distribution(
 doubtful? Defaults to TRUE.}
 }
 \value{
-List of length two, with global and local maps of distribution as
-ggplot objects. If taxon has global distribution, only the first element is returned.
+A \code{ggplot} of the distribution.
 }
 \description{
 Plot distribution maps for species, genera or families
 }
 \details{
 The colour scheme mirrors that used by Plants of the World (POWO;
-https://powo.science.kew.org/).
+https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 }
 \examples{
 p <- plot_distribution(get_distribution("Callitris", rank="genus"))
-p[[1]]
-p[[2]]
-#now only the native range
-p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE)
-p[[1]]
-p[[2]]
+p
+# now only the native range, and cropped to range extent
+p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE, crop.map=TRUE)
+p
+# now with different colours
+# note that this taxon only has native and introduced occurrences, so only two colours are needed
+p <- plot_distribution(get_distribution("Callitris", rank="genus"))
+p + scale_fill_manual(values=c("red", "blue"))+ # for polygons
+   scale_colour_manual(values=c("red", "blue")) # for points (islands)
 }

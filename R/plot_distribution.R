@@ -10,20 +10,21 @@
 #'
 #' @import ggplot2
 #' @details The colour scheme mirrors that used by Plants of the World (POWO;
-#' https://powo.science.kew.org/).
+#' https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 #'
-#' @return List of length two, with global and local maps of distribution as
-#' ggplot objects. If taxon has global distribution, only the first element is returned.
-#' @export
+#' @return A \code{ggplot} of the distribution.
 #'
 #' @examples
 #' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
-#' p[[1]]
-#' p[[2]]
-#' #now only the native range
-#' p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE)
-#' p[[1]]
-#' p[[2]]
+#' p
+#' # now only the native range, and cropped to range extent
+#' p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE, crop.map=TRUE)
+#' p
+#' # now with different colours
+#' # note that this taxon only has native and introduced occurrences, so only two colours are needed
+#' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
+#' p + scale_fill_manual(values=c("red", "blue"))+ # for polygons
+#'    scale_colour_manual(values=c("red", "blue")) # for points (islands)
 plot_distribution <- function(range, crop.map=FALSE, native = TRUE, introduced = TRUE,
                              extinct = TRUE, location_doubtful = TRUE){
  occurrence_type <- NULL

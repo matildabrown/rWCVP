@@ -1,21 +1,23 @@
 #' Generate a species checklist from WCVP
 #'
-#' @param taxon Character. One or many taxa to be included. Defaults to NULL (all species)
-#' @param rank Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.
-#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to NULL (global).
-#' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.
-#' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
-#' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
-#' @param location_doubtful Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.
-#' @param local_wcvp Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-#' If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
+#' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
+#' @param rank Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
+#' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to \code{TRUE}.
+#' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to \code{TRUE}.
+#' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to \code{TRUE}.
+#' @param location_doubtful Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.
+#' @param local_wcvp Logical. If \code{FALSE} (the default), use data from \code{rWCVPdata}.
+#' If \code{TRUE}, use a local copy of the data (useful if \code{rWCVPdata} is not the latest
 #' version of the checklist).
-#' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
-#' @param synonyms Logical. Include synonyms in checklist? Defaults to TRUE.
+#' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.
+#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.
+#' @param synonyms Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.
 #' @param render.report Logical. Render the checklist as a markdown report? Defaults to FALSE.
-#' @param report.filename Character. Filename for the HTML file generated. Defaults to "[taxon]_[area]_[checklist.type].html".
+#' @param report.filename Character. Name for the HTML file. Defaults to taxon_area_type.html
 #' @param report.type Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?
+#' @details The \code{synonyms} argument can be used to limit names to those that are Accepted and Unplaced. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
+#' Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 #'
 #' @return Data.frame with filtered data and, if render.report=TRUE. a report HTML file.
 #'

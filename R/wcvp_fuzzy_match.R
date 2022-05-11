@@ -5,12 +5,13 @@
 #' @param x data.frame containing the variables \code{id, taxon.name} to match
 #'
 #' @return data.frame consisting of \code{x} bound to \code{plant_name_id, taxon_name,
-#' taxon_rank, taxon_status, accepted_plant_name_id, homotypic_synonym} and
+#' taxon_rank, taxon_status,}
+#' \code{accepted_plant_name_id, homotypic_synonym} and
 #' \code{match_type} (a descriptor of the match result)
 #' @details This function first uses phonetic matching, using metaphone encoding
 #' (via the \code{phonics} package) with a maximum codelength of 20. For names
 #' that remain unmatched, fuzzy matching is performed using the Levenshtein
-#' similarity
+#' edit distance and similarity (standardised edit distance). It is strongly recommended that this function only be called using \code{wcvp_name_match}, as it is much more efficient to find any exact matches before proceeding to fuzzy matching.
 #' @export
 #'
 #' @examples

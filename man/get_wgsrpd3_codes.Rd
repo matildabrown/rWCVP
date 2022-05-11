@@ -7,7 +7,7 @@
 get_wgsrpd3_codes(geography, include.equatorial = NULL)
 }
 \arguments{
-\item{geography}{Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")}
+\item{geography}{Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country (political) or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")}
 
 \item{include.equatorial}{Logical. Include Level 3 areas that span the equator? Defaults to Null, which generates a message and includes these areas. Ignored if geography is not a hemisphere.}
 }
@@ -16,6 +16,11 @@ Character with area codes (Level 3) that fall within the geography.
 }
 \description{
 Extract WGSRPD Level 3 (area) codes.
+}
+\details{
+Country mapping follows Gallagher et al. (2020).
+
+Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 }
 \examples{
 get_wgsrpd3_codes("Brazil")

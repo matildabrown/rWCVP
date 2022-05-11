@@ -31,7 +31,7 @@ p <- plot_distribution(get_distribution("Callitris", rank="genus"))
 
 
 ```{r}
-p[[1]] #global
+p #global
 ```
   
 
@@ -40,7 +40,7 @@ p[[1]] #global
 
 We can filter this map to only the native range by using introduced=FALSE (there are also location_doubtful and extinct that can be switched on and off).
 ```{r}
-p <- plot_distribution(get_distribution("Callitris", rank="genus", introduced=FALSE))
+d <- get_distribution("Callitris", rank="genus", introduced=FALSE)
 ```
 :::: {style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px;"}
 
@@ -48,7 +48,7 @@ p <- plot_distribution(get_distribution("Callitris", rank="genus", introduced=FA
 
 
 ```{r}
-p[[1]] #global
+p <- plot_distribution(d) #global
 ```
   
 :::
@@ -56,7 +56,7 @@ p[[1]] #global
 ::: {}
 
 ```{r}
-p[[2]] #zoomed in
+p <- plot_distribution(d, crop.map = TRUE) #zoomed in
 ```
 
 :::
@@ -69,6 +69,6 @@ p <- plot_distribution(get_distribution("Melastomataceae", rank="family"))
 ```
 
 ```{r}
-p[[1]] #global
+p 
 ```
   

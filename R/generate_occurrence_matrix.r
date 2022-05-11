@@ -13,6 +13,8 @@
 #' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #'
+#' @details See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
+#'
 #' @importFrom rlang .data
 #' @return A data.frame containing the \code{taxon_name} and \code{plant_name_id}
 #' of all species that are present in the \code{area}, plus one variable for each WGSPRD level 3 region in \code{area}, with species presences marked as 1 and absences marked as 0.

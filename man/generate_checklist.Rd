@@ -22,41 +22,45 @@ generate_checklist(
 )
 }
 \arguments{
-\item{taxon}{Character. One or many taxa to be included. Defaults to NULL (all species)}
+\item{taxon}{Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).}
 
-\item{rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.}
+\item{rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
-\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to NULL (global).}
+\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
-\item{synonyms}{Logical. Include synonyms in checklist? Defaults to TRUE.}
+\item{synonyms}{Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.}
 
 \item{render.report}{Logical. Render the checklist as a markdown report? Defaults to FALSE.}
 
-\item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.}
+\item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to \code{TRUE}.}
 
-\item{introduced}{Logical. Include species occurrences flagged as introduced? Defaults to TRUE.}
+\item{introduced}{Logical. Include species occurrences flagged as introduced? Defaults to \code{TRUE}.}
 
-\item{extinct}{Logical. Include species occurrences flagged as extinct? Defaults to TRUE.}
+\item{extinct}{Logical. Include species occurrences flagged as extinct? Defaults to \code{TRUE}.}
 
-\item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
+\item{location_doubtful}{Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.}
 
-\item{report.filename}{Character. Filename for the HTML file generated. Defaults to "[taxon]_[area]_[checklist.type].html".}
+\item{report.filename}{Character. Name for the HTML file. Defaults to taxon_area_type.html}
 
 \item{report.type}{Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
-\item{local_wcvp}{Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
+\item{local_wcvp}{Logical. If \code{FALSE} (the default), use data from \code{rWCVPdata}.
+If \code{TRUE}, use a local copy of the data (useful if \code{rWCVPdata} is not the latest
 version of the checklist).}
 
-\item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
+\item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.}
 
-\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
+\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.}
 }
 \value{
 Data.frame with filtered data and, if render.report=TRUE. a report HTML file.
 }
 \description{
 Generate a species checklist from WCVP
+}
+\details{
+The \code{synonyms} argument can be used to limit names to those that are Accepted and Unplaced. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
+Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 }
 \examples{
 generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
