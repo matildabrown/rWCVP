@@ -340,7 +340,7 @@ df3[is.na(df3$accepted_name),"rowgrouptext"] <- "Unplaced"
   df3 %>% 
   dplyr::filter(taxon_rank!= "Genus") %>% 
   dplyr::arrange(family, taxon_status) %>% 
-  dplyr::select(maintext, plant_name_id, rowgrouptext) %>% 
+  dplyr::select(maintext, plant_name_id, rowgrouptext, ipni_id) %>% 
   dplyr::group_by(rowgrouptext) %>% 
   unique() %>% 
   gt::gt() %>% 

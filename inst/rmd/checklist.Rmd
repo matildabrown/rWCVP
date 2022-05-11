@@ -322,7 +322,7 @@ df3 <- df3 %>% dplyr::mutate(endemic_flag=dplyr::case_when(endemic==1 ~ "E",
                                              TRUE ~ ""))
 
 df3 %>% dplyr::filter(taxon_rank!= "Genus") %>% 
-  dplyr::select(family, endemic_flag, maintext, plant_name_id) %>% 
+  dplyr::select(family, endemic_flag, maintext, plant_name_id, ipni_id) %>% 
   dplyr::group_by(family) %>% 
   unique() %>% 
   gt::gt() %>% 
