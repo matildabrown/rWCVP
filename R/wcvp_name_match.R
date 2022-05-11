@@ -198,7 +198,7 @@ if(length(multi_matches)>0)   message(glue::glue("Multiple matches found for {le
 
   if(!is.null(authors)){
     matches <- matches %>%
-    mutate(author_edit_distance = diag(utils::adist(matches$taxon.authors, matches$taxon_authors)),
+    mutate(author_edit_distance = mapply(utils::adist, matches$taxon.authors, matches$taxon_authors),
            author_lcs = mapply(length_lcs, matches$taxon.authors, matches$taxon_authors))
   }
 
