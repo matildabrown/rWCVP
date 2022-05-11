@@ -34,11 +34,11 @@ species.
 library(rWCVP)
 
 distribution <- get_distribution("Myrcia guanensis", rank="Species")
-plots <- plot_distribution(distribution)
+
 
 # global map
-plots[[1]]
+plot_distribution(distribution)
 
 # zoomed-in map
-plots[[2]]
+plot_distribution(distribution, crop.map = TRUE)
 ```
