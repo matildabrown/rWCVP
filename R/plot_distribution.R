@@ -1,6 +1,7 @@
 #' Plot distribution maps for species, genera or families
 #'
 #' @param range sf object of the type output by \code{get_distribution()}.
+#' @param crop.map Logical. Crop map extent to distribution? Defaults to FALSE.
 #' @param native Logical. Include native range? Defaults to TRUE.
 #' @param introduced Logical. Include introduced range? Defaults to TRUE.
 #' @param extinct Logical. Include extinct range? Defaults to TRUE.
@@ -23,7 +24,7 @@
 #' p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE)
 #' p[[1]]
 #' p[[2]]
-plot_distribution <- function(range, native = TRUE, introduced = TRUE,
+plot_distribution <- function(range, crop.map=FALSE, native = TRUE, introduced = TRUE,
                              extinct = TRUE, location_doubtful = TRUE){
  occurrence_type <- NULL
 
@@ -91,8 +92,9 @@ if(range.area2<(range.area/1.5)){
 
 wgsprd3 <- rWCVPdata::wgsprd3
 
+if(crop.map==FALSE){
 
-p1 <- ggplot(wgsprd3) +
+p <- ggplot(wgsprd3) +
   geom_sf(fill="white", col="gray90")+
   theme(panel.background = element_rect(fill = "#b8dee6"),
         panel.grid = element_blank(),
@@ -113,8 +115,9 @@ p1 <- ggplot(wgsprd3) +
   )+ guides(colour="none")+
   guides(fill=guide_legend(title="Status"))
 
+} else {
 
-p2 <- ggplot(world) +
+p <- ggplot(world) +
   geom_sf(fill="white", col="gray90")+
   theme(panel.background = element_rect(fill = "#b8dee6"),
         panel.grid = element_blank(),
@@ -134,7 +137,8 @@ p2 <- ggplot(world) +
     breaks=unique(range$occurrence_type)
   )+ guides(colour="none")+
   guides(fill=guide_legend(title="Status"))
+}
 
-return(list(p1,p2))
+return(p)
 
 }
