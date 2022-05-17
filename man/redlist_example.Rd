@@ -7,11 +7,11 @@
 \format{
 A data frame with 20 rows and 4 variables:
 \describe{
-  \item{assessmentId}{Red List identifier}
-  \item{scientificName}{Taxon name.}
-  \item{redlistCategory}{Red List threat category}
-  \item{authority}{Taxon author/s.}
-  }
+\item{assessmentId}{Red List identifier}
+\item{scientificName}{Taxon name.}
+\item{redlistCategory}{Red List threat category}
+\item{authority}{Taxon author/s.}
+}
 }
 \source{
 Downloaded and sampled from \url{https://www.iucnredlist.org/}
