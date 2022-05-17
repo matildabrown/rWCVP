@@ -31,3 +31,25 @@ length_lcs <- function(a,b) {
   longest <- max(lengths)
  return(longest)
 }
+
+#' Format columns of name matching output.
+#'
+#' @import dplyr
+#' @noRd
+#'
+format_output_ <- function(output, original_cols=NULL) {
+  output_cols <- c(
+    "match_type",
+    "match_id"="plant_name_id",
+    "match_name"="taxon_name",
+    "match_authors"="taxon_authors",
+    "match_rank"="taxon_rank",
+    "match_status"="taxon_status",
+    "match_homotypic"="homotypic_synonym",
+    "match_ipni_id"="ipni_id",
+    "match_accepted_id"="accepted_plant_name_id"
+  )
+
+  output %>%
+    select(all_of(original_cols), all_of(output_cols))
+}
