@@ -17,3 +17,13 @@ test_that("returns a spatial dataframe", {
   distribution <- get_distribution("Myrcia guianensis", "species")
   expect_s3_class(distribution, "sf")
 })
+
+test_that("returns expected distribution for Poa annua", {
+  taxon <- "Poa annua"
+  distribution <- get_distribution(taxon, "species")
+  n_introduced <- sum(distribution$occurrence_type == "introduced")
+  n_native <- sum(distribution$occurrence_type == "native")
+
+  expect_equal(n_introduced, 151)
+  expect_equal(n_native, 113)
+})

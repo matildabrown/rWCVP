@@ -13,9 +13,11 @@
 #' version of the checklist).
 #' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
-#' @details For an exmaple of how this function can be used to clean occurrence records using a spatial filter, see the vignette "Cleaning occurrence records with rWCVP".
 #'
-#' @return A \code{sf} data.frame containing the range polygon/s of the taxon.
+#'
+#' @return sf data.frame containing the range polygon/s of the taxon.
+#'
+#' @importFrom rlang .data
 #' @import dplyr
 #' @export
 #'
@@ -23,24 +25,20 @@
 #' r <- get_distribution("Callitris", rank="genus")
 #' p <- plot_distribution(r)
 #' p
-get_distribution <- function(taxon, rank=c("species", "genus", "family"), native = TRUE, introduced = TRUE,
-                              extinct = TRUE, location_doubtful = TRUE,
+get_distribution <- function(taxon, rank=c("species", "genus", "family"), native=TRUE, introduced=TRUE,
+                              extinct=TRUE, location_doubtful=TRUE,
                               local_wcvp=FALSE, wcvp_names=NULL,
                               wcvp_distributions=NULL){
 
-  LEVEL3_COD <- df <- doubt <- intro <- occurrence_type <- plant_name_id <- NULL
-  species <- taxon_authors <- taxon_rank <- taxon_status <- NULL
-
   rank <- match.arg(rank)
 
-  shown <- native
-  showi <- introduced
-  showe <- extinct
-  showl <- location_doubtful
-  requireNamespace("sf")
-  suppressMessages(sf::sf_use_s2(FALSE))
+  occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
+  show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
-  if(local_wcvp == FALSE){
+  suppressMessages(sf::sf_use_s2(FALSE))
+  wgsrpd3 <- rWCVPdata::wgsprd3
+
+  if(! local_wcvp){
     wcvp_distributions <- rWCVPdata::wcvp_distributions
     wcvp_names <- rWCVPdata::wcvp_names
   } else {
@@ -49,48 +47,33 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family"), native
   }
 
   if(length(taxon)>1) stop("'taxon' argument must be a single name")
+  wcvp_cols <- c("plant_name_id", "taxon_rank", "taxon_status",
+                 "family", "genus", "species", "taxon_name", "taxon_authors")
+  df <- wcvp_names %>%
+    select(all_of(wcvp_cols)) %>%
+    right_join(wcvp_distributions, by="plant_name_id")
 
-  df <- right_join(wcvp_names %>% select(plant_name_id, taxon_rank, taxon_status,family, genus,species, taxon_name, taxon_authors),
-    wcvp_distributions, by="plant_name_id")
-
-  occurrence_type <- taxon_name <-  area_code_l3 <- native <-  introduced <-  extinct <-  location_doubtful <- genus <- family <- LEVEL3_COD <-  NULL
+  range_cols <- c("area_code_l3", "introduced", "extinct", "location_doubtful")
   if(rank=="species"){
-    df <- df %>%
-      filter(taxon_name %in% taxon) %>%
-      select(area_code_l3, introduced, extinct, location_doubtful)
+    df <- filter(df, .data$taxon_name %in% taxon)
   }
   if(rank=="genus"){
-    df <- df %>%
-      filter(genus %in% taxon)%>%
-      select(area_code_l3, introduced, extinct, location_doubtful)
+    df <- filter(df, .data$genus %in% taxon)
   }
   if(rank=="family"){
-    df <- df %>%
-      filter(family %in% taxon)%>%
-      select(area_code_l3, introduced, extinct, location_doubtful)
+    df <- filter(df, .data$family %in% taxon)
   }
+  df <- select(df, all_of(range_cols))
 
   if(nrow(df)==0) stop("No distribution for that taxon. Are the rank and spelling both correct?")
 
-  intro <-  df[which(df$introduced==1),"area_code_l3"]
-  extinct <-  df[which(df$extinct==1),"area_code_l3"]
-  doubt <-  df[which(df$location_doubtful==1),"area_code_l3"]
-
-  range <- rWCVPdata::wgsprd3[which(rWCVPdata::wgsprd3$LEVEL3_COD %in% df$area_code_l3),]
-
-
-  range$occurrence_type [which(range$LEVEL3_COD %in% df$area_code_l3)] <- "native"
-  range$occurrence_type [which(range$LEVEL3_COD %in% intro)] <- "introduced"
-  range$occurrence_type [which(range$LEVEL3_COD %in% extinct)] <- "extinct"
-  range$occurrence_type [which(range$LEVEL3_COD %in% doubt)] <- "location doubtful"
-
-  if(shown==FALSE) range <- range %>% filter(LEVEL3_COD %notin% df$area_code_l3)
-  if(showi==FALSE) range <- range %>% filter(LEVEL3_COD %notin% intro)
-  if(showe==FALSE) range <- range %>% filter(LEVEL3_COD %notin% extinct)
-  if(showl==FALSE) range <- range %>% filter(LEVEL3_COD %notin% doubt)
-
-  return(range)
+  wgsrpd3 %>%
+    mutate(occurrence_type=case_when(
+      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful",
+      .data$LEVEL3_COD %in% df[df$extinct == 1, "area_code_l3"] ~ "extinct",
+      .data$LEVEL3_COD %in% df[df$introduced == 1, "area_code_l3"] ~ "introduced",
+      .data$LEVEL3_COD %in% df$area_code_l3 ~ "native",
+    )) %>%
+    filter(.data$occurrence_type %in% show_types)
 
 }
-
-

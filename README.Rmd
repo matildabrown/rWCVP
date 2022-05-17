@@ -40,14 +40,13 @@ rWCVP makes it easy to get and plot the known distribution of plant species.
 ```{r example, eval=FALSE}
 library(rWCVP)
 
-distribution <- get_distribution("Myrcia guanensis", rank="Species")
-plots <- plot_distribution(distribution)
+distribution <- get_distribution("Myrcia guianensis", rank="species")
 
 # global map
-plots[[1]]
+plot_distribution(distribution)
 
 # zoomed-in map
-plots[[2]]
+plot_distribution(distribution, crop.map=TRUE)
 ```
 
 

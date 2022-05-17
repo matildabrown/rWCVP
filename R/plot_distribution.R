@@ -8,7 +8,9 @@
 #' @param location_doubtful Logical. Include occurrences that are thought to be
 #'     doubtful? Defaults to TRUE.
 #'
-#' @import ggplot2
+#' @import ggplot2 dplyr
+#' @importFrom rlang .data
+#' @importFrom sf sf_use_s2 st_bbox st_shift_longitude st_centroid
 #' @details The colour scheme mirrors that used by Plants of the World (POWO;
 #' https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 #'
@@ -25,121 +27,139 @@
 #' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
 #' p + scale_fill_manual(values=c("red", "blue"))+ # for polygons
 #'    scale_colour_manual(values=c("red", "blue")) # for points (islands)
-plot_distribution <- function(range, crop.map=FALSE, native = TRUE, introduced = TRUE,
-                             extinct = TRUE, location_doubtful = TRUE){
+plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRUE,
+                              extinct=TRUE, location_doubtful=TRUE){
  occurrence_type <- NULL
 
-  shown <- native
-  showi <- introduced
-  showe <- extinct
-  showl <- location_doubtful
-  requireNamespace("sf")
-  suppressMessages(sf::sf_use_s2(FALSE))
+  suppressMessages(sf_use_s2(FALSE))
 
-colors <- c("absent" = "white",
-            "native" = "#72994c",
-            "introduced" = "#995499",
-            "extinct" ="#e22d2d",
-            "location doubtful" = "#ea962e")
+  occurrence_types <- c("native", "introduced", "extinct", "location doubtful")
+  show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
+  range <- filter(range, .data$occurrence_type %in% show_types)
 
+  bbox <- st_bbox(range)
+  range.area <- ((bbox[3] - bbox[1]) * (bbox[4] - bbox[2]))
 
+  if (crop.map) {
+    crop_details <- calculate_map_crop_(range, range.area, bbox, range.buffer)
+    range <- crop_details$range
+    range.area <- crop_details$range.area
+  }
 
-if(shown==FALSE) range <- range %>% dplyr::filter(occurrence_type != "native")
-if(showi==FALSE) range <- range %>% dplyr::filter(occurrence_type != "introduced")
-if(showe==FALSE) range <- range %>% dplyr::filter(occurrence_type != "extinct")
-if(showl==FALSE) range <- range %>% dplyr::filter(occurrence_type != "location doubtful")
+  suppressWarnings(range.centroids <- st_centroid(range))
 
-bbox <- sf::st_bbox(range)
-bbox2 <- sf::st_bbox(sf::st_shift_longitude(range))
+  p <- powo_map(range, range.centroids)
 
-range.area <- ((bbox[3]-bbox[1])*(bbox[4]-bbox[2]))
-range.area2 <- ((bbox2[3]-bbox2[1])*(bbox2[4]-bbox2[2]))
+  if (crop.map) {
+    p <- p + coord_sf(xlim=crop_details$xlims, ylim=crop_details$ylims, expand=FALSE)
+  }
 
-suppressWarnings(range.centroids <- sf::st_centroid(range))
+  p
+}
 
-if(range.area2<(range.area/1.5)){
-
-  range2 <- sf::st_shift_longitude(range)
-
-  range.area <- ((bbox2[3]-bbox2[1])*(bbox2[4]-bbox2[2]))
-  range.buffer <- range.area^0.3
-  xlims <- c(bbox2[1]-range.buffer,bbox2[3]+range.buffer)
-  ylims <- c(bbox2[2]-range.buffer,bbox2[4]+range.buffer)
-
-  if(xlims[1]< 1) xlims[1] <- 1
-  if(xlims[2]> 359) xlims[2] <- 359
-  if(ylims[1]< -90) ylims[1] <- -90
-  if(ylims[2]> 83) ylims[2] <- 83
-
-  world <- rWCVPdata::wgsprd3_pacific
-  coast <- rWCVPdata::coast_pacific
-  suppressWarnings(range.centroids2 <- sf::st_centroid(range))
-
-} else {
-  range2 <- range
-  range.area <- ((bbox[3]-bbox[1])*(bbox[4]-bbox[2]))
-  range.buffer <- range.area^0.3
-  xlims <- c(bbox[1]-range.buffer,bbox[3]+range.buffer)
-  ylims <- c(bbox[2]-range.buffer,bbox[4]+range.buffer)
-
-  if(xlims[1]< -180) xlims[1] <- -180
-  if(xlims[2]> 180) xlims[2] <- 180
-  if(ylims[1]< -90) ylims[1] <- -90
-  if(ylims[2]> 83) ylims[2] <- 83
+#' Plot a POWO style map for given range and range centroids.
+#'
+#' @param range_sf A simple features data frame of range polygons
+#' @param centroids_sf A simple features data frame of range centroids
+#'
+#' @return A ggplot map of the range
+#'
+#' @import ggplot2
+#' @export
+powo_map <- function(range_sf, centroids_sf) {
   world <- rWCVPdata::wgsprd3
   coast <- rWCVPdata::coast
-  suppressWarnings(range.centroids2 <- sf::st_centroid(range))
+
+  color_breaks <- unique(range_sf$occurrence_type)
+
+  ggplot(world) +
+    geom_sf(fill="white", col="gray90") +
+    geom_sf(data=range_sf, aes_(fill=~occurrence_type), col="gray90") +
+    geom_sf(data=coast, fill="transparent", col="#89c7d5") +
+    geom_sf(data=centroids_sf, aes_(col=~occurrence_type), size=2)+
+    scale_fill_powo(breaks=color_breaks, name="Status") +
+    scale_colour_powo(breaks=color_breaks) +
+    guides(colour="none") +
+    theme(panel.background = element_rect(fill = "#b8dee6"),
+          panel.grid = element_blank(),
+          plot.margin = margin(0, 0, 0, 0, "cm"),
+          axis.text = element_blank(),
+          axis.ticks = element_blank())
+
 }
 
-wgsprd3 <- rWCVPdata::wgsprd3
-
-if(crop.map==FALSE){
-
-p <- ggplot(wgsprd3) +
-  geom_sf(fill="white", col="gray90")+
-  theme(panel.background = element_rect(fill = "#b8dee6"),
-        panel.grid = element_blank(),
-        plot.margin = margin(0, 0, 0, 0, "cm"),
-        axis.text = element_blank(),
-        axis.ticks = element_blank()) +
-  geom_sf(data=range, aes(fill=occurrence_type), col="gray90") +
-  geom_sf(data=rWCVPdata::coast, fill="transparent", col="#89c7d5") +
-  geom_sf(data=range.centroids, aes(col=range$occurrence_type), size=2)+
-  coord_sf(expand=FALSE)+
-  scale_fill_manual(
-    values=colors,
-    breaks=unique(range$occurrence_type)
-  )+
-  scale_colour_manual(
-    values=colors,
-    breaks=unique(range$occurrence_type)
-  )+ guides(colour="none")+
-  guides(fill=guide_legend(title="Status"))
-
-} else {
-
-p <- ggplot(world) +
-  geom_sf(fill="white", col="gray90")+
-  theme(panel.background = element_rect(fill = "#b8dee6"),
-        panel.grid = element_blank(),
-        plot.margin = margin(0, 0, 0, 0, "cm"),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())+
-  geom_sf(data=range2, aes(fill=occurrence_type), col="gray90") +
-  geom_sf(data=coast, fill="transparent", col="#89c7d5") +
-  geom_sf(data=range.centroids2, aes(col=occurrence_type), size=2)+
-  coord_sf(xlim =xlims, ylim =ylims, expand=FALSE)+
-  scale_fill_manual(
-    values=colors,
-    breaks=unique(range$occurrence_type)
-  )+
-  scale_colour_manual(
-    values=colors,
-    breaks=unique(range$occurrence_type)
-  )+ guides(colour="none")+
-  guides(fill=guide_legend(title="Status"))
+#' POWO colour palette for range maps
+#'
+#' Range maps displayed on the [POWO]() website have a fixed,
+#' discrete colour palette based on the type of taxon occurrence
+#' in a region.
+#'
+#' @rdname powo_pal
+#' @export
+powo_pal <- function() {
+  c("absent" = "#ffffff",
+              "native" = "#72994c",
+              "introduced" = "#995499",
+              "extinct" ="#e22d2d",
+              "location doubtful" = "#ea962e")
 }
 
-return(p)
+#' @importFrom ggplot2 scale_color_manual
+#' @rdname powo_pal
+#' @inheritParams ggplot2::scale_colour_manual
+#' @export
+scale_color_powo <- function(...) {
+  scale_color_manual(values=powo_pal(), ...)
+}
 
+#' @rdname powo_pal
+#' @export
+scale_colour_powo <- scale_color_powo
+
+#' @importFrom ggplot2 scale_color_manual
+#' @rdname powo_pal
+#' @inheritParams ggplot2::scale_fill_manual
+#' @export
+scale_fill_powo <- function(...){
+  scale_fill_manual(values=powo_pal(), ...)
+}
+
+#' Calculate crop area.
+#' 
+#' @noRd
+#' 
+calculate_map_crop_ <- function(range, range.area, bbox, range.buffer) {
+  bbox2 <- st_bbox(st_shift_longitude(range))
+  range.area2 <- ((bbox2[3] - bbox2[1]) * (bbox2[4] - bbox2[2]))
+
+  if (range.area2 < (range.area / 1.5)) {
+    range <- st_shift_longitude(range)
+
+    range.buffer <- range.area2^0.3
+    xlims <- c(bbox2[1] - range.buffer, bbox2[3] + range.buffer)
+    ylims <- c(bbox2[2] - range.buffer, bbox2[4] + range.buffer)
+
+    if(xlims[1] < 1) xlims[1] <- 1
+    if(xlims[2] > 359) xlims[2] <- 359
+    if(ylims[1] < -90) ylims[1] <- -90
+    if(ylims[2] > 83) ylims[2] <- 83
+
+    range.area <- range.area2
+  } else {
+    range.buffer <- range.area^0.3
+    xlims <- c(bbox[1] - range.buffer, bbox[3] + range.buffer)
+    ylims <- c(bbox[2] - range.buffer, bbox[4] + range.buffer)
+
+    if(xlims[1] < -180) xlims[1] <- -180
+    if(xlims[2] > 180) xlims[2] <- 180
+    if(ylims[1] < -90) ylims[1] <- -90
+    if(ylims[2] > 83) ylims[2] <- 83
+  }
+
+  list(
+    range=range,
+    range.area=range.area,
+    xlims=xlims,
+    ylims=ylims
+  )
 }

@@ -18,6 +18,10 @@
 #' @importFrom rlang .data
 #' @return A data.frame containing the \code{taxon_name} and \code{plant_name_id}
 #' of all species that are present in the \code{area}, plus one variable for each WGSPRD level 3 region in \code{area}, with species presences marked as 1 and absences marked as 0.
+#'
+#' @import dplyr
+#' @importFrom rlang .data
+#' @importFrom tidyr pivot_wider
 #' @export
 #'
 #' @examples generate_occurrence_matrix(taxon="Poa",taxon.rank="genus",
@@ -25,19 +29,12 @@
 #'
 #'
 generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genus", "family"), area=NULL,
-                          native=TRUE, introduced = TRUE,
-                          extinct = TRUE, location_doubtful = TRUE,
+                          native=TRUE, introduced=TRUE,
+                          extinct=TRUE, location_doubtful=TRUE,
                           local_wcvp=FALSE, wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
-  #to avoid confusion with the variable names in distribution data
-  nat <- native
-  int <- introduced
-  ext <- extinct
-  dou <- location_doubtful
-  omarea <- area
-
-   if(local_wcvp == FALSE){
+  if(! local_wcvp){
     wcvp_distributions <- rWCVPdata::wcvp_distributions
     wcvp_names <- rWCVPdata::wcvp_names
   } else {
@@ -48,25 +45,28 @@ generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genu
   if (is.null(area)) message("No area specified. Generating global occurrence matrix.")
   if (is.null(taxon)) message("No taxon specified. Generating occurrence matrix for all species.")
 
-   df <- suppressMessages(dplyr::left_join(wcvp_names %>%
-                     dplyr::select(.data$plant_name_id, .data$taxon_name, .data$taxon_status, .data$taxon_rank, .data$family, .data$genus),
-                   wcvp_distributions)) %>%
-     dplyr::filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
-                   .data$taxon_rank == "Species")
+  wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
+                 "family", "genus")
 
-  if(!is.null(taxon)) df <- df %>% dplyr::filter(dplyr::if_any(taxon.rank) %in% taxon)
-  if(int==FALSE) df <- dplyr::filter(df, .data$introduced==0)
-  if(ext==FALSE) df <- dplyr::filter(df, .data$extinct==0)
-  if(dou==FALSE) df <- dplyr::filter(df, .data$location_doubtful==0)
+  df <- wcvp_names %>%
+    select(all_of(wcvp_cols)) %>%
+    left_join(wcvp_distributions, by="plant_name_id") %>%
+    filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
+           .data$taxon_rank == "Species")
 
+  if(!is.null(taxon)) df <- df %>% filter(if_any(taxon.rank) %in% taxon)
+  if(! introduced) df <- filter(df, .data$introduced == 0)
+  if(! extinct) df <- filter(df, .data$extinct == 0)
+  if(! location_doubtful) df <- filter(df, .data$location_doubtful == 0)
 
-   species_total <- dplyr::filter(df, .data$area_code_l3 %in% omarea) %>%
-     dplyr::select(.data$plant_name_id, .data$taxon_name, .data$area_code_l3) %>%
-     dplyr::mutate(present = 1)
+  species_total <- df %>%
+    filter(.data$area_code_l3 %in% area) %>%
+    select("plant_name_id", "taxon_name", "area_code_l3") %>%
+    mutate(present = 1)
 
-   ocmat <-  tidyr::pivot_wider(species_total, names_from=.data$area_code_l3, values_from=.data$present, values_fill=0) %>%
-     unique()
+  species_total %>%
+    pivot_wider(names_from="area_code_l3", values_from="present", values_fill=0) %>%
+    distinct()
 
- return(ocmat)
 
 }

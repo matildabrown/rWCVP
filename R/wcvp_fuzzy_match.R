@@ -1,5 +1,3 @@
-
-
 #' Fuzzy (approximate) matching to the WCVP
 #'
 #' @param x data.frame containing the variables \code{id, taxon.name} to match
@@ -12,6 +10,10 @@
 #' (via the \code{phonics} package) with a maximum codelength of 20. For names
 #' that remain unmatched, fuzzy matching is performed using the Levenshtein
 #' edit distance and similarity (standardised edit distance). It is strongly recommended that this function only be called using \code{wcvp_name_match}, as it is much more efficient to find any exact matches before proceeding to fuzzy matching.
+#'
+#' @import dplyr
+#' @importFrom rlang .data
+#'
 #' @export
 #'
 #' @examples
@@ -21,141 +23,164 @@
 #'
 wcvp_fuzzy_match <- function(x){
 
-  plant_name_id <- taxon_rank <- id <- NULL
-
   if("taxon.name" %notin% colnames(x)) stop("There is no variable named taxon.name")
 
-  wcvp_to_search <- dplyr::filter(rWCVPdata::wcvp_names, taxon_rank != "Genus") %>%
-    dplyr::select(dplyr::all_of(c("plant_name_id","genus","taxon_name","taxon_rank","taxon_status","taxon_authors",
-                           "accepted_plant_name_id","homotypic_synonym")))
+  wcvp_species <-
+    rWCVPdata::wcvp_names %>%
+    filter(.data$taxon_rank != "Genus")
 
-  x_phonetic <- phonetic_match(x, wcvp_to_search) %>%
-    dplyr::filter(!is.na(plant_name_id))
+  phonetic_matches <- x %>%
+    phonetic_match(wcvp_species) %>%
+    filter(!is.na(.data$match_id))
 
-  x_unmatched <- x %>%
-    dplyr::filter(id %notin% x_phonetic$id)
+  unmatched <- x %>%
+    filter(id %notin% phonetic_matches$id)
 
-  x_fuzzy <- fuzzy_match(x_unmatched, wcvp_to_search)
+  fuzzy_matches <- fuzzy_match(unmatched, wcvp_species)
 
+  matches <- phonetic_matches %>%
+    bind_rows(fuzzy_matches) %>%
+    left_join(
+      wcvp_species %>%
+        select("plant_name_id", "taxon_name",
+               "ipni_id", "taxon_rank", "taxon_status", "family", "accepted_plant_name_id",
+               "homotypic_synonym"),
+      by=c("match_id"="plant_name_id", "match_name"="taxon_name")
+    )
 
-
-x_matched <- dplyr::left_join(x, rbind(x_phonetic, x_fuzzy), by="id")
-
-
-  return(x_matched)
-
+  x %>%
+    left_join(
+      matches,
+      by="id"
+    )
 }
 
-
-
-# Phonetic matching of taxon names
-#
-# @param x data.frame containing the variable \code{taxon.name} to match
-# @param wcvp_to_search data.frame containing selected variables from the WVCP,
-# without genus-level names
-#
-# @return data.frame with relevant WCVP information, plus match_type - an
-# informative column giving the match result and Levenshtein similarity to
-# original name (note that this is not the metric that is used to link the
-# names, see \code{fuzzy_match} for Levenshtein matching)
-
+#' Phonetic matching
+#'
+#' @param x data.frame containing the variable \code{taxon.name} to match
+#' @param wcvp_to_search data.frame containing selected variables from the WVCP,
+#' without genus-level names
+#'
+#' @return data.frame with relevant WCVP information, plus match_type - an
+#' informative column giving the match result and Levenshtein similarity to
+#' original name (note that this is not the metric that is used to link the
+#' names, see \code{fuzzy_match} for Levenshtein matching)
+#'
+#' @importFrom phonics metaphone
+#' @importFrom RecordLinkage levenshteinSim
+#' @importFrom utils adist
+#' @import dplyr
+#'
+#' @noRd
+#'
 phonetic_match <- function(x, wcvp_to_search){
 
-  wcvp_to_search$mp <- phonics::metaphone(wcvp_to_search$taxon_name, maxCodeLen = 20, clean=FALSE)
+  wcvp_to_search$mp <- metaphone(wcvp_to_search$taxon_name, maxCodeLen = 20, clean=FALSE)
 
+  x$mp <- metaphone(x$taxon.name, maxCodeLen = 20, clean=FALSE)
 
-  x$mp <- phonics::metaphone(x$taxon.name,maxCodeLen = 20, clean=FALSE)
-
-  x_join <- dplyr::left_join(x, wcvp_to_search, by="mp")
-
-  x_join$match_similarity <- round(RecordLinkage::levenshteinSim(x_join$taxon.name, x_join$taxon_name),3)
-  x_join$match_edit_distance <- diag(utils::adist(x_join$taxon.name, x_join$taxon_name))
-
-  x_join[which(x_join$match_similarity < 0.75),] <- NA
-  x_join[which(x_join$match_similarity < 0.75),"match_type"] <- "No fuzzy match found"
-  x_join[which(x_join$match_similarity >= 0.75),"match_type"] <- "Fuzzy matched (phonetically)"
-  x_join[which(x_join$match_similarity > 0.9),"match_type"] <- "Fuzzy matched (phonetically)"
-
-
-  x_join <- x_join %>%
-    dplyr:: select(.data$id, .data$plant_name_id, .data$taxon_name, .data$taxon_rank, .data$taxon_status, .data$taxon_authors,
-                   .data$accepted_plant_name_id, .data$homotypic_synonym, .data$match_type, .data$match_similarity, .data$match_edit_distance)
-
-  return(x_join)
+  x %>%
+    left_join(wcvp_to_search, by="mp") %>%
+    mutate(
+      match_similarity=levenshteinSim(.data$taxon.name, .data$taxon_name),
+      match_similarity=round(.data$match_similarity),
+      match_edit_distance=diag(adist(.data$taxon.name, .data$taxon_name))
+    ) %>%
+    mutate(match_type=case_when(.data$match_similarity > 0.9 ~ "Fuzzy matched (phonetically)",
+                                .data$match_similarity >= 0.75 ~ "Fuzzy matched (phonetically)",
+                                TRUE ~ "No fuzzy match found")) %>%
+    mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity)) %>%
+    select("id", "match_name"="taxon_name", "match_id"="plant_name_id",
+           "match_type", "match_similarity", "match_edit_distance")
 }
 
-# Distance-based matching using Levenshtein similarity
-#
-# @param x data.frame containing the variable \code{taxon.name} to match
-# @param wcvp_to_search data.frame containing selected variables from the WVCP,
-# without genus-level names
-#
-# @return data.frame with relevant WCVP information, plus match_type - an
-# informative column giving the match result and Levenshtein similarity (as
-# implemented in the \code{RecordLinkage} package)
-
-fuzzy_match <- function(x,wcvp_to_search){
-
+#' Distance-based matching using Levenshtein similarity
+#'
+#' @param x data.frame containing the variable \code{taxon.name} to match
+#' @param wcvp_to_search data.frame containing selected variables from the WVCP,
+#' without genus-level names
+#'
+#' @return data.frame with relevant WCVP information, plus match_type - an
+#' informative column giving the match result and Levenshtein similarity (as
+#' implemented in the \code{RecordLinkage} package)
+#'
+#' @import dplyr
+#' @importFrom rlang .data
+#' @importFrom tidyr unnest
+#'
+#' @noRd
+#'
+fuzzy_match <- function(x, wcvp_to_search){
   x <- x[!is.na(x$taxon.name),]
-  x_genera <- strsplit(x$taxon.name," ")
-  x_genera <- sapply(x_genera,"[[",1)
 
-  matches <- NULL
+  matches <-
+    x %>%
+    filter(!is.na(.data$taxon.name)) %>%
+    rowwise() %>%
+    mutate(match_info=list(fuzzy_match_name_(.data$taxon.name, wcvp_to_search))) %>%
+    select("id", "taxon.name", "match_info") %>%
+    unnest(.data$match_info)
 
-  for (i in 1:nrow(x)){
-    genus_i <- x_genera[i]
-    wcvp_i <- wcvp_to_search %>%
-      dplyr::filter(.data$genus == genus_i)
-    suppressWarnings(lev_sim <- RecordLinkage::levenshteinSim(x$taxon.name[i], wcvp_i$taxon_name))
-    if(length(which(lev_sim>0.90)) >1){
-      k <- which(lev_sim >0.90)
-      bestname <- wcvp_i[k,]
-      bestname$match_type <- "Multiple fuzzy matches found"
-      bestname$id <- x$id[i]
-      bestname$taxon.name <- x$taxon.name[i]
-    }
-    if(length(which(lev_sim>0.90)) == 1){
-      k <- which.max(lev_sim)
-      bestname <- wcvp_i[k,]
-      bestname$match_type <- "Fuzzy matched (edit distance)"
-      bestname$id <- x$id[i]
-      bestname$taxon.name <- x$taxon.name[i]
-    }
-    if(length(which(lev_sim>0.90)) == 0){
-      if(max(lev_sim)>0.75){
-      k <- which.max(lev_sim)
-      bestname <- wcvp_i[k,]
-      bestname$match_type <- "Fuzzy matched (edit distance)"
-      bestname$id <- x$id[i]
-      bestname$taxon.name <- x$taxon.name[i]
-      }else{
-        lev_sim <- RecordLinkage::levenshteinSim(x$taxon.name[i], wcvp_to_search$taxon_name)
-        if(max(lev_sim)>0.75){
-          k <- which.max(lev_sim)
-          bestname <- wcvp_i[k,]
-          bestname$match_type <- "Fuzzy matched (edit distance)"
-          bestname$id <- x$id[i]
-          bestname$taxon.name <- x$taxon.name[i]
-        }else{
-        bestname <- data.frame(id= x$id[i], taxon.name=x$taxon.name[i], plant_name_id=NA, taxon_name=NA, taxon_rank= NA,
-                               taxon_status= NA, accepted_plant_name_id= NA,
-                               homotypic_synonym= NA,
-                               match_type="No fuzzy match found")}
-        }
-    }
-    matches <- dplyr::bind_rows(matches, bestname) %>%
-      dplyr:: select(.data$id, .data$plant_name_id,.data$taxon.name, .data$taxon_name, .data$taxon_rank, .data$taxon_status, .data$taxon_authors,
-                     .data$accepted_plant_name_id, .data$homotypic_synonym, .data$match_type)
-  }
-suppressWarnings({
-  matches$match_similarity <- round(RecordLinkage::levenshteinSim(matches$taxon.name, matches$taxon_name),3)
-  matches$match_edit_distance <- diag(utils::adist(matches$taxon.name, matches$taxon_name))
-  matches <- matches %>% dplyr::select(-.data$taxon.name)
-})
-  return(matches)
-
+  matches %>%
+    left_join(wcvp_to_search, by=c("match_id"="plant_name_id", "match_name"="taxon_name")) %>%
+    select("id", "match_name", "match_id", "match_type",
+           "match_similarity", "match_edit_distance")
 }
 
+#' Match a name to a lookup table using Levenshtein similarity.
+#'
+#' @import dplyr
+#' @importFrom RecordLinkage levenshteinSim
+#' @importFrom utils adist
+#' @importFrom stringr str_extract
+#' @importFrom rlang .data
+#'
+#' @noRd
+#'
+fuzzy_match_name_ <- function(name, lookup) {
+  genus <- str_extract(name, "^[^ ]+")
+  genus_lookup <-
+    lookup %>%
+    filter(.data$genus == genus)
 
+  similarity <- levenshteinSim(name, genus_lookup$taxon_name)
 
+  best_idx <- which(similarity > 0.9)
+
+  if (length(best_idx) == 0) {
+    best_idx <- which(similarity == max(similarity) & similarity > 0.75)
+  }
+
+  best_name_id <- genus_lookup$plant_name_id[best_idx]
+  best_name <- genus_lookup$taxon_name[best_idx]
+
+  if (length(best_name_id) == 0) {
+    similarity <- levenshteinSim(name, lookup$taxon_name)
+    best_idx <- which(similarity == max(similarity) & similarity > 0.75)
+    best_name_id <- lookup$plant_name_id[best_idx]
+    best_name <- lookup$taxon_name[best_idx]
+  }
+
+  if (length(best_name_id) == 0) {
+    best_name_id <- NA_character_
+    best_name <- NA_character_
+    best_similarity <- NA_real_
+    match_type <- "No fuzzy match found"
+  } else {
+    best_similarity <- round(similarity[best_idx], 3)
+    match_type <- "Fuzzy matched (edit distance)"
+  }
+
+  if (length(best_name_id) > 1) {
+    match_type <- "Multiple matches found"
+  }
+
+  data.frame(
+    match_name=best_name,
+    match_id=best_name_id,
+    match_similarity=best_similarity,
+    match_edit_distance=as.vector(adist(name, best_name)),
+    match_type=match_type
+  )
+}
 
