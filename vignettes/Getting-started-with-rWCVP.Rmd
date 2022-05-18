@@ -34,34 +34,21 @@ p <- plot_distribution(get_distribution("Callitris", rank="genus"))
 p #global
 ```
   
-
-
-
-
 We can filter this map to only the native range by using introduced=FALSE (there are also location_doubtful and extinct that can be switched on and off).
 ```{r}
 d <- get_distribution("Callitris", rank="genus", introduced=FALSE)
 ```
-:::: {style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px;"}
-
-::: {}
 
 
 ```{r}
 p <- plot_distribution(d) #global
 ```
   
-:::
-
-::: {}
 
 ```{r}
 p <- plot_distribution(d, crop.map = TRUE) #zoomed in
 ```
 
-:::
-
-::::
 
 Here's a family example:
 ```{r}

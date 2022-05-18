@@ -1,6 +1,6 @@
 #' Plot distribution maps for species, genera or families
 #'
-#' @param range sf object of the type output by \code{get_distribution()}.
+#' @param range sf object of the type output by [get_distribution()].
 #' @param crop.map Logical. Crop map extent to distribution? Defaults to FALSE.
 #' @param native Logical. Include native range? Defaults to TRUE.
 #' @param introduced Logical. Include introduced range? Defaults to TRUE.
@@ -11,10 +11,13 @@
 #' @import ggplot2 dplyr
 #' @importFrom rlang .data
 #' @importFrom sf sf_use_s2 st_bbox st_shift_longitude st_centroid
+#'
+#' @export
+#'
 #' @details The colour scheme mirrors that used by Plants of the World (POWO;
 #' https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 #'
-#' @return A \code{ggplot} of the distribution.
+#' @return A [ggplot2::ggplot] of the distribution.
 #'
 #' @examples
 #' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
@@ -25,8 +28,11 @@
 #' # now with different colours
 #' # note that this taxon only has native and introduced occurrences, so only two colours are needed
 #' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
-#' p + scale_fill_manual(values=c("red", "blue"))+ # for polygons
-#'    scale_colour_manual(values=c("red", "blue")) # for points (islands)
+#' p +
+#' # for polygons
+#'   ggplot2::scale_fill_manual(values=c("red", "blue")) +
+#' # for points (islands)
+#'   ggplot2::scale_colour_manual(values=c("red", "blue")) # for points (islands)
 plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRUE,
                               extinct=TRUE, location_doubtful=TRUE){
  occurrence_type <- NULL
@@ -41,7 +47,7 @@ plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRU
   range.area <- ((bbox[3] - bbox[1]) * (bbox[4] - bbox[2]))
 
   if (crop.map) {
-    crop_details <- calculate_map_crop_(range, range.area, bbox, range.buffer)
+    crop_details <- calculate_map_crop_(range, range.area, bbox)
     range <- crop_details$range
     range.area <- crop_details$range.area
   }
@@ -125,10 +131,10 @@ scale_fill_powo <- function(...){
 }
 
 #' Calculate crop area.
-#' 
+#'
 #' @noRd
-#' 
-calculate_map_crop_ <- function(range, range.area, bbox, range.buffer) {
+#'
+calculate_map_crop_ <- function(range, range.area, bbox) {
   bbox2 <- st_bbox(st_shift_longitude(range))
   range.area2 <- ((bbox2[3] - bbox2[1]) * (bbox2[4] - bbox2[2]))
 

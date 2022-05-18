@@ -14,7 +14,7 @@ plot_distribution(
 )
 }
 \arguments{
-\item{range}{sf object of the type output by \code{get_distribution()}.}
+\item{range}{sf object of the type output by \code{\link[=get_distribution]{get_distribution()}}.}
 
 \item{crop.map}{Logical. Crop map extent to distribution? Defaults to FALSE.}
 
@@ -28,7 +28,7 @@ plot_distribution(
 doubtful? Defaults to TRUE.}
 }
 \value{
-A \code{ggplot} of the distribution.
+A \link[ggplot2:ggplot]{ggplot2::ggplot} of the distribution.
 }
 \description{
 Plot distribution maps for species, genera or families
@@ -46,6 +46,9 @@ p
 # now with different colours
 # note that this taxon only has native and introduced occurrences, so only two colours are needed
 p <- plot_distribution(get_distribution("Callitris", rank="genus"))
-p + scale_fill_manual(values=c("red", "blue"))+ # for polygons
-   scale_colour_manual(values=c("red", "blue")) # for points (islands)
+p +
+# for polygons
+  ggplot2::scale_fill_manual(values=c("red", "blue")) +
+# for points (islands)
+  ggplot2::scale_colour_manual(values=c("red", "blue")) # for points (islands)
 }
