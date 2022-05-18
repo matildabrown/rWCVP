@@ -40,6 +40,7 @@ length_lcs <- function(a,b) {
 format_output_ <- function(output, original_cols=NULL) {
   output_cols <- c(
     "match_type",
+    "multiple_matches",
     "match_id"="plant_name_id",
     "match_name"="taxon_name",
     "match_authors"="taxon_authors",

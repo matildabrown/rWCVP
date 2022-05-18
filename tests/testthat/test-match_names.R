@@ -4,10 +4,10 @@ test_that("match names with author returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 5)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 0)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (with author)"), 2)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (without author)"), 1)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 2)
+  expect_equal(sum(matches$multiple_matches, na.rm=TRUE), 0)
+  expect_equal(sum(matches$match_type == "Exact (with author)"), 2)
+  expect_equal(sum(matches$match_type == "Exact (without author)"), 1)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 2)
 })
 
 test_that("match names without author returns expected output", {
@@ -16,10 +16,10 @@ test_that("match names without author returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 6)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 2)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (with author)"), 0)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (without author)"), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 2)
+  expect_equal(sum(matches$multiple_matches, na.rm=TRUE), 2)
+  expect_equal(sum(matches$match_type == "Exact (with author)"), 0)
+  expect_equal(sum(matches$match_type == "Exact (without author)"), 4)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 2)
 })
 
 test_that("match names without fuzzy returns expected output", {
@@ -28,10 +28,10 @@ test_that("match names without fuzzy returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 5)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 0)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (with author)"), 2)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (without author)"), 1)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 0)
+  expect_equal(sum(matches$multiple_matches, na.rm=TRUE), 0)
+  expect_equal(sum(matches$match_type == "Exact (with author)", na.rm=TRUE), 2)
+  expect_equal(sum(matches$match_type == "Exact (without author)", na.rm=TRUE), 1)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)", na.rm=TRUE), 0)
 })
 
 test_that("match names without taxon name parts returns expected output", {
@@ -40,10 +40,10 @@ test_that("match names without taxon name parts returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 6)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 2)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (with author)"), 0)
-  expect_equal(sum(matches$match_type == "Matched in WCVP (without author)"), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 2)
+  expect_equal(sum(matches$multiple_matches, na.rm=TRUE), 2)
+  expect_equal(sum(matches$match_type == "Exact (with author)"), 0)
+  expect_equal(sum(matches$match_type == "Exact (without author)"), 4)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 2)
 })
 
 test_that("match names returns original columns", {

@@ -19,8 +19,8 @@ test_that("edit match returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 6)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (edit distance)"), 4)
+  expect_equal(sum(matches$multiple_matches), 2)
+  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)"), 6)
 })
 
 test_that("phonetic match returns expected output", {
@@ -28,8 +28,8 @@ test_that("phonetic match returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 6)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 4)
+  expect_equal(sum(matches$multiple_matches), 2)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 6)
 })
 
 test_that("fuzzy match returns expected output", {
@@ -37,7 +37,6 @@ test_that("fuzzy match returns expected output", {
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), 6)
-  expect_equal(sum(matches$match_type == "Multiple matches found"), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy matched (phonetically)"), 4)
+  expect_equal(sum(matches$multiple_matches), 2)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 6)
 })
-

@@ -87,8 +87,9 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
 
   multi_matches <-
     matches %>%
-    filter(.data$match_type == "Multiple matches found") %>%
-    distinct(.data[[id_col]], .keep_all=TRUE)
+    distinct(.data[[id_col]], .keep_all=TRUE) %>%
+    pull(.data$multiple_matches) %>%
+    sum(na.rm=TRUE)
 
   n_matched <- length(unique(matches[[name_col]]))
 
@@ -116,9 +117,10 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
     n_matched <- length(unique(matches_no_author[[name_col]]))
 
     multi_matches <-
-      matches_no_author %>%
-      filter(.data$match_type == "Multiple matches found") %>%
-      distinct(.data[[id_col]], .keep_all=TRUE)
+      matches %>%
+      distinct(.data[[id_col]], .keep_all=TRUE) %>%
+      pull(.data$multiple_matches) %>%
+      sum(na.rm=TRUE)
 
     matches <- bind_rows(matches, matches_no_author)
     message(glue::glue("---\n",
@@ -144,7 +146,7 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
 #
 #   # Compilation of matched results  ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
-  unmatched$match_type <- "No match found"
+  unmatched$match_type <- NA_character_
 
   matches <-
     matches %>%

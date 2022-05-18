@@ -26,9 +26,8 @@
 exact_match <- function(names_df, wcvp, name_col, author_col=NULL) {
   original_names <- colnames(names_df)
 
-  match_type <- ifelse(is.null(author_col),
-                       "Matched in WCVP (without author)",
-                       "Matched in WCVP (with author)")
+  match_type <- ifelse(is.null(author_col), "Exact (without author)",
+                       "Exact (with author)")
 
   join_key <- "taxon_name"
   join_names <- name_col
@@ -50,11 +49,11 @@ exact_match <- function(names_df, wcvp, name_col, author_col=NULL) {
 
   matches <-
     matches %>%
-    mutate(match_type=ifelse(is.na(.data$taxon_name), "No exact match found", match_type),
+    mutate(match_type=ifelse(is.na(.data$taxon_name), NA_character_, match_type),
            match_similarity=ifelse(is.na(.data$taxon_name), NA_real_, 1),
            match_edit_distance=ifelse(is.na(.data$taxon_name), NA_real_, 0)) %>%
     add_count(.data[[name_col]]) %>%
-    mutate(match_type=ifelse(n > 1, "Multiple matches found", .data$match_type)) %>%
+    mutate(multiple_matches=.data$n > 1) %>%
     select(-.data$n)
 
   matches %>%

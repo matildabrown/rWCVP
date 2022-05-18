@@ -82,12 +82,12 @@ phonetic_match <- function(names_df, wcvp, name_col){
 
   matches <-
     matches %>%
-    mutate(match_type=case_when(.data$match_similarity > 0.9 ~ "Fuzzy matched (phonetically)",
-                                .data$match_similarity >= 0.75 ~ "Fuzzy matched (phonetically)",
-                                TRUE ~ "No fuzzy match found")) %>%
+    mutate(match_type=case_when(.data$match_similarity > 0.9 ~ "Fuzzy (phonetic)",
+                                .data$match_similarity >= 0.75 ~ "Fuzzy (phonetic)",
+                                TRUE ~ NA_character_)) %>%
     mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity)) %>%
     add_count(.data[[name_col]]) %>%
-    mutate(match_type=ifelse(.data$n > 1, "Multiple matches found", .data$match_type)) %>%
+    mutate(multiple_matches=.data$n > 1) %>%
     select(-.data$n)
 
   matches %>%
@@ -165,14 +165,10 @@ edit_match_name_ <- function(name, lookup) {
     best_name_id <- NA_character_
     best_name <- NA_character_
     best_similarity <- NA_real_
-    match_type <- "No fuzzy match found"
+    match_type <- NA_character_
   } else {
     best_similarity <- round(similarity[best_idx], 3)
-    match_type <- "Fuzzy matched (edit distance)"
-  }
-
-  if (length(best_name_id) > 1) {
-    match_type <- "Multiple matches found"
+    match_type <- "Fuzzy (edit distance)"
   }
 
   data.frame(
@@ -180,6 +176,7 @@ edit_match_name_ <- function(name, lookup) {
     plant_name_id=best_name_id,
     match_similarity=best_similarity,
     match_edit_distance=as.vector(adist(name, best_name)),
-    match_type=match_type
+    match_type=match_type,
+    multiple_matches=length(best_name_id) > 1
   )
 }
