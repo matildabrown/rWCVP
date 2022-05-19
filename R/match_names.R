@@ -31,22 +31,26 @@
 #' @import dplyr
 #'
 #' @examples
-#' wcvp <- rWCVPdata::wcvp_names
+#' wcvp_names <- rWCVPdata::wcvp_names
 #'
 #' # without author
-#' match_names(redlist_example, wcvp, name_col="scientificName",
+#' match_names(redlist_example, wcvp_names, name_col="scientificName",
 #'             id_col="assessmentId")
 #'
 #' # with author
-#' match_names(redlist_example, wcvp, name_col="scientificName",
+#' match_names(redlist_example, wcvp_names, name_col="scientificName",
 #'             id_col="assessmentId", author_col="authority")
 #'
 #' @family name matching functions
 #'
-match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=NULL,
+match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, author_col=NULL,
                         join_cols=NULL, fuzzy=TRUE) {
-  latest_version <- rWCVPdata::check_wcvp_version(silent=TRUE)
-  if(! latest_version) message("Warning: This version of WCVP is out of date, see check_wcvp_version() for details.")
+  if (is.null(wcvp_names)) {
+    wcvp_names <- rWCVPdata::wcvp_names
+    latest_version <- rWCVPdata::check_wcvp_version(silent=TRUE)
+    if(! latest_version) message("Warning: This version of WCVP is out of date, see check_wcvp_version() for details.")
+  }
+
 
   # warning for missing name info
   if (is.null(name_col) & is.null(join_cols)) {
@@ -82,8 +86,8 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
   # 1. Match within WCVP including authority if present ####
   matches <-
     unmatched %>%
-    exact_match(wcvp, name_col=name_col, author_col=author_col) %>%
-    filter(! is.na(.data$match_id))
+    exact_match(wcvp_names, name_col=name_col, author_col=author_col) %>%
+    filter(! is.na(.data$wcvp_id))
 
   multi_matches <-
     matches %>%
@@ -111,8 +115,8 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
     # Match names
     matches_no_author <-
       unmatched %>%
-      exact_match(wcvp, name_col=name_col, author_col=NULL) %>%
-      filter(! is.na(.data$match_id))
+      exact_match(wcvp_names, name_col=name_col, author_col=NULL) %>%
+      filter(! is.na(.data$wcvp_id))
 
     n_matched <- length(unique(matches_no_author[[name_col]]))
 
@@ -136,8 +140,8 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
   if(fuzzy){
     message(glue::glue("---
                        Fuzzy matching {length(unique(unmatched[[name_col]]))} names...this may take some time"))
-    fuzzy_matches <- fuzzy_match(unmatched, wcvp, name_col=name_col)
-    message(glue::glue("Fuzzy matched {sum(!is.na(unique(fuzzy_matches$match_name)))} ",
+    fuzzy_matches <- fuzzy_match(unmatched, wcvp_names, name_col=name_col)
+    message(glue::glue("Fuzzy matched {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} ",
                        "out of {length(unique(unmatched[[name_col]]))} names."))
 
     matches <- bind_rows(matches, fuzzy_matches)
@@ -156,7 +160,7 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
 
   n_matched <-
     matches %>%
-    filter(!is.na(.data$match_id)) %>%
+    filter(!is.na(.data$wcvp_id)) %>%
     distinct(.data[[name_col]]) %>%
     nrow()
 
@@ -169,8 +173,8 @@ match_names <- function(names_df, wcvp, name_col=NULL, id_col=NULL, author_col=N
     matches <-
       matches %>%
       rowwise() %>%
-      mutate(author_edit_distance=adist(.data[[author_col]], .data$match_authors)[,1],
-             author_lcs=length_lcs(.data[[author_col]], .data$match_authors)) %>%
+      mutate(wcvp_author_edit_distance=adist(.data[[author_col]], .data$wcvp_authors)[,1],
+             wcvp_author_lcs=length_lcs(.data[[author_col]], .data$wcvp_authors)) %>%
       ungroup()
   }
 

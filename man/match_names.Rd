@@ -6,7 +6,7 @@
 \usage{
 match_names(
   names_df,
-  wcvp,
+  wcvp_names = NULL,
   name_col = NULL,
   id_col = NULL,
   author_col = NULL,
@@ -17,7 +17,7 @@ match_names(
 \arguments{
 \item{names_df}{a data frame of names for matching.}
 
-\item{wcvp}{a data frame of WCVP names to match against.}
+\item{wcvp_names}{a data frame of WCVP names to match against.}
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
 
@@ -54,14 +54,14 @@ and can optionally be turned off.
 The WCVP can be loaded for matching from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.
 }
 \examples{
-wcvp <- rWCVPdata::wcvp_names
+wcvp_names <- rWCVPdata::wcvp_names
 
 # without author
-match_names(redlist_example, wcvp, name_col="scientificName",
+match_names(redlist_example, wcvp_names, name_col="scientificName",
             id_col="assessmentId")
 
 # with author
-match_names(redlist_example, wcvp, name_col="scientificName",
+match_names(redlist_example, wcvp_names, name_col="scientificName",
             id_col="assessmentId", author_col="authority")
 
 }

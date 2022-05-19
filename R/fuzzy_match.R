@@ -4,7 +4,7 @@
 #' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names].
 #'
 #' @param names_df a data frame of names for matching.
-#' @param wcvp a data frame of WCVP names to match against.
+#' @param wcvp_names a data frame of WCVP names to match against.
 #' @param name_col the column in `names_df` that has the taxon name for matching.
 #'
 #' @return Match results from WCVP bound to the original data from `names_df`.
@@ -18,18 +18,18 @@
 #' @export
 #'
 #' @examples
-#' wcvp <- rWCVPdata::wcvp_names
-#' fuzzy_match(redlist_example, wcvp, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' fuzzy_match(redlist_example, wcvp_names, "scientificName")
 #'
 #' @family name matching functions
 #'
-fuzzy_match <- function(names_df, wcvp, name_col){
-  wcvp_species <- filter(wcvp, .data$taxon_rank != "Genus")
+fuzzy_match <- function(names_df, wcvp_names, name_col){
+  wcvp_species <- filter(wcvp_names, .data$taxon_rank != "Genus")
 
   phonetic_matches <-
     names_df %>%
     phonetic_match(wcvp_species, name_col=name_col) %>%
-    filter(!is.na(.data$match_id))
+    filter(!is.na(.data$wcvp_id))
 
   matched_names <- phonetic_matches[[name_col]]
 
@@ -60,17 +60,17 @@ fuzzy_match <- function(names_df, wcvp, name_col){
 #' @export
 #'
 #' @examples
-#' wcvp <- rWCVPdata::wcvp_names
-#' phonetic_match(redlist_example, wcvp, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' phonetic_match(redlist_example, wcvp_names, "scientificName")
 #'
-phonetic_match <- function(names_df, wcvp, name_col){
+phonetic_match <- function(names_df, wcvp_names, name_col){
   original_names <- colnames(names_df)
-  wcvp$mp <- metaphone(wcvp$taxon_name, maxCodeLen=20, clean=FALSE)
+  wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen=20, clean=FALSE)
 
   matches <-
     names_df %>%
     mutate(mp=metaphone(.data[[name_col]], maxCodeLen=20, clean=FALSE)) %>%
-    left_join(wcvp, by="mp", suffix=c("", "_wcvp"))
+    left_join(wcvp_names, by="mp", suffix=c("", "_wcvp_names"))
 
   matches <-
     matches %>%
@@ -106,21 +106,21 @@ phonetic_match <- function(names_df, wcvp, name_col){
 #' @export
 #'
 #' @examples
-#' wcvp <- rWCVPdata::wcvp_names
-#' edit_match(redlist_example, wcvp, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' edit_match(redlist_example, wcvp_names, "scientificName")
 #'
-edit_match <- function(names_df, wcvp, name_col){
+edit_match <- function(names_df, wcvp_names, name_col){
   original_names <- colnames(names_df)
   matches <-
     names_df %>%
     filter(!is.na(.data[[name_col]])) %>%
     rowwise() %>%
-    mutate(match_info=list(edit_match_name_(.data[[name_col]], wcvp))) %>%
+    mutate(match_info=list(edit_match_name_(.data[[name_col]], wcvp_names))) %>%
     unnest(.data$match_info)
 
   matches %>%
     left_join(
-      wcvp,
+      wcvp_names,
       by=c("plant_name_id", "taxon_name"),
       suffix=c("", "_wcvp")
     ) %>%

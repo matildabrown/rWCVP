@@ -41,14 +41,16 @@ format_output_ <- function(output, original_cols=NULL) {
   output_cols <- c(
     "match_type",
     "multiple_matches",
-    "match_id"="plant_name_id",
-    "match_name"="taxon_name",
-    "match_authors"="taxon_authors",
-    "match_rank"="taxon_rank",
-    "match_status"="taxon_status",
-    "match_homotypic"="homotypic_synonym",
-    "match_ipni_id"="ipni_id",
-    "match_accepted_id"="accepted_plant_name_id"
+    "match_similarity",
+    "match_edit_distance",
+    "wcvp_id"="plant_name_id",
+    "wcvp_name"="taxon_name",
+    "wcvp_authors"="taxon_authors",
+    "wcvp_rank"="taxon_rank",
+    "wcvp_status"="taxon_status",
+    "wcvp_homotypic"="homotypic_synonym",
+    "wcvp_ipni_id"="ipni_id",
+    "wcvp_accepted_id"="accepted_plant_name_id"
   )
 
   output %>%

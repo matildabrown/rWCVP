@@ -13,17 +13,17 @@
 #' @export
 #'
 #' @examples
-#' wcvp <- rWCVPdata::wcvp_names
+#' wcvp_names <- rWCVPdata::wcvp_names
 #'
 #' # including author string
-#' exact_match(redlist_example, wcvp, "scientificName", author_col="authority")
+#' exact_match(redlist_example, wcvp_names, "scientificName", author_col="authority")
 #'
 #' # without author string
-#' exact_match(redlist_example, wcvp, "scientificName")
+#' exact_match(redlist_example, wcvp_names, "scientificName")
 #'
 #' @family name matching functions
 #'
-exact_match <- function(names_df, wcvp, name_col, author_col=NULL) {
+exact_match <- function(names_df, wcvp_names, name_col, author_col=NULL) {
   original_names <- colnames(names_df)
 
   match_type <- ifelse(is.null(author_col), "Exact (without author)",
@@ -40,7 +40,7 @@ exact_match <- function(names_df, wcvp, name_col, author_col=NULL) {
   matches <-
     names_df %>%
     left_join(
-      wcvp,
+      wcvp_names,
       by=join_key,
       keep=TRUE,
       na_matches="never",

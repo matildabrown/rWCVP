@@ -6,16 +6,16 @@
 \alias{edit_match}
 \title{Fuzzy (approximate) matching to the WCVP.}
 \usage{
-fuzzy_match(names_df, wcvp, name_col)
+fuzzy_match(names_df, wcvp_names, name_col)
 
-phonetic_match(names_df, wcvp, name_col)
+phonetic_match(names_df, wcvp_names, name_col)
 
-edit_match(names_df, wcvp, name_col)
+edit_match(names_df, wcvp_names, name_col)
 }
 \arguments{
 \item{names_df}{a data frame of names for matching.}
 
-\item{wcvp}{a data frame of WCVP names to match against.}
+\item{wcvp_names}{a data frame of WCVP names to match against.}
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
 }
@@ -37,14 +37,14 @@ Edit distance matching finds the closest match based on Levenshtein similarity,
 calculated by \link[RecordLinkage:strcmp]{RecordLinkage::levenshteinSim}.
 }
 \examples{
-wcvp <- rWCVPdata::wcvp_names
-fuzzy_match(redlist_example, wcvp, "scientificName")
+wcvp_names <- rWCVPdata::wcvp_names
+fuzzy_match(redlist_example, wcvp_names, "scientificName")
 
-wcvp <- rWCVPdata::wcvp_names
-phonetic_match(redlist_example, wcvp, "scientificName")
+wcvp_names <- rWCVPdata::wcvp_names
+phonetic_match(redlist_example, wcvp_names, "scientificName")
 
-wcvp <- rWCVPdata::wcvp_names
-edit_match(redlist_example, wcvp, "scientificName")
+wcvp_names <- rWCVPdata::wcvp_names
+edit_match(redlist_example, wcvp_names, "scientificName")
 
 }
 \seealso{

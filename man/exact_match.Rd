@@ -4,12 +4,12 @@
 \alias{exact_match}
 \title{Exact matching to WCVP.}
 \usage{
-exact_match(names_df, wcvp, name_col, author_col = NULL)
+exact_match(names_df, wcvp_names, name_col, author_col = NULL)
 }
 \arguments{
 \item{names_df}{a data frame of names for matching.}
 
-\item{wcvp}{a data frame of WCVP names to match against.}
+\item{wcvp_names}{a data frame of WCVP names to match against.}
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
 
@@ -24,13 +24,13 @@ Exact matching of names to the WCVP, optionally using the author string to
 refine results.
 }
 \examples{
-wcvp <- rWCVPdata::wcvp_names
+wcvp_names <- rWCVPdata::wcvp_names
 
 # including author string
-exact_match(redlist_example, wcvp, "scientificName", author_col="authority")
+exact_match(redlist_example, wcvp_names, "scientificName", author_col="authority")
 
 # without author string
-exact_match(redlist_example, wcvp, "scientificName")
+exact_match(redlist_example, wcvp_names, "scientificName")
 
 }
 \seealso{
