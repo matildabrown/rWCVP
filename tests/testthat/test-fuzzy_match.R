@@ -18,25 +18,25 @@ test_that("edit match returns expected output", {
   matches <- edit_match(match_data, lookup_data, name_col="scientificName")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
-  expect_equal(nrow(matches), 6)
+  expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)"), 6)
+  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)"), 7)
 })
 
 test_that("phonetic match returns expected output", {
   matches <- phonetic_match(match_data, lookup_data, name_col="scientificName")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
-  expect_equal(nrow(matches), 6)
+  expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 6)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 7)
 })
 
 test_that("fuzzy match returns expected output", {
   matches <- fuzzy_match(match_data, lookup_data, name_col="scientificName")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
-  expect_equal(nrow(matches), 6)
+  expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 6)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 7)
 })

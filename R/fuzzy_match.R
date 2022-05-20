@@ -70,7 +70,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
   matches <-
     names_df %>%
     mutate(sanitised_=sanitise_names_(.data[[name_col]])) %>%
-    mutate(mp=metaphone(sanitised_, maxCodeLen=20, clean=FALSE)) %>%
+    mutate(mp=metaphone(.data$sanitised_, maxCodeLen=20, clean=FALSE)) %>%
     left_join(wcvp_names, by="mp", suffix=c("", "_wcvp_names"))
 
   matches <-

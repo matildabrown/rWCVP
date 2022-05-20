@@ -29,13 +29,15 @@ exact_match <- function(names_df, wcvp_names, name_col, author_col=NULL) {
   match_type <- ifelse(is.null(author_col), "Exact (without author)",
                        "Exact (with author)")
 
-  join_key <- "taxon_name"
+  join_key <- "wcvp_sanitised_"
   join_names <- "sanitised_"
   if (! is.null(author_col)) {
     join_key <- c(join_key, "taxon_authors")
     join_names <- c(join_names, author_col)
   }
   names(join_key) <- join_names
+
+  wcvp_names$wcvp_sanitised_ <- sanitise_names_(wcvp_names$taxon_name)
 
   matches <-
     names_df %>%
