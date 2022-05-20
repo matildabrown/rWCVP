@@ -31,3 +31,57 @@ length_lcs <- function(a,b) {
   longest <- max(lengths)
  return(longest)
 }
+
+#' Format columns of name matching output.
+#'
+#' @import dplyr
+#' @noRd
+#'
+format_output_ <- function(output, original_cols=NULL) {
+  output_cols <- c(
+    "match_type",
+    "multiple_matches",
+    "match_similarity",
+    "match_edit_distance",
+    "wcvp_id"="plant_name_id",
+    "wcvp_name"="taxon_name",
+    "wcvp_authors"="taxon_authors",
+    "wcvp_rank"="taxon_rank",
+    "wcvp_status"="taxon_status",
+    "wcvp_homotypic"="homotypic_synonym",
+    "wcvp_ipni_id"="ipni_id",
+    "wcvp_accepted_id"="accepted_plant_name_id"
+  )
+
+  output %>%
+    select(all_of(original_cols), all_of(output_cols))
+}
+
+#' Remove hybrid symbol from names.
+#'
+#' @importFrom stringr str_remove_all str_squish
+#' @noRd
+remove_hybrid_ <- function(names) {
+  names <- str_remove_all(names, "(?<![A-Za-z])(x|\u00d7)")
+  str_squish(names)
+}
+
+#' Standardise infraspecific ranks.
+#'
+#' @importFrom stringr str_replace_all
+#' @noRd
+standardise_infras_ <- function(names) {
+  infras <- c(" subsp "=" subsp. ", " ssp "=" subsp. ", " ssp. "=" subsp. ",
+              " var "=" var. ", " f "=" f. ", " forma "=" f. ")
+
+  str_replace_all(names, infras)
+}
+
+#' Sanitise names.
+#'
+#' @noRd
+#'
+sanitise_names_ <- function(names) {
+  names <- remove_hybrid_(names)
+  standardise_infras_(names)
+}

@@ -40,13 +40,10 @@ version of the checklist).}
 \item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
 }
 \value{
-A \code{sf} data.frame containing the range polygon/s of the taxon.
+sf data.frame containing the range polygon/s of the taxon.
 }
 \description{
 Generate spatial distribution objects for species, genera or families
-}
-\details{
-For an exmaple of how this function can be used to clean occurrence records using a spatial filter, see the vignette "Cleaning occurrence records with rWCVP".
 }
 \examples{
 r <- get_distribution("Callitris", rank="genus")
