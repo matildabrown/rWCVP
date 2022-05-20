@@ -56,3 +56,32 @@ format_output_ <- function(output, original_cols=NULL) {
   output %>%
     select(all_of(original_cols), all_of(output_cols))
 }
+
+#' Remove hybrid symbol from names.
+#'
+#' @importFrom stringr str_remove_all str_squish
+#' @noRd
+remove_hybrid_ <- function(names) {
+  names <- str_remove_all(names, "(?<![A-Za-z])(x|\u00d7)")
+  str_squish(names)
+}
+
+#' Standardise infraspecific ranks.
+#'
+#' @importFrom stringr str_replace_all
+#' @noRd
+standardise_infras_ <- function(names) {
+  infras <- c(" subsp "=" subsp. ", " ssp "=" subsp. ", " ssp. "=" subsp. ",
+              " var "=" var. ", " f "=" f. ", " forma "=" f. ")
+
+  str_replace_all(names, infras)
+}
+
+#' Sanitise names.
+#'
+#' @noRd
+#'
+sanitise_names_ <- function(names) {
+  names <- remove_hybrid_(names)
+  standardise_infras_(names)
+}

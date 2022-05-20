@@ -69,15 +69,16 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 
   matches <-
     names_df %>%
-    mutate(mp=metaphone(.data[[name_col]], maxCodeLen=20, clean=FALSE)) %>%
+    mutate(sanitised_=sanitise_names_(.data[[name_col]])) %>%
+    mutate(mp=metaphone(sanitised_, maxCodeLen=20, clean=FALSE)) %>%
     left_join(wcvp_names, by="mp", suffix=c("", "_wcvp_names"))
 
   matches <-
     matches %>%
     mutate(
-      match_similarity=levenshteinSim(.data[[name_col]], .data$taxon_name),
+      match_similarity=levenshteinSim(.data$sanitised_, .data$taxon_name),
       match_similarity=round(.data$match_similarity),
-      match_edit_distance=diag(adist(.data[[name_col]], .data$taxon_name))
+      match_edit_distance=diag(adist(.data$sanitised_, .data$taxon_name))
     )
 
   matches <-
@@ -114,8 +115,9 @@ edit_match <- function(names_df, wcvp_names, name_col){
   matches <-
     names_df %>%
     filter(!is.na(.data[[name_col]])) %>%
+    mutate(sanitised_=sanitise_names_(.data[[name_col]])) %>%
     rowwise() %>%
-    mutate(match_info=list(edit_match_name_(.data[[name_col]], wcvp_names))) %>%
+    mutate(match_info=list(edit_match_name_(.data$sanitised_, wcvp_names))) %>%
     unnest(.data$match_info)
 
   matches %>%
@@ -132,7 +134,7 @@ edit_match <- function(names_df, wcvp_names, name_col){
 #' @import dplyr
 #' @importFrom RecordLinkage levenshteinSim
 #' @importFrom utils adist
-#' @importFrom stringr str_extract
+#' @importFrom stringr str_extract str_remove_all str_squish
 #' @importFrom rlang .data
 #'
 #' @noRd
