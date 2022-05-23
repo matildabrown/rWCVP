@@ -1,6 +1,5 @@
 ---
-title: "World Checklist of Vascular Plants"
-subtitle: "Species checklist generated with the rWCVP package"
+title: "Species checklist generated with the rWCVP package"
 output: html_document
 params: 
  version: "New Phytologist Special Issue"
@@ -17,7 +16,7 @@ params:
 }
 
 h1.title {
-  font-size: 38px;
+  font-size: 28px;
 }
 
 </style>
@@ -38,8 +37,7 @@ synonyms <- params$synonyms
   cat("**Generated on: **", format(Sys.time(), '%d %B, %Y'),"\n")
   cat("\n**WCVP version: **", version)
 ```
-    
-**Licensing:** [??]    
+
     
 **Cite as:**  
 
@@ -112,6 +110,7 @@ data.frame(v1= c("E","e","x","i","?"),
     data_row.padding = gt::px(1),
     data_row.padding.horizontal = gt::px(15),
     column_labels.hidden = TRUE,
+    table.font.size = 12,
     table.align = "left")
   
 ```
@@ -242,6 +241,7 @@ suppressMessages(summ %>%
     column_labels.font.weight = "bold",
     data_row.padding = gt::px(1),
     table.font.size = 12,
+    table_body.hlines.color = "transparent",
     table.align = "left") %>% 
     gt::tab_style(
         style = gt::cell_text(align = "left"),
@@ -338,7 +338,15 @@ df3 %>% dplyr::filter(taxon_rank!= "Genus") %>%
     table.font.size = 12,
     data_row.padding = gt::px(1),
     column_labels.hidden = TRUE
-  ) 
+  )  %>% 
+    gt::tab_style(
+        style = gt::cell_text(size = 8),
+        locations = gt::cells_body(columns = plant_name_id)
+    )  %>% 
+    gt::tab_style(
+        style = gt::cell_text(size = 8),
+        locations = gt::cells_body(columns = ipni_id)
+    ) 
 })
   
 ```

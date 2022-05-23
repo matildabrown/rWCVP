@@ -85,3 +85,11 @@ sanitise_names_ <- function(names) {
   names <- remove_hybrid_(names)
   standardise_infras_(names)
 }
+#' First letter to upper
+#'
+#' @noRd
+#'
+Toupper <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}

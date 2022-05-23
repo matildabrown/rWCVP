@@ -38,3 +38,18 @@
 #' @source Modified from data available at \url{https://github.com/tdwg/wgsrpd}
 
 "wgsrpd_mapping"
+
+#' Data for mapping plant family to order or higher classification
+#'
+#' A dataset containing the higher classification (Angiosperms, Gymnosperms, Ferns and Lycophytes) and Order for each family in the WCVP.
+#'
+#'
+#' @format A data frame with 457 rows and 3 variables: \code{family, order} and \code{higher_classification}
+#'
+#'
+#' @source Fern and lycophyte taxonomy from PPG I (2016; \url{https://doi.org/10.1111/jse.12229}). Angiosperm taxonomy from APG IV (2016;; \url{https://doi.org/10.1111/boj.12385}). Gymnosperm taxonomy from Forest et al (2018; \url{https://doi.org/10.1038/s41598-018-24365-4})
+#'
+#'
+"taxonomic_mapping"
+
+

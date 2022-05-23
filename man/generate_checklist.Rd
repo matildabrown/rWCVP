@@ -6,7 +6,7 @@
 \usage{
 generate_checklist(
   taxon = NULL,
-  rank = c("species", "genus", "family"),
+  rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
   synonyms = TRUE,
   render.report = FALSE,
@@ -24,7 +24,7 @@ generate_checklist(
 \arguments{
 \item{taxon}{Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).}
 
-\item{rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
+\item{rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
@@ -63,5 +63,9 @@ The \code{synonyms} argument can be used to limit names to those that are Accept
 Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 }
 \examples{
+#These examples take >10 seconds to run.
+\dontrun{
 generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
+generate_checklist(taxon="Ferns", rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+}
 }

@@ -6,7 +6,7 @@
 \usage{
 generate_occurrence_matrix(
   taxon = NULL,
-  taxon.rank = c("species", "genus", "family"),
+  rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
   native = TRUE,
   introduced = TRUE,
@@ -20,9 +20,9 @@ generate_occurrence_matrix(
 \arguments{
 \item{taxon}{Character. One or many taxa to be included. Defaults to NULL (all species)}
 
-\item{taxon.rank}{Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.}
+\item{rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
-\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to NULL (global).}
+\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
 \item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.}
 
@@ -51,7 +51,7 @@ Generate occurrence matrix for taxa and areas
 See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
 }
 \examples{
-generate_occurrence_matrix(taxon="Poa",taxon.rank="genus",
+generate_occurrence_matrix(taxon="Poa",rank="genus",
 area=c("TAS", "VIC","NSW"), introduced=FALSE)
 
 

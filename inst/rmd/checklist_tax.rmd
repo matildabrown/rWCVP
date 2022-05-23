@@ -370,6 +370,10 @@ df3[is.na(df3$accepted_name),"rowgrouptext"] <- "Unplaced"
     gt::tab_style(
         style = gt::cell_text(align = "left", indent = gt::px(20)),
         locations = gt::cells_body(columns = maintext)
+    ) %>% 
+    gt::tab_style(
+        style = gt::cell_text(size = 8),
+        locations = gt::cells_body(columns = plant_name_id)
     ) 
 
 })

@@ -1,8 +1,8 @@
 #' Generate occurrence matrix for taxa and areas
 #'
 #' @param taxon Character. One or many taxa to be included. Defaults to NULL (all species)
-#' @param taxon.rank Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is NULL. Note that this must be one value only - it is not possible to mix and match families and genera, for example.
-#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to NULL (global).
+#' @param rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
@@ -24,11 +24,11 @@
 #' @importFrom tidyr pivot_wider
 #' @export
 #'
-#' @examples generate_occurrence_matrix(taxon="Poa",taxon.rank="genus",
+#' @examples generate_occurrence_matrix(taxon="Poa",rank="genus",
 #' area=c("TAS", "VIC","NSW"), introduced=FALSE)
 #'
 #'
-generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genus", "family"), area=NULL,
+generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "family","order","higher"), area=NULL,
                           native=TRUE, introduced=TRUE,
                           extinct=TRUE, location_doubtful=TRUE,
                           local_wcvp=FALSE, wcvp_names=NULL,
@@ -40,6 +40,10 @@ generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genu
   } else {
     if (is.null(wcvp_names)) stop("Pointer to wcvp_names missing.")
     if (is.null(wcvp_distributions)) stop("Pointer to wcvp_distributions missing.")
+  }
+
+  if(rank %in% c("order","higher")) {
+    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
   }
 
   if (is.null(area)) message("No area specified. Generating global occurrence matrix.")
@@ -54,7 +58,7 @@ generate_occurrence_matrix <- function(taxon=NULL, taxon.rank=c("species", "genu
     filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
            .data$taxon_rank == "Species")
 
-  if(!is.null(taxon)) df <- df %>% filter(if_any(taxon.rank) %in% taxon)
+  if(!is.null(taxon)) df <- df %>% filter(if_any(rank) %in% taxon)
   if(! introduced) df <- filter(df, .data$introduced == 0)
   if(! extinct) df <- filter(df, .data$extinct == 0)
   if(! location_doubtful) df <- filter(df, .data$location_doubtful == 0)

@@ -6,7 +6,7 @@
 \usage{
 get_distribution(
   taxon,
-  rank = c("species", "genus", "family"),
+  rank = c("species", "genus", "family", "order", "higher"),
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -19,8 +19,7 @@ get_distribution(
 \arguments{
 \item{taxon}{Character. The taxon to be mapped.}
 
-\item{rank}{Character. The rank of \code{taxon}. Note: if multiple taxa are
-to be mapped, they must be of the same rank.}
+\item{rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in \code{taxon}.}
 
 \item{native}{Logical. Include native range? Defaults to TRUE.}
 
@@ -44,6 +43,9 @@ sf data.frame containing the range polygon/s of the taxon.
 }
 \description{
 Generate spatial distribution objects for species, genera or families
+}
+\details{
+Where \link{rank} is higher than species, the distribution of the whole group will be returned, not individual species within that group.
 }
 \examples{
 r <- get_distribution("Callitris", rank="genus")

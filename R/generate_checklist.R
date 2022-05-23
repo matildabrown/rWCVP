@@ -1,7 +1,7 @@
 #' Generate a species checklist from WCVP
 #'
 #' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
-#' @param rank Character. One of "species", "genus" or "family" giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to \code{TRUE}.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to \code{TRUE}.
@@ -25,8 +25,13 @@
 #' @import dplyr
 #' @export
 #'
-#' @examples generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
-generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family"), area=NULL,
+#' @examples
+#' #These examples take >10 seconds to run.
+#' \dontrun{
+#' generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
+#' generate_checklist(taxon="Ferns", rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+#' }
+generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","order","higher"), area=NULL,
                                synonyms=TRUE, render.report=FALSE,
                                native=TRUE, introduced = TRUE,
                                extinct = TRUE, location_doubtful = TRUE,
@@ -52,6 +57,9 @@ if(local_wcvp == FALSE){
   if (is.null(wcvp_distributions)) stop("Pointer to wcvp_distributions missing.")
 }
 
+if(rank %in% c("order","higher")) {
+  wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
+}
 # give some messages
 if (is.null(area)) message("No area specified. Generating global checklist.")
 if (is.null(taxon)) message("No taxon specified. Generating checklist for all species.")
@@ -177,7 +185,7 @@ message(glue::glue("Saving report as: ", report.filename))
                                    taxa = taxon,
                                    area_delim = area,
                                    mydata = df,
-                                   synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
+                                   synonyms = synonyms), output_file = report.filename)
     )
   }
        }
