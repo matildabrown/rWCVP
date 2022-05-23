@@ -20,7 +20,7 @@ test_that("edit match returns expected output", {
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)"), 7)
+  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)", na.rm=TRUE), 8)
 })
 
 test_that("phonetic match returns expected output", {
@@ -29,7 +29,7 @@ test_that("phonetic match returns expected output", {
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
-  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 7)
+  expect_equal(sum(matches$match_type == "Fuzzy (phonetic)", na.rm=TRUE), 7)
 })
 
 test_that("fuzzy match returns expected output", {
@@ -39,11 +39,11 @@ test_that("fuzzy match returns expected output", {
   expect_equal(nrow(matches), nrow(match_data)+1)
   expect_equal(sum(matches$multiple_matches), 2)
   expect_equal(sum(matches$match_type == "Fuzzy (phonetic)"), 7)
+  expect_equal(sum(matches$match_type == "Fuzzy (edit distance)"), 1)
 })
 
-test_that("phonetic match is the same as edit distance match", {
-  phonetic <- phonetic_match(match_data, lookup_data, name_col="scientificName")
-  edit <- edit_match(match_data, lookup_data, name_col="scientificName")
-
-  expect_true(all(phonetic$wcvp_id == edit$wcvp_id))
+test_that("phonetic match returns NA if match is too disimilar", {
+  phonetic <- phonetic_match(tail(match_data, 1), lookup_data, name_col="scientificName")
+  expect_true(is.na(phonetic$match_type))
+  expect_true(is.na(phonetic$wcvp_name))
 })
