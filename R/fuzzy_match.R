@@ -87,7 +87,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
                                 .data$match_similarity >= 0.75 ~ "Fuzzy (phonetic)",
                                 TRUE ~ NA_character_)) %>%
     mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity),
-           match_edit_distance=ifelse(is.na(match_type), NA_real_, .data$match_edit_distance)) %>%
+           match_edit_distance=ifelse(is.na(.data$match_type), NA_real_, .data$match_edit_distance)) %>%
     add_count(.data[[name_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
     select(-.data$n)
