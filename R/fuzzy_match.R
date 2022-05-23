@@ -77,7 +77,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
     matches %>%
     mutate(
       match_similarity=levenshteinSim(.data$sanitised_, .data$taxon_name),
-      match_similarity=round(.data$match_similarity),
+      match_similarity=round(.data$match_similarity, 3),
       match_edit_distance=diag(adist(.data$sanitised_, .data$taxon_name))
     )
 
@@ -86,13 +86,15 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
     mutate(match_type=case_when(.data$match_similarity > 0.9 ~ "Fuzzy (phonetic)",
                                 .data$match_similarity >= 0.75 ~ "Fuzzy (phonetic)",
                                 TRUE ~ NA_character_)) %>%
-    mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity)) %>%
+    mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity),
+           match_edit_distance=ifelse(is.na(match_type), NA_real_, .data$match_edit_distance)) %>%
     add_count(.data[[name_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
     select(-.data$n)
 
   matches %>%
-    format_output_(original_cols=original_names)
+    format_output_(original_cols=original_names) %>%
+    mutate(across(starts_with("wcvp_"), ~ifelse(is.na(.data$match_type), NA, .x)))
 }
 
 #' @rdname fuzzy_match
