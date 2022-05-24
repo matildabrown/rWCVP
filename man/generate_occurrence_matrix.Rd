@@ -12,7 +12,6 @@ generate_occurrence_matrix(
   introduced = TRUE,
   extinct = TRUE,
   location_doubtful = TRUE,
-  local_wcvp = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
 )
@@ -32,13 +31,9 @@ generate_occurrence_matrix(
 
 \item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
 
-\item{local_wcvp}{Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
-version of the checklist).}
+\item{wcvp_names}{Pointer to the WCVP names dataset. Defaults to NULL (data from \code{rWCVPdata}).}
 
-\item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
-
-\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
+\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Defaults to NULL (data from \code{rWCVPdata}).}
 }
 \value{
 A data.frame containing the \code{taxon_name} and \code{plant_name_id}

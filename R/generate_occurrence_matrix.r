@@ -7,11 +7,8 @@
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
 #' @param location_doubtful Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.
-#' @param local_wcvp Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-#' If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
-#' version of the checklist).
-#' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
+#' @param wcvp_names Pointer to the WCVP names dataset. Defaults to NULL (data from \code{rWCVPdata}).
+#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Defaults to NULL (data from \code{rWCVPdata}).
 #'
 #' @details See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
 #'
@@ -31,22 +28,19 @@
 generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "family","order","higher"), area=NULL,
                           native=TRUE, introduced=TRUE,
                           extinct=TRUE, location_doubtful=TRUE,
-                          local_wcvp=FALSE, wcvp_names=NULL,
+                          wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
-  if(! local_wcvp){
-    wcvp_distributions <- rWCVPdata::wcvp_distributions
-    wcvp_names <- rWCVPdata::wcvp_names
-  } else {
-    if (is.null(wcvp_names)) stop("Pointer to wcvp_names missing.")
-    if (is.null(wcvp_distributions)) stop("Pointer to wcvp_distributions missing.")
-  }
+  rank <- match.arg(rank)
+  input.area <- area
 
-  if(rank %in% c("order","higher")) {
-    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
-  }
+    if (is.null(wcvp_names)) wcvp_names <- rWCVPdata::wcvp_names
+    if (is.null(wcvp_distributions)) wcvp_distributions <- rWCVPdata::wcvp_distributions
 
-  if (is.null(area)) message("No area specified. Generating global occurrence matrix.")
+
+
+
+  if (is.null(input.area)) message("No area specified. Generating global occurrence matrix.")
   if (is.null(taxon)) message("No taxon specified. Generating occurrence matrix for all species.")
 
   wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
@@ -58,19 +52,31 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
     filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
            .data$taxon_rank == "Species")
 
-  if(!is.null(taxon)) df <- df %>% filter(if_any(rank) %in% taxon)
+  if(rank %in% c("order","higher")) {
+    df <- right_join(rWCVP::taxonomic_mapping, df, by="family")
+  }
+
+  if(!is.null(taxon)) df <- df %>% filter(df[,rank] %in% taxon)
+  if(! native) df <- filter(df, .data$introduced == 1)
   if(! introduced) df <- filter(df, .data$introduced == 0)
   if(! extinct) df <- filter(df, .data$extinct == 0)
   if(! location_doubtful) df <- filter(df, .data$location_doubtful == 0)
 
+  data_blank <- data.frame(t(data.frame(row.names = input.area, val=rep(0, times=length(input.area)))))
+
   species_total <- df %>%
-    filter(.data$area_code_l3 %in% area) %>%
+    filter(.data$area_code_l3 %in% input.area) %>%
     select("plant_name_id", "taxon_name", "area_code_l3") %>%
-    mutate(present = 1)
-
-  species_total %>%
+    mutate(present = 1) %>%
     pivot_wider(names_from="area_code_l3", values_from="present", values_fill=0) %>%
-    distinct()
+    distinct() %>%
+    bind_rows(data_blank) %>% #add the zero-entry columns
+    filter(!is.na(.data$taxon_name))
 
+  species_total[is.na(species_total)] <- 0
+  colorder <- c(1,2,order(colnames(species_total[,3:ncol(species_total)]))+2)
+  species_total <- species_total[,colorder] #rearrange area columns alphabetically
+
+  return(species_total)
 
 }

@@ -69,7 +69,10 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 #'
 #' @examples get_area_name(get_wgsrpd3_codes("Brazil"))
 get_area_name <- function(area.codes){
+
+
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
+  global <- wgsrpd_mapping$LEVEL3_COD
   nhi <-   c("ABT", "AFG", "ALA", "ALB", "ALG", "ALT", "ALU", "AMU", "AND",
              "ARI", "ARK", "ARU", "ASK", "ASS", "AUT", "AZO", "BAH", "BAL",
              "BAN", "BEN", "BER", "BGM", "BKN", "BLR", "BLT", "BLZ", "BOR",
@@ -159,7 +162,7 @@ get_area_name <- function(area.codes){
  if(identical(area.codes[order(area.codes)],nhe)) return( "Northern Hemisphere (excl. equatorial Level 3 areas)")
  if(identical(area.codes[order(area.codes)],shi)) return( "Southern Hemisphere (incl. equatorial Level 3 areas)")
  if(identical(area.codes[order(area.codes)],she)) return( "Southern Hemisphere (excl. equatorial Level 3 areas)")
-
+ if(identical(area.codes[order(area.codes)],global)) return( "Global")
 
   levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
                   COUNTRY = "Country (political)",

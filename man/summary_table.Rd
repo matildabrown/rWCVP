@@ -8,7 +8,6 @@ summary_table(
   taxon = NULL,
   rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
-  return = c("data.frame", "gt_table"),
   grouping.var = c("area_code_l3", "genus", "family", "order", "higher"),
   wcvp_names = NULL,
   wcvp_distributions = NULL
@@ -17,11 +16,9 @@ summary_table(
 \arguments{
 \item{taxon}{Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).}
 
-\item{rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
+\item{rank}{Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
-
-\item{return}{Return the checklist as a \code{gt} table \code{"gt_table"} or \code{"data.frame"}? Defaults to \code{"data.frame"}.}
 
 \item{grouping.var}{Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.}
 
@@ -34,6 +31,10 @@ Data.frame with filtered data, or a \code{gt} table
 }
 \description{
 Generate a summary table from the WCVP
+}
+\details{
+Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 }
 \examples{
 ferns <- summary_table("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
