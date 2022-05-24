@@ -1,5 +1,5 @@
 ---
-title: "Coordinate cleaning to recorded range with rWCVP"
+title: "Coordinate cleaning to native range with rWCVP"
 author: "Matilda Brown"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
@@ -85,7 +85,8 @@ p +
   coord_sf(xlim=lims[c(1,3)], ylim=lims[c(2,4)])
 ```
 
-
+    
+        
 Ah, they are in the water! Note: the WGSRPD shapefiles that we are using as a base map are not super-high resolution, so it might be worth adding a buffer so that we are not cleaning too enthusiastically. 
 
 The coordinates for the shapefile are in degrees, so a 1km buffer is approximately 0.009 degrees latitude (and longitude at the equator). For high latitudes, a buffer of 0.009 degrees is going to be significantly more than a kilometre, but the important thing is that points won't be removed because of minor differences in the shapefile. 
@@ -104,6 +105,7 @@ p+geom_sf(data = st_buffer(st_union(d_native), 0.009), fill="transparent", col="
           shape=21)+
     coord_sf(xlim=lims[c(1,3)], ylim=lims[c(2,4)])
 ```
+    
 An appropriate buffer width might be wider or narrower, depending on downstream analyses but we strongly suggest visualisation to sanity-check the buffer before using it to discard points. 
 
 Now, we can discard occurrences that are >1km (approximately) outside of the native range and plot them one last time, just to make sure it's worked:
