@@ -28,7 +28,9 @@
 #' @importFrom rlang .data
 #' @importFrom utils adist
 #' @importFrom tidyr unite
+#' @importFrom stringr str_detect
 #' @import dplyr
+#' @import cli
 #'
 #' @examples
 #' wcvp_names <- rWCVPdata::wcvp_names
@@ -45,16 +47,20 @@
 #'
 match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, author_col=NULL,
                         join_cols=NULL, fuzzy=TRUE) {
+
+  cli_h1("Matching names to WCVP")
   if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
     latest_version <- rWCVPdata::check_wcvp_version(silent=TRUE)
-    if(! latest_version) message("Warning: This version of WCVP is out of date, see check_wcvp_version() for details.")
+    if(! latest_version) {
+      cli_alert_danger("This version of WCVP is out of date, see {.fun check_wcvp_version} for details.")
+    }
   }
-
+  label_col <- name_col
 
   # warning for missing name info
   if (is.null(name_col) & is.null(join_cols)) {
-    stop("Names not supplied - use either name_col or join_cols to supply names")
+    cli_abort("Names not supplied - use either {.arg name_col} or {.arg join_cols} to supply names")
   }
 
   # get taxon name from name parts
@@ -62,7 +68,10 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     name_col <- "original_name"
     names_df <- unite(names_df, "original_name", all_of(join_cols), sep=" ",
                       remove=FALSE, na.rm=TRUE)
+    label_col <- join_cols
   }
+
+  cli_alert_info("Using the {.var {label_col}} column{?s}")
 
   if (is.null(id_col)) {
     names_df$id <- 1:nrow(names_df)
@@ -71,19 +80,19 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 
   # rename authors
   if(is.null(author_col)) {
-    message("No author information supplied - matching on taxon name only")
+    cli_alert_warning("No author information supplied - matching on taxon name only")
   }
 
   #set up id col for returned df
   names_df$row_order <- 1:nrow(names_df)
   n_names <- length(unique(names_df[[name_col]]))
 
-  message(glue::glue("________________________________________________________________________________
-                     Matching {n_names} names..."))
+  cli_alert_info("Matching {n_names} taxon names")
 
   unmatched <- names_df
 
   # 1. Match within WCVP including authority if present ####
+  cli_h2("Exact matching {n_names} name{?s} with{ifelse(is.null(author_col), 'out', '')} author")
   matches <-
     unmatched %>%
     exact_match(wcvp_names, name_col=name_col, author_col=author_col) %>%
@@ -96,13 +105,8 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     sum(na.rm=TRUE)
 
   n_matched <- length(unique(matches[[name_col]]))
-
-  message(glue::glue("--------------------------------------------------------------------------------\n",
-               "Searching WCVP with{ifelse(is.null(author_col), ' no', '')} author:",
-               "resolved matches for {n_matched} ",
-               "out of {n_names} names."))
-
-  message(glue::glue("Multiple matches found for {nrow(multi_matches)} names."))
+  cli_alert_success("Found {n_matched} of {n_names} names")
+  cli_alert_warning("Multiple matches found for {no(multi_matches)} name{?s}")
 
   # Only names without authors or those that were not matched before
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
@@ -111,6 +115,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   # (this includes names that could not be matched using authority from step 1)
   if (! is.null(author_col)) {
     n_names <- length(unique(unmatched[[name_col]]))
+    cli_h2("Exact matching {n_names} name{?s} without author")
 
     # Match names
     matches_no_author <-
@@ -126,23 +131,20 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
       pull(.data$multiple_matches) %>%
       sum(na.rm=TRUE)
 
-    matches <- bind_rows(matches, matches_no_author)
-    message(glue::glue("---\n",
-                      "Searching WCVP without author: found matches for {n_matched} ",
-                       "out of {n_names} names."))
+    cli_alert_success("Found {n_matched} of {n_names} names")
+    cli_alert_warning("Multiple matches found for {no(multi_matches)} name{?s}")
 
-    message(glue::glue("Multiple matches found for {nrow(multi_matches)} names."))
+    matches <- bind_rows(matches, matches_no_author)
   }
 
   #_____________________________________________________________________________
   # 3. Fuzzy matching  ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
   if(fuzzy){
-    message(glue::glue("---
-                       Fuzzy matching {length(unique(unmatched[[name_col]]))} names...this may take some time"))
+    cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
     fuzzy_matches <- fuzzy_match(unmatched, wcvp_names, name_col=name_col)
-    message(glue::glue("Fuzzy matched {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} ",
-                       "out of {length(unique(unmatched[[name_col]]))} names."))
+
+    cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {n_names} names")
 
     matches <- bind_rows(matches, fuzzy_matches)
   }
@@ -164,10 +166,18 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     distinct(.data[[name_col]]) %>%
     nrow()
 
-  message(glue::glue("---
-                     Matching complete - {n_matched}",
-                     "names matched out of {length(unique(names_df[[name_col]]))}
-                     ________________________________________________________________________________"))
+  multi_matches <-
+    matches %>%
+    distinct(.data[[id_col]], .keep_all=TRUE) %>%
+    pull(.data$multiple_matches) %>%
+    sum(na.rm=TRUE)
+
+  cli_h2("Matching complete!")
+  cli_alert_success("Matched {n_matched} of {length(unique(names_df[[name_col]]))} name{?s}")
+  cli_alert_info("{no(sum(str_detect(matches$match_type, 'Exact'), na.rm=TRUE))} exact match{?es}")
+  cli_alert_info("{no(sum(str_detect(matches$match_type, 'phonetic'), na.rm=TRUE))} phonetic match{?es}")
+  cli_alert_info("{no(sum(str_detect(matches$match_type, 'distance'), na.rm=TRUE))} edit distance match{?es}")
+  cli_alert_warning("{no(multi_matches)} multiple match{?es}")
 
   if(! is.null(author_col)){
     matches <-
