@@ -27,7 +27,6 @@ summary_table <- function(taxon=NULL,
 
 
   rank <- match.arg(rank)
-  return <- match.arg(return)
   grouping.var <- match.arg(grouping.var)
 
   if(is.null(wcvp_distributions)){
