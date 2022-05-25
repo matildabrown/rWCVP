@@ -19,6 +19,7 @@
 #' @import dplyr
 #' @importFrom rlang .data
 #' @importFrom tidyr pivot_wider
+#' @import cli
 #' @export
 #'
 #' @examples generate_occurrence_matrix(taxon="Poa",rank="genus",
@@ -40,8 +41,8 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
 
 
 
-  if (is.null(input.area)) message("No area specified. Generating global occurrence matrix.")
-  if (is.null(taxon)) message("No taxon specified. Generating occurrence matrix for all species.")
+  if (is.null(input.area)) cli_alert_info("No area specified. Generating global occurrence matrix.")
+  if (is.null(taxon)) cli_alert_info("No taxon specified. Generating occurrence matrix for all species.")
 
   wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
                  "family", "genus")

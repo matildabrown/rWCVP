@@ -24,4 +24,5 @@ Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., &
 }
 \examples{
 get_wgsrpd3_codes("Brazil")
+
 }

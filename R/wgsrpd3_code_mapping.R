@@ -6,11 +6,13 @@
 #'
 #' Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 #' @return Character with area codes (Level 3) that fall within the geography.
+#'
+#' @import cli
 #' @export
 #'
 #' @examples
 #' get_wgsrpd3_codes("Brazil")
-
+#'
 get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
@@ -23,20 +25,21 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
                   )
   if(length(which(wgsrpd_mapping == geography |
                   wgsrpd_mapping == toupper(geography))
-            )==0)  stop("No matches to area, country, region, continent or hemisphere found.")
+            )==0)  cli_abort("No matches to area, country, region, continent or hemisphere found.")
 
   matchlevel <- levelnames[which(names(levelnames) %in% colnames(wgsrpd_mapping[which(wgsrpd_mapping==geography |
                                                                                       wgsrpd_mapping == toupper(geography), arr.ind = T)[,2] %>%
                                                                                   unique()]))]
 
   if (length(matchlevel)==0) {
-    stop("No matches to area, country, region, continent or hemisphere found.")}
-  else{message(glue::glue("Matches to input geography found at: ",
-                          paste(matchlevel, collapse = " + ")))}
+    cli_abort("No matches to area, country, region, continent or hemisphere found.")
+  } else {
+    cli_alert_info("Matches to input geography found at {matchlevel}")
+  }
 
-  if(length(grep("hemisphere", geography, ignore.case = TRUE))!=0){
+  if(length(grep("hemisphere", geography, ignore.case = TRUE))!=0) {
     if(is.null(include.equatorial)){
-      message("Including WGSRPD areas that span the equator. To turn this off, use include.equatorial = FALSE")
+      cli_alert_info("Including WGSRPD areas that span the equator. To turn this off, use {.var include.equatorial = FALSE}")
       include.equatorial <- TRUE
     }
     if(include.equatorial==TRUE) {
@@ -181,7 +184,7 @@ get_area_name <- function(area.codes){
 
   bestlevel <- names(levelnames)[which(names(levelnames) %in% rownames(levelvals))][1]
   if(is.na(bestlevel)) {
-    message("No higher level name found. Returning original vector of area codes.")
+    cli_alert_info("No higher level name found. Returning original vector of area codes.")
     return(area.codes)
   }
 
@@ -200,7 +203,7 @@ get_area_name <- function(area.codes){
   if(identical(allcodesforname, area.codes[order(area.codes)])) {
     return(bestlevelval)
   } else {
-    message("No higher level name found. Returning original vector of area codes.")
+    cli_alert_info("No higher level name found. Returning original vector of area codes.")
     return(area.codes)
   }
 }

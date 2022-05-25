@@ -23,6 +23,7 @@
 #'
 #' @importFrom rlang .data
 #' @import dplyr
+#' @import cli
 #' @export
 #'
 #' @examples
@@ -53,8 +54,8 @@ if(local_wcvp == FALSE){
   wcvp_distributions <- rWCVPdata::wcvp_distributions
   wcvp_names <- rWCVPdata::wcvp_names
 } else {
-  if (is.null(wcvp_names)) stop("Pointer to wcvp_names missing.")
-  if (is.null(wcvp_distributions)) stop("Pointer to wcvp_distributions missing.")
+  if (is.null(wcvp_names)) cli_abort("Pointer to wcvp_names missing.")
+  if (is.null(wcvp_distributions)) cli_abort("Pointer to wcvp_distributions missing.")
 }
 
 if(rank %in% c("order","higher")) {
@@ -84,7 +85,7 @@ if(!is.null(taxon)) {
 }
 
 
-if(nrow(df)==0) stop("No occurrences. Are the rank and spelling correct?")
+if(nrow(df)==0) cli_abort("No occurrences. Are the rank and spelling correct?")
 
 #annotate with single-tdwg endemic status
 df_summ <- df %>%
@@ -126,7 +127,7 @@ if (!is.null(area)){
 }
 
 
-if(nrow(df)==0) stop("No occurrences. Are the rank, geography and spelling all correct?")
+if(nrow(df)==0) cli_abort("No occurrences. Are the rank, geography and spelling all correct?")
 
 #filter out genus-level names, excluded occurrence types
 df <- df %>%
@@ -144,11 +145,13 @@ df <- df %>%
   relocate(.data$in_geography, .after = .data$location_doubtful)
 
 
-if(nrow(df)==0) stop("No occurrences after filtering by occurrence type.")
+if(nrow(df)==0) cli_abort("No occurrences after filtering by occurrence type.")
 
 
 if(render.report==TRUE){
-  if(report.type =="taxonomic" & length(unique(df$family))>1) warning("Taxonomic checklist format does not display family information.")
+  if(report.type =="taxonomic" & length(unique(df$family)) > 1) {
+    cli_warn("Taxonomic checklist format does not display family information.")
+  }
 
     if(is.null(report.filename)){
       if(!is.null(taxon)) n1 <- taxon else n1 <- NULL
@@ -165,20 +168,21 @@ if(render.report==TRUE){
 
 
 
-if(report.type=="alphabetical"){
-message(glue::glue("Saving report as: ", report.filename))
-  suppressWarnings(rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
-                  quiet = TRUE,
-       params=list( version = "New Phytologist Special Issue",
-                    taxa = taxon,
-                    area_delim = area,
-                    mydata = df,
-                    synonyms = synonyms), output_file = paste0(getwd(),"/",report.filename))
-  )
-}
+  if(report.type=="alphabetical"){
+    cli_alert_info("Saving report as: {.file {report.filename}}")
+    suppressWarnings(rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
+                                       quiet = TRUE,
+                                       params=list(version = "New Phytologist Special Issue",
+                                                  taxa = taxon,
+                                                  area_delim = area,
+                                                  mydata = df,
+                                                  synonyms = synonyms),
+                                       output_file = paste0(getwd(),"/",report.filename))
+    )
+  }
 
   if(report.type=="taxonomic"){
-    message(glue::glue("Saving report as: ", report.filename))
+    cli_alert_info("Saving report as: {.file {report.filename}}")
     suppressWarnings(rmarkdown::render(system.file("rmd", "checklist_tax.Rmd", package = "rWCVP"),
                       quiet = TRUE,
                       params=list( version = "New Phytologist Special Issue",
@@ -190,5 +194,5 @@ message(glue::glue("Saving report as: ", report.filename))
   }
        }
 
-return(df)
+  return(df)
 }
