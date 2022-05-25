@@ -11,14 +11,13 @@
 #' @return Data.frame with filtered data, or a \code{gt} table
 #'
 #' @importFrom rlang .data
-#' @import dplyr gt
+#' @import dplyr gt cli
 #' @export
 #'
 #' @examples
 #' ferns <- summary_table("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
 #' summary_table_gt(ferns)
 #'
-
 summary_table <- function(taxon=NULL,
                           rank=c("species", "genus", "family","order","higher"), #species makes no sense
                           area=NULL,
@@ -54,7 +53,7 @@ summary_table <- function(taxon=NULL,
   }
 
   if(grouping.var %in% c("genus", "family", "order", "higher") & length(input.area>1)){
-    message("Aggregating occurrence types across input areas - see ?summary_table for details.")
+    cli_alert_info("Aggregating occurrence types across input areas - see {.fun ?summary_table} for details.")
     occ_type_levels <- c("native", "introduced", "extinct", "location_doubful")
     df <- df %>% left_join(df %>%
                                   mutate(occurrence_type_num = as.numeric(factor(.data$occurrence_type, levels=occ_type_levels))) %>%

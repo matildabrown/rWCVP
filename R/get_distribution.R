@@ -18,6 +18,7 @@
 #'
 #' @importFrom rlang .data
 #' @import dplyr
+#' @import cli
 #' @export
 #'
 #' @examples
@@ -48,7 +49,9 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
     wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
   }
 
-  if(length(taxon)>1) stop("'taxon' argument must be a single name")
+  if(length(taxon)>1) {
+    cli_abort("'taxon' argument must be a single name")
+  }
   wcvp_cols <- c("plant_name_id", "taxon_rank", "taxon_status","higher", "order",
                  "family", "genus", "species", "taxon_name", "taxon_authors")
   df <- wcvp_names %>%
@@ -75,7 +78,9 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
   }
   df <- select(df, all_of(range_cols))
 
-  if(nrow(df)==0) stop("No distribution for that taxon. Are the rank and spelling both correct?")
+  if(nrow(df) == 0) {
+    cli_abort("No distribution for that taxon. Are the rank and spelling both correct?")
+  }
 
   wgsrpd3 %>%
     mutate(occurrence_type=case_when(
