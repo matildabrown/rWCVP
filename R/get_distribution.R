@@ -13,7 +13,7 @@
 #' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #'
-#' @details Where [rank] is higher than species, the distribution of the whole group will be returned, not individual species within that group.
+#' @details Where [rank] is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{summary_table} and \code{generate_occurrence_matrix} functions can be used.
 #' @return sf data.frame containing the range polygon/s of the taxon.
 #'
 #' @importFrom rlang .data
@@ -84,7 +84,7 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
                                  df$introduced == 0, "area_code_l3"] ~ "native",
       .data$LEVEL3_COD %in% df[df$extinct == 1, "area_code_l3"] ~ "extinct",
       .data$LEVEL3_COD %in% df[df$introduced == 1, "area_code_l3"] ~ "introduced",
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful",
+      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful"
 
     )) %>%
     filter(.data$occurrence_type %in% show_types)

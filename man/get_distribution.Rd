@@ -45,7 +45,7 @@ sf data.frame containing the range polygon/s of the taxon.
 Generate spatial distribution objects for species, genera or families
 }
 \details{
-Where \link{rank} is higher than species, the distribution of the whole group will be returned, not individual species within that group.
+Where \link{rank} is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{summary_table} and \code{generate_occurrence_matrix} functions can be used.
 }
 \examples{
 r <- get_distribution("Callitris", rank="genus")
