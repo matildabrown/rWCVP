@@ -105,6 +105,8 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #' @import dplyr
 #' @importFrom rlang .data
 #' @importFrom tidyr unnest
+#' @importFrom cli cli_progress_along
+#' @importFrom purrr map
 #'
 #' @export
 #'
@@ -113,13 +115,21 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #' edit_match(redlist_example, wcvp_names, "scientificName")
 #'
 edit_match <- function(names_df, wcvp_names, name_col){
+  withr::local_options(list(cli.progress_show_after=2, cli.progress_clear=FALSE))
+
   original_names <- colnames(names_df)
-  matches <-
+  names_df <-
     names_df %>%
     filter(!is.na(.data[[name_col]])) %>%
-    mutate(sanitised_=sanitise_names_(.data[[name_col]])) %>%
-    rowwise() %>%
-    mutate(match_info=list(edit_match_name_(.data$sanitised_, wcvp_names))) %>%
+    mutate(sanitised_=sanitise_names_(.data[[name_col]]))
+
+  matches <-
+    names_df %>%
+    mutate(match_info=map(cli_progress_along(.data$sanitised_, "Matching"),
+                          ~edit_match_name_(.data$sanitised_[.x], wcvp_names)))
+
+  matches <-
+    matches %>%
     unnest(.data$match_info)
 
   matches %>%

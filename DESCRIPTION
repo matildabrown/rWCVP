@@ -14,6 +14,7 @@ LazyData: true
 LazyDataCompression: xz
 RoxygenNote: 7.2.0
 Imports: 
+    cli,
     dplyr,
     ggplot2,
     glue,
@@ -21,16 +22,17 @@ Imports:
     htmltools,
     magrittr,
     phonics,
+    purrr,
     RecordLinkage,
     rlang,
     rmarkdown,
     sf,
     stringr,
-    tidyr
+    tidyr,
+    withr
 Suggests: 
     rWCVPdata (>= 0.1.0),
     knitr,
-    purrr,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP
