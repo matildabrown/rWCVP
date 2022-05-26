@@ -2,7 +2,7 @@
 #'
 #' @param geography Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country (political) or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")
 #' @param include.equatorial Logical. Include Level 3 areas that span the equator? Defaults to Null, which generates a message and includes these areas. Ignored if geography is not a hemisphere.
-#' @details Country mapping follows Gallagher et al. (2020).
+#' @details Country mapping follows Gallagher et al. (2020). Importantly, this means that some overseas territories are not considered part of the Country in this system, e.g. the Canary Islands are designated as a Country (Gallagher), rather than part of Spain in this mapping. Where this is ambiguous, the mapping can be explored using \code{View(wgsrpd_mapping)}.
 #'
 #' Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 #' @return Character with area codes (Level 3) that fall within the geography.
@@ -16,7 +16,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
 
   levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
-                  COUNTRY = "Country (political)",
+                  COUNTRY = "Country (Gallagher)",
                   LEVEL2_NAM = "Region (Level 2)",
                   LEVEL1_NAM = "Continent (Level 1)",
                   HEMISPHERE = "Hemisphere level"
@@ -165,7 +165,7 @@ get_area_name <- function(area.codes){
  if(identical(area.codes[order(area.codes)],global)) return( "Global")
 
   levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
-                  COUNTRY = "Country (political)",
+                  COUNTRY = "Country (Gallagher)",
                   LEVEL2_NAM = "Region (Level 2)",
                   LEVEL1_NAM = "Continent (Level 1)",
                   HEMISPHERE = "Hemisphere"
