@@ -191,6 +191,7 @@ x <- list(
 #'
 #' @import gt
 #' @importFrom rlang .data
+#' @importFrom stringr str_to_sentence
 #' @export
 #'
 #' @examples
@@ -208,7 +209,7 @@ summary_table_gt <- function(x){
   }
 
   if(x$Grouping_variable =="area_code_l3") colnames(x$Summary)[colnames(x$Summary)=="area_code_l3"] <- "area"
-  colnames(x$Summary) <- Toupper(colnames(x$Summary))
+  colnames(x$Summary) <- str_to_sentence(colnames(x$Summary))
 
   if(x$Grouping_variable =="area_code_l3") {
     x$Summary %>%
