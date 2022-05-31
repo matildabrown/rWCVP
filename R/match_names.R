@@ -75,7 +75,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 
   if (is.null(id_col)) {
     names_df$id <- 1:nrow(names_df)
-    id_col <- "id"
+    id_col <- "..id"
   }
 
   # rename authors
@@ -87,26 +87,14 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   names_df$row_order <- 1:nrow(names_df)
   n_names <- length(unique(names_df[[name_col]]))
 
-  cli_alert_info("Matching {n_names} taxon names")
-
   unmatched <- names_df
 
   # 1. Match within WCVP including authority if present ####
-  cli_h2("Exact matching {n_names} name{?s} with{ifelse(is.null(author_col), 'out', '')} author")
+  cli_h2("Exact matching {n_names} name{?s}")
   matches <-
     unmatched %>%
     exact_match(wcvp_names, name_col=name_col, author_col=author_col) %>%
     filter(! is.na(.data$wcvp_id))
-
-  multi_matches <-
-    matches %>%
-    distinct(.data[[id_col]], .keep_all=TRUE) %>%
-    pull(.data$multiple_matches) %>%
-    sum(na.rm=TRUE)
-
-  n_matched <- length(unique(matches[[name_col]]))
-  cli_alert_success("Found {n_matched} of {n_names} names")
-  cli_alert_warning("Multiple matches found for {no(multi_matches)} name{?s}")
 
   # Only names without authors or those that were not matched before
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
@@ -115,7 +103,6 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   # (this includes names that could not be matched using authority from step 1)
   if (! is.null(author_col)) {
     n_names <- length(unique(unmatched[[name_col]]))
-    cli_h2("Exact matching {n_names} name{?s} without author")
 
     # Match names
     matches_no_author <-
@@ -123,19 +110,12 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
       exact_match(wcvp_names, name_col=name_col, author_col=NULL) %>%
       filter(! is.na(.data$wcvp_id))
 
-    n_matched <- length(unique(matches_no_author[[name_col]]))
-
-    multi_matches <-
-      matches %>%
-      distinct(.data[[id_col]], .keep_all=TRUE) %>%
-      pull(.data$multiple_matches) %>%
-      sum(na.rm=TRUE)
-
-    cli_alert_success("Found {n_matched} of {n_names} names")
-    cli_alert_warning("Multiple matches found for {no(multi_matches)} name{?s}")
-
     matches <- bind_rows(matches, matches_no_author)
   }
+
+  n_matched <- length(unique(matches[[name_col]]))
+
+  cli_alert_success("Found {n_matched} of {n_names} names")
 
   #_____________________________________________________________________________
   # 3. Fuzzy matching  ####
@@ -172,12 +152,19 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     pull(.data$multiple_matches) %>%
     sum(na.rm=TRUE)
 
+  match_summary <-
+    matches %>%
+    distinct(.data[[id_col]], .keep_all=TRUE) %>%
+    count(.data$match_type) %>%
+    filter(!is.na(.data$match_type)) %>%
+    tibble::deframe()
+
   cli_h2("Matching complete!")
   cli_alert_success("Matched {n_matched} of {length(unique(names_df[[name_col]]))} name{?s}")
-  cli_alert_info("{no(sum(str_detect(matches$match_type, 'Exact'), na.rm=TRUE))} exact match{?es}")
-  cli_alert_info("{no(sum(str_detect(matches$match_type, 'phonetic'), na.rm=TRUE))} phonetic match{?es}")
-  cli_alert_info("{no(sum(str_detect(matches$match_type, 'distance'), na.rm=TRUE))} edit distance match{?es}")
-  cli_alert_warning("{no(multi_matches)} multiple match{?es}")
+  for (i in seq_along(match_summary)) {
+    cli_alert_info("{names(match_summary)[i]}: {.value {match_summary[i]}}")
+  }
+  cli_alert_warning("multiple matches: {multi_matches}")
 
   if(! is.null(author_col)){
     matches <-
@@ -186,6 +173,10 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
       mutate(wcvp_author_edit_distance=adist(.data[[author_col]], .data$wcvp_authors)[,1],
              wcvp_author_lcs=length_lcs(.data[[author_col]], .data$wcvp_authors)) %>%
       ungroup()
+  }
+
+  if ("..id" %in% colnames(matches)) {
+    matches <- select(matches, -"..id")
   }
 
   matches
