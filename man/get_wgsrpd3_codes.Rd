@@ -18,7 +18,7 @@ Character with area codes (Level 3) that fall within the geography.
 Extract WGSRPD Level 3 (area) codes.
 }
 \details{
-Country mapping follows Gallagher et al. (2020).
+Country mapping follows Gallagher et al. (2020). Importantly, this means that some overseas territories are not considered part of the Country in this system, e.g. the Canary Islands are designated as a Country (Gallagher), rather than part of Spain in this mapping. Where this is ambiguous, the mapping can be explored using \code{View(wgsrpd_mapping)}.
 
 Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 }
