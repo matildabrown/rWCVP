@@ -33,19 +33,21 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
                           wcvp_distributions=NULL){
 
   rank <- match.arg(rank)
+  #print(rank) #for debugging
   input.area <- area
 
     if (is.null(wcvp_names)) wcvp_names <- rWCVPdata::wcvp_names
     if (is.null(wcvp_distributions)) wcvp_distributions <- rWCVPdata::wcvp_distributions
 
 
-
-
-  if (is.null(input.area)) cli_alert_info("No area specified. Generating global occurrence matrix.")
+  if (is.null(input.area)) {
+    cli_alert_info("No area specified. Generating global occurrence matrix.")
+    input.area <- unique(wgsrpd_mapping$LEVEL3_COD)
+  }
   if (is.null(taxon)) cli_alert_info("No taxon specified. Generating occurrence matrix for all species.")
 
   wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
-                 "family", "genus")
+                 "family", "genus","species")
 
   df <- wcvp_names %>%
     select(all_of(wcvp_cols)) %>%
@@ -57,7 +59,15 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
     df <- right_join(rWCVP::taxonomic_mapping, df, by="family")
   }
 
-  if(!is.null(taxon)) df <- df %>% filter(df[,rank] %in% taxon)
+  if(!is.null(taxon)){
+    if(rank =="species"){
+        df <- filter(df, .data$taxon_name %in% taxon)
+    } else {
+    if  (!taxon %in% df[,rank]) cli_abort("Taxon not found. Are the rank and spelling correct?")
+    df <- df %>% filter(df[,rank] %in% taxon)
+    }
+  }
+
   if(! native) df <- filter(df, .data$introduced == 1)
   if(! introduced) df <- filter(df, .data$introduced == 0)
   if(! extinct) df <- filter(df, .data$extinct == 0)
@@ -73,6 +83,8 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
     distinct() %>%
     bind_rows(data_blank) %>% #add the zero-entry columns
     filter(!is.na(.data$taxon_name))
+
+  if(nrow(species_total)==0) cli_abort("No occurrences in the input geography.")
 
   species_total[is.na(species_total)] <- 0
   colorder <- c(1,2,order(colnames(species_total[,3:ncol(species_total)]))+2)
