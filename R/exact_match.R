@@ -23,7 +23,7 @@
 #'
 #' @family name matching functions
 #'
-exact_match <- function(names_df, wcvp_names, name_col, author_col=NULL) {
+exact_match <- function(names_df, wcvp_names, name_col, author_col=NULL, id_col) {
   original_names <- colnames(names_df)
 
   match_type <- ifelse(is.null(author_col), "Exact (without author)",
@@ -55,7 +55,7 @@ exact_match <- function(names_df, wcvp_names, name_col, author_col=NULL) {
     mutate(match_type=ifelse(is.na(.data$taxon_name), NA_character_, match_type),
            match_similarity=ifelse(is.na(.data$taxon_name), NA_real_, 1),
            match_edit_distance=ifelse(is.na(.data$taxon_name), NA_real_, 0)) %>%
-    add_count(.data[[name_col]]) %>%
+    add_count(.data[[id_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
     select(-.data$n)
 
