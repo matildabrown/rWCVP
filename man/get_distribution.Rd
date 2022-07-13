@@ -11,7 +11,6 @@ get_distribution(
   introduced = TRUE,
   extinct = TRUE,
   location_doubtful = TRUE,
-  local_wcvp = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
 )
@@ -29,10 +28,6 @@ get_distribution(
 
 \item{location_doubtful}{Logical. Include occurrences that are thought to be
 doubtful? Defaults to TRUE.}
-
-\item{local_wcvp}{Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
-version of the checklist).}
 
 \item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
 

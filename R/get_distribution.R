@@ -7,9 +7,6 @@
 #' @param extinct Logical. Include extinct range? Defaults to TRUE.
 #' @param location_doubtful Logical. Include occurrences that are thought to be
 #'     doubtful? Defaults to TRUE.
-#' @param local_wcvp Logical. If FALSE (the default), use data from \code{rWCVPdata}.
-#' If TRUE, use a local copy of the data (useful if rWCVPdata is not the latest
-#' version of the checklist).
 #' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
 #'
@@ -27,7 +24,7 @@
 #' p
 get_distribution <- function(taxon, rank=c("species", "genus", "family","order","higher"), native=TRUE, introduced=TRUE,
                               extinct=TRUE, location_doubtful=TRUE,
-                              local_wcvp=FALSE, wcvp_names=NULL,
+                              wcvp_names=NULL,
                               wcvp_distributions=NULL){
 
   rank <- match.arg(rank)
@@ -84,13 +81,12 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
 
   wgsrpd3 %>%
     mutate(occurrence_type=case_when(
+      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful",
       .data$LEVEL3_COD %in% df[df$location_doubtful == 0 &
                                  df$extinct == 0 &
                                  df$introduced == 0, "area_code_l3"] ~ "native",
       .data$LEVEL3_COD %in% df[df$extinct == 1, "area_code_l3"] ~ "extinct",
-      .data$LEVEL3_COD %in% df[df$introduced == 1, "area_code_l3"] ~ "introduced",
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful"
-
+      .data$LEVEL3_COD %in% df[df$introduced == 1, "area_code_l3"] ~ "introduced"
     )) %>%
     filter(.data$occurrence_type %in% show_types)
 

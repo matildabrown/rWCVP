@@ -39,7 +39,7 @@ plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRU
 
   suppressMessages(sf_use_s2(FALSE))
 
-  occurrence_types <- c("native", "introduced", "extinct", "location doubtful")
+  occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
   show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
   range <- filter(range, .data$occurrence_type %in% show_types)
 
@@ -58,6 +58,8 @@ plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRU
 
   if (crop.map) {
     p <- p + coord_sf(xlim=crop_details$xlims, ylim=crop_details$ylims, expand=FALSE)
+  } else {
+    p <- p + coord_sf(expand=FALSE)
   }
 
   p
@@ -107,7 +109,7 @@ powo_pal <- function() {
               "native" = "#72994c",
               "introduced" = "#995499",
               "extinct" ="#e22d2d",
-              "location doubtful" = "#ea962e")
+              "location_doubtful" = "#ea962e")
 }
 
 #' @importFrom ggplot2 scale_color_manual
