@@ -75,7 +75,7 @@ get_area_name <- function(area.codes){
 
 
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
-  global <- wgsrpd_mapping$LEVEL3_COD
+  global <- unique(wgsrpd_mapping$LEVEL3_COD[order(wgsrpd_mapping$LEVEL3_COD)])
   nhi <-   c("ABT", "AFG", "ALA", "ALB", "ALG", "ALT", "ALU", "AMU", "AND",
              "ARI", "ARK", "ARU", "ASK", "ASS", "AUT", "AZO", "BAH", "BAL",
              "BAN", "BEN", "BER", "BGM", "BKN", "BLR", "BLT", "BLZ", "BOR",
@@ -203,8 +203,8 @@ get_area_name <- function(area.codes){
   if(identical(allcodesforname, area.codes[order(area.codes)])) {
     return(bestlevelval)
   } else {
-    cli_alert_info("No higher level name found. Returning original vector of area codes.")
-    return(area.codes)
+    cli_alert_info("No higher level name found. Returning original area codes as string.")
+    return(paste(area.codes, collapse = "-"))
   }
 }
 
