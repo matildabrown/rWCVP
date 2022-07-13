@@ -17,7 +17,6 @@ Imports:
     cli,
     dplyr,
     ggplot2,
-    glue,
     gt,
     htmltools,
     magrittr,
@@ -28,6 +27,7 @@ Imports:
     rmarkdown,
     sf,
     stringr,
+    tibble,
     tidyr,
     withr
 Suggests: 

@@ -15,6 +15,7 @@ generate_checklist(
   extinct = TRUE,
   location_doubtful = TRUE,
   report.filename = NULL,
+  report.dir = NULL,
   report.type = c("alphabetical", "taxonomic"),
   local_wcvp = FALSE,
   wcvp_names = NULL,
@@ -41,6 +42,8 @@ generate_checklist(
 \item{location_doubtful}{Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.}
 
 \item{report.filename}{Character. Name for the HTML file. Defaults to taxon_area_type.html}
+
+\item{report.dir}{Character. Directory for the HTML file to be saved in. Must be provided by user.}
 
 \item{report.type}{Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 

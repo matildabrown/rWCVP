@@ -42,7 +42,7 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
 
   if (is.null(input.area)) {
     cli_alert_info("No area specified. Generating global occurrence matrix.")
-    input.area <- unique(wgsrpd_mapping$LEVEL3_COD)
+    input.area <- unique(rWCVP::wgsrpd_mapping$LEVEL3_COD)
   }
   if (is.null(taxon)) cli_alert_info("No taxon specified. Generating occurrence matrix for all species.")
 
