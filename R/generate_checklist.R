@@ -75,6 +75,9 @@ df <- left_join(wcvp_names, wcvp_distributions,by = "plant_name_id") %>%
                      select(.data$plant_name_id, .data$accepted_name),
                    by=c("accepted_plant_name_id"="plant_name_id"))
 
+#replace Unknown with blank in publication info
+df$place_of_publication <- gsub("Unknown", "", df$place_of_publication)
+
 # prune early if possible, to reduce computation time
 if (synonyms==FALSE) df <- filter(df, .data$taxon_status %in% c("Accepted","Unplaced"))
 
