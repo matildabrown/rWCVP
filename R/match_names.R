@@ -74,8 +74,8 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   cli_alert_info("Using the {.var {label_col}} column{?s}")
 
   if (is.null(id_col)) {
-    names_df$id <- 1:nrow(names_df)
-    id_col <- "..id"
+    names_df$internal_id <- 1:nrow(names_df)
+    id_col <- "internal_id"
   }
 
   # rename authors
@@ -93,7 +93,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   cli_h2("Exact matching {n_names} name{?s}")
   matches <-
     unmatched %>%
-    exact_match(wcvp_names, name_col=name_col, author_col=author_col) %>%
+    exact_match(wcvp_names, name_col=name_col, author_col=author_col, id_col=id_col) %>%
     filter(! is.na(.data$wcvp_id))
 
   # Only names without authors or those that were not matched before
@@ -107,7 +107,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     # Match names
     matches_no_author <-
       unmatched %>%
-      exact_match(wcvp_names, name_col=name_col, author_col=NULL) %>%
+      exact_match(wcvp_names, name_col=name_col, author_col=NULL, id_col=id_col) %>%
       filter(! is.na(.data$wcvp_id))
 
     matches <- bind_rows(matches, matches_no_author)
@@ -148,13 +148,13 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 
   multi_matches <-
     matches %>%
-    distinct(.data[[id_col]], .keep_all=TRUE) %>%
+    distinct(.data[[name_col]], .keep_all=TRUE) %>%
     pull(.data$multiple_matches) %>%
     sum(na.rm=TRUE)
 
   match_summary <-
     matches %>%
-    distinct(.data[[id_col]], .keep_all=TRUE) %>%
+    distinct(.data[[name_col]], .keep_all=TRUE) %>%
     count(.data$match_type) %>%
     filter(!is.na(.data$match_type)) %>%
     tibble::deframe()
@@ -164,7 +164,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
   for (i in seq_along(match_summary)) {
     cli_alert_info("{names(match_summary)[i]}: {.value {match_summary[i]}}")
   }
-  cli_alert_warning("multiple matches: {multi_matches}")
+  cli_alert_warning("Names with multiple matches: {multi_matches}")
 
   if(! is.null(author_col)){
     matches <-
@@ -175,8 +175,8 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
       ungroup()
   }
 
-  if ("..id" %in% colnames(matches)) {
-    matches <- select(matches, -"..id")
+  if ("internal_id" %in% colnames(matches)) {
+    matches <- select(matches, -"internal_id")
   }
 
   matches

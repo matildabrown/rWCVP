@@ -15,7 +15,8 @@ match_data <- tibble(
   infra=c(NA_character_, NA_character_, "angulatum", NA_character_, NA_character_,
           "americana", NA_character_),
   authority=c("L.", "O.Berg", NA_character_, NA_character_, "NicLug", NA_character_,
-              NA_character_)
+              NA_character_),
+  assessmentId = 1:7
 )
 
 lookup_data <- tibble(

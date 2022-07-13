@@ -4,7 +4,7 @@
 \alias{exact_match}
 \title{Exact matching to WCVP.}
 \usage{
-exact_match(names_df, wcvp_names, name_col, author_col = NULL)
+exact_match(names_df, wcvp_names, name_col, author_col = NULL, id_col)
 }
 \arguments{
 \item{names_df}{a data frame of names for matching.}
@@ -15,6 +15,8 @@ exact_match(names_df, wcvp_names, name_col, author_col = NULL)
 
 \item{author_col}{the column in \code{names_df} that has the name authority, to aid
 matching. Set to \code{NULL} to match with no author string.}
+
+\item{id_col}{the column in \code{names_df} that has the observation id.}
 }
 \value{
 Match results from WCVP bound to the original data from \code{names_df}.
@@ -27,10 +29,11 @@ refine results.
 wcvp_names <- rWCVPdata::wcvp_names
 
 # including author string
-exact_match(redlist_example, wcvp_names, "scientificName", author_col="authority")
+exact_match(redlist_example, wcvp_names, "scientificName", author_col="authority",
+id_col = "assessmentId")
 
 # without author string
-exact_match(redlist_example, wcvp_names, "scientificName")
+exact_match(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
 
 }
 \seealso{
