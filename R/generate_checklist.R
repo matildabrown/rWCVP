@@ -15,6 +15,7 @@
 #' @param synonyms Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.
 #' @param render.report Logical. Render the checklist as a markdown report? Defaults to FALSE.
 #' @param report.filename Character. Name for the HTML file. Defaults to taxon_area_type.html
+#' @param report.dir Character. Directory for the HTML file to be saved in. Must be provided by user.
 #' @param report.type Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?
 #' @details The \code{synonyms} argument can be used to limit names to those that are Accepted and Unplaced. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
 #' Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
@@ -36,7 +37,8 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","
                                synonyms=TRUE, render.report=FALSE,
                                native=TRUE, introduced = TRUE,
                                extinct = TRUE, location_doubtful = TRUE,
-                               report.filename=NULL, report.type=c("alphabetical", "taxonomic"),
+                               report.filename=NULL, report.dir=NULL,
+                               report.type=c("alphabetical", "taxonomic"),
                                local_wcvp=FALSE, wcvp_names=NULL,
                                wcvp_distributions=NULL){
 
@@ -44,7 +46,7 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","
 report.type <- match.arg(report.type)
 rank <- match.arg(rank)
 
-
+if(render.report==TRUE & is.null(report.dir)) cli_abort("Must provide a directory to save report, using 'report.dir'.")
 occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
 show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
@@ -180,7 +182,7 @@ if(render.report==TRUE){
                                                   area_delim = area,
                                                   mydata = df,
                                                   synonyms = synonyms),
-                                       output_file = paste0(getwd(),"/",report.filename))
+                                       output_file = paste0(report.dir,"/",report.filename))
     )
   }
 
@@ -192,7 +194,7 @@ if(render.report==TRUE){
                                    taxa = taxon,
                                    area_delim = area,
                                    mydata = df,
-                                   synonyms = synonyms), output_file = report.filename)
+                                   synonyms = synonyms), output_file = paste0(report.dir,"/",report.filename))
     )
   }
        }
