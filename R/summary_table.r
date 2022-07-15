@@ -200,7 +200,10 @@ x <- list(
 #'
 
 summary_table_gt <- function(x){
-  tab_title <- paste("<b>",x$Taxon, "of", paste(x$Area, sep=","), "</b>")
+  if(is.null(x$Taxon)) x$Taxon <- "Plants"
+  tab_title <- paste("<b>",x$Taxon, "of", x$Area, "</b>")
+
+
   if(!is.null(x$Number_of_regionally_endemic_species)){
     tab_sub <- paste0("Total number of species: ", as.numeric(x$Total_number_of_species), "<br>",
                                  "Number of regionally endemic species: ", as.numeric(x$Number_of_regionally_endemic_species))
