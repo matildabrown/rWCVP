@@ -132,7 +132,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 #
 #   # Compilation of matched results  ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
-  unmatched$match_type <- NA_character_
+  if(nrow(unmatched)>0) unmatched$match_type <- NA_character_
 
   matches <-
     matches %>%
