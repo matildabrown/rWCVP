@@ -29,9 +29,11 @@ get_distribution(
 \item{location_doubtful}{Logical. Include occurrences that are thought to be
 doubtful? Defaults to TRUE.}
 
-\item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
+\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 
-\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.}
+\item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
+If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 }
 \value{
 sf data.frame containing the range polygon/s of the taxon.

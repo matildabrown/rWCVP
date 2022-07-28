@@ -7,8 +7,10 @@
 #' @param extinct Logical. Include extinct range? Defaults to TRUE.
 #' @param location_doubtful Logical. Include occurrences that are thought to be
 #'     doubtful? Defaults to TRUE.
-#' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to NULL.
+#' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #'
 #' @details Where [rank] is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{summary_table} and \code{generate_occurrence_matrix} functions can be used.
 #' @return sf data.frame containing the range polygon/s of the taxon.
@@ -29,6 +31,10 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
 
   rank <- match.arg(rank)
 
+  if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
+    .wcvp_available()
+  }
+
   occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
   show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
@@ -38,6 +44,7 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
   if(is.null(wcvp_distributions)){
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
+
   if(is.null(wcvp_names)){
     wcvp_names <- rWCVPdata::wcvp_names
   }

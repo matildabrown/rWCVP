@@ -7,11 +7,10 @@
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to \code{TRUE}.
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to \code{TRUE}.
 #' @param location_doubtful Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.
-#' @param local_wcvp Logical. If \code{FALSE} (the default), use data from \code{rWCVPdata}.
-#' If \code{TRUE}, use a local copy of the data (useful if \code{rWCVPdata} is not the latest
-#' version of the checklist).
-#' @param wcvp_names Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.
+#' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #' @param synonyms Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.
 #' @param render.report Logical. Render the checklist as a markdown report? Defaults to FALSE.
 #' @param report.filename Character. Name for the HTML file. Defaults to taxon_area_type.html
@@ -39,25 +38,29 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","
                                extinct = TRUE, location_doubtful = TRUE,
                                report.filename=NULL, report.dir=NULL,
                                report.type=c("alphabetical", "taxonomic"),
-                               local_wcvp=FALSE, wcvp_names=NULL,
+                               wcvp_names=NULL,
                                wcvp_distributions=NULL){
 
 
 report.type <- match.arg(report.type)
 rank <- match.arg(rank)
 
-if(render.report==TRUE & is.null(report.dir)) cli_abort("Must provide a directory to save report, using 'report.dir'.")
+if(render.report & is.null(report.dir)) {
+  cli_abort("Must provide a directory to save report, using 'report.dir'.")
+}
+
 occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
 show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
+if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
+  .wcvp_available()
+}
 
-#set up local wcvp
-if(local_wcvp == FALSE){
+if(is.null(wcvp_distributions)){
   wcvp_distributions <- rWCVPdata::wcvp_distributions
+}
+if(is.null(wcvp_names)){
   wcvp_names <- rWCVPdata::wcvp_names
-} else {
-  if (is.null(wcvp_names)) cli_abort("Pointer to wcvp_names missing.")
-  if (is.null(wcvp_distributions)) cli_abort("Pointer to wcvp_distributions missing.")
 }
 
 if(rank %in% c("order","higher")) {
@@ -68,13 +71,10 @@ if (is.null(area)) message("No area specified. Generating global checklist.")
 if (is.null(taxon)) message("No taxon specified. Generating checklist for all species.")
 if (synonyms==FALSE) message("Generating a checklist of accepted species names only. Use synonyms = TRUE to include all names")
 
-
-
 # get the full dataset to work with
 df <- left_join(wcvp_names, wcvp_distributions,by = "plant_name_id") %>%
       left_join(wcvp_names %>%
-                     mutate(accepted_name = .data$taxon_name) %>%
-                     select(.data$plant_name_id, .data$accepted_name),
+                     select(.data$plant_name_id, accepted_name=.data$taxon_name),
                    by=c("accepted_plant_name_id"="plant_name_id"))
 
 #replace Unknown with blank in publication info

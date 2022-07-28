@@ -17,7 +17,6 @@ generate_checklist(
   report.filename = NULL,
   report.dir = NULL,
   report.type = c("alphabetical", "taxonomic"),
-  local_wcvp = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
 )
@@ -47,13 +46,11 @@ generate_checklist(
 
 \item{report.type}{Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
-\item{local_wcvp}{Logical. If \code{FALSE} (the default), use data from \code{rWCVPdata}.
-If \code{TRUE}, use a local copy of the data (useful if \code{rWCVPdata} is not the latest
-version of the checklist).}
+\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 
-\item{wcvp_names}{Pointer to the WCVP names dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.}
-
-\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Ignored if \code{local.wcvp = FALSE}. Defaults to \code{NULL}.}
+\item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
+If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 }
 \value{
 Data.frame with filtered data and, if render.report=TRUE. a report HTML file.

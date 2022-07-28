@@ -7,8 +7,10 @@
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
 #' @param location_doubtful Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.
-#' @param wcvp_names Pointer to the WCVP names dataset. Defaults to NULL (data from \code{rWCVPdata}).
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Defaults to NULL (data from \code{rWCVPdata}).
+#' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #'
 #' @details See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
 #'
@@ -36,9 +38,17 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
   #print(rank) #for debugging
   input.area <- area
 
-    if (is.null(wcvp_names)) wcvp_names <- rWCVPdata::wcvp_names
-    if (is.null(wcvp_distributions)) wcvp_distributions <- rWCVPdata::wcvp_distributions
+  if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
+    .wcvp_available()
+  }
 
+  if (is.null(wcvp_names)) {
+    wcvp_names <- rWCVPdata::wcvp_names
+  }
+
+  if (is.null(wcvp_distributions)) {
+    wcvp_distributions <- rWCVPdata::wcvp_distributions
+  }
 
   if (is.null(input.area)) {
     cli_alert_info("No area specified. Generating global occurrence matrix.")
