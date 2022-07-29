@@ -4,8 +4,10 @@
 #' @param rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param grouping.var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
-#' @param wcvp_names Pointer to the WCVP names dataset. Defaults to \code{NULL} (uses data from \code{WCVPdata}).
-#' @param wcvp_distributions Pointer to the WCVP distributions dataset. Defaults to \code{NULL} (uses data from \code{WCVPdata}).
+#' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #' @details Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table
@@ -28,10 +30,15 @@ summary_table <- function(taxon=NULL,
   rank <- match.arg(rank)
   grouping.var <- match.arg(grouping.var)
 
-  if(is.null(wcvp_distributions)){
+  if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
+    .wcvp_available()
+    .wcvp_fresh()
+  }
+
+  if (is.null(wcvp_distributions)) {
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
-  if(is.null(wcvp_names)){
+  if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
