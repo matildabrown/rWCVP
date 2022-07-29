@@ -32,6 +32,7 @@ summary_table <- function(taxon=NULL,
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
+    .wcvp_fresh()
   }
 
   if (is.null(wcvp_distributions)) {

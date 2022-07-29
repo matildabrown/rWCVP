@@ -33,6 +33,7 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
+    .wcvp_fresh()
   }
 
   occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")

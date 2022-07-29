@@ -35,11 +35,11 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
                           wcvp_distributions=NULL){
 
   rank <- match.arg(rank)
-  #print(rank) #for debugging
   input.area <- area
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
+    .wcvp_fresh()
   }
 
   if (is.null(wcvp_names)) {
