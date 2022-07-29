@@ -1,17 +1,15 @@
 ---
-title: "Custom checklists using rWCVP"
+title: "Generating custom checklists with rWCVP"
 author: "Matilda Brown"
 date: "24/05/2022"
-output: 
-  html_document: 
-    highlight: haddock
-    theme: sandstone
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(warning = FALSE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  comment = "#>"
+)
 ```
 
 Here, I demonstrate how we can modify our checklist output to generate a customised report. The objective for this example is: **to generate a list of species that are endemic (or near-endemic) to Sierra Leone**. 
@@ -187,4 +185,4 @@ And here is our file (screenshot here, because the report has left the building)
 
 ____
 
-![example report](Custom-checklist_example_report.png)
+![example report](../../man/figures/custom-checklist_example-report.png)

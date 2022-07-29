@@ -1,15 +1,18 @@
 ---
-title: "Coordinate cleaning to native range with rWCVP"
+title: "Cleaning coordinates to native range with rWCVP"
 author: "Matilda Brown"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(message = FALSE)
-knitr::opts_chunk$set(warning = FALSE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE
+  comment = "#>"
+)
 ```
+
 
 Load in some packages:
 

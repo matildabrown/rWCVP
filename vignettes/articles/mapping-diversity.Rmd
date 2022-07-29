@@ -2,17 +2,16 @@
 title: "Mapping diversity with rWCVP"
 author: "Matilda Brown"
 date: "26/05/2022"
-output:  
- html_document: 
-    highlight: haddock
-    theme: sandstone
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(warning = FALSE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  comment = "#>"
+)
 ```
+
 
 Here, I demonstrate how we can use some of the functions and data in the World Checklist to produce maps of various metrics (for distribution maps, see `plot_distribution`). 
 
@@ -176,9 +175,6 @@ ymax <- bounding_box["ymax"] + 2
   scale_colour_viridis_c(name = "Native\nspecies")+
     ggtitle("Orchidaceae species richness")
 )
-
-
-  
 ```
  
- For more examples and tutorials, see  {link to github page - doesn't exist yet. 
+For more examples and tutorials, see  {link to github page - doesn't exist yet. 

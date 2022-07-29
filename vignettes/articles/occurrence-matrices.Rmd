@@ -1,16 +1,18 @@
 ---
-title: "Generating publication-ready occurrence matrices with rWCVP"
+title: "Publication-ready occurrence matrices with rWCVP"
 author: "Matilda Brown"
 date: "24/05/2022"
-output: html_document
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(message = FALSE)
-knitr::opts_chunk$set(warning = FALSE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>"
+)
 ```
+
 
 In this example I use the pipe operator (`%>%`) and `dplyr` syntax - if these are unfamiliar I suggest checking out https://dplyr.tidyverse.org/ and some of the help pages therein. Now, let's get started! 
 
