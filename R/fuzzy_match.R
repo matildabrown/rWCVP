@@ -4,7 +4,8 @@
 #' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names].
 #'
 #' @param names_df a data frame of names for matching.
-#' @param wcvp_names a data frame of WCVP names to match against.
+#' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param name_col the column in `names_df` that has the taxon name for matching.
 #'
 #' @return Match results from WCVP bound to the original data from `names_df`.

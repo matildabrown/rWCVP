@@ -50,12 +50,11 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 
   cli_h1("Matching names to WCVP")
   if (is.null(wcvp_names)) {
+    .wcvp_available()
+    .wcvp_fresh()
     wcvp_names <- rWCVPdata::wcvp_names
-    latest_version <- rWCVPdata::check_wcvp_version(silent=TRUE)
-    if(! latest_version) {
-      cli_alert_danger("This version of WCVP is out of date, see {.fun check_wcvp_version} for details.")
-    }
   }
+
   label_col <- name_col
 
   # warning for missing name info

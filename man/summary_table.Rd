@@ -22,9 +22,11 @@ summary_table(
 
 \item{grouping.var}{Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.}
 
-\item{wcvp_names}{Pointer to the WCVP names dataset. Defaults to \code{NULL} (uses data from \code{WCVPdata}).}
+\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 
-\item{wcvp_distributions}{Pointer to the WCVP distributions dataset. Defaults to \code{NULL} (uses data from \code{WCVPdata}).}
+\item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
+If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 }
 \value{
 Data.frame with filtered data, or a \code{gt} table
