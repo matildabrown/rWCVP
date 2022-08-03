@@ -124,7 +124,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
     fuzzy_matches <- fuzzy_match(unmatched, wcvp_names, name_col=name_col)
 
-    cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {n_names} names")
+    cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
 
     matches <- bind_rows(matches, fuzzy_matches)
   }
@@ -132,7 +132,7 @@ match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, a
 #
 #   # Compilation of matched results  ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
-  if(nrow(unmatched)>0) unmatched$match_type <- NA_character_
+  if(nrow(unmatched)>0) unmatched$match_type <- "No match found"
 
   matches <-
     matches %>%
