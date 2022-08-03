@@ -7,37 +7,78 @@ date: "`r Sys.Date()`"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
   comment = "#>"
 )
 ```
 
-## Example dataset: the IUCN Red List
-```{r}
-library(tidyverse)
-library(rWCVP)
-library(gt)
+The World Checklist of Vascular Plants provides a global consensus view of all known vascular plant species, including taxonomic status and synonymy. As such, it can be used for standardising and reconciling lists of plant names from other sources.
 
-redlist <- read_csv("rl_assessment_details_20220725_version2022-1.csv")
+We have implemented name matching functions in rWCVP to make it simpler for a user to standardise a list of plant names against WCVP.
+
+In this article, we'll show you an example of how name matching in rWCVP might fit into a realistic workflow.
+
+As well as `rWCVP`, we'll be using the `tidyverse` collection of packages for data manipulation, `gt` for formatting tables, and `ggalluvial` for visualising the matching process.
+
+```{r libraries}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(rWCVP))
+suppressPackageStartupMessages(library(gt))
+suppressPackageStartupMessages(library(ggalluvial))
+```
+
+## Example dataset: the IUCN Red List
+
+The example we'll use here is matching assessments from the IUCN Red List of Threatened Species (Red List) to accepted names in the WCVP.
+
+We're using a download of plant assessments from version 2022-1 of the Red List, which we made through [their website](https://www.iucnredlist.org/).
+
+```{r load-redlist}
+redlist <- read_csv(
+  "../../inst/extdata/rl_assessment_details_20220725_version2022-1.csv",
+  col_types=cols(errata_reason=col_character(), amended_reason=col_character())
+)
 
 redlist <- redlist %>% 
-  filter(phylum ==  "TRACHEOPHYTA") %>% #filter out the bryophytes
+  #filter out the bryophytes
+  filter(phylum ==  "TRACHEOPHYTA") %>% 
   select(scientific_name, authority, category)
+
 glimpse(redlist)
 ```
-```{r cache=TRUE, message=FALSE }
-#m1 for matching step 1
-redlist_m1 <- match_names(redlist,
-                          name_col = "scientific_name",
-                          author_col = "authority",
-                          fuzzy = TRUE)
+
+Now that we've loaded the names from the Red List, we can match them to the WCVP using the `match_names` function.
+
+This function takes a data frame of names for matching, the name of the column in the data frame storing the names, and (optionally) the name of the column storing the authors for each name, if you want to include that in the matching process.
+
+The function will first try to find any names that match exactly to names in the WCVP. If an author column has been provided, this first step will include authors and a second step will run to match any remaining names exactly without the author strings. All remaining unmatched names are then passed through a fuzzy matching process that tries to match names phonetically and then finds the most similar name by Levenshtein distance.
+
+```{r match-names-1, cache=TRUE}
+matches <- match_names(redlist,
+                       name_col = "scientific_name",
+                       author_col = "authority",
+                       fuzzy = TRUE)
 ```
 ![](../../man/figures/name-match-message-1.PNG){width=100%}
 
-We get a warning about rWCVP being out of date - this is because the package (and therefore this tutorial) have been developed using a version of the data that is not currently on the website, so we can ignore it for now. 
+We haven't explicitly passed in a data frame of names from WCVP, and we get a warning because we are using an out of date version via the rWCVPdata package. We can ignore this warning for now because the package (and therefore this tutorial) have been developed using a version of the data that is not currently on the website. 
 
 We also get a series of messages, giving us an idea of the proportion that were exact matched, and how long we can expect fuzzy matching to take. 
 
-Once it's finished, we get a full summary. We need to resolve fuzzy and multiple matches
+Once it's finished, we get a full summary of how many names were matched, how many used fuzzy matching, and how many were matched to multiple names in the WCVP.
+
+The output of the `match_names` is a data frame of our original names, which names they match to in the WCVP, and information on how they were matched and how close any fuzzy matches are.
+
+## Resolving matched names to accepted species
+
+Now we've matched our names, we can resolve the fuzzy matches and the names that were matched to multiple entries in WCVP, and make sure our assessed species are linked to accepted names in WCVP.
+
+How you choose which fuzzy matches are valid and resolve multiple matches will ultimately depend on your reason for doing the matching. For instance, we're matching IUCN assessments to accepted names in WCVP. For this application, an assessment is only valid for a particular taxonomic concept, so we might not care about resolving anything matched to a non-homotypic synonym.
+
+In the case of this tutorial, we've tried to resolve as many fuzzy and multiple matches as possible first, before filtering out matches that aren't appropriate for our application.
+
+### Fuzzy matches
 
 There are not too many fuzzy matches (around 1000) but still a lot to manually verify, so let's do a bit of pre-checking based on the following rules:
 
@@ -45,42 +86,37 @@ There are not too many fuzzy matches (around 1000) but still a lot to manually v
 2. If the fuzzy match has an identical author string and is ≥90% similar, we keep it. 
 3. If the fuzzy match is only one letter out (i.e. has an edit distance of 1) and is ≥90% similar, we keep it. 
 
-Let's apply these:
-```{r}
+Let's apply these.
+
+```{r filter-fuzzy-1}
 # f for fuzzy
-redlist_f <- redlist_m1 %>% 
-  filter(match_type %in% c("Fuzzy (phonetic)", 
-                           "Fuzzy (edit distance)")) %>% 
+fuzzy_matches <- matches %>% 
+  filter(str_detect(match_type, "Fuzzy")) %>% 
   mutate(
     keep = case_when( #set up a keep column
-      match_similarity<0.9 ~ NA_real_, # fill with blank for dissimilar names
-      wcvp_author_edit_distance==0 ~ 1, # fill with 1 if authors identical
-      match_edit_distance==1 ~ 1, # fill with 1 if only one letter different
-      TRUE ~ NA_real_ # otherwise leave blank
-     )
+      match_similarity < 0.9 ~ NA_real_, # fill with blank for dissimilar names
+      wcvp_author_edit_distance == 0 ~ 1, # fill with 1 if authors identical
+      match_edit_distance == 1 ~ 1, # fill with 1 if only one letter different
+    )
   ) 
 
 #how many did this resolve? 
-table(redlist_f$keep, useNA = "always")
-  
+table(fuzzy_matches$keep, useNA = "always")
 ```
+
 A great start! Over half of all fuzzy matches can be resolved without looking at them. 
 
 What about an edit distance of 2 - surely that's still pretty close?  
 
-```{r}
-redlist_f %>% 
-  filter(match_edit_distance==2, 
-         multiple_matches==FALSE, 
-         match_similarity>0.9
+```{r filter-fuzzy-2}
+fuzzy_matches %>% 
+  filter(match_edit_distance == 2, 
+         !multiple_matches, 
+         match_similarity > 0.9
          ) %>% 
   arrange(desc(wcvp_author_edit_distance)) %>% #sort by least similar authors first
-  select(scientific_name, authority, 
-         match_type, 
-         wcvp_name, wcvp_authors
-         ) %>% 
+  select(scientific_name, authority, match_type,wcvp_name, wcvp_authors) %>% 
   head()
-  
 ```
 Hmm, clearly not! 
 
@@ -88,166 +124,180 @@ If we really wanted to continue algorithmically, we could take a random sample o
 
 However, at this point, a quick glance at each name is going to give the most accurate result and be faster. 
 
-```{r eval=FALSE}
-write.csv(redlist_f, "redlist_fuzzy_tocheck.csv", fileEncoding = "UTF-8" ,row.names = FALSE)
-  
+```{r save-fuzzy-check, eval=FALSE}
+write_csv(fuzzy_matches, "redlist-fuzzy-tocheck.csv")
 ```
-It took under an hour to eyeball these in Excel; I marked good matches with a 1 in the `keep` column, and bad matches with a 0. Then, I deleted all the match data except `match_type` and `multiple.matches` for the bad matches, and added a new column `resolved_match_type`. I left this blank for the good matches, and filled it with "Fuzzy match rejected" for the bad matches. 
 
-Now, we read that file back in:
+It took under an hour to eyeball these in Excel; I marked good matches with a 1 in the `keep` column, and bad matches with a 0. Then, I deleted all the match data except `match_type` and `multiple_matches` for the bad matches, and added a new column `resolved_match_type`. I left this blank for the good matches, and filled it with "Fuzzy match rejected" for the bad matches. 
 
-```{r}
-redlist_f2 <- read.csv("extdata/redlist-fuzzy-checked.csv") %>% 
+Now, we read that file back in.
+
+```{r checked-fuzzy}
+fuzzy_checked <- 
+  read_csv("../../inst/extdata/redlist-fuzzy-checked.csv", 
+           show_col_types=FALSE) %>% 
   select(-keep) %>% 
-  mutate(resolved_match_type = case_when(
-    !is.na(resolved_match_type) & resolved_match_type != "" ~ resolved_match_type,
-    TRUE ~ match_type
-  ))
+  mutate(resolved_match_type=ifelse(! is.na(resolved_match_type),
+                                    resolved_match_type,
+                                    match_type))
 
-
-# r for resolved
-redlist_r1 <- redlist_m1 %>% 
-  filter(!match_type %in% c("Fuzzy (phonetic)", "Fuzzy (edit distance)")) %>% 
-  bind_rows(redlist_f2)
+checked_matches <- matches %>% 
+  filter(! str_detect(match_type, "Fuzzy")) %>% 
+  bind_rows(fuzzy_checked)
 ```
 
-Still the same number of rows - we don't want to get rid of the bad matches (yet). 
+So far we've kept the same number of rows - we don't want to get rid of the bad matches (yet). 
 
-Now we need to deal with the multiple matches. Again, we can use some rules:
+### Multiple matches
 
-1. Filter matches using author information. If one or more matches has the same author string, we keep 
+Now we need to deal with the multiple matches. Again, we can use some rules to automatically resolve these:
+
+1. Filter matches using author information. If one or more matches has the same author string, we keep them.
 2. If one (and only one) of the matches is Accepted, we keep that one. 
-3. If one (and only one) of the matches is a Synonym (as opposed to Invalid, Illegitimate, etc), we keep that one 
+3. If one (and only one) of the matches is a Synonym (as opposed to Invalid, Illegitimate, etc), we keep that one.
 
-We can set this up in a function: 
-```{r}
+We'll write these rules into a function.
+
+```{r resolution-function}
 # resolve multiple matches function ####
-resolve_multi <- function(x){
-  summ <- x %>% summarise(
-    n.Auth = length(which(.$wcvp_author_edit_distance ==0)),
-    n.Acc = length(which(.$wcvp_status=="Accepted")),
-    n.syn = length(which(.$wcvp_status %in% c("Synonym", "Orthographic","Artificial Hybrid","Unplaced"))),
-    n.hom = length(which(.$wcvp_homotypic==1)),
-    n.sameacc = length(unique(.$wcvp_accepted_id))/nrow(.)
-  )
-  
-  if(summ$n.Auth > 0) x <- x %>% filter(wcvp_author_edit_distance ==0)
-  if (nrow(x) ==1) return(x)
-  if(summ$n.Acc==1) x <- x %>% filter(wcvp_status=="Accepted") 
-  if (nrow(x) ==1) return(x)
-  if(summ$n.syn==1) x <- x %>% filter(wcvp_status %in% c("Synonym", "Orthographic","Artificial Hybrid","Unplaced")) 
-  if (nrow(x) ==1) return(x)
-  if(summ$n.sameacc==1) x <- x[1,]
-  if(nrow(x)>1) {
-    x <- x[1,]
-    x[,(ncol(x)-10):ncol(x)] <- NA
-    x$resolved_match_type <- "Could not resolve multiple matches"
+resolve_multi <- function(df) {
+  if (nrow(df) == 1) {
+    return(df)
   }
-  return(x)
-}
-```
-
-Now we go through each name that has multiple matches and apply these rules: 
-
-```{r}
-
-
-# m for multi this time
-
-redlist_m2 <- redlist_r1 %>% filter(multiple_matches==TRUE) %>% 
-  group_by(scientific_name) %>% 
-  group_split()
-
-for (i in 1:length(redlist_m2)){
-  redlist_m2[[i]] <- resolve_multi(redlist_m2[[i]])
-}
   
-redlist_m2 <- do.call(bind_rows, redlist_m2) %>% 
-   mutate(resolved_match_type = case_when(
-   !is.na(resolved_match_type) & resolved_match_type != "" ~ resolved_match_type,
-    TRUE ~ match_type
+  # some fuzzy matches are rejected from the previous section
+  valid_matches <- filter(df, !is.na(match_similarity))
+  
+  if (nrow(valid_matches) == 0) {
+    return(head(df, 1))
+  }
+  
+  matching_authors <- 
+    valid_matches %>%
+    filter(wcvp_author_edit_distance == 0 | ! sum(wcvp_author_edit_distance == 0, 
+                                                  na.rm=TRUE))
+  
+  if (nrow(matching_authors) == 1) {
+    return(matching_authors)
+  }
+  
+  accepted_names <- 
+    matching_authors %>%
+    filter(wcvp_status == "Accepted" | ! sum(wcvp_status == "Accepted"))
+  
+  if (nrow(accepted_names) == 1) {
+    return(accepted_names)
+  }
+  
+  synonym_codes <- c("Synonym", "Orthographic", "Artificial Hybrid", "Unplaced")
+  synonyms <- 
+    accepted_names %>%
+    filter(wcvp_status %in% synonym_codes | ! sum(wcvp_status %in% synonym_codes))
+  
+  if (nrow(synonyms) == 1)  {
+    return(synonyms)
+  }
+  
+  n_matches <- length(unique(synonyms$wcvp_accepted_id)) / nrow(synonyms)
+  final <- head(synonyms, 1)
+  
+  if (n_matches != 1) {
+    final <- 
+      final %>%
+      mutate(
+      across(wcvp_id:resolved_match_type & where(is.numeric), ~NA_real_),
+      across(wcvp_id:resolved_match_type & where(is.character), ~NA_character_),
+      resolved_match_type="Could not resolve multiple matches"
+    )
+  }
+  
+  final
+}
+```
+
+Now we go through each name that has multiple matches and apply these rules. 
+
+```{r resolve-multi-matches}
+auto_resolved <- 
+  checked_matches %>%
+  nest_by(scientific_name) %>%
+  mutate(data=list(resolve_multi(data))) %>%
+  unnest(col=data) %>%
+  ungroup()
+
+auto_resolved <-
+  auto_resolved %>%
+  mutate(resolved_match_type=case_when(
+    is.na(resolved_match_type) & is.na(match_type) ~ "No match found",
+    is.na(resolved_match_type) ~ match_type,
+    TRUE ~ resolved_match_type
   ))
-
- 
-redlist_r2 <- redlist_r1 %>% filter(multiple_matches==FALSE | is.na(multiple_matches)) %>% 
-  rbind(redlist_m2) %>% 
-  mutate(resolved_match_type = case_when(
-   !is.na(resolved_match_type) & resolved_match_type != "" ~ resolved_match_type,
-    TRUE ~ match_type
-  ))
 ```
 
 
-What's our resolved summary? 
-```{r}
-redlist_r2$resolved_match_type[which(is.na(redlist_r2$resolved_match_type))] <- "No match found" 
-table(redlist_r2$resolved_match_type)
+How did our automatic resolution do?
 
+```{r auto-resolution-summary}
+count(auto_resolved, resolved_match_type)
 ```
-Hmm, still just under names (around 1% of the original dataset) that we couldn't find a match for. For most datasets, this is an acceptable loss, but this particular data will be used for several papers, so it's worth going through more carefully.
+Hmm, still ~200 names (less than 1% of the original dataset) that we couldn't find a match for. For most datasets, this is an acceptable loss, but this particular data will be used for several papers, so it's worth going through more carefully.
 
 
-```{r eval=FALSE}
-write.csv(redlist_r2 %>% 
-            filter(resolved_match_type %in% c("No match found",
-                                              "Fuzzy match rejected")
-                   ),
-          "redlist_tomanuallymatch.csv", row.names = F
-          )
+```{r save-for-manual-resolution, eval=FALSE}
+auto_resolved %>%
+  filter(resolved_match_type %in% c("No match found","Fuzzy match rejected")) %>%
+  write_csv("redlist_tomanuallymatch.csv")
 ```
 
-Here's one we prepared earlier: 
+Here's one we prepared earlier.
 
-```{r}
-#m for manual, this time
-redlist_m3 <- read.csv("extdata/redlist-manually-matched.csv")
-table(redlist_m3$resolved_match_type)
+```{r manual-resolution}
+manually_resolved <- read_csv("../../inst/extdata/redlist-manually-matched.csv",
+                              show_col_types=FALSE)
+count(manually_resolved, resolved_match_type)
 ```
 
 In this example, many of the unmatched names are new species that have not been added to the WCVP (sometimes listed as e.g. *Heptapleurum* sp.), making it quicker than searching every name individually. Still, it's a time consuming process with a relatively small success rate (here, we found names for 95), so it will not be applicable to all (or even most) name-matching workflows. 
 
-We need to re-run matching on the manually matched names, to get the rest of the info: 
+We need to re-run matching on the manually matched names, to get the rest of the info.
 
-
-```{r message=FALSE}
-redlist_m4 <- rWCVP::match_names(redlist_m3 %>% 
-                                   filter(manually_entered_name!=""), 
-                                 name_col = "manually_entered_name", 
-                                 fuzzy=FALSE)
+```{r complete-manual-resolution}
+manually_resolved <- 
+  manually_resolved %>% 
+  match_names(name_col = "manually_entered_name", fuzzy=FALSE)
 ```
 ![](../../man/figures/name-match-message-2.PNG){width=100%}
 
-Oop, a couple multiple names here - let's resolve them and tidy up the columns: 
+This has produced a couple of multiple matches again. We could have avoided this by entering the WCVP ID that we wanted rather than the name. But in this case, it only affects a couple of records. Looking at these, the extra names are illegitimate, so we can just quickly filter these out. 
 
-```{r}
-redlist_m4 <- redlist_m4 %>% group_by(scientific_name) %>% group_split()
-for (i in 1:length(redlist_m4)){
-  if(nrow(redlist_m4[[i]])>1) # only multiple matches
-    # OK to ignore the warnings
-  redlist_m4[[i]] <- resolve_multi(redlist_m4[[i]])
-}
-
-redlist_m4 <- do.call(rbind, redlist_m4) 
-
-redlist_m3 <- bind_rows(redlist_m3 %>% 
-                          filter(resolved_match_type!= "Manually matched"), 
-                        redlist_m4) %>%
-  select(-c(manually_entered_name, Notes, match_type, multiple_matches, match_similarity, match_edit_distance)) %>% 
-  rename(match_type=original_match_type) 
-
-redlist_r3 <- bind_rows(redlist_r2 %>% filter(!resolved_match_type %in% c("No match found",
-                                              "Fuzzy match rejected")), redlist_m3)
+```{r remove-illegitimate}
+manually_resolved <- filter(manually_resolved, wcvp_status != "Illegitimate")
 ```
 
-```{r}
+And now we'll insert them back into our match results and remove anything that remains unmatched.
 
-table(redlist_r3$resolved_match_type) %>% as.data.frame() %>% 
-  arrange(desc(Freq)) %>% 
-   gt(rowname_col = "Var1") %>% 
+```{r join-resolved}
+resolved_matches <-
+  manually_resolved %>%
+  select(-c(manually_entered_name, Notes, match_type, multiple_matches, 
+            match_similarity, match_edit_distance)) %>%
+  rename(match_type=original_match_type) %>%
+  bind_rows(
+    auto_resolved %>% 
+    filter(! scientific_name %in% manually_resolved$scientific_name)
+  )
+```
+
+Finally, we'll take a look at a summary of our name resolution in a nicely formatted table.
+
+```{r resolution-summary}
+resolved_matches %>%
+  count(resolved_match_type, sort=TRUE) %>%
+  gt(rowname_col = "resolved_match_type") %>% 
   tab_options(table_body.hlines.color = "transparent",
               column_labels.hidden = TRUE) %>% 
   summary_rows(
-    columns = c(Freq),
+    columns = c(n),
     fns = list(Total ="sum"),
     formatter = fmt_integer
   ) %>% 
@@ -258,152 +308,158 @@ table(redlist_r3$resolved_match_type) %>% as.data.frame() %>%
     locations = cells_stub()
   ) %>%
   tab_header("Match summary", "(after resolution of fuzzy and multiple matches)") %>% 
-   opt_align_table_header(align = "left")
+  opt_align_table_header(align = "left")
 ```
 
-Great! We might also want to visualise this, but first, let's finish the resolution - what we want is to link each Red List assessment to an Accepted species name. This is where things get a little tricky - for synonyms, we need to consider how the name change affects the assessment. Specifically, we can only apply the new name to the assessment if the taxonomic concept has been preserved: 
+Great! 
+
+### Linking assessments to accepted names
+
+There is one last step before we're finished resolving our name matches - linking each Red List assessment to an accepted species name. This is where things get a little tricky - for synonyms, we need to consider how the name change affects the assessment. Specifically, we can only apply the new name to the assessment if the taxonomic concept has been preserved.
 
 ![](../../man/figures/synonymy-diagram.png){width=50%}
 
 Luckily, we can use the `homotypic_synonym` column of the WCVP to easily filter our matches. 
 
-We'll add the full WCVP to our data, using `wcvp_accepted_id` to join with `plant_name_id`. 
+We'll add the full WCVP to our data, using `wcvp_accepted_id` to join with `plant_name_id`. We then only want to flag names that matched to accepted species or matched to homotypic synonyms that link to accepted species.
 
 ```{r}
 # a for accepted
-redlist_a1 <- redlist_r3 %>% left_join(rWCVPdata::wcvp_names, by=c("wcvp_accepted_id"="plant_name_id")) %>% 
-  mutate(keep = case_when(
-    wcvp_status == "Accepted" | wcvp_homotypic ==TRUE ~ "Matched to an accepted name",
+accepted_matches <- resolved_matches %>% 
+  left_join(rWCVPdata::wcvp_names, by=c("wcvp_accepted_id"="plant_name_id")) %>% 
+  mutate(keep=case_when(
+    taxon_status == "Accepted" & (wcvp_status != "Synonym" | wcvp_homotypic) ~
+      "Matched to an accepted name", 
     TRUE ~ "Not matched to an accepted name"
   ))
 
-table(redlist_a1$keep)
+count(accepted_matches, keep)
 ```
 Still the vast majority! 
 
-We can filter this dataset to only assessments that have been matched to an accepted name, but first, let's visualise the proportion of names at each step. We can do this using an alluvial plot:
+## Visualising the matching process
 
-```{r}
+One thing we might want to do, to check how the matching process went, is visualise the proportion of names going through each type of matching. An alluvial diagram offers one way of doing this.
+
+```{r, fig.width=9}
 library(ggalluvial)
 
-p <- redlist_a1  %>% 
-  mutate(
-    step0 = "Input",
-    step1 = case_when(
-      match_type == "Exact (with author)" ~ "Exact",
-      match_type == "Exact (without author)" ~ "Exact",
-      match_type %in% c("Fuzzy (edit distance)","Fuzzy (phonetic)") ~ "Fuzzy",
-      match_type == "No match found" ~ "No match"),
-    step2 = case_when(
-      resolved_match_type == "Exact (without author)" ~ sprintf("\U2713"),
-      resolved_match_type == "Exact (with author)" ~ sprintf("\U2713"),
-      resolved_match_type == "Fuzzy (edit distance)" ~ sprintf("\U2713"),
-      resolved_match_type == "Fuzzy (phonetic)" ~ sprintf("\U2713"),
-      resolved_match_type == "Could not resolve multiple matches" ~ sprintf("\U2716"),
-      resolved_match_type == "Fuzzy match rejected" ~ sprintf("\U2716"),
-      resolved_match_type == "No match found" ~ sprintf("\U2716")),
-    step3 = 
-      case_when (
-        keep == "Matched to an accepted name" ~ sprintf("\U2713"),
-        TRUE ~ sprintf("\U2716")
-  ) )%>% 
-  mutate(scenario =paste0(step1,multiple_matches,step2, step3)) %>% 
-  group_by(step0, step1, step2,step3,scenario) %>% summarise(n=n()) %>% 
-  mutate(colour_key = step3) %>% 
-  to_lodes_form(axes=c(1:4), id = "scenario") %>% 
-  ggplot(aes(x=x, y=n, stratum=stratum, alluvium=scenario, fill=colour_key)) +
-  scale_fill_brewer(type = "qual", palette = "Set2") +
-  geom_flow(stat = "alluvium", lode.guidance = "frontback",
-            color = "darkgray",aes.flow = "forward") +
-  geom_stratum() +
-  theme_void()+
-  ggrepel::geom_text_repel(
-    aes(label = ifelse(as.character(stratum) %in% c("Fuzzy", "No match"), as.character(stratum), NA)),
-    stat = "stratum", size = 4, direction = "y", nudge_x = -.5
-  ) +
-  geom_text(
-    aes(label = ifelse(!as.character(stratum) %in% c("Fuzzy", "No match"), as.character(stratum), NA)),
-    stat = "stratum", size = 4
-  ) +
-  theme(legend.position = "none")
-
-
-p +
-  geom_text(label=c("Initial"), x=2, y=61371*1.03)+
-  geom_text(label=c("Resolved"), x=3, y=61371*1.03)+
-  geom_text(label=c("Accepted"), x=4, y=61371*1.03)
-
+step1_codes <- c("Exact (with author)"="Exact", 
+                 "Exact (without author)"="Exact",
+                 "Fuzzy (edit distance)"="Fuzzy",
+                 "Fuzzy (phonetic)"="Fuzzy")
+step2_codes <- c("Exact (without author)"="\U2713",
+                 "Exact (with author)"="\U2713",
+                 "Fuzzy (edit distance)"="\U2713",
+                 "Fuzzy (phonetic)"="\U2713",
+                 "Could not resolve multiple matches"="\U2716",
+                 "Fuzzy match rejected"="\U2716",
+                 "No match found"="\U2716")
+plot_data <-
+  accepted_matches %>%
+  mutate(step0="Input", 
+         step1=recode(match_type, !!! step1_codes),
+         step2=recode(resolved_match_type, !!! step2_codes),
+         step3=ifelse(keep == "Matched to an accepted name", "\U2713", "\U2716")) %>%
+  replace_na(list(multiple_matches=FALSE)) %>%
+  mutate(scenario=paste0(step1, step2, step3)) %>%
+  count(step0, step1, step2, step3, scenario) %>%
+  mutate(colour_key=step3) %>%
+  to_lodes_form(axes=c(1:4), id="scenario") %>%
+  group_by(x, stratum) %>%
+  mutate(label=ifelse(row_number() == 1, as.character(stratum), NA_character_),
+         total=sum(n)) %>%
+  ungroup() %>%
+  mutate(label=ifelse(total < 1500, NA_character_, label))
   
 
-
+plot_data %>%
+  ggplot(mapping=aes(x=x, y=n, stratum=stratum, alluvium=scenario, fill=colour_key)) +
+  scale_fill_brewer(palette="Set2") +
+  geom_flow(stat="alluvium", lode.guidance="frontback", color="darkgrey",
+            aes.flow="forward") +
+  geom_stratum() +
+  geom_text(mapping=aes(label=label), vjust=0.75, size=4) +
+  annotate("text", x=c(2, 3, 4), y=rep(61371 * 1.03, 3), 
+           label=c("Initial", "Resolved", "Accepted"), size=5) +
+  guides(fill="none") +
+  theme_void()
 ```
     
-Clearly, the vast majority of the names have exact matches (with and without author string) that needed no resolution. If we exclude them, effectively zooming in on the lower part of that figure, we can see more detail on the less straightforward matches: 
+Clearly, the vast majority of the names have exact matches (with and without author string) that needed no resolution. If we exclude them, effectively zooming in on the lower part of that figure, we can see more detail on the less straightforward matches.
 
-```{r fig.height=8, fig.width=9}
+```{r, fig.width=9}
 
-p <- redlist_a1  %>% 
-  mutate(
-    step1 = gsub("\\(", "\n\\(", match_type),
-    step2 = gsub("\\(", "\n\\(", resolved_match_type),
-    step3 = 
-      case_when (
-        keep == "Matched to an accepted name" ~ sprintf("\U2713"),
-        TRUE ~ sprintf("\U2716")
-        ) 
-  )%>% 
-  mutate(scenario =paste0(step1,multiple_matches,step2, step3)) %>% 
-  group_by(step1, step2,step3,scenario) %>% summarise(n=n()) %>% 
-  mutate(colour_key = step3) %>% 
-  to_lodes_form(axes=c(1:3), id = "scenario") %>% 
+plot_data <-
+  accepted_matches %>%
+  mutate(step1=str_replace(match_type, "\\(", "\n\\("),
+         step2=str_replace(resolved_match_type, "\\(", "\n\\("),
+         step3=ifelse(keep == "Matched to an accepted name", "\U2713", "\U2716")) %>%
+  mutate(scenario=paste0(step1, step2, step3)) %>%
+  count(step1, step2, step3, scenario) %>%
+  mutate(colour_key=step3) %>%
+  to_lodes_form(axes=c(1:3), id="scenario") %>%
+  mutate(label1=ifelse(stratum %in% c("\U2713", "\U2716"),
+                       as.character(stratum), NA_character_),
+         label2=ifelse(! stratum %in% c("\U2713", "\U2716"),
+                       as.character(stratum), NA_character_))
+
+
+plot_data %>% 
   #filter out the big categories
-  filter(n<4000) %>% 
+  filter(n < 4000) %>% 
   ggplot(aes(x=x, y=n, stratum=stratum, alluvium=scenario, fill=colour_key)) +
-  scale_fill_brewer(type = "qual", palette = "Set2") +
-  geom_flow(stat = "alluvium", lode.guidance = "frontback",
-            color = "darkgray",aes.flow = "forward") +
+  scale_fill_brewer(palette = "Set2") +
+  geom_flow(stat="alluvium", lode.guidance="frontback",
+            color="darkgray", aes.flow="forward") +
   geom_stratum() +
   theme_void()+
-  geom_text(
-    aes(label = ifelse(as.character(stratum) %in% c(sprintf("\U2713"), 
-                                                    sprintf("\U2716")), 
-                       as.character(stratum), NA)),
-    stat = "stratum", size = 8
-  ) +
-   geom_text(
-    aes(label = ifelse(!as.character(stratum) %in% c(sprintf("\U2713"), 
-                                                    sprintf("\U2716")), 
-                       as.character(stratum), NA)),
-    stat = "stratum", size = 4
-  ) +
-  # geom_text(
-  #   aes(label = ifelse(!as.character(stratum) %in% c("Fuzzy", "No match"), as.character(stratum), NA)),
-  #   stat = "stratum", size = 4
-  # ) +
+  geom_text(mapping=aes(label=label1), stat="stratum", size=8) +
+  geom_text(mapping=aes(label=label2), stat = "stratum", size=4) +
+  annotate("text", x=c(1, 2, 3), y=2950, label=c("Initial", "Resolved", "Accepted")) +
+  annotate("text", x=3.4, y=1000, 
+           label="e.g. heterotypic \nsynonyms, \nunplaced names", size=4) +
   theme(legend.position = "none")
-
-
-p +
-  geom_text(label=c("Initial"), x=1, y=2950, size=5)+
-  geom_text(label=c("Resolved"), x=2, y=2950, size=5)+
-  geom_text(label=c("Accepted"), x=3, y=2950, size=5)+
-  geom_text(label="e.g. heterotypic \nsynonyms, \nunplaced names", x=3.4, y=1000, size=4)
 ```
 
-Finally, we want to turn our large data.frame into something more manageable that we can use for downstream analyses, by filtering out all of the unsuccessful matches and reducing the number of columns (plus renaming them to be more intuituve): 
+## Getting a final dataset
+
+Finally, we want to turn our large data frame into something more manageable that we can use for downstream analyses, by filtering out all of the unsuccessful matches and reducing the number of columns (plus renaming them to be more intuitive).
+
 ```{r}
-redlist_a2 <- redlist_a1 %>%
-  filter(keep=="Matched to an accepted name") %>% 
-  select(1:3, wcvp_name, wcvp_status, wcvp_accepted_id, ipni_id, taxon_name, taxon_authors, taxon_status) %>% 
-  rename(match_name=wcvp_name,
-         match_status=wcvp_status,
-         accepted_plant_name_id = wcvp_accepted_id,
-         accepted_taxon_name = taxon_name,
-         accepted_taxon_authors = taxon_authors,
-         accepted_taxon_status=taxon_status)
+final_matches <- 
+  accepted_matches %>%
+  filter(keep == "Matched to an accepted name") %>% 
+  select(scientific_name, authority, category, 
+         match_name=wcvp_name, match_status=wcvp_status, 
+         accepted_plant_name_id=wcvp_accepted_id, ipni_id, 
+         accepted_taxon_name=taxon_name, accepted_taxon_authors=taxon_authors)
 
-glimpse(redlist_a2)
+glimpse(final_matches)
 
+```
+
+And, just as an example of a downstream analysis, we might want to show the number of accepted species in each Red List category.
+
+```{r plot-categories}
+cat_order <- c("DD", "LC or LR/lc", "NT or LR/nt", "LR/cd", "VU", "EN", "CR",
+               "EW", "EX")
+cat_colors <- c("DD"="#D1D1C6", "LC or LR/lc"="#60C659", "NT or LR/nt"="#CCE226", 
+                "LR/cd"="#e4d354", "VU"="#F9E814", "EN"="#FC7F3F", "CR"="#D81E05",
+                "EW"="#542344", "EX"="#000000")
+
+final_matches %>%
+  mutate(category=recode(category, "LC"="LC or LR/lc", "LR/lc"="LC or LR/lc",
+                         "NT"="NT or LR/nt", "LR/nt"="NT or LR/nt"),
+         category=factor(category, levels=cat_order, ordered=TRUE)) %>%
+  count(category) %>%
+  mutate(p=n / sum(n)) %>%
+  ggplot(mapping=aes(x=category, y=n, fill=category)) +
+  geom_col() +
+  geom_text(mapping=aes(label=scales::percent_format(accuracy=0.1)(p)), vjust=-0.5) +
+  scale_fill_manual(values=cat_colors) +
+  guides(fill="none") +
+  labs(x="", y="Species")
 ```
 
 
