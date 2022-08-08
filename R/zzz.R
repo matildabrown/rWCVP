@@ -3,7 +3,7 @@
 .pkgenv <- new.env(parent=emptyenv())
 
 .onLoad <- function(libname, pkgname) {
-  wcvp_available <- requireNamespace("rWCVPData", quietly=TRUE)
+  wcvp_available <- requireNamespace("rWCVPdata", quietly=TRUE)
 
   .pkgenv[["wcvp_available"]] <- wcvp_available
 }

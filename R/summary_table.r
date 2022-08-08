@@ -26,7 +26,6 @@ summary_table <- function(taxon=NULL,
                           grouping.var = c("area_code_l3","genus","family","order","higher"),
                           wcvp_names=NULL,wcvp_distributions=NULL){
 
-
   rank <- match.arg(rank)
   grouping.var <- match.arg(grouping.var)
 
@@ -183,6 +182,8 @@ x <- list(
   Number_of_regionally_endemic_species = r.end.text,
   Summary = res %>% ungroup()
 )
+
+if(is.null(area)) x[[2]] <- "the world"
 
 
   return(x)

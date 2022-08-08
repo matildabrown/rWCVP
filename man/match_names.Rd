@@ -17,8 +17,8 @@ match_names(
 \arguments{
 \item{names_df}{a data frame of names for matching.}
 
-\item{wcvp_names}{a data frame of WCVP names to match against,
-can be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
 

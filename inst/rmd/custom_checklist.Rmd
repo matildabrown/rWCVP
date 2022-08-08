@@ -1,0 +1,195 @@
+---
+title: "Custom species checklist generated with the rWCVP package"
+output: html_document
+params: 
+ version: "New Phytologist Special Issue"
+ mydata: df
+ description: NULL
+---
+<style type="text/css">
+.main-container {
+  max-width: 8.5in;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1.title {
+  font-size: 18px;
+}
+
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+
+
+taxa <- params$taxa
+version <- params$version
+df <- params$mydata
+description <- params$description
+```
+```{r, echo = FALSE, results = "asis"}
+description <- "Checklist of species that are endemic (or near-endemic, based on neighbouring countries) to Sierra Leone"
+if(!is.null(description)){
+  cat("### ", description)
+  }
+  cat("\n")
+  cat("\n")
+  cat("**Generated on: **", format(Sys.time(), '%d %B, %Y'),"\n")
+  cat("\n**WCVP version: **", version)
+```
+
+    
+**Cite as:**  
+
+|  Govaerts, R., Nic Lughadha, E., Black, N., Turner, R., & Paton, A. (2021). The World Checklist of 
+|       Vascular Plants, a continuously updated resource for exploring global plant diversity. Scientific 
+|       Data, 8(1), 1-10.  
+| 
+|  Brown, M.J.M, Black, N., Govaerts, R., Nic Lughadha, E., Ondo, I., Turner, R., Walker , B.E. (2022). 
+|       rWCVP: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants. R 
+|       package version 1.0.0. https://github.com/matildabrown/rWCVP
+
+<br>
+          
+For compilers and reviewers of the dataset, see: https://wcsp.science.kew.org/compilersReviewers.do
+
+
+___
+
+For key to codes, see: https://en.wikipedia.org/wiki/List_of_codes_used_in_the_World_Geographical_Scheme_for_Recording_Plant_Distributions"
+
+
+
+
+```{r setup for files} 
+df <- params$mydata
+if("X" %in% colnames(df)) df <- select(df, -X)
+
+html <- function(text, replace_sign_entities = FALSE, ...) {
+  
+  if(replace_sign_entities) {
+    text <- stringr::str_replace_all(text, c("&lt;" = "<", "&gt;" = ">"))
+  }
+  
+  htmltools::HTML(text, ...)
+}
+```
+
+
+### Symbols used in species list
+```{r}
+data.frame(v1= c("E","x","i","?"), 
+                      v2=c("Endemic to a single WGSPRD Level 3 area",
+                           "Considered extinct or eradicated",
+                           "Introduced and naturalised",
+                           "Occurrence doubtful"
+                           )) %>% 
+  gt::gt() %>% 
+    gt::tab_options(
+    data_row.padding = gt::px(1),
+    data_row.padding.horizontal = gt::px(15),
+    column_labels.hidden = TRUE,
+    table.font.size = 12,
+    table.align = "left")
+  
+```
+
+
+
+### List of species
+```{r results='asis'}
+cat("**Total number of species:**", length(unique(df$plant_name_id)))
+```
+<div style="text-align: right"> WCVP ID &nbsp;&nbsp; |&nbsp;&nbsp; IPNI ID &nbsp;&nbsp;    </div>
+```{r message=FALSE}
+textkey <- data.frame(introduced=c(0,1,1,0,0,1,1,0), extinct=c(0,1,0,1,0,1,0,1), location_doubtful=c(0,1,0,0,1,0,1,1), text=c("","(i,x,d)","(i)","(x)","(d)","(i,x)","(i,d)","(x,d)"))
+
+suppressMessages({ 
+  df <- dplyr::left_join(df, textkey)
+df$area_text <- paste0(df$area_code_l3, df$text)
+
+df_area_key <- unique(df[, c("continent_code_l1","continent","region_code_l2", "region", "area_code_l3", "area")])
+
+distvars <- c("continent_code_l1","continent","region_code_l2", "region", "area_code_l3", "area","text")
+
+df2 <- df %>%   dplyr::arrange(continent, region, area_code_l3, taxon_name) %>% 
+  dplyr::select(-dplyr::any_of(distvars)) %>% 
+  dplyr::group_by(plant_name_id) %>% 
+  dplyr::summarise(
+    area_text = paste(area_text, collapse=", "))
+  
+  
+df3 <- df %>% 
+  dplyr::select(-any_of(c(distvars, "area_text"))) %>% 
+  dplyr::left_join(df2) %>% 
+  unique()
+
+df3$area_text[which(df3$area_text  %in% c("","NANA"))] <- NA
+
+df3$genus_text <- df3$genus
+df3$genus_text[which(df3$taxon_status=="Accepted")] <- paste("<b><em>", df3$genus[which(df3$taxon_status=="Accepted")], "</b></em>")
+df3$species_text <- df3$species
+df3$species_text[which(df3$taxon_status=="Accepted")] <- paste("<b><em>", df3$species[which(df3$taxon_status=="Accepted")], "</b></em>")
+df3$species_hybrid_text <- df3$species_hybrid
+df3$species_hybrid_text[which(df3$taxon_status=="Accepted" & !is.na(df3$species_hybrid))] <- paste("<b>", df3$species_hybrid[which(df3$taxon_status=="Accepted"& !is.na(df3$species_hybrid))], "</b>")
+df3$infraspecific_rank_text <- df3$infraspecific_rank
+df3$infraspecific_rank_text[which(df3$taxon_status=="Accepted" & !is.na(df3$infraspecific_rank))] <- paste(" <b>", df3$infraspecific_rank_text[which(df3$taxon_status=="Accepted" & !is.na(df3$infraspecific_rank))], "</b>")
+df3$infraspecies_text <- df3$infraspecies
+df3$infraspecies_text[which(df3$taxon_status=="Accepted" & !is.na(df3$infraspecies))] <- paste(" <b><em>", df3$infraspecies_text[which(df3$taxon_status=="Accepted" & !is.na(df3$infraspecies))], "</b></em>")
+df3$maintext <- paste(df3$genus_hybrid, df3$genus_text,  " ", df3$species_hybrid_text, df3$species_text, df3$infraspecific_rank_text, df3$infraspecies_text, " ", df3$taxon_authors)
+df3$maintext[which(df3$taxon_status != "Accepted")] <- paste0(df3$maintext[which(df3$taxon_status != "Accepted")], " [",df3$taxon_status[which(df3$taxon_status != "Accepted")] ,"]")
+
+df3$maintext <- paste(df3$maintext, df3$place_of_publication, df3$volume_and_page, df3$first_published)
+df3$maintext[which(df3$taxon_name != df3$accepted_name & !is.na(df3$accepted_name))] <- paste0(df3$maintext[which(df3$taxon_name != df3$accepted_name & !is.na(df3$accepted_name))], 
+         " = <b><em>", df3$accepted_name[which(df3$taxon_name != df3$accepted_name & !is.na(df3$accepted_name))], "</em></b>")
+  
+df3$maintext <- gsub("NA ", "", df3$maintext)
+df3$maintext <- gsub(" NA", "", df3$maintext)
+
+df3$maintext[which(!is.na(df3$area_text))] <- paste0(df3$maintext[which(!is.na(df3$area_text))], "<br>     ",df3$area_text[which(!is.na(df3$area_text))] )
+
+
+df3 <- df3 %>% dplyr::mutate(endemic_flag=dplyr::case_when(endemic==1 ~ "E",
+                                             area_endemic==1 & endemic==0 ~ "e",
+                                             TRUE ~ ""))
+
+df3 %>% dplyr::filter(taxon_rank!= "Genus") %>% 
+  dplyr::select(family, endemic_flag, maintext, plant_name_id, ipni_id) %>% 
+  unique() %>% 
+  dplyr::arrange(family) %>% 
+  dplyr::group_by(family) %>% 
+  gt::gt() %>% 
+  gt::text_transform(
+    locations = gt::cells_body(columns = maintext),
+    fn = function(x){
+      purrr::map(x, html, replace_sign_entities = TRUE)
+    }
+  ) %>% 
+  gt::tab_options(
+    row_group.font.weight = "bold",
+    row_group.font.size = 14,
+    table.font.size = 11.5,
+    data_row.padding = gt::px(1),
+    column_labels.hidden = TRUE,
+    table_body.hlines.color = "transparent"
+  )  %>% 
+    gt::tab_style(
+        style = gt::cell_text(size = 8,
+                              align="right"),
+        locations = gt::cells_body(columns = plant_name_id)
+    )  %>% 
+    gt::tab_style(
+        style = gt::cell_text(size = 8,
+                              align="right"),
+        locations = gt::cells_body(columns = ipni_id)
+    ) 
+})
+  
+```
+
+
+
+
