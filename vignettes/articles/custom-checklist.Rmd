@@ -4,7 +4,7 @@ author: "Matilda Brown"
 date: "24/05/2022"
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
@@ -12,90 +12,90 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here, I demonstrate how we can modify our checklist output to generate a customised report. The objective for this example is: **to generate a list of species that are endemic (or near-endemic) to Sierra Leone**. 
+As well as allowing users to create checklists from the [World Checklist of Vascular Plants (WCVP)](https://wcvp.science.kew.org), rWCVP provides functionality for modifying a checklist output to generate a customised report. I'll demonstrate this here by **generating a list of species that are endemic (or near-endemic) to Sierra Leone**.
 
-In this example I use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar I'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret.
-Now, let's get started! 
+In addition to `rWCVP`, we'll use the `tidyverse` packages for data manipulation and plotting, the `gt` package for rendering nice tables, and the `sdpep` package to find bordering regions.
 
-
-```{r message=FALSE}
-#load in some packages
+```{r libraries, message=FALSE}
 library(rWCVP)
-library(tidyverse) # for data manipulation
-library(gt) # for tables
+library(tidyverse)
+library(gt)
+library(spdep)
 ```
 
+In this example I use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar I'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret.
 
+Now, let's get started! 
 
-### Endemic species
-
-It makes sense to look at endemic species before we expand our scope to include near-endemics.  
+## A checklist of endemic species
 
 We start by generating a checklist of the species that occur in Sierra Leone. Remembering and/or finding the appropriate WGSRPD Level 3 codes is a pain, so we can use `get_wgsrpd3_codes("Sierra Leone")` to do that work for us in the function call. 
 
-```{r}
-sl_species <- generate_checklist(area = get_wgsrpd3_codes("Sierra Leone"), synonyms = FALSE)
+```{r species-checklist}
+sl_code <- get_wgsrpd3_codes("Sierra Leone")
+sl_species <- generate_checklist(area=sl_code, synonyms = FALSE)
 ```
-How many species occur in Sierra Leone, and how many are endemic? We can use the `endemic` column here, so it's really simple:
-```{r}
+
+How many species occur in Sierra Leone, and how many are endemic? We can use the `endemic` column here, so it's really simple.
+
+```{r endemics-count}
 #enclosed in parentheses so that the output is printed as well as assigned
 (endemic_summary <- sl_species %>% 
-  select(taxon_name, endemic) %>% 
-  unique() %>% 
+  distinct(taxon_name, endemic) %>% 
   group_by(endemic) %>% 
   summarise(number.of.sp = n()))
 ```
-Easy! For a list of endemic species, we could simply filter our checklist using the `endemic` column, but what about **near-endemics**?
+Easy! For a list of endemic species, we can simply filter our checklist using the `endemic` column, but what about **near-endemics**?
 
-### Near-endemic species
+## A checklist of near-endemic species
 
 Depending on how we define near-endemics, there are two ways we can approach the filtering step. 
 
-1. We define near-endemics as those species that occur in Sierra Leone + one other WGSPRD3 Area (L3). From a data perspective, this means filtering out species that have >2 rows in `sl_species` (because each row is a species-area occurrence). 
+1. We define near-endemics as those species that occur in Sierra Leone and one other WGSPRD3 Area (L3). From a data perspective, this means filtering out species that have >2 rows in `sl_species` (because each row is a species-area occurrence). 
 2. Alternatively, we can consider near-endemics as those species that might occur across a border, so are functionally endemic. To do this, we need to a) identify the neighbouring WGSPRD3 Areas and b) filter our species list accordingly. 
 
-Let's start with Option 1. 
+### 1. Species in Sierra Leone plus 1 other area
 
-```{r}
-#get the list of near-endemics
-near_endemics <- sl_species %>% 
-  select(plant_name_id, taxon_name, area_code_l3) %>% #not strictly necessary 
-  unique() %>% 
+We can just directly remove any species from our list of species from Sierra Leone that occur in more than 2 areas.
+
+```{r near-endemic-list1}
+sl_near_endemics1 <- sl_species %>% 
   group_by(plant_name_id, taxon_name) %>% 
-  summarise(number.of.areas = n()) %>% 
-  filter(number.of.areas < 3) 
-
-#filter sl_species according to that list
-sl_nearendemics1 <- sl_species %>% 
-  filter(plant_name_id %in% near_endemics$plant_name_id) 
-
+  filter(n() < 3) %>%
+  ungroup()
 ```
 
-Once we have our checklist filtered to near-endemics, the formatting is the same regardless of which option we choose, so let's also look at option 2 while we're in the filtering stage. 
+### 2. Species in Sierra Leone and neighbouring areas
 
-First, we need to identify which WGSRPD Areas share a border with Sierra Leone. We can do this by looking at a map, but for completeness, we can also do it using the spatial polygons in the `rWCVPdata` package:
-```{r message=FALSE}
-library(spdep)
-#get the polygons for WGSRPD Level 3 Areas
-area_polygons <- rWCVPdata::wgsprd3 
-sf_use_s2(FALSE) #switch off spherical geometry - necessary for these polygons
+First, we need to identify which WGSRPD Areas share a border with Sierra Leone. 
 
+We could do this by looking at a map, but we'll do this programmitically using the shape files.
+
+To do so, we take the WGSRPD level 3 polygons and find all the areas that border each other.
+```{r neighbours, message=FALSE}
+sf_use_s2(FALSE)
+
+area_polygons <- rWCVPdata::wgsprd3
+
+area_neighbours <- poly2nb(area_polygons)
+```
+
+**Note, we had to turn off spherical coordinates in `sf` for this using `sf_use_s2(FALSE)`.**
+
+Now we have a list of neighbouring areas, we need to find the ones that border Sierra Leone.
+```{r sl-neighbours}
 #which polygon/s is/are Sierra Leone? 
-sl_index <- which(area_polygons$LEVEL3_COD %in% get_wgsrpd3_codes("Sierra Leone"))
+sl_index <- which(area_polygons$LEVEL3_COD %in% sl_code)
 
 #find neighbouring polygons
-sl_neighbours_index <- poly2nb(area_polygons)[[sl_index]]
+sl_neighbours_index <- area_neighbours[[sl_index]]
 
 #get the polygons for Sierra Leone plus its neighbours
 sl_plus_neighbours <- area_polygons[c(sl_index, sl_neighbours_index),]
-
-#get the Area codes of SL + neighbours to use in filtering
-sl_plus_neighbours_codes <- sl_plus_neighbours$LEVEL3_COD
-
 ```
-This is all very well and good, but it would be nice to sanity-check this automated neighbour detection before we generate our final checklist. Let's make a map of the region to make sure we've selected the right areas:
 
-```{r}
+We can map the region to sanity-check this automated neighbour detection before we generate our final checklist. 
+```{r neighbours-plot}
 #get a sensible bounding box for our plot
 bounding_box <- st_bbox(sl_plus_neighbours)
 xmin <- bounding_box["xmin"] - 2
@@ -119,49 +119,35 @@ ggplot(area_polygons) +
   xlab(NULL) +
   ylab(NULL)
 ```
-<br> Looks good! Let's just check that our area codes match up:
-```{r}
-wgsrpd_mapping %>% filter(LEVEL3_COD %in% sl_plus_neighbours_codes)
-```
-They match! Of course, we could have just identified Guinea and Liberia as neighbouring countries from a map, then found the codes using `get_wgsrpd3_codes("Liberia")` and `get_wgsrpd3_codes("Guinea")`, but that's not nearly as much fun!
-<br>
-Now we can identify near-endemics as those species that *only* have occurrences in Sierra Leone, Guinea or Liberia. 
 
+Of course, we could have just identified Guinea and Liberia as neighbouring countries from a map, then found the codes using `get_wgsrpd3_codes("Liberia")` and `get_wgsrpd3_codes("Guinea")`, but that's not nearly as much fun!
 
-```{r}
-sl_nearendemics2 <- sl_species %>% 
-  #filter to only species that are not in the list of...
-  filter(!plant_name_id %in% 
-           # ...species that have occurrences outside SL+Neighbours
-           # i.e., the non-near-endemics
-           (sl_species %>% 
-           filter(!area_code_l3 %in% sl_plus_neighbours_codes) %>% 
-           pull(plant_name_id))
-  )
+Next, we can identify near-endemics as those species that *only* have occurrences in Sierra Leone, Guinea or Liberia. 
+
+```{r neighbouring-species}
+sl_near_endemics2 <- sl_species %>% 
+  # filtering for each species
+  group_by(plant_name_id) %>%
+  # only keep those where all points are in the threee countries
+  filter(all(area_code_l3 %in% sl_plus_neighbours$LEVEL3_COD)) %>%
+  ungroup()
 ```
 
-Now, we do the same thing as before (Option 1), filtering our list to only species that occur in Sierra Leone + one neighbour. Looking at the map it seems plausible that a species could occur right at the triple junction between the three countries, but for this example we will exclude those species. 
+And finally we filter our list to only species that occur in Sierra Leone + one neighbour, like we did in Option 1. Looking at the map it seems plausible that a species could occur right at the triple junction between the three countries, but for this example we will exclude those species. 
 
-```{r}
-#get the list of near-endemics that only occur in SL + one neighbour
-near_endemics <- sl_nearendemics2 %>% 
-  select(plant_name_id, taxon_name, area_code_l3) %>% #not strictly necessary 
-  unique() %>% 
+```{r near-endemics-list2}
+sl_near_endemics2 <- sl_near_endemics2 %>% 
   group_by(plant_name_id, taxon_name) %>% 
-  summarise(number.of.areas = n()) %>% 
-  filter(number.of.areas < 3) 
-
-#filter sl_nearendemics2 according to that list
-sl_nearendemics2 <- sl_nearendemics2 %>% 
-  filter(plant_name_id %in% near_endemics$plant_name_id) 
-
-
+  filter(n() < 3) %>%
+  ungroup()
 ```
 
-The next part is a bit fancy - we want to turn out checklist dataframe into a formatted report. To do this, we plug it into a template file called "custom_checklist.Rmd" that is stored in the `rWCVP` package folder (specifically, the "rmd" subfolder). We pass the data (as well as some other information) using `params`, and need to specify a filename using `output_file`. 
+## Creating our formatted report
+
+Now we can do something a bit fancy - turn our checklist data frame into a formatted report. To do this, we plug it into a template file called "custom_checklist.Rmd" that is stored in the `rWCVP` package folder (specifically, the "rmd" subfolder). We pass the data (as well as some other information) using `params`, and need to specify a file name using `output_file`. 
 
 
-```{r eval=FALSE}
+```{r report, eval=FALSE}
 library(rmarkdown)
 
 #informative test to include in our html
@@ -177,8 +163,6 @@ render(system.file("rmd", "custom_checklist.Rmd", package = "rWCVP"),
                                    mydata = sl_nearendemics2,
                                    description = checklist_description),
        output_file = paste0(wd,"/Sierra_Leone_endemics_and_near_endemics.html"))
-
-
 ```
 
 And here is our file (screenshot here, because the report has left the building)! 
