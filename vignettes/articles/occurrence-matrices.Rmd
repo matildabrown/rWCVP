@@ -13,49 +13,58 @@ knitr::opts_chunk$set(
 )
 ```
 
+The [World Checklist of Vascular Plants (WCVP)](https://wcvp.science.kew.org) provides distribution data for the > 340,000 vascular plant species known to science. This distribution data can be used to build occurrence matrices for checklists of plant species, which `rWCVP` can help with.
 
-In this example I use the pipe operator (`%>%`) and `dplyr` syntax - if these are unfamiliar I suggest checking out https://dplyr.tidyverse.org/ and some of the help pages therein. Now, let's get started! 
 
-Load in some packages:
+As well as `rWCVP`, well use the `tidyverse` packages for data manipulation and plotting and the `gt` package for formatting tables.
 
-```{r}
+```{r libraries}
 library(rWCVP)
-library(tidyverse) # for data manipulation
-library(gt) # for tables
+library(tidyverse)
+library(gt)
 ```
-### Finding an example group
-For this example, we don't have a particular area or group of plants that we want to examine, but this gives us a chance to showcase one of other the functions in `rWCVP`! We want a group of species that is a) not too large and b) distributed across a few WGSRPD Level 3 Areas. Brazil has good potential because it has five Level 3 Areas (a good number for this purpose because the table will fit on a portrait-oriented page). Let's see if there are some nice-sized example genera, using the `summary_table` function: 
-```{r}
+
+In this example I use the pipe operator (`%>%`) and `dplyr` syntax - if these are unfamiliar I suggest checking out https://dplyr.tidyverse.org/ and some of the help pages therein. 
+
+Now, let's get started! 
+
+## Finding an example group
+
+For this example, we don't have a particular area or group of plants that we want to examine, but this gives us a chance to showcase one of other the functions in `rWCVP`! 
+
+We want a group of species that is a) not too large and b) distributed across a few WGSRPD Level 3 Areas. Brazil has good potential because it has five Level 3 Areas (a good number for this purpose because the table will fit on a portrait-oriented page). Let's see if there are some nice-sized example genera, using the `summary_table` function: 
+```{r myrt-summary}
 summary_table(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"), 
-              grouping.var = "genus") %>% summary_table_gt()
+              grouping.var = "genus") %>% 
+  summary_table_gt()
 ```
-   <br> 
-    
-*Calycolpus* looks nice and tidy - let's see how the 8 species are distributed across the 5 areas. We can use the same function, but limit our taxon and change our grouping variable to area:
-```{r}
-summary_table(taxon="Calycolpus", rank="genus", area=get_wgsrpd3_codes("Brazil"), grouping.var = "area_code_l3") %>% summary_table_gt()
+
+*Calycolpus* looks nice and tidy - let's see how the 8 species are distributed across the 5 areas. We can use the same function, but limit our taxon and change our grouping variable to area.
+```{r calycolpus-summary}
+summary_table(taxon="Calycolpus", rank="genus", area=get_wgsrpd3_codes("Brazil"),
+              grouping.var = "area_code_l3") %>% 
+  summary_table_gt()
 ```
     
-    
-<br>
 Hmm, maybe a bit too small - it only occurs in 3 of the 5 regions. What about *Myrciaria*? 
 
-```{r}
-summary_table(taxon="Myrciaria", rank="genus", area=get_wgsrpd3_codes("Brazil"), grouping.var = "area_code_l3") %>% summary_table_gt()
-
+```{r myrciaria-summary}
+summary_table(taxon="Myrciaria", rank="genus", area=get_wgsrpd3_codes("Brazil"), 
+              grouping.var="area_code_l3") %>% 
+  summary_table_gt()
 ```
- <br>   
+
 Perfect! 25 species (rows) won't take up too much space, and there are enough occurrences to make it interesting. 
 
-### Generating and formatting the occurrence matrix
-Now let's look at which species occur in which regions, using the `generate_occurence_matrix` function.  
+## Generating and formatting the occurrence matrix
+Generating an occurrence matrix for this genus is as simple as using the `generate_occurence_matrix` function.  
 
-
-```{r}
-m <- generate_occurrence_matrix(taxon = "Myrciaria", rank = "genus",area = get_wgsrpd3_codes("Brazil"))
+```{r myrciaria-matrix}
+m <- generate_occurrence_matrix(taxon="Myrciaria", rank="genus", 
+                                area=get_wgsrpd3_codes("Brazil"))
 m
 ```
-<br>
+
 It's OK, but we can make it much prettier using the `gt` package.
 Let's do the following: 
 
@@ -67,8 +76,7 @@ Let's do the following:
 * remove the internal borders
 * change the 1s and 0s into X and blank
 
-
-```{r}
+```{r myrciaria-matrix-nice}
 m_gt <- m %>% 
   select(-plant_name_id) %>% #remove ID col
   gt() %>% 
@@ -105,10 +113,10 @@ m_gt <- m %>%
       )
 m_gt
 ```
-<br>
+
 Much nicer! We can save this `gt` table as an HTML table or as a picture. If we plan on making a few more tables, we can save space by saving our table style as a theme (see https://themockup.blog/posts/2020-09-26-functions-and-themes-for-gt-tables/ for more details on this)
 
-```{r}
+```{r matrix-theme}
 occ_mat_theme <- function(x){
   x %>% cols_label(
     taxon_name = "Species"
@@ -143,31 +151,31 @@ occ_mat_theme <- function(x){
       )
 }
 ```
-<br>
-The biggest issue with gt() is that it doesn't support Word - for exporting directly to a docx file, check out `flextable` (https://ardata-fr.github.io/flextable-book/).
+
+The biggest issue with `gt()` is that it doesn't support Word - for exporting directly to a docx file, check out `flextable` (https://ardata-fr.github.io/flextable-book/).
     
 ### Including or excluding occurrence types
 What if we only want to know about native or introduced species? This function has the option to filter for one or the other. Brazilian *Myrciaria* doesn't look very interesting on that front (we can see from the summary table that only one species is introduced), so let's look at a more invasive group - *Poa* in Northern Europe (Level 2 Region). 
 
-```{r}
+```{r poa-summary}
 summary_table(taxon="Poa", rank="genus", area=get_wgsrpd3_codes("Northern Europe"), 
-              grouping.var = "area_code_l3") %>% summary_table_gt()
+              grouping.var = "area_code_l3") %>% 
+  summary_table_gt()
 ```
- <br>   
+  
 A few more there to work with. First, let's look at the native species only:
-```{r}
-m <- generate_occurrence_matrix(taxon = "Poa", rank = "genus",
-                                area = get_wgsrpd3_codes("Northern Europe"), 
+```{r native-poa-matrix}
+m <- generate_occurrence_matrix(taxon="Poa", rank="genus",
+                                area=get_wgsrpd3_codes("Northern Europe"), 
                                 introduced=FALSE, extinct=FALSE, 
-                                location_doubtful = FALSE)
+                                location_doubtful=FALSE)
 m
 ```
-   <br> 
 We can format this matrix just like we did above, but let's skip that and go straight to introduced species only. We're doing all the same formatting as before, but also adding a heading - the `html` function makes it possiible to italicise our genus name and everything!
 
-```{r}
-m <- generate_occurrence_matrix(taxon = "Poa", rank = "genus",
-                                area = get_wgsrpd3_codes("Northern Europe"), 
+```{r introduced-poa-matrix}
+m <- generate_occurrence_matrix(taxon="Poa", rank="genus",
+                                area=get_wgsrpd3_codes("Northern Europe"), 
                                 native=FALSE,
                                 introduced=TRUE, extinct=FALSE, 
                                 location_doubtful = FALSE)
@@ -178,12 +186,12 @@ m %>%
   #add a header
   tab_header(title=html("Introduced <em>Poa</em> species in Northern Europe")) 
 ```
-  <br>  
 
-### Bonus: adding a country spanner
+## Bonus: adding a country spanner
 Tables created with `gt` are extremely flexible - let's say we want to look at occurrences across the US-Canadian border:
-```{r}
-m <- generate_occurrence_matrix("Fritillaria", "genus", area = c("WAS", "ORE", "IDA","MNT", "ABT", "BRC"))
+```{r fritilaria-matrix}
+m <- generate_occurrence_matrix("Fritillaria", "genus", 
+                                area=c("WAS", "ORE", "IDA","MNT", "ABT", "BRC"))
 
 
 m_gt <- m %>% 
@@ -194,9 +202,9 @@ m_gt <- m %>%
   tab_header(title=html("<em>Fritillaria</em> species in Northwest USA and Southwest Canada")) 
 m_gt
 ```
-<br>
-It would be really useful to know which of those codes are in the US and which are in Canada. We could use the data included in `rWCVP` to create a key:
-```{r}
+
+It would be really useful to know which of those codes are in the US and which are in Canada. We could use the data included in `rWCVP` to create a key.
+```{r fritillaria-key}
 wgsrpd_mapping %>% 
   filter(LEVEL3_COD %in% c("WAS", "ORE", "IDA","MNT", "ABT", "BRC")) %>% 
   select(LEVEL3_NAM, LEVEL3_COD, COUNTRY) %>% 
@@ -210,19 +218,16 @@ wgsrpd_mapping %>%
         )
   
 ```
-<br>
     
 It would really be nicer to have it on the occurrence matrix though. Enter `tab_spanner()`:
-```{r}
+```{r fritillaria-spanner}
 m_gt %>% 
   tab_spanner(label="United States",
-              columns = c(IDA, MNT, ORE, WAS)
-              ) %>% 
+              columns = c(IDA, MNT, ORE, WAS)) %>% 
   tab_spanner(label="Canada",
-              columns = c(ABT, BRC)
-              ) 
+              columns=c(ABT, BRC)) 
 ```
-<br>
+
 There is a lot more that can be done with `gt` - see https://gt.rstudio.com/ for help, examples and documentation. 
 
 
