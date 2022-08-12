@@ -2,6 +2,7 @@
 title: "Matching names to WCVP with rWCVP"
 author: "Matilda Brown"
 date: "`r Sys.Date()`"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -54,13 +55,12 @@ This function takes a data frame of names for matching, the name of the column i
 
 The function will first try to find any names that match exactly to names in the WCVP. If an author column has been provided, this first step will include authors and a second step will run to match any remaining names exactly without the author strings. All remaining unmatched names are then passed through a fuzzy matching process that tries to match names phonetically and then finds the most similar name by Levenshtein distance.
 
-```{r match-names-1, cache=TRUE}
+```{r match-names-1, cache=TRUE, message=TRUE, warning=TRUE}
 matches <- match_names(redlist,
                        name_col = "scientific_name",
                        author_col = "authority",
                        fuzzy = TRUE)
 ```
-![](../../man/figures/name-match-message-1.PNG){width=100%}
 
 We haven't explicitly passed in a data frame of names from WCVP, and we get a warning because we are using an out of date version via the rWCVPdata package. We can ignore this warning for now because the package (and therefore this tutorial) have been developed using a version of the data that is not currently on the website. 
 
@@ -261,12 +261,11 @@ In this example, many of the unmatched names are new species that have not been 
 
 We need to re-run matching on the manually matched names, to get the rest of the info.
 
-```{r complete-manual-resolution}
+```{r complete-manual-resolution, message=TRUE, warning=TRUE}
 manually_resolved <- 
   manually_resolved %>% 
   match_names(name_col = "manually_entered_name", fuzzy=FALSE)
 ```
-![](../../man/figures/name-match-message-2.PNG){width=100%}
 
 This has produced a couple of multiple matches again. We could have avoided this by entering the WCVP ID that we wanted rather than the name. But in this case, it only affects a couple of records. Looking at these, the extra names are illegitimate, so we can just quickly filter these out. 
 
@@ -342,8 +341,6 @@ Still the vast majority!
 One thing we might want to do, to check how the matching process went, is visualise the proportion of names going through each type of matching. An alluvial diagram offers one way of doing this.
 
 ```{r, fig.width=9}
-library(ggalluvial)
-
 step1_codes <- c("Exact (with author)"="Exact", 
                  "Exact (without author)"="Exact",
                  "Fuzzy (edit distance)"="Fuzzy",
