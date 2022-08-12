@@ -4,116 +4,155 @@ author: "Matilda Brown"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   message = FALSE,
-  warning = FALSE
+  warning = FALSE,
   comment = "#>"
 )
 ```
 
+The [World Checklist of Vascular Plants (WCVP)](https://wcvp.science.kew.org) provides coarse-scale distribution data for all > 340,000 vascular plant species known to science. This distribution data provides information about species' native and introduced ranges. We can use the native range data to clean occurrence records for species by removing potentially implausible occurrences.
 
-Load in some packages:
+To do this, as well as `rWCVP`, we'll use the `rgbif` library to download occurrence records, the `tidyverse` library to do data manipulation, and the `sf` library to handle the shapes of the native ranges.
 
-```{r}
+
+```{r libraries}
 library(rWCVP)
 library(rgbif)
 library(tidyverse)
 library(sf)
 ```
 
-For an example, we're using *Callitris rhomboidea*, a lovely Australian conifer. First, we download the occurrences using the `rgbif` package.
-Non-GBIF data with latitude and longitude coordinates still need to be converted to spatial points using `st_as_sf(coords = c(long, lat)` and the appropriate coordinate reference system (`st_crs(4326)` is the CRS for WGS84, used for GPS coordinates).
+## Cleaning occurrence records for a single species
 
-```{r}
-occs_0 <- rgbif::occ_data(scientificName = "Callitris rhomboidea", limit = 1000)
-occs <- occs_0$data %>% 
-  select(scientificName, decimalLatitude, decimalLongitude) %>% #only want name and coords
-  na.omit() %>% #delete missing coords
-  st_as_sf(coords=c(3,2),crs = st_crs(4326)) #make the points spatial 
+In this tutorial, we'll use *Callitris rhomboidea (a lovely Australian conifer) as an example.
+
+### Downloading occurrence records
+
+The first step is to get the occurrences records from somewhere. We'll use `rgbif` to get these from GBIF.
+
+We've limited the number of occurrences to 1000 here, so it doesn't take too long to download. And we've requested to only get records with coordinates that don't have any issues automatically flagged by GBIF.
+
+```{r download-occ}
+gbif_response <- occ_data(scientificName="Callitris rhomboidea", limit=1000,
+                          hasCoordinate=TRUE, hasGeospatialIssue=FALSE)
+
+paste(1000, "of", gbif_response$meta$count, "records downloaded.")
 ```
 
-We would probably want to do some other filtering, but let's skip that for now, and move on to the native ranges: 
+### Preparing the occurrences
 
-```{r}
-d_all <- get_distribution("Callitris rhomboidea", rank="species")
+Before we remote the non-native occurrences from our download, we need to get the data in the right format.
 
+Removing the non-native occurrences can be quite computationally expensive, if you have a large number of occurrences and a species that is native to a large number of regions. So you probably want to do any cleaning steps, like removing records from the sea or that are at known institution locations, before filtering by the native range.
 
-# Plot_distribution gives you two plots, one with a full world map and one with 
-# a zoomed in field of view
-plot_distribution(d_all, crop.map = TRUE)
+For now, because we don't have too many points, we won't do anymore cleaning. But we do make sure we convert our data frame of records to a spatial data frame to be able to filter the points using the shapes for our species' native range.
 
+```{r spatial-occ}
+occs <- 
+  gbif_response$data %>% 
+  select(scientificName, decimalLatitude, decimalLongitude) %>%
+  st_as_sf(coords=c("decimalLongitude", "decimalLatitude"), crs = st_crs(4326))
 ```
 
+*Note* - if you're using your own data frame of occurrences, rather than one downloaded from GBIF, you'll still need to convert it to a spatial data frame like we've done above and set the appropriate coordinate system. We've used EPSG 4326 here because it's the default one for coordinates in degrees longitude and latitude.
 
-We're only really interested in the native distribution...
 
-```{r}
-d_native <- get_distribution("Callitris rhomboidea", rank="species", 
-                             introduced = FALSE, extinct = FALSE, 
-                             location_doubtful = FALSE)
+### Getting the native range
 
-p <- plot_distribution(d_native, crop.map = TRUE)
-(p <- p + theme(legend.position = "none"))
+Now we can use `rWCVP` to download the native distribution of our species.
+
+```{r download-native}
+native_range <- get_distribution("Callitris rhomboidea", rank="species",
+                                introduced=FALSE, extinct=FALSE, 
+                                location_doubtful=FALSE)
 ```
 
-Now, how do our points map onto the range? 
+And take a look at it.
+```{r plot-native}
+(p <- plot_distribution(native_range, crop.map=TRUE) + 
+   theme(legend.position="none"))
+```
 
-```{r}
+And how do our occurrence records map onto the range? 
+
+```{r plot-occ}
 p + geom_sf(data=occs, fill="#6e6ad9",col="black", shape=21) 
 ```
 
-Yikes, let's get rid of those rogue points. First, get TRUE/FALSE values for whether each point falls within the native range polygon, and plot them coloured by this value:
+Yikes, some very rogue points!
 
-```{r}
-occs$native <- factor(sf::st_intersects(occs, st_union(d_native), sparse=FALSE))
+### Removing non-native occurrences
 
-p+
-  geom_sf(data=occs, 
-          fill=c("red","#72994c")[occs$native],
+Now let's get rid of those rogue points. 
+
+One way to do this is to check which points touch the native range polygons, getting a TRUE/FALSE value for each. We can use the `st_intersects` function from `sf` to do this. As we have four native range polygons, we would get four values for each point rather than just one, so we also merge the native range polygons together using `st_union`.
+
+```{r find-native-occ}
+occs$native <- st_intersects(occs, st_union(native_range), sparse=FALSE)[,1]
+```
+
+Highlighting them on the map gives an idea of which points are erroneous.
+
+```{r plot-native-occ}
+p +
+  geom_sf(data=occs,
+          fill=c("red","#72994c")[factor(occs$native)],
           col="black", 
           shape=21)
 ```
 
+Some of these are obviously bad (very far from the native range), but some are quite close.
 
-Let's have a closer look at the ones that are near the green:
-```{r}
-lims <- st_bbox(d_native) #getting a sensible bounding box
+Let's have a closer look at the ones that are near the native range polygons:
+```{r plot-native-occ-zoom}
+lims <- st_bbox(native_range) #getting a sensible bounding box
+
 p +
   geom_sf(data=occs, 
-          fill=c("red","#72994c")[occs$native],
+          fill=c("red","#72994c")[factor(occs$native)],
           col="black", 
           shape=21)+
   coord_sf(xlim=lims[c(1,3)], ylim=lims[c(2,4)])
 ```
 
-    
-        
-Ah, they are in the water! Note: the WGSRPD shapefiles that we are using as a base map are not super-high resolution, so it might be worth adding a buffer so that we are not cleaning too enthusiastically. 
+Ah, they are in the water! Some are quite obviously off the coast but there are a few that are quite close. This might be a problem with the resolution of the WGSRPD shape files we're using - a higher resolution might reveal the points are actually within the native range.
 
-The coordinates for the shapefile are in degrees, so a 1km buffer is approximately 0.009 degrees latitude (and longitude at the equator). For high latitudes, a buffer of 0.009 degrees is going to be significantly more than a kilometre, but the important thing is that points won't be removed because of minor differences in the shapefile. 
+We can try adding a buffer so that we are not cleaning too enthusiastically. 
 
-Let's see which of our occurrences fall within ~1km of the native range. For clarity, we've removed the points that are within the native range and are just plotting the points that are within the buffer (yellow) and those that are outside the buffer (red). 
-```{r}
-occs$native_buffer <- factor(sf::st_intersects(occs, st_buffer(st_union(d_native), 0.009), sparse=FALSE))
+The coordinates for the shape file are in degrees, so a 1 km buffer is approximately 0.009 degrees latitude (and longitude at the equator). For high latitudes, a buffer of 0.009 degrees is going to be significantly more than 1 km, so you might want to change the buffer depending on the location and span of your data. 
 
-#filter out the points that are in the native range
-occs2 <- occs %>% filter(native == FALSE)
+Let's see which of our occurrences fall within ~1 km of the native range. For clarity, we've removed the points that are within the native range and are just plotting the points that are within the buffer (yellow) and those that are outside the buffer (red). 
 
-p+geom_sf(data = st_buffer(st_union(d_native), 0.009), fill="transparent", col="gold")+
-  geom_sf(data=occs2, 
-          fill=c("red","gold")[occs2$native_buffer],
+```{r buffer-range}
+buffered_dist <- native_range %>%
+  st_union() %>%
+  st_buffer(0.009)
+
+occs$native_buffer <- st_intersects(occs, buffered_dist, sparse=FALSE)[,1]
+
+# filter out the points that are in the native range
+suspect_occs <- occs %>% 
+  filter(! native)
+
+p + 
+  geom_sf(data=buffered_dist, fill="transparent", col="gold")+
+  geom_sf(data=suspect_occs, 
+          fill=c("red","gold")[factor(suspect_occs$native_buffer)],
           col="black", 
           shape=21)+
     coord_sf(xlim=lims[c(1,3)], ylim=lims[c(2,4)])
 ```
     
-An appropriate buffer width might be wider or narrower, depending on downstream analyses but we strongly suggest visualisation to sanity-check the buffer before using it to discard points. 
+An appropriate buffer width might be wider or narrower, depending on downstream analyses but visualisation can help to sanity-check the buffer before discarding points. 
 
-Now, we can discard occurrences that are >1km (approximately) outside of the native range and plot them one last time, just to make sure it's worked:
-```{r}
-occs_filtered <- occs %>% filter(native_buffer == TRUE)
+Now, we can discard occurrences that are >1 km (approximately) outside of the native range.
+
+```{r final-filter}
+occs_filtered <- occs %>% 
+  filter(native_buffer)
 
 #filtered occurrences plotted
 p +
