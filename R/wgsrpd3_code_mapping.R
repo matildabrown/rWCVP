@@ -53,6 +53,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
                   .data$LEVEL1_NAM %in% toupper(geography) |
                   .data$LEVEL2_NAM %in% geography |
                   .data$LEVEL3_NAM %in% geography |
+                  .data$COUNTRY %in% geography |
                   .data$HEMISPHERE %in% geography) %>%
   dplyr::pull(.data$LEVEL3_COD) %>%
   return()
