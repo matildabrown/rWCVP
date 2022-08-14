@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
   message = FALSE,
   comment = "#>"
 )
+
+cli_progress_show_option <- getOption("cli.progress_show_after")
+options("cli.progress_show_after"=12000)
 ```
 
 The World Checklist of Vascular Plants provides a global consensus view of all known vascular plant species, including taxonomic status and synonymy. As such, it can be used for standardising and reconciling lists of plant names from other sources.
@@ -316,7 +319,7 @@ Great!
 
 There is one last step before we're finished resolving our name matches - linking each Red List assessment to an accepted species name. This is where things get a little tricky - for synonyms, we need to consider how the name change affects the assessment. Specifically, we can only apply the new name to the assessment if the taxonomic concept has been preserved.
 
-![](../../man/figures/synonymy-diagram.png){width=50%}
+![](synonymy-diagram.png){width=50%}
 
 Luckily, we can use the `homotypic_synonym` column of the WCVP to easily filter our matches. 
 
@@ -459,4 +462,6 @@ final_matches %>%
   labs(x="", y="Species")
 ```
 
-
+```{r, include = FALSE}
+options("cli.progress_show_after"=cli_progress_show_option)
+```

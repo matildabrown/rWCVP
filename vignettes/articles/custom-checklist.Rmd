@@ -169,4 +169,4 @@ And here is our file (screenshot here, because the report has left the building)
 
 ____
 
-![example report](../../man/figures/custom-checklist_example-report.png)
+![example report](custom-checklist_example-report.png)
