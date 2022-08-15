@@ -33,7 +33,8 @@ Imports:
 Suggests: 
     rWCVPdata (>= 0.1.0),
     knitr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    spdep
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP
 BugReports: https://github.com/matildabrown/rWCVP/issues

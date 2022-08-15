@@ -1,0 +1,108 @@
+---
+title: "Introduction to rWCVP"
+output: rmarkdown::html_vignette
+description: |
+  rWCVP provides functions for accessing the taxonomic and geographic data held
+  in the World Checklist of Vascular Plants and for using that data to generate
+  summaries, reports, and plots.
+vignette: >
+  %\VignetteIndexEntry{Introduction to rWCVP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  message=FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(rWCVP)
+```
+
+The [World Checklist of Vascular Plants (WCVP)](https://wcvp.science.kew.org) is a global consensus view of vascular plant species. It provides names, synonymy, taxonomy, and distributions for the > 340,000 vascular plant species known to science.
+
+We have developed rWCVP to make some common tasks that use the WCVP easier. These include standardising a list of taxon names against the WCVP, getting and mapping the distribution of a species, and creating a checklist of taxa found in a particular region.
+
+### Accessing the WCVP
+
+For the functions in rWCVP to work, you need to have access to a copy of the WCVP.
+
+One way to load the WCVP is to install the associated data package, rWCVPdata:
+
+```{r install-data, eval=FALSE}
+remotes::install_github("matildabrown/rWCVPdata")
+
+# taxonomy data
+names <- rWCVPdata::wcvp_names
+
+# distribution data
+distributions <- rWCVPdata::wcvp_distributions
+```
+
+If the data package isn't available, or you'd prefer to use a different version of the WCVP, you can provide a local copy of the data to the main functions in this package. For instance, to generate a checklist:
+
+```{r local-data, eval=FALSE}
+names <- read_csv("/path/to/wcvp_names.csv")
+distributions <- read_csv("/path/to/wcvp_distributions.csv")
+
+checklist <- generate_checklist("Acacia", rank="genus", area="CPP",
+                                wcvp_names=names, wcvp_distributions=distributions)
+```
+
+**Be careful if you're using your own WCVP version!** The structure of the WCVP tables sometimes changes between versions. rWCVP should be set up to work with the latest version of WCVP, and any previous versions that share the same structure.
+
+## Filtering the WCVP
+
+Some rWCVP functions involve filtering the WCVP to generate lists or summaries of vascular plant species in particular areas. These functions accept two arguments for filtering the WCVP:
+
+* `taxon`: the name of a valid taxon with a taxonomic rank of species or higher (e.g. the species "Myrcia almasensis", the genus "Myrcia", or the family "Myrtaceae").
+* `area`: a vector of WGSRPD level 3 codes for the regions you want to focus on.
+
+These arguments can be combined in the `generate_checklist`, `generate_occurrence_matrix`, and `summary_table` to generate outputs for focal taxa in a desired area. For example, Myrtaceae species in Brazil:
+
+```{r filter-example}
+checklist <- generate_checklist("Myrtaceae", rank="family", 
+                                area=c("BZC", "BZN", "BZS", "BZE", "BZL"))
+```
+
+### A note on filtering by taxon
+
+When filtering by taxon, you need to tell the function what taxonomic rank the name you're providing is using the `rank` argument.
+
+For example, making a summary table for the genus *Poa*:
+```{r filter-genus}
+summary_table("Poa", rank="genus")
+```
+
+You can provide taxon names of the ranks `species`, `genus`, `family`, `order`, or `higher`. The WCVP only provides taxonomic information up to the family rank. We have included a table called `taxonomic_mapping` to map families to orders and higher taxonomies, based on APG IV.
+
+```{r mapping-table}
+head(taxonomic_mapping)
+```
+
+We use this table behind the scenes to allow you to filter using these higher taxonomic ranks.
+
+For example, making a summary table for all Poales:
+```{r gymnosperm-summary}
+summary_table("Poales", rank="order")
+```
+
+### A note on filtering by area
+
+The WCVP lists taxon distributions using the [World Geographic Scheme for Recording Plant Distributions (WGSRPD)](https://github.com/tdwg/wgsrpd) at level 3. This level corresponds to "botanical countries", which mostly follow the boundaries of countries, except where large countries are split or outlying areas omitted.
+
+The functions in rWCVP expect `area` to be provided as a vector of WGSRPD level 3 codes. These can be annoying to look up for the entire region you're interested in. For example, to filter by species in Brazil you need to provide a vector of 5 codes.
+
+To make things easier, rWCVP has a function that converts the name of a region to a vector of WGSRPD level 3 codes.
+
+```{r brazil-codes}
+get_wgsrpd3_codes("Brazil")
+```
+
+This can be input directly into functions that filter the WCVP by area.
+
+```{r filter-africa}
+summary_table("Poa", rank="genus", area=get_wgsrpd3_codes("Southern Hemisphere"))
+```
