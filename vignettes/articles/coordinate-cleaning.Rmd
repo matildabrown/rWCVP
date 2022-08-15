@@ -1,5 +1,5 @@
 ---
-title: "Cleaning coordinates to native range with rWCVP"
+title: "Cleaning coordinates to species' native range with rWCVP"
 author: "Matilda Brown"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
@@ -27,7 +27,7 @@ library(sf)
 
 ## Cleaning occurrence records for a single species
 
-In this tutorial, we'll use *Callitris rhomboidea (a lovely Australian conifer) as an example.
+In this tutorial, we'll use *Callitris rhomboidea* (a lovely Australian conifer) as an example.
 
 ### Downloading occurrence records
 
@@ -88,7 +88,7 @@ Yikes, some very rogue points!
 
 Now let's get rid of those rogue points. 
 
-One way to do this is to check which points touch the native range polygons, getting a TRUE/FALSE value for each. We can use the `st_intersects` function from `sf` to do this. As we have four native range polygons, we would get four values for each point rather than just one, so we also merge the native range polygons together using `st_union`.
+One way to do this is to check which points fall within the native range polygons, getting a TRUE/FALSE value for each. We can use the `st_intersects` function from `sf` to do this. As we have four native range polygons, we would get four values for each point rather than just one, so we also merge the native range polygons together using `st_union`.
 
 ```{r find-native-occ}
 occs$native <- st_intersects(occs, st_union(native_range), sparse=FALSE)[,1]
@@ -146,7 +146,7 @@ p +
     coord_sf(xlim=lims[c(1,3)], ylim=lims[c(2,4)])
 ```
     
-An appropriate buffer width might be wider or narrower, depending on downstream analyses but visualisation can help to sanity-check the buffer before discarding points. 
+An appropriate buffer width might be wider or narrower, depending on downstream analyses, but visualisation can help to sense-check the buffer before discarding points. 
 
 Now, we can discard occurrences that are >1 km (approximately) outside of the native range.
 

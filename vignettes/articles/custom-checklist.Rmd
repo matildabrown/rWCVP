@@ -23,7 +23,7 @@ library(gt)
 library(spdep)
 ```
 
-In this example I use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar I'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret.
+In this example we use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar we'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret.
 
 Now, let's get started! 
 

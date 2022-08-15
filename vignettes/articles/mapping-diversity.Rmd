@@ -23,7 +23,7 @@ library(sf)
 library(gt)
 ```
 
-In this example I use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar I'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret. 
+In this example we use the pipe operator (`%>%`),`dplyr` and `ggplot` - if these are unfamiliar we'd suggest checking out https://tidyverse.org/ and some of the help pages therein, or this code might be difficult to interpret. 
 
 Now, let's get started! 
 
@@ -179,4 +179,3 @@ ymax <- bounding_box["ymax"] + 2
 )
 ```
  
-For more examples and tutorials, see  {link to github page - doesn't exist yet. 
