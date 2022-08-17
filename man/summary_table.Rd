@@ -35,7 +35,7 @@ Data.frame with filtered data, or a \code{gt} table
 Generate a summary table from the WCVP
 }
 \details{
-Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 }
 \examples{

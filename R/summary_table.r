@@ -8,7 +8,7 @@
 #'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
-#' @details Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table
 #'
@@ -29,6 +29,13 @@ summary_table <- function(taxon=NULL,
   rank <- match.arg(rank)
   grouping.var <- match.arg(grouping.var)
 
+  if(rank == "order" &
+     !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
+       "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
+  if(rank == "higher" &
+     !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
+       "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
     .wcvp_fresh()
@@ -41,7 +48,11 @@ summary_table <- function(taxon=NULL,
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
-  df <- generate_checklist(taxon=taxon, rank=rank, area=area, wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions)
+
+  if (is.null(area)) message("No area specified. Generating global summary.")
+  if (is.null(taxon)) message("No taxon specified. Generating summary of all species.")
+
+  df <- suppressMessages(generate_checklist(taxon=taxon, rank=rank, area=area, wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
   input.area <- area
 
 
@@ -173,17 +184,23 @@ res <- summ %>%
      res <- res %>% arrange(vars(grouping.var))
    }
 
+if(is.null(area)){
+  output.area <- "the world"
+} else {
+  output.area <- get_area_name(input.area)
+  }
+
 
 x <- list(
   Taxon = taxon,
-  Area = get_area_name(input.area),
+  Area = output.area,
   Grouping_variable = grouping.var,
   Total_number_of_species = as.numeric(summ_df[1,2]),
   Number_of_regionally_endemic_species = r.end.text,
   Summary = res %>% ungroup()
 )
 
-if(is.null(area)) x[[2]] <- "the world"
+
 
 
   return(x)

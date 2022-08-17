@@ -37,6 +37,13 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
   rank <- match.arg(rank)
   input.area <- area
 
+  if(rank == "order" &
+     !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
+       "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
+  if(rank == "higher" &
+     !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
+       "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
     .wcvp_fresh()
