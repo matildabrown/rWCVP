@@ -78,9 +78,10 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
     matches %>%
     mutate(
       match_similarity=levenshteinSim(.data$sanitised_, .data$taxon_name),
-      match_similarity=round(.data$match_similarity, 3),
-      match_edit_distance=diag(adist(.data$sanitised_, .data$taxon_name))
-    )
+      match_similarity=round(.data$match_similarity, 3)) %>%
+    rowwise() %>%
+    mutate(match_edit_distance=adist(.data$sanitised_, .data$taxon_name)[,1]) %>%
+    ungroup()
 
   matches <-
     matches %>%
