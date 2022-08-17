@@ -45,6 +45,13 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","
 report.type <- match.arg(report.type)
 rank <- match.arg(rank)
 
+if(rank == "order" &
+   !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
+     "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
+if(rank == "higher" &
+   !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
+     "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+
 if(render.report & is.null(report.dir)) {
   cli_abort("Must provide a directory to save report, using 'report.dir'.")
 }
