@@ -1,14 +1,14 @@
 #' Generate a summary table from the WCVP
 #'
 #' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
-#' @param rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param taxon.rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param grouping.var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
 #'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
-#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon.rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table
 #'
@@ -17,22 +17,22 @@
 #' @export
 #'
 #' @examples
-#' ferns <- summary_table("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
-#' summary_table_gt(ferns)
+#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
+#' wcvp_summary_gt(ferns)
 #'
-summary_table <- function(taxon=NULL,
-                          rank=c("species", "genus", "family","order","higher"), #species makes no sense
+wcvp_summary <- function(taxon=NULL,
+                          taxon.rank=c("species", "genus", "family","order","higher"), #species makes no sense
                           area=NULL,
                           grouping.var = c("area_code_l3","genus","family","order","higher"),
                           wcvp_names=NULL,wcvp_distributions=NULL){
 
-  rank <- match.arg(rank)
+  taxon.rank <- match.arg(taxon.rank)
   grouping.var <- match.arg(grouping.var)
 
-  if(rank == "order" &
+  if(taxon.rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(rank == "higher" &
+  if(taxon.rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
 
@@ -52,7 +52,7 @@ summary_table <- function(taxon=NULL,
   if (is.null(area)) message("No area specified. Generating global summary.")
   if (is.null(taxon)) message("No taxon specified. Generating summary of all species.")
 
-  df <- suppressMessages(generate_checklist(taxon=taxon, rank=rank, area=area, wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
+  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon.rank=taxon.rank, area=area, wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
   input.area <- area
 
 
@@ -62,7 +62,7 @@ summary_table <- function(taxon=NULL,
   }
 
   df <- df %>% filter(.data$taxon_rank=="Species",
-                      .data$taxon_status %in% c("Accepted", "Unplaced"),
+                      .data$taxon_status =="Accepted",
                       .data$in_geography == TRUE)
 
   if(grouping.var %in% c("order", "higher")){
@@ -70,7 +70,7 @@ summary_table <- function(taxon=NULL,
   }
 
   if(grouping.var %in% c("genus", "family", "order", "higher") & length(input.area>1)){
-    cli_alert_info("Aggregating occurrence types across input areas - see {.fun ?summary_table} for details.")
+    cli_alert_info("Aggregating occurrence types across input areas - see {.fun ?wcvp_summary} for details.")
     occ_type_levels <- c("native", "introduced", "extinct", "location_doubful")
     df <- df %>% left_join(df %>%
                                   mutate(occurrence_type_num = as.numeric(factor(.data$occurrence_type, levels=occ_type_levels))) %>%
@@ -91,11 +91,11 @@ summary_table <- function(taxon=NULL,
   summ_df <- data.frame(area_code_l3="Region",
                         cat=c("Total", "Endemic (to region)"),
                         n.sp= c(nrow(unique(df %>%
-                                              filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                                              filter(.data$taxon_status == "Accepted",
                                                      .data$taxon_rank == "Species") %>%
                                               select(.data$taxon_name))),
                                 nrow(unique(df %>%
-                                              filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                                              filter(.data$taxon_status == "Accepted",
                                                      .data$taxon_rank == "Species",
                                                      .data$area_endemic == 1) %>%
                                               select(.data$taxon_name))))) %>%
@@ -117,27 +117,27 @@ summary_table <- function(taxon=NULL,
   summ_split <- list()
   for(i in 1:length(df_split)){
     native <- nrow(unique(df_split[[i]] %>%
-                            filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                            filter(.data$taxon_status == "Accepted",
                                    .data$taxon_rank == "Species",
                                    .data$occurrence_type=="native" ) %>%
                             select(.data$taxon_name)))
     endemic <- nrow(unique(df_split[[i]] %>%
-                             filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                             filter(.data$taxon_status == "Accepted",
                                     .data$taxon_rank == "Species",
                                     .data$endemic ==1 ) %>%
                              select(.data$taxon_name)))
     introduced <- nrow(unique(df_split[[i]] %>%
-                                filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                                filter(.data$taxon_status == "Accepted",
                                        .data$taxon_rank == "Species",
                                        .data$occurrence_type=="introduced" ) %>%
                                 select((.data$taxon_name))))
     extinct <- nrow(unique(df_split[[i]] %>%
-                             filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                             filter(.data$taxon_status == "Accepted",
                                     .data$taxon_rank == "Species",
                                     .data$occurrence_type=="extinct" ) %>%
                              select(.data$taxon_name)))
     total <- nrow(unique(df_split[[i]] %>%
-                           filter(.data$taxon_status %in% c("Accepted","Unplaced"),
+                           filter(.data$taxon_status == "Accepted",
                                   .data$taxon_rank == "Species") %>%
                            select(.data$taxon_name)))
 
@@ -208,7 +208,7 @@ x <- list(
 }
 
 
-#' Render a summary table from [summary_table]
+#' Render a summary table from [wcvp_summary]
 #'
 #' @param x List.
 
@@ -220,11 +220,11 @@ x <- list(
 #' @export
 #'
 #' @examples
-#' ferns <- summary_table("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
-#' summary_table_gt(ferns)
+#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
+#' wcvp_summary_gt(ferns)
 #'
 
-summary_table_gt <- function(x){
+wcvp_summary_gt <- function(x){
   if(is.null(x$Taxon)) x$Taxon <- "Plants"
   tab_title <- paste("<b>",x$Taxon, "of", x$Area, "</b>")
 

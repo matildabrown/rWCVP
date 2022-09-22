@@ -1,5 +1,5 @@
 test_that("match names with author returns expected output", {
-  matches <- match_names(match_data, lookup_data, id_col="taxonId",
+  matches <- wcvp_match_names(match_data, lookup_data, id_col="taxonId",
                          name_col="scientificName", author_col="authority")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
@@ -11,7 +11,7 @@ test_that("match names with author returns expected output", {
 })
 
 test_that("match names without author returns expected output", {
-  matches <- match_names(match_data, lookup_data, id_col="taxonId",
+  matches <- wcvp_match_names(match_data, lookup_data, id_col="taxonId",
                          name_col="scientificName", author_col=NULL)
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
@@ -23,7 +23,7 @@ test_that("match names without author returns expected output", {
 })
 
 test_that("match names without fuzzy returns expected output", {
-  matches <- match_names(match_data, lookup_data, id_col="taxonId", name_col="scientificName",
+  matches <- wcvp_match_names(match_data, lookup_data, id_col="taxonId", name_col="scientificName",
                          author_col="authority", fuzzy=FALSE)
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
@@ -35,7 +35,7 @@ test_that("match names without fuzzy returns expected output", {
 })
 
 test_that("match names without taxon name parts returns expected output", {
-  matches <- match_names(match_data, lookup_data, id_col="taxonId",
+  matches <- wcvp_match_names(match_data, lookup_data, id_col="taxonId",
                          join_cols=c("genus", "species", "infra_rank", "infra"))
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
@@ -47,7 +47,7 @@ test_that("match names without taxon name parts returns expected output", {
 })
 
 test_that("match names returns original columns", {
-  matches <- match_names(match_data, lookup_data, id_col="taxonId", name_col="scientificName",
+  matches <- wcvp_match_names(match_data, lookup_data, id_col="taxonId", name_col="scientificName",
                          author_col="authority")
 
   expect_true(all(colnames(match_data) %in% colnames(matches)))

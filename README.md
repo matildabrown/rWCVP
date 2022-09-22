@@ -33,11 +33,11 @@ species.
 ``` r
 library(rWCVP)
 
-distribution <- get_distribution("Myrcia guianensis", rank="species")
+distribution <- wcvp_distribution("Myrcia guianensis", taxon.rank="species")
 
 # global map
-plot_distribution(distribution)
+wcvp_distribution_map(distribution)
 
 # zoomed-in map
-plot_distribution(distribution, crop.map=TRUE)
+wcvp_distribution_map(distribution, crop.map=TRUE)
 ```

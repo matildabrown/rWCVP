@@ -1,6 +1,6 @@
 #' Plot distribution maps for species, genera or families
 #'
-#' @param range sf object of the type output by [get_distribution()].
+#' @param range sf object of the type output by [wcvp_distribution()].
 #' @param crop.map Logical. Crop map extent to distribution? Defaults to FALSE.
 #' @param native Logical. Include native range? Defaults to TRUE.
 #' @param introduced Logical. Include introduced range? Defaults to TRUE.
@@ -20,20 +20,21 @@
 #' @return A [ggplot2::ggplot] of the distribution.
 #'
 #' @examples
-#' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
 #' p
 #' # now only the native range, and cropped to range extent
-#' p <- plot_distribution(get_distribution("Callitris", rank="genus"), introduced=FALSE, crop.map=TRUE)
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"),
+#' introduced=FALSE, crop.map=TRUE)
 #' p
 #' # now with different colours
 #' # note that this taxon only has native and introduced occurrences, so only two colours are needed
-#' p <- plot_distribution(get_distribution("Callitris", rank="genus"))
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
 #' p +
 #' # for polygons
 #'   ggplot2::scale_fill_manual(values=c("red", "blue")) +
 #' # for points (islands)
 #'   ggplot2::scale_colour_manual(values=c("red", "blue")) # for points (islands)
-plot_distribution <- function(range, crop.map=FALSE, native=TRUE, introduced=TRUE,
+wcvp_distribution_map <- function(range, crop.map=FALSE, native=TRUE, introduced=TRUE,
                               extinct=TRUE, location_doubtful=TRUE){
  occurrence_type <- NULL
 

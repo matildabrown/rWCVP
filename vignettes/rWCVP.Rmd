@@ -47,7 +47,7 @@ If the data package isn't available, or you'd prefer to use a different version 
 names <- read_csv("/path/to/wcvp_names.csv")
 distributions <- read_csv("/path/to/wcvp_distributions.csv")
 
-checklist <- generate_checklist("Acacia", rank="genus", area="CPP",
+checklist <- wcvp_checklist("Acacia", taxon.rank="genus", area="CPP",
                                 wcvp_names=names, wcvp_distributions=distributions)
 ```
 
@@ -60,10 +60,10 @@ Some rWCVP functions involve filtering the WCVP to generate lists or summaries o
 * `taxon`: the name of a valid taxon with a taxonomic rank of species or higher (e.g. the species "Myrcia almasensis", the genus "Myrcia", or the family "Myrtaceae").
 * `area`: a vector of WGSRPD level 3 codes for the regions you want to focus on.
 
-These arguments can be combined in the `generate_checklist`, `generate_occurrence_matrix`, and `summary_table` to generate outputs for focal taxa in a desired area. For example, Myrtaceae species in Brazil:
+These arguments can be combined in the `wcvp_checklist`, `wcvp_occ_mat`, and `wcvp_summary` to generate outputs for focal taxa in a desired area. For example, Myrtaceae species in Brazil:
 
 ```{r filter-example}
-checklist <- generate_checklist("Myrtaceae", rank="family", 
+checklist <- wcvp_checklist("Myrtaceae", taxon.rank="family", 
                                 area=c("BZC", "BZN", "BZS", "BZE", "BZL"))
 ```
 
@@ -73,7 +73,7 @@ When filtering by taxon, you need to tell the function what taxonomic rank the n
 
 For example, making a summary table for the genus *Poa*:
 ```{r filter-genus}
-summary_table("Poa", rank="genus")
+wcvp_summary("Poa", taxon.rank="genus")
 ```
 
 You can provide taxon names of the ranks `species`, `genus`, `family`, `order`, or `higher`. The WCVP only provides taxonomic information up to the family rank. We have included a table called `taxonomic_mapping` to map families to orders and higher taxonomies, based on APG IV.
@@ -86,7 +86,7 @@ We use this table behind the scenes to allow you to filter using these higher ta
 
 For example, making a summary table for all Poales:
 ```{r gymnosperm-summary}
-summary_table("Poales", rank="order")
+wcvp_summary("Poales", taxon.rank="order")
 ```
 
 ### A note on filtering by area
@@ -104,5 +104,5 @@ get_wgsrpd3_codes("Brazil")
 This can be input directly into functions that filter the WCVP by area.
 
 ```{r filter-africa}
-summary_table("Poa", rank="genus", area=get_wgsrpd3_codes("Southern Hemisphere"))
+wcvp_summary("Poa", taxon.rank="genus", area=get_wgsrpd3_codes("Southern Hemisphere"))
 ```

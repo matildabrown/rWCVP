@@ -33,7 +33,7 @@ We start by generating a checklist of the species that occur in Sierra Leone. Re
 
 ```{r species-checklist}
 sl_code <- get_wgsrpd3_codes("Sierra Leone")
-sl_species <- generate_checklist(area=sl_code, synonyms = FALSE)
+sl_species <- wcvp_checklist(area=sl_code, synonyms = FALSE)
 ```
 
 How many species occur in Sierra Leone, and how many are endemic? We can use the `endemic` column here, so it's really simple.

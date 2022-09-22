@@ -63,7 +63,7 @@ if(!is.null(taxa)){
   cat("\n")
 if(synonyms==TRUE) {
   cat("**Including synonyms, illegitimate, invalid and other non-accepted names.**") 
-} else {cat("**Accepted and unplaced names only.** ")}
+} else {cat("**Accepted names only.** ")}
  
 ```
 
@@ -160,11 +160,11 @@ if(!"in_geography" %in% colnames(df)) {
 summ_df <- data.frame(area_code_l3="Region",
            cat=c("Total", "Endemic (to region)"),
 n.sp= c(nrow(unique(df %>% 
-     dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+     dplyr::filter(taxon_status == "Accepted",
             taxon_rank == "Species") %>% 
      dplyr::select(taxon_name))),
     nrow(unique(df %>% 
-     dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+     dplyr::filter(taxon_status == "Accepted",
             taxon_rank == "Species",
             area_endemic == 1) %>% 
             dplyr::select(taxon_name))))) %>% 
@@ -187,27 +187,27 @@ df_split <- df %>%
 summ_split <- list()
 for(i in 1:length(df_split)){
   native <- nrow(unique(df_split[[i]] %>% 
-                       dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+                       dplyr::filter(taxon_status == "Accepted",
                               taxon_rank == "Species",
                               introduced ==0 ) %>% 
                        dplyr::select(taxon_name)))
   endemic <- nrow(unique(df_split[[i]] %>% 
-                       dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+                       dplyr::filter(taxon_status == "Accepted",
                               taxon_rank == "Species",
                               endemic ==1 ) %>% 
                        dplyr::select(taxon_name)))
   introduced <- nrow(unique(df_split[[i]] %>% 
-                     dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+                     dplyr::filter(taxon_status == "Accepted",
                             taxon_rank == "Species",
                             introduced ==1 ) %>% 
                      dplyr::select(taxon_name)))
    extinct <- nrow(unique(df_split[[i]] %>% 
-                     dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+                     dplyr::filter(taxon_status == "Accepted",
                             taxon_rank == "Species",
                             extinct ==1 ) %>% 
                      dplyr::select(taxon_name)))
     total <- nrow(unique(df_split[[i]] %>% 
-                     dplyr::filter(taxon_status %in% c("Accepted","Unplaced"),
+                     dplyr::filter(taxon_status == "Accepted",
                             taxon_rank == "Species") %>% 
                      dplyr::select(taxon_name)))
     

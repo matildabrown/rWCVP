@@ -1,7 +1,7 @@
 #' Generate spatial distribution objects for species, genera or families
 #'
 #' @param taxon Character. The taxon to be mapped.
-#' @param rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in \code{taxon}.
+#' @param taxon.rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in \code{taxon}.
 #' @param native Logical. Include native range? Defaults to TRUE.
 #' @param introduced Logical. Include introduced range? Defaults to TRUE.
 #' @param extinct Logical. Include extinct range? Defaults to TRUE.
@@ -12,7 +12,7 @@
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #'
-#' @details Where [rank] is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{summary_table} and \code{generate_occurrence_matrix} functions can be used.
+#' @details Where \code{taxon.rank} is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{wcvp_summary} and \code{wcvp_occ_mat} functions can be used.
 #' @return sf data.frame containing the range polygon/s of the taxon.
 #'
 #' @importFrom rlang .data
@@ -21,20 +21,20 @@
 #' @export
 #'
 #' @examples
-#' r <- get_distribution("Callitris", rank="genus")
-#' p <- plot_distribution(r)
+#' r <- wcvp_distribution("Callitris", taxon.rank="genus")
+#' p <- wcvp_distribution_map(r)
 #' p
-get_distribution <- function(taxon, rank=c("species", "genus", "family","order","higher"), native=TRUE, introduced=TRUE,
+wcvp_distribution <- function(taxon, taxon.rank=c("species", "genus", "family","order","higher"), native=TRUE, introduced=TRUE,
                               extinct=TRUE, location_doubtful=TRUE,
                               wcvp_names=NULL,
                               wcvp_distributions=NULL){
 
-  rank <- match.arg(rank)
+  taxon.rank <- match.arg(taxon.rank)
 
-  if(rank == "order" &
+  if(taxon.rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(rank == "higher" &
+  if(taxon.rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
 
@@ -57,7 +57,7 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
-  if(rank %in% c("order","higher")) {
+  if(taxon.rank %in% c("order","higher")) {
     wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
   }
 
@@ -71,21 +71,21 @@ get_distribution <- function(taxon, rank=c("species", "genus", "family","order",
     right_join(wcvp_distributions, by="plant_name_id")
 
   range_cols <- c("area_code_l3", "introduced", "extinct", "location_doubtful")
-  if(rank=="species"){
+  if(taxon.rank=="species"){
     df <- filter(df, .data$taxon_name %in% taxon)
   }
-  if(rank=="genus"){
+  if(taxon.rank=="genus"){
     df <- filter(df, .data$genus %in% taxon)
   }
-  if(rank=="family"){
+  if(taxon.rank=="family"){
     df <- filter(df, .data$family %in% taxon)
   }
 
-  if(rank=="order"){
+  if(taxon.rank=="order"){
     df <- filter(df, .data$order %in% taxon)
   }
 
-  if(rank=="higher"){
+  if(taxon.rank=="higher"){
     df <- filter(df, .data$higher %in% taxon)
   }
   df <- select(df, all_of(range_cols))

@@ -29,16 +29,16 @@ Now, let's get started!
 
 ## Species richness
 
-The obvious place to start is global species richness. We can use `summary_table` to condense the global occurrence data for all species into raw counts per WGSRPD Level 3 Area. 
+The obvious place to start is global species richness. We can use `wcvp_summary` to condense the global occurrence data for all species into raw counts per WGSRPD Level 3 Area. 
 
 This gives us a list, with information in the first five slots and the data in the slot named `$Summary`. It's this `$Summary` data frame that we'll be working with. 
 
 ```{r global-summary}
-global_summary <- summary_table()
+global_summary <- wcvp_summary()
 glimpse(global_summary)
 ```
 
-We could display this using `summary_table_gt` but that's going to be a big table, so let's skip straight to plotting. 
+We could display this using `wcvp_summary_gt` but that's going to be a big table, so let's skip straight to plotting. 
 
 `rWCVPdata` includes the area polygons for the WGSRPD Level 3 Areas - this is going to be the base that we add things to. Let's add the `global_summary` to the spatial data, and plot a map where species richness defines colour. 
 
@@ -138,7 +138,7 @@ We can attach any variable to `area_polygons` - it doesn't have to be from the W
 One more example, showing how we can limit our maps to a specific area of interest. Let's look at orchids in Africa. 
 
 ```{r african-orchids}
-orchid_africa_summary <- summary_table("Orchidaceae", "family", get_wgsrpd3_codes("Africa"))
+orchid_africa_summary <- wcvp_summary("Orchidaceae", "family", get_wgsrpd3_codes("Africa"))
 ```
 
 Remember that the dataset is saved in the `$Summary` slot (trying to join `orchid_africa_summary` will cause an error). 
