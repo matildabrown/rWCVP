@@ -1,7 +1,7 @@
 #' Generate occurrence matrix for taxa and areas
 #'
 #' @param taxon Character. One or many taxa to be included. Defaults to NULL (all species)
-#' @param rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param taxon.rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
@@ -24,23 +24,23 @@
 #' @import cli
 #' @export
 #'
-#' @examples generate_occurrence_matrix(taxon="Poa",rank="genus",
+#' @examples wcvp_occ_mat(taxon="Poa", taxon.rank="genus",
 #' area=c("TAS", "VIC","NSW"), introduced=FALSE)
 #'
 #'
-generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "family","order","higher"), area=NULL,
+wcvp_occ_mat <- function(taxon=NULL, taxon.rank=c("species", "genus", "family","order","higher"), area=NULL,
                           native=TRUE, introduced=TRUE,
                           extinct=TRUE, location_doubtful=TRUE,
                           wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
-  rank <- match.arg(rank)
+  taxon.rank <- match.arg(taxon.rank)
   input.area <- area
 
-  if(rank == "order" &
+  if(taxon.rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(rank == "higher" &
+  if(taxon.rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
 
@@ -72,16 +72,16 @@ generate_occurrence_matrix <- function(taxon=NULL, rank=c("species", "genus", "f
     filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
            .data$taxon_rank == "Species")
 
-  if(rank %in% c("order","higher")) {
+  if(taxon.rank %in% c("order","higher")) {
     df <- right_join(rWCVP::taxonomic_mapping, df, by="family")
   }
 
   if(!is.null(taxon)){
-    if(rank =="species"){
+    if(taxon.rank =="species"){
         df <- filter(df, .data$taxon_name %in% taxon)
     } else {
-    if  (!taxon %in% df[,rank]) cli_abort("Taxon not found. Are the rank and spelling correct?")
-    df <- df %>% filter(df[,rank] %in% taxon)
+    if  (!taxon %in% df[,taxon.rank]) cli_abort("Taxon not found. Are the rank and spelling correct?")
+    df <- df %>% filter(df[,taxon.rank] %in% taxon)
     }
   }
 

@@ -33,7 +33,7 @@ test_that("phonetic match returns expected output", {
 })
 
 test_that("fuzzy match returns expected output", {
-  matches <- fuzzy_match(match_data, lookup_data, name_col="scientificName")
+  matches <- wcvp_match_fuzzy(match_data, lookup_data, name_col="scientificName")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), nrow(match_data)+1)

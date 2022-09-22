@@ -52,14 +52,14 @@ redlist <- redlist %>%
 glimpse(redlist)
 ```
 
-Now that we've loaded the names from the Red List, we can match them to the WCVP using the `match_names` function.
+Now that we've loaded the names from the Red List, we can match them to the WCVP using the `wcvp_match_names` function.
 
 This function takes a data frame of names for matching, the name of the column in the data frame storing the names, and (optionally) the name of the column storing the authors for each name, if you want to include that in the matching process.
 
 The function will first try to find any names that match exactly to names in the WCVP. If an author column has been provided, this first step will include authors and a second step will run to match any remaining names exactly without the author strings. All remaining unmatched names are then passed through a fuzzy matching process that tries to match names phonetically and then finds the most similar name by Levenshtein distance.
 
 ```{r match-names-1, cache=TRUE, message=TRUE, warning=TRUE}
-matches <- match_names(redlist,
+matches <- wcvp_match_names(redlist,
                        name_col = "scientific_name",
                        author_col = "authority",
                        fuzzy = TRUE)
@@ -71,7 +71,7 @@ We also get a series of messages, giving us an idea of the proportion that were 
 
 Once it's finished, we get a full summary of how many names were matched, how many used fuzzy matching, and how many were matched to multiple names in the WCVP.
 
-The output of the `match_names` is a data frame of our original names, which names they match to in the WCVP, and information on how they were matched and how close any fuzzy matches are.
+The output of the `wcvp_match_names` is a data frame of our original names, which names they match to in the WCVP, and information on how they were matched and how close any fuzzy matches are.
 
 ## Resolving matched names to accepted species
 
@@ -93,7 +93,7 @@ Let's apply these.
 
 ```{r filter-fuzzy-1}
 # f for fuzzy
-fuzzy_matches <- matches %>% 
+wcvp_match_fuzzyes <- matches %>% 
   filter(str_detect(match_type, "Fuzzy")) %>% 
   mutate(
     keep = case_when( #set up a keep column
@@ -104,7 +104,7 @@ fuzzy_matches <- matches %>%
   ) 
 
 #how many did this resolve? 
-table(fuzzy_matches$keep, useNA = "always")
+table(wcvp_match_fuzzyes$keep, useNA = "always")
 ```
 
 A great start! Over half of all fuzzy matches can be resolved without looking at them. 
@@ -112,7 +112,7 @@ A great start! Over half of all fuzzy matches can be resolved without looking at
 What about an edit distance of 2 - surely that's still pretty close?  
 
 ```{r filter-fuzzy-2}
-fuzzy_matches %>% 
+wcvp_match_fuzzyes %>% 
   filter(match_edit_distance == 2, 
          !multiple_matches, 
          match_similarity > 0.9
@@ -128,7 +128,7 @@ If we really wanted to continue algorithmically, we could take a random sample o
 However, at this point, a quick glance at each name is going to give the most accurate result and be faster. 
 
 ```{r save-fuzzy-check, eval=FALSE}
-write_csv(fuzzy_matches, "redlist-fuzzy-tocheck.csv")
+write_csv(wcvp_match_fuzzyes, "redlist-fuzzy-tocheck.csv")
 ```
 
 It took under an hour to eyeball these in Excel; I marked good matches with a 1 in the `keep` column, and bad matches with a 0. Then, I deleted all the match data except `match_type` and `multiple_matches` for the bad matches, and added a new column `resolved_match_type`. I left this blank for the good matches, and filled it with "Fuzzy match rejected" for the bad matches. 
@@ -267,7 +267,7 @@ We need to re-run matching on the manually matched names, to get the rest of the
 ```{r complete-manual-resolution, message=TRUE, warning=TRUE}
 manually_resolved <- 
   manually_resolved %>% 
-  match_names(name_col = "manually_entered_name", fuzzy=FALSE)
+  wcvp_match_names(name_col = "manually_entered_name", fuzzy=FALSE)
 ```
 
 This has produced a couple of multiple matches again. We could have avoided this by entering the WCVP ID that we wanted rather than the name. But in this case, it only affects a couple of records. Looking at these, the extra names are illegitimate, so we can just quickly filter these out. 

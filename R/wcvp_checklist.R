@@ -1,7 +1,7 @@
 #' Generate a species checklist from WCVP
 #'
 #' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
-#' @param rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param taxon.rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to \code{TRUE}.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to \code{TRUE}.
@@ -16,7 +16,7 @@
 #' @param report.filename Character. Name for the HTML file. Defaults to taxon_area_type.html
 #' @param report.dir Character. Directory for the HTML file to be saved in. Must be provided by user.
 #' @param report.type Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?
-#' @details The \code{synonyms} argument can be used to limit names to those that are Accepted and Unplaced. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
+#' @details The \code{synonyms} argument can be used to limit names to those that are Accepted. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
 #' Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 #'
 #' @return Data.frame with filtered data and, if render.report=TRUE. a report HTML file.
@@ -29,10 +29,10 @@
 #' @examples
 #' #These examples take >10 seconds to run.
 #' \dontrun{
-#' generate_checklist(taxon="Myrtaceae", rank="family", area=get_wgsrpd3_codes("Brazil"))
-#' generate_checklist(taxon="Ferns", rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+#' wcvp_checklist(taxon="Myrtaceae", taxon.rank="family", area=get_wgsrpd3_codes("Brazil"))
+#' wcvp_checklist(taxon="Ferns", taxon.rank="higher", area=get_wgsrpd3_codes("New Zealand"))
 #' }
-generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","order","higher"), area=NULL,
+wcvp_checklist <- function(taxon=NULL, taxon.rank=c("species", "genus", "family","order","higher"), area=NULL,
                                synonyms=TRUE, render.report=FALSE,
                                native=TRUE, introduced = TRUE,
                                extinct = TRUE, location_doubtful = TRUE,
@@ -43,12 +43,12 @@ generate_checklist <- function(taxon=NULL, rank=c("species", "genus", "family","
 
 
 report.type <- match.arg(report.type)
-rank <- match.arg(rank)
+taxon.rank <- match.arg(taxon.rank)
 
-if(rank == "order" &
+if(taxon.rank == "order" &
    !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
      "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-if(rank == "higher" &
+if(taxon.rank == "higher" &
    !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
      "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
 
@@ -71,7 +71,7 @@ if(is.null(wcvp_names)){
   wcvp_names <- rWCVPdata::wcvp_names
 }
 
-if(rank %in% c("order","higher")) {
+if(taxon.rank %in% c("order","higher")) {
   wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
 }
 # give some messages
@@ -89,12 +89,12 @@ df <- left_join(wcvp_names, wcvp_distributions,by = "plant_name_id") %>%
 df$place_of_publication <- gsub("Unknown", "", df$place_of_publication)
 
 # prune early if possible, to reduce computation time
-if (synonyms==FALSE) df <- filter(df, .data$taxon_status %in% c("Accepted","Unplaced"))
+if (synonyms==FALSE) df <- filter(df, .data$taxon_status == "Accepted")
 
 #filter by taxon
 if(!is.null(taxon)) {
   df <- df %>%
-    filter(if_any(all_of(rank)) %in% taxon)
+    filter(if_any(all_of(taxon.rank)) %in% taxon)
 }
 
 

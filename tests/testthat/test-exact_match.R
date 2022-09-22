@@ -1,5 +1,5 @@
 test_that("exact match with author returns expected output", {
-  matches <- exact_match(match_data, lookup_data, name_col="scientificName", author_col="authority", id_col="assessmentId")
+  matches <- wcvp_match_exact(match_data, lookup_data, name_col="scientificName", author_col="authority", id_col="assessmentId")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), nrow(match_data))
@@ -8,7 +8,7 @@ test_that("exact match with author returns expected output", {
 })
 
 test_that("exact match without author returns expected output", {
-  matches <- exact_match(match_data, lookup_data, name_col="scientificName", author_col=NULL, id_col="assessmentId")
+  matches <- wcvp_match_exact(match_data, lookup_data, name_col="scientificName", author_col=NULL, id_col="assessmentId")
 
   expect_true(all(c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5") %in% matches$taxonId))
   expect_equal(nrow(matches), nrow(match_data)+1)

@@ -2,6 +2,7 @@
 title: "Cleaning coordinates to species' native range with rWCVP"
 author: "Matilda Brown"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
 ---
 
 ```{r setup, include = FALSE}
@@ -65,14 +66,14 @@ occs <-
 Now we can use `rWCVP` to download the native distribution of our species.
 
 ```{r download-native}
-native_range <- get_distribution("Callitris rhomboidea", rank="species",
+native_range <- wcvp_distribution("Callitris rhomboidea", taxon.rank="species",
                                 introduced=FALSE, extinct=FALSE, 
                                 location_doubtful=FALSE)
 ```
 
 And take a look at it.
 ```{r plot-native}
-(p <- plot_distribution(native_range, crop.map=TRUE) + 
+(p <- wcvp_distribution_map(native_range, crop.map=TRUE) + 
    theme(legend.position="none"))
 ```
 
