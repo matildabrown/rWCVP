@@ -45,12 +45,14 @@ wcvp_checklist <- function(taxon=NULL, taxon.rank=c("species", "genus", "family"
 report.type <- match.arg(report.type)
 taxon.rank <- match.arg(taxon.rank)
 
+if(!is.null(taxon)){
 if(taxon.rank == "order" &
    !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
      "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
 if(taxon.rank == "higher" &
    !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
      "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+}
 
 if(render.report & is.null(report.dir)) {
   cli_abort("Must provide a directory to save report, using 'report.dir'.")
@@ -71,9 +73,12 @@ if(is.null(wcvp_names)){
   wcvp_names <- rWCVPdata::wcvp_names
 }
 
+if(!is.null(taxon)){
 if(taxon.rank %in% c("order","higher")) {
   wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
 }
+}
+
 # give some messages
 if (is.null(area)) message("No area specified. Generating global checklist.")
 if (is.null(taxon)) message("No taxon specified. Generating checklist for all species.")

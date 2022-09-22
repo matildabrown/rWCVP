@@ -37,12 +37,14 @@ wcvp_occ_mat <- function(taxon=NULL, taxon.rank=c("species", "genus", "family","
   taxon.rank <- match.arg(taxon.rank)
   input.area <- area
 
+  if(!is.null(taxon)){
   if(taxon.rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
   if(taxon.rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+  }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()

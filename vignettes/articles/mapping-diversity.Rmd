@@ -44,7 +44,7 @@ We could display this using `wcvp_summary_gt` but that's going to be a big table
 
 ```{r plot-richness, fig.asp=0.4822878}
 #load the spatial data
-area_polygons <- rWCVPdata::wgsprd3 %>% 
+area_polygons <- rWCVPdata::wgsrpd3 %>% 
   #add the summary data, allowing for the different column names
   left_join(global_summary$Summary, by=c("LEVEL3_COD"="area_code_l3"))
 
@@ -145,7 +145,7 @@ Remember that the dataset is saved in the `$Summary` slot (trying to join `orchi
 
 ```{r orchid-polygons}
 #reset the spatial data by loading it in afresh
-area_polygons <- rWCVPdata::wgsprd3 %>% 
+area_polygons <- rWCVPdata::wgsrpd3 %>% 
   #add the summary data, allowing for the different column names
   left_join(orchid_africa_summary$Summary, by=c("LEVEL3_COD"="area_code_l3")) %>% 
   #add continent and region names for easy filtering

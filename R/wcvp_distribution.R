@@ -31,12 +31,14 @@ wcvp_distribution <- function(taxon, taxon.rank=c("species", "genus", "family","
 
   taxon.rank <- match.arg(taxon.rank)
 
+  if(!is.null(taxon)){
   if(taxon.rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
   if(taxon.rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+   }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
@@ -47,7 +49,7 @@ wcvp_distribution <- function(taxon, taxon.rank=c("species", "genus", "family","
   show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
   suppressMessages(sf::sf_use_s2(FALSE))
-  wgsrpd3 <- rWCVPdata::wgsprd3
+  wgsrpd3 <- rWCVPdata::wgsrpd3
 
   if(is.null(wcvp_distributions)){
     wcvp_distributions <- rWCVPdata::wcvp_distributions

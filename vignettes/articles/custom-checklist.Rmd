@@ -75,7 +75,7 @@ To do so, we take the WGSRPD level 3 polygons and find all the areas that border
 ```{r neighbours, message=FALSE}
 sf_use_s2(FALSE)
 
-area_polygons <- rWCVPdata::wgsprd3
+area_polygons <- rWCVPdata::wgsrpd3
 
 area_neighbours <- poly2nb(area_polygons)
 ```

@@ -72,7 +72,7 @@ if(synonyms==TRUE) {
 if(!identical(input.area, "global"))  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n") else cat("### Geography: Global","\n")
 ```
 ```{r warning=FALSE, fig.asp=0.4822878, results="hide", message=FALSE}
-shp <- rWCVPdata::wgsprd3
+shp <- rWCVPdata::wgsrpd3
 shp$fillcol <- as.numeric(shp$LEVEL3_COD %in% input.area)+1
 if(identical(input.area,"global")) shp$fillcol <- 2
 
