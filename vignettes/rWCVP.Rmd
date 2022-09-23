@@ -69,7 +69,7 @@ checklist <- wcvp_checklist("Myrtaceae", taxon.rank="family",
 
 ### A note on filtering by taxon
 
-When filtering by taxon, you need to tell the function what taxonomic rank the name you're providing is using the `rank` argument.
+When filtering by taxon, you need to tell the function what taxonomic rank the name you're providing is using the `taxon.rank` argument.
 
 For example, making a summary table for the genus *Poa*:
 ```{r filter-genus}
