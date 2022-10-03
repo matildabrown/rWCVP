@@ -44,8 +44,15 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col){
 
   edit_matches <- edit_match(unmatched, wcvp_species, name_col=name_col)
 
-  phonetic_matches %>%
-    bind_rows(edit_matches)
+  if(nrow(phonetic_matches)>0){
+    return(
+      phonetic_matches %>%
+      bind_rows(edit_matches)
+    )
+  } else {
+    return(edit_matches)
+  }
+
 }
 
 #' @rdname wcvp_match_fuzzy
