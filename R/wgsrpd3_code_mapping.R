@@ -56,6 +56,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
                   .data$COUNTRY %in% geography |
                   .data$HEMISPHERE %in% geography) %>%
   dplyr::pull(.data$LEVEL3_COD) %>%
+    unique() %>%
   return()
 
 }

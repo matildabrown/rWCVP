@@ -4,6 +4,7 @@
 #' @param taxon.rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param grouping.var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
+#' @param hybrids Logical. Include hybrid species in counts? Defaults to FALSE.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
 #'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
@@ -24,6 +25,7 @@ wcvp_summary <- function(taxon=NULL,
                           taxon.rank=c("species", "genus", "family","order","higher"), #species makes no sense
                           area=NULL,
                           grouping.var = c("area_code_l3","genus","family","order","higher"),
+                          hybrids = FALSE,
                           wcvp_names=NULL,wcvp_distributions=NULL){
 
   taxon.rank <- match.arg(taxon.rank)
@@ -54,7 +56,9 @@ wcvp_summary <- function(taxon=NULL,
   if (is.null(area)) message("No area specified. Generating global summary.")
   if (is.null(taxon)) message("No taxon specified. Generating summary of all species.")
 
-  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon.rank=taxon.rank, area=area, wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
+  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon.rank=taxon.rank,
+                                        area=area, hybrids=hybrids,
+                                        wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
   input.area <- area
 
 

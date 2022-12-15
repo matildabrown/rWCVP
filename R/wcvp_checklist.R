@@ -12,6 +12,8 @@
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #' @param synonyms Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.
+#' @param hybrids Logical. Include hybrid species in checklist? Defaults to FALSE.
+#' @param infraspecies Logical. Include hybrid species in checklist? Defaults to TRUE.
 #' @param render.report Logical. Render the checklist as a markdown report? Defaults to FALSE.
 #' @param report.filename Character. Name for the HTML file. Defaults to taxon_area_type.html
 #' @param report.dir Character. Directory for the HTML file to be saved in. Must be provided by user.
@@ -36,6 +38,8 @@ wcvp_checklist <- function(taxon=NULL, taxon.rank=c("species", "genus", "family"
                                synonyms=TRUE, render.report=FALSE,
                                native=TRUE, introduced = TRUE,
                                extinct = TRUE, location_doubtful = TRUE,
+                               hybrids = FALSE,
+                               infraspecies = TRUE,
                                report.filename=NULL, report.dir=NULL,
                                report.type=c("alphabetical", "taxonomic"),
                                wcvp_names=NULL,
@@ -102,6 +106,15 @@ if(!is.null(taxon)) {
     filter(if_any(all_of(taxon.rank)) %in% taxon)
 }
 
+#filter out hybrids and infraspecies depending on input
+if(hybrids==FALSE){
+  df <- df %>% filter(.data$genus_hybrid=="" & .data$species_hybrid=="")
+}
+
+if(infraspecies==FALSE){
+  df <- df %>% filter(.data$infraspecific_rank=="" & .data$infraspecies=="")
+}
+
 
 if(nrow(df)==0) cli_abort("No occurrences. Are the rank and spelling correct?")
 
@@ -147,7 +160,7 @@ if (!is.null(area)){
 
 if(nrow(df)==0) cli_abort("No occurrences. Are the rank, geography and spelling all correct?")
 
-#filter out genus-level names, excluded occurrence types
+#filter out genus-level names,
 df <- df %>%
   mutate(occurrence_type=case_when(
     .data$location_doubtful ==1 ~ "location_doubtful",
@@ -155,18 +168,29 @@ df <- df %>%
     .data$introduced==1 ~ "introduced",
     TRUE ~ "native",
   )) %>%
-  filter(.data$occurrence_type %in% show_types) %>%
   filter(.data$taxon_rank != "Genus") %>%
-  arrange(.data$genus, .data$species, .data$infraspecies) %>%
+  arrange(.data$family, .data$genus, .data$species, .data$infraspecies) %>%
   relocate(.data$accepted_name, .after = .data$accepted_plant_name_id) %>%
   relocate(.data$occurrence_type, .before = .data$introduced) %>%
   relocate(.data$in_geography, .after = .data$location_doubtful)
+
+#  remove species with excluded occurrence types
+
+df_showtypes <- df %>% filter(.data$occurrence_type %in% show_types, .data$in_geography==TRUE) %>%
+  pull(.data$plant_name_id)
+
+df <- df %>% filter(.data$plant_name_id %in% df_showtypes)
 
 
 if(nrow(df)==0) cli_abort("No occurrences after filtering by occurrence type.")
 
 
 if(render.report==TRUE){
+
+  if(length(unique(df$plant_name_id))>5000) {
+    cli::cli_alert_warning("Checklist longer than 5,000 names; it will be very slow (many hours) to render and might exceed available memory.\nConsider setting `synonyms=FALSE` or generating chunked checklists (e.g. by family).")
+    invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
+  }
   if(report.type =="taxonomic" & length(unique(df$family)) > 1) {
     cli_warn("Taxonomic checklist format does not display family information.")
   }

@@ -3,6 +3,8 @@
 ^LICENSE\.md$
 ^\.github$
 ^README\.Rmd$
-^vignettes\articles$
+^vignettes$
+^docs$
+^inst\extdata$
 ^man_backup\$
 ^inst\extdata\rl_assessment_details_20220725_version2022-1.csv$

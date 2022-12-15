@@ -9,6 +9,7 @@ wcvp_summary(
   taxon.rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
   grouping.var = c("area_code_l3", "genus", "family", "order", "higher"),
+  hybrids = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
 )
@@ -21,6 +22,8 @@ wcvp_summary(
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
 \item{grouping.var}{Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.}
+
+\item{hybrids}{Logical. Include hybrid species in counts? Defaults to FALSE.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
 If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}

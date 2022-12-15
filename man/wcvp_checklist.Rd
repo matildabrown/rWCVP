@@ -14,6 +14,8 @@ wcvp_checklist(
   introduced = TRUE,
   extinct = TRUE,
   location_doubtful = TRUE,
+  hybrids = FALSE,
+  infraspecies = TRUE,
   report.filename = NULL,
   report.dir = NULL,
   report.type = c("alphabetical", "taxonomic"),
@@ -39,6 +41,10 @@ wcvp_checklist(
 \item{extinct}{Logical. Include species occurrences flagged as extinct? Defaults to \code{TRUE}.}
 
 \item{location_doubtful}{Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.}
+
+\item{hybrids}{Logical. Include hybrid species in checklist? Defaults to FALSE.}
+
+\item{infraspecies}{Logical. Include hybrid species in checklist? Defaults to TRUE.}
 
 \item{report.filename}{Character. Name for the HTML file. Defaults to taxon_area_type.html}
 

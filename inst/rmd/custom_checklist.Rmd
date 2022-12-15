@@ -31,7 +31,6 @@ df <- params$mydata
 description <- params$description
 ```
 ```{r, echo = FALSE, results = "asis"}
-description <- "Checklist of species that are endemic (or near-endemic, based on neighbouring countries) to Sierra Leone"
 if(!is.null(description)){
   cat("### ", description)
   }
