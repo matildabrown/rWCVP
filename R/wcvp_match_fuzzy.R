@@ -25,6 +25,12 @@
 #' @family name matching functions
 #'
 wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col){
+
+  if(length(unique(names_df[,name_col]))<nrow(names_df)*1.2){
+    cli::cli_alert_warning("Fuzzy matching is very slow for data with repeated names. \nWe recommend matching a unique set of names to the WCVP, \nthen attaching the resolved matches to the original data using e.g. `*_join` functions.")
+    invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
+  }
+
   wcvp_species <- filter(wcvp_names, .data$taxon_rank != "Genus")
 
   phonetic_matches <-
