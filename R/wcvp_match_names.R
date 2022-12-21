@@ -80,16 +80,18 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
   # rename authors
   if(is.null(author_col)) {
     cli_alert_warning("No author information supplied - matching on taxon name only")
+    n_names1 <- nrow(unique(names_df[[name_col]]))
+  } else {
+    n_names1 <- nrow(unique(cbind(names_df[[name_col]],names_df[[author_col]])))
   }
 
   #set up id col for returned df
   names_df$row_order <- 1:nrow(names_df)
-  n_names <- length(unique(names_df[[name_col]]))
 
   unmatched <- names_df
 
   # 1. Match within WCVP including authority if present ####
-  cli_h2("Exact matching {n_names} name{?s}")
+  cli_h2("Exact matching {n_names1} name{?s}")
   matches <-
     unmatched %>%
     wcvp_match_exact(wcvp_names, name_col=name_col, author_col=author_col, id_col=id_col) %>%
@@ -101,7 +103,7 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
   # 2. Match within WCVP excluding authority, if not done already ####
   # (this includes names that could not be matched using authority from step 1)
   if (! is.null(author_col)) {
-    n_names <- length(unique(unmatched[[name_col]]))
+    n_names2 <- length(unique(unmatched[[name_col]]))
 
     # Match names
     matches_no_author <-
@@ -114,12 +116,14 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
 
   n_matched <- length(unique(matches[[name_col]]))
 
-  cli_alert_success("Found {n_matched} of {n_names} names")
+  cli_alert_success("Found {n_matched} of {n_names1} names")
 
   #_____________________________________________________________________________
   # 3. Fuzzy matching  ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
   if(fuzzy){
+
+
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
     wcvp_match_fuzzyes <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col=name_col)
 
