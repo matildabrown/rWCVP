@@ -13,7 +13,7 @@
 
 rWCVP is a package for accessing and using plant name and distribution
 data from the [World Checklist of Vascular
-Plants](https://wcvp.science.kew.org/)
+Plants](https://powo.science.kew.org/about-wcvp)
 
 ## Installation
 
