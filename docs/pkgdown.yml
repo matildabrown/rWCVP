@@ -1,0 +1,12 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  coordinate-cleaning: coordinate-cleaning.html
+  custom-checklist: custom-checklist.html
+  mapping-diversity: mapping-diversity.html
+  occurrence-matrices: occurrence-matrices.html
+  redlist-name-matching: redlist-name-matching.html
+  rWCVP: rWCVP.html
+last_built: 2022-09-23T07:58Z
+
