@@ -11,7 +11,8 @@ wcvp_match_names(
   id_col = NULL,
   author_col = NULL,
   join_cols = NULL,
-  fuzzy = TRUE
+  fuzzy = TRUE,
+  progress_bar = TRUE
 )
 }
 \arguments{
@@ -22,17 +23,20 @@ If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata:
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
 
-\item{id_col}{a column in \code{names_df} with a unique ID for each name. Will be
-created from the row number if not provided.}
+\item{id_col}{Character. A column in \code{names_df} with a unique ID for each
+name. Will be created from the row number if not provided.}
 
 \item{author_col}{the column in \code{names_df} that has the name authority, to aid
 matching. Set to \code{NULL} to match with no author string.}
 
-\item{join_cols}{a character vector of name parts to make the taxon name,
+\item{join_cols}{Character. A vector of name parts to make the taxon name,
 if \code{name_col} is not provided.}
 
-\item{fuzzy}{whether or not fuzzy matching should be used for names that could
-not be matched exactly.}
+\item{fuzzy}{Logical; whether or not fuzzy matching should be used for names
+that could not be matched exactly.}
+
+\item{progress_bar}{Logical. Show progress bar when matching? Defaults to
+TRUE; should be changed to FALSE if used in a markdown report.}
 }
 \value{
 Match results from WCVP bound to the original data from \code{names_df}.

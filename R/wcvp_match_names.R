@@ -4,12 +4,14 @@
 #' on any remaining unmatched names.
 #'
 #' @inherit wcvp_match_exact return params
-#' @param id_col a column in `names_df` with a unique ID for each name. Will be
-#'  created from the row number if not provided.
-#' @param join_cols a character vector of name parts to make the taxon name,
+#' @param id_col Character. A column in `names_df` with a unique ID for each
+#'   name. Will be created from the row number if not provided.
+#' @param join_cols Character. A vector of name parts to make the taxon name,
 #'  if `name_col` is not provided.
-#' @param fuzzy whether or not fuzzy matching should be used for names that could
-#'  not be matched exactly.
+#' @param fuzzy Logical; whether or not fuzzy matching should be used for names
+#'   that could not be matched exactly.
+#' @param progress_bar Logical. Show progress bar when matching? Defaults to
+#'  TRUE; should be changed to FALSE if used in a markdown report.
 #'
 #' @details By default, exact matching uses only the taxon name (supplied by `name_col`)
 #'  unless a column specifying the author string is provided (as `author_col`).
@@ -46,7 +48,7 @@
 #' @family name matching functions
 #'
 wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, author_col=NULL,
-                        join_cols=NULL, fuzzy=TRUE) {
+                        join_cols=NULL, fuzzy=TRUE, progress_bar=TRUE) {
 
   cli_h1("Matching names to WCVP")
   if (is.null(wcvp_names)) {
@@ -125,7 +127,7 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
 
 
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
-    wcvp_match_fuzzyes <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col=name_col)
+    wcvp_match_fuzzyes <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col=name_col, progress_bar=progress_bar)
 
     cli_alert_success("Found {sum(!is.na(unique(wcvp_match_fuzzyes$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
 

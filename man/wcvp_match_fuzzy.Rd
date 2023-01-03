@@ -6,7 +6,7 @@
 \alias{edit_match}
 \title{Fuzzy (approximate) matching to the WCVP.}
 \usage{
-wcvp_match_fuzzy(names_df, wcvp_names, name_col)
+wcvp_match_fuzzy(names_df, wcvp_names, name_col, progress_bar = TRUE)
 
 phonetic_match(names_df, wcvp_names, name_col)
 
@@ -19,6 +19,9 @@ edit_match(names_df, wcvp_names, name_col)
 If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
 
 \item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
+
+\item{progress_bar}{Logical. Show progress bar when matching? Defaults to
+TRUE; should be changed to FALSE if used in a markdown report.}
 }
 \value{
 Match results from WCVP bound to the original data from \code{names_df}.

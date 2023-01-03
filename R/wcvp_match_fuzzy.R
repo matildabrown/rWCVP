@@ -7,6 +7,8 @@
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
 #'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param name_col the column in `names_df` that has the taxon name for matching.
+#' @param progress_bar Logical. Show progress bar when matching? Defaults to
+#'  TRUE; should be changed to FALSE if used in a markdown report.
 #'
 #' @return Match results from WCVP bound to the original data from `names_df`.
 #'
@@ -24,7 +26,7 @@
 #'
 #' @family name matching functions
 #'
-wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col){
+wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE){
 
   # check for duplicated names
   if(length(which(duplicated(names_df[,name_col]))==TRUE)>10){
@@ -49,7 +51,12 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col){
     return(phonetic_matches)
   }
 
-  edit_matches <- edit_match(unmatched, wcvp_species, name_col=name_col)
+  if(progress_bar==TRUE){
+    edit_matches <- edit_match(unmatched, wcvp_species, name_col=name_col)
+  } else {
+    edit_matches <- suppressMessages(edit_match(unmatched, wcvp_species, name_col=name_col))
+  }
+
 
   if(nrow(phonetic_matches)>0){
     return(
