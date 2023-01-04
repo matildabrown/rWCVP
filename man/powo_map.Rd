@@ -7,9 +7,9 @@
 powo_map(range_sf, centroids_sf)
 }
 \arguments{
-\item{range_sf}{A simple features data frame of range polygons}
+\item{range_sf}{A simple features (\code{sf}) data frame of range polygons}
 
-\item{centroids_sf}{A simple features data frame of range centroids}
+\item{centroids_sf}{A simple features (\code{sf}) data frame of range centroids}
 }
 \value{
 A ggplot map of the range

@@ -4,10 +4,10 @@
 \alias{get_area_name}
 \title{Get area description from vector of area codes}
 \usage{
-get_area_name(area.codes)
+get_area_name(area_codes)
 }
 \arguments{
-\item{area.codes}{Character vector containing the set of codes to be mapped to a name.}
+\item{area_codes}{Character vector containing the set of codes to be mapped to a name.}
 }
 \value{
 Character. Either a vector of length one, with a name for the set of

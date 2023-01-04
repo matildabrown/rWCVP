@@ -6,19 +6,19 @@
 \usage{
 wcvp_checklist(
   taxon = NULL,
-  taxon.rank = c("species", "genus", "family", "order", "higher"),
+  taxon_rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
   synonyms = TRUE,
-  render.report = FALSE,
+  render_report = FALSE,
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
   location_doubtful = TRUE,
   hybrids = FALSE,
   infraspecies = TRUE,
-  report.filename = NULL,
-  report.dir = NULL,
-  report.type = c("alphabetical", "taxonomic"),
+  report_filename = NULL,
+  report_dir = NULL,
+  report_type = c("alphabetical", "taxonomic"),
   wcvp_names = NULL,
   wcvp_distributions = NULL
 )
@@ -26,13 +26,13 @@ wcvp_checklist(
 \arguments{
 \item{taxon}{Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).}
 
-\item{taxon.rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
+\item{taxon_rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
 \item{synonyms}{Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.}
 
-\item{render.report}{Logical. Render the checklist as a markdown report? Defaults to FALSE.}
+\item{render_report}{Logical. Render the checklist as a markdown report? Defaults to \code{FALSE}.}
 
 \item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to \code{TRUE}.}
 
@@ -42,36 +42,38 @@ wcvp_checklist(
 
 \item{location_doubtful}{Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.}
 
-\item{hybrids}{Logical. Include hybrid species in checklist? Defaults to FALSE.}
+\item{hybrids}{Logical. Include hybrid species in checklist? Defaults to \code{FALSE}.}
 
-\item{infraspecies}{Logical. Include hybrid species in checklist? Defaults to TRUE.}
+\item{infraspecies}{Logical. Include hybrid species in checklist? Defaults to \code{TRUE}.}
 
-\item{report.filename}{Character. Name for the HTML file. Defaults to taxon_area_type.html}
+\item{report_filename}{Character. Name for the HTML file. Defaults to taxon_area_type.html}
 
-\item{report.dir}{Character. Directory for the HTML file to be saved in. Must be provided by user.}
+\item{report_dir}{Character. Directory for the HTML file to be saved in. Must be provided by user.}
 
-\item{report.type}{Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
+\item{report_type}{Character; one of "alphabetical" (the default) or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL} (the default), distributions will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 }
 \value{
-Data.frame with filtered data and, if render.report=TRUE. a report HTML file.
+Data frame with filtered data and, if \code{render_report=TRUE}. a report HTML file.
 }
 \description{
 Generate a species checklist from WCVP
 }
 \details{
 The \code{synonyms} argument can be used to limit names to those that are Accepted. If \code{synonyms = TRUE} then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which \code{taxon_status == "Synonym"}).
-Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
+Two styles of checklist are supported in \code{rWCVP} - alphabetical and taxonomic.
+In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name.
+For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 }
 \examples{
 #These examples take >10 seconds to run.
 \dontrun{
-wcvp_checklist(taxon="Myrtaceae", taxon.rank="family", area=get_wgsrpd3_codes("Brazil"))
-wcvp_checklist(taxon="Ferns", taxon.rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+wcvp_checklist(taxon="Myrtaceae", taxon_rank="family", area=get_wgsrpd3_codes("Brazil"))
+wcvp_checklist(taxon="Ferns", taxon_rank="higher", area=get_wgsrpd3_codes("New Zealand"))
 }
 }

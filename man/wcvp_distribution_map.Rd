@@ -6,7 +6,7 @@
 \usage{
 wcvp_distribution_map(
   range,
-  crop.map = FALSE,
+  crop_map = FALSE,
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -14,21 +14,21 @@ wcvp_distribution_map(
 )
 }
 \arguments{
-\item{range}{sf object of the type output by \code{\link[=wcvp_distribution]{wcvp_distribution()}}.}
+\item{range}{Simple features (\code{sf}) data frame of the type output by \code{\link[=wcvp_distribution]{wcvp_distribution()}}.}
 
-\item{crop.map}{Logical. Crop map extent to distribution? Defaults to FALSE.}
+\item{crop_map}{Logical. Crop map extent to distribution? Defaults to \code{FALSE}.}
 
-\item{native}{Logical. Include native range? Defaults to TRUE.}
+\item{native}{Logical. Include native range? Defaults to \code{TRUE}.}
 
-\item{introduced}{Logical. Include introduced range? Defaults to TRUE.}
+\item{introduced}{Logical. Include introduced range? Defaults to \code{TRUE}.}
 
-\item{extinct}{Logical. Include extinct range? Defaults to TRUE.}
+\item{extinct}{Logical. Include extinct range? Defaults to \code{TRUE}.}
 
 \item{location_doubtful}{Logical. Include occurrences that are thought to be
-doubtful? Defaults to TRUE.}
+doubtful? Defaults to \code{TRUE}.}
 }
 \value{
-A \link[ggplot2:ggplot]{ggplot2::ggplot} of the distribution.
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot}} of the distribution.
 }
 \description{
 Plot distribution maps for species, genera or families
@@ -38,18 +38,18 @@ The colour scheme mirrors that used by Plants of the World (POWO;
 https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 }
 \examples{
-p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
+p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"))
 p
 # now only the native range, and cropped to range extent
-p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"),
-introduced=FALSE, crop.map=TRUE)
+p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"),
+introduced=FALSE, crop_map=TRUE)
 p
 # now with different colours
 # note that this taxon only has native and introduced occurrences, so only two colours are needed
-p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
+p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"))
 p +
 # for polygons
   ggplot2::scale_fill_manual(values=c("red", "blue")) +
 # for points (islands)
-  ggplot2::scale_colour_manual(values=c("red", "blue")) # for points (islands)
+  ggplot2::scale_colour_manual(values=c("red", "blue"))
 }

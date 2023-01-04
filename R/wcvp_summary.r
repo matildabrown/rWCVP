@@ -1,15 +1,15 @@
 #' Generate a summary table from the WCVP
 #'
 #' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
-#' @param taxon.rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param taxon_rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
-#' @param grouping.var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
+#' @param grouping_var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
 #' @param hybrids Logical. Include hybrid species in counts? Defaults to FALSE.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
 #'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
-#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon.rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon_rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table
 #'
@@ -18,24 +18,24 @@
 #' @export
 #'
 #' @examples
-#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
+#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var="family")
 #' wcvp_summary_gt(ferns)
 #'
 wcvp_summary <- function(taxon=NULL,
-                          taxon.rank=c("species", "genus", "family","order","higher"), #species makes no sense
+                          taxon_rank=c("species", "genus", "family","order","higher"), #species makes no sense
                           area=NULL,
-                          grouping.var = c("area_code_l3","genus","family","order","higher"),
+                          grouping_var = c("area_code_l3","genus","family","order","higher"),
                           hybrids = FALSE,
                           wcvp_names=NULL,wcvp_distributions=NULL){
 
-  taxon.rank <- match.arg(taxon.rank)
-  grouping.var <- match.arg(grouping.var)
+  taxon_rank <- match.arg(taxon_rank)
+  grouping_var <- match.arg(grouping_var)
 
   if(!is.null(taxon)){
-  if(taxon.rank == "order" &
+  if(taxon_rank == "order" &
      !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(taxon.rank == "higher" &
+  if(taxon_rank == "higher" &
      !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
        "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
   }
@@ -56,7 +56,7 @@ wcvp_summary <- function(taxon=NULL,
   if (is.null(area)) message("No area specified. Generating global summary.")
   if (is.null(taxon)) message("No taxon specified. Generating summary of all species.")
 
-  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon.rank=taxon.rank,
+  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon_rank=taxon_rank,
                                         area=area, hybrids=hybrids,
                                         wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
   input.area <- area
@@ -71,11 +71,11 @@ wcvp_summary <- function(taxon=NULL,
                       .data$taxon_status =="Accepted",
                       .data$in_geography == TRUE)
 
-  if(grouping.var %in% c("order", "higher")){
-    if(!grouping.var %in% colnames(df)) right_join(rWCVP::taxonomic_mapping, df, by="family")
+  if(grouping_var %in% c("order", "higher")){
+    if(!grouping_var %in% colnames(df)) right_join(rWCVP::taxonomic_mapping, df, by="family")
   }
 
-  if(grouping.var %in% c("genus", "family", "order", "higher") & length(input.area>1)){
+  if(grouping_var %in% c("genus", "family", "order", "higher") & length(input.area>1)){
     cli_alert_info("Aggregating occurrence types across input areas - see {.fun ?wcvp_summary} for details.")
     occ_type_levels <- c("native", "introduced", "extinct", "location_doubful")
     df <- df %>% left_join(df %>%
@@ -118,7 +118,7 @@ wcvp_summary <- function(taxon=NULL,
   }
 
   df_split <- df %>%
-    group_by_at(grouping.var) %>%
+    group_by_at(grouping_var) %>%
     group_split()
   summ_split <- list()
   for(i in 1:length(df_split)){
@@ -147,7 +147,7 @@ wcvp_summary <- function(taxon=NULL,
                                   .data$taxon_rank == "Species") %>%
                            select(.data$taxon_name)))
 
-    summ_split[[i]] <- data.frame(group = df_split[[i]][1,grouping.var],
+    summ_split[[i]] <- data.frame(group = df_split[[i]][1,grouping_var],
                                   cat=c("Native",
                                         "Endemic",
                                         "Introduced",
@@ -169,7 +169,7 @@ res <- summ %>%
 
 
 
-  if(grouping.var== "area_code_l3") {
+  if(grouping_var== "area_code_l3") {
     zeroareas <- input.area[!input.area %in% res$area_code_l3]
     data_blanks <- data.frame(area_code_l3 = zeroareas,
                               Native=rep(0, times=length(zeroareas)),
@@ -187,7 +187,7 @@ res <- summ %>%
    unique() %>%
    stats::na.omit()
   } else {
-     res <- res %>% arrange(vars(grouping.var))
+     res <- res %>% arrange(vars(grouping_var))
    }
 
 if(is.null(area)){
@@ -200,7 +200,7 @@ if(is.null(area)){
 x <- list(
   Taxon = taxon,
   Area = output.area,
-  Grouping_variable = grouping.var,
+  Grouping_variable = grouping_var,
   Total_number_of_species = as.numeric(summ_df[1,2]),
   Number_of_regionally_endemic_species = r.end.text,
   Summary = res %>% ungroup()
@@ -226,7 +226,7 @@ x <- list(
 #' @export
 #'
 #' @examples
-#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
+#' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var="family")
 #' wcvp_summary_gt(ferns)
 #'
 

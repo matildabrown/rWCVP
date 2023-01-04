@@ -1,8 +1,8 @@
 #' Extract WGSRPD Level 3 (area) codes.
 #'
 #' @param geography Character. The geography to convert into Level 3 codes. May be a WGSRPD area (Level 3), region (Level 2) or continent (Level 1), country (political) or hemisphere ("Northern Hemisphere", "Southern Hemisphere" or "Equatorial")
-#' @param include.equatorial Logical. Include Level 3 areas that span the equator? Defaults to Null, which generates a message and includes these areas. Ignored if geography is not a hemisphere.
-#' @details Country mapping follows Gallagher et al. (2020). Importantly, this means that some overseas territories are not considered part of the Country in this system, e.g. the Canary Islands are designated as a Country (Gallagher), rather than part of Spain in this mapping. Where this is ambiguous, the mapping can be explored using \code{View(wgsrpd_mapping)}.
+#' @param include_equatorial Logical. Include Level 3 areas that span the equator? Defaults to `NULL`, which generates a message and includes these areas. Ignored if geography is not a hemisphere.
+#' @details Country mapping follows Gallagher et al. (2020). Importantly, this means that some overseas territories are not considered part of the country in this system, e.g. the Canary Islands are designated as their own Level 3 area, rather than part of Spain in this mapping. Where this is ambiguous, the mapping can be explored using \code{View(wgsrpd_mapping)}.
 #'
 #' Gallagher, R. V., Allen, S., Rivers, M. C., Allen, A. P., Butt, N., Keith, D., & Adams, V. M. (2020). Global shortfalls in extinction risk assessments for endemic flora. bioRxiv, 2020.2003.2012.984559. https://doi.org/10.1101/2020.03.12.984559
 #' @return Character with area codes (Level 3) that fall within the geography.
@@ -13,7 +13,7 @@
 #' @examples
 #' get_wgsrpd3_codes("Brazil")
 #'
-get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
+get_wgsrpd3_codes <- function(geography, include_equatorial=NULL) {
 
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
 
@@ -38,11 +38,11 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
   }
 
   if(length(grep("hemisphere", geography, ignore.case = TRUE))!=0) {
-    if(is.null(include.equatorial)){
-      cli_alert_info("Including WGSRPD areas that span the equator. To turn this off, use {.var include.equatorial = FALSE}")
-      include.equatorial <- TRUE
+    if(is.null(include_equatorial)){
+      cli_alert_info("Including WGSRPD areas that span the equator. To turn this off, use {.var include_equatorial = FALSE}")
+      include_equatorial <- TRUE
     }
-    if(include.equatorial==TRUE) {
+    if(include_equatorial==TRUE) {
       geography <- c(geography, "Equatorial")
     }
 
@@ -65,7 +65,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 
 #' Get area description from vector of area codes
 #'
-#' @param area.codes Character vector containing the set of codes to be mapped to a name.
+#' @param area_codes Character vector containing the set of codes to be mapped to a name.
 #'
 #' @return Character. Either a vector of length one, with a name for the set of
 #' Level 3 areas, or (if no name exists for that set of areas) the input vector of codes.
@@ -73,7 +73,7 @@ get_wgsrpd3_codes <- function(geography, include.equatorial=NULL) {
 #' @export
 #'
 #' @examples get_area_name(get_wgsrpd3_codes("Brazil"))
-get_area_name <- function(area.codes){
+get_area_name <- function(area_codes){
 
 
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
@@ -163,11 +163,11 @@ get_area_name <- function(area.codes){
             "TDC", "TOK", "TON", "TUA", "TUB", "TUV", "TVL", "URU", "VAN",
             "VIC", "WAL", "WAU", "XMS", "ZAM", "ZIM")
 
- if(identical(area.codes[order(area.codes)],nhi)) return( "Northern Hemisphere (incl. equatorial Level 3 areas)")
- if(identical(area.codes[order(area.codes)],nhe)) return( "Northern Hemisphere (excl. equatorial Level 3 areas)")
- if(identical(area.codes[order(area.codes)],shi)) return( "Southern Hemisphere (incl. equatorial Level 3 areas)")
- if(identical(area.codes[order(area.codes)],she)) return( "Southern Hemisphere (excl. equatorial Level 3 areas)")
- if(identical(area.codes[order(area.codes)],global)) return( "Global")
+ if(identical(area_codes[order(area_codes)],nhi)) return( "Northern Hemisphere (incl. equatorial Level 3 areas)")
+ if(identical(area_codes[order(area_codes)],nhe)) return( "Northern Hemisphere (excl. equatorial Level 3 areas)")
+ if(identical(area_codes[order(area_codes)],shi)) return( "Southern Hemisphere (incl. equatorial Level 3 areas)")
+ if(identical(area_codes[order(area_codes)],she)) return( "Southern Hemisphere (excl. equatorial Level 3 areas)")
+ if(identical(area_codes[order(area_codes)],global)) return( "Global")
 
   levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
                   COUNTRY = "Country (Gallagher)",
@@ -177,7 +177,7 @@ get_area_name <- function(area.codes){
   )
 
   levelvals <- wgsrpd_mapping %>%
-    dplyr::filter(.data$LEVEL3_COD %in% area.codes) %>%
+    dplyr::filter(.data$LEVEL3_COD %in% area_codes) %>%
     dplyr::summarise(dplyr::across(1:8, function(x){length(unique(x))})) %>%
     t() %>%
     data.frame() %>%
@@ -187,11 +187,11 @@ get_area_name <- function(area.codes){
   bestlevel <- names(levelnames)[which(names(levelnames) %in% rownames(levelvals))][1]
   if(is.na(bestlevel)) {
     cli_alert_info("No higher level name found. Returning original vector of area codes.")
-    return(area.codes)
+    return(area_codes)
   }
 
   bestlevelval <- wgsrpd_mapping %>%
-    dplyr::filter(.data$LEVEL3_COD %in% area.codes) %>%
+    dplyr::filter(.data$LEVEL3_COD %in% area_codes) %>%
     dplyr::select(dplyr::any_of(bestlevel)) %>%
     unique() %>%
     dplyr::pull()
@@ -202,11 +202,11 @@ get_area_name <- function(area.codes){
     dplyr::pull(.data$LEVEL3_COD)
 
 
-  if(identical(allcodesforname, area.codes[order(area.codes)])) {
+  if(identical(allcodesforname, area_codes[order(area_codes)])) {
     return(bestlevelval)
   } else {
     cli_alert_info("No higher level name found. Returning original area codes as string.")
-    return(paste(area.codes, collapse = "-"))
+    return(paste(area_codes, collapse = "-"))
   }
 }
 

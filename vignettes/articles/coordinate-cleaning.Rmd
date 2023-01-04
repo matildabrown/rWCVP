@@ -66,14 +66,14 @@ occs <-
 Now we can use `rWCVP` to download the native distribution of our species.
 
 ```{r download-native}
-native_range <- wcvp_distribution("Callitris rhomboidea", taxon.rank="species",
+native_range <- wcvp_distribution("Callitris rhomboidea", taxon_rank="species",
                                 introduced=FALSE, extinct=FALSE, 
                                 location_doubtful=FALSE)
 ```
 
 And take a look at it.
 ```{r plot-native}
-(p <- wcvp_distribution_map(native_range, crop.map=TRUE) + 
+(p <- wcvp_distribution_map(native_range, crop_map=TRUE) + 
    theme(legend.position="none"))
 ```
 

@@ -1,7 +1,7 @@
 #' Generate occurrence matrix for taxa and areas
 #'
 #' @param taxon Character. One or many taxa to be included. Defaults to NULL (all species)
-#' @param taxon.rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
+#' @param taxon_rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
 #' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
@@ -12,7 +12,7 @@
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
 #'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
 #'
-#' @details See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
+#' @details See \href{https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html}{here} for an example of how this output can be formatted for publication.
 #'
 #' @importFrom rlang .data
 #' @return A data.frame containing the \code{taxon_name} and \code{plant_name_id}
@@ -24,17 +24,17 @@
 #' @import cli
 #' @export
 #'
-#' @examples wcvp_occ_mat(taxon="Poa", taxon.rank="genus",
+#' @examples wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
 #' area=c("TAS", "VIC","NSW"), introduced=FALSE)
 #'
 #'
-wcvp_occ_mat <- function(taxon=NULL, taxon.rank=c("species", "genus", "family","order","higher"), area=NULL,
+wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","order","higher"), area=NULL,
                           native=TRUE, introduced=TRUE,
                           extinct=TRUE, location_doubtful=TRUE,
                           wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
-  taxon.rank <- match.arg(taxon.rank)
+  taxon.rank <- match.arg(taxon_rank)
   input.area <- area
 
   if(!is.null(taxon)){

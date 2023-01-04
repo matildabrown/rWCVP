@@ -11,7 +11,7 @@
 #' @param fuzzy Logical; whether or not fuzzy matching should be used for names
 #'   that could not be matched exactly.
 #' @param progress_bar Logical. Show progress bar when matching? Defaults to
-#'  TRUE; should be changed to FALSE if used in a markdown report.
+#'  `TRUE`; should be changed to `FALSE` if used in a markdown report.
 #'
 #' @details By default, exact matching uses only the taxon name (supplied by `name_col`)
 #'  unless a column specifying the author string is provided (as `author_col`).
@@ -21,9 +21,11 @@
 #'  (e.g. `c("genus", "species", "infra_rank", "infra")`).
 #'
 #'  Fuzzy matching uses a combination of phonetic and edit distance matching,
-#'  and can optionally be turned off.
+#'  and can optionally be turned off using `fuzzy=FALSE`.
 #'
-#'  The WCVP can be loaded for matching from [rWCVPdata::wcvp_names].
+#'  The WCVP can be loaded for matching from `[rWCVPdata::wcvp_names]`.
+#'
+#'  See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 #'
 #' @export
 #'
@@ -86,6 +88,15 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
   } else {
     n_names1 <- nrow(unique(cbind(names_df[[name_col]],names_df[[author_col]])))
   }
+
+  matchcols <- c("match_type","multiple_matches","match_similarity","match_edit_distance",
+                 "wcvp_id","wcvp_name","wcvp_authors","wcvp_rank","wcvp_status",
+                 "wcvp_homotypic","wcvp_ipni_id","wcvp_accepted_id","wcvp_author_edit_distance","wcvp_author_lcs")
+
+  if (length(
+    setdiff(colnames(names_df), matchcols)
+        ) < length(colnames(names_df))
+      ) cli_abort("Column names of input data frame must not contain any of the following: {matchcols}")
 
   #set up id col for returned df
   names_df$row_order <- 1:nrow(names_df)

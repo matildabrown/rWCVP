@@ -16,12 +16,13 @@ wcvp_match_names(
 )
 }
 \arguments{
-\item{names_df}{a data frame of names for matching.}
+\item{names_df}{Data frame of names for matching.}
 
-\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+\item{wcvp_names}{Data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 
-\item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
+\item{name_col}{Character. The column in \code{names_df} that has the taxon name
+for matching.}
 
 \item{id_col}{Character. A column in \code{names_df} with a unique ID for each
 name. Will be created from the row number if not provided.}
@@ -36,7 +37,7 @@ if \code{name_col} is not provided.}
 that could not be matched exactly.}
 
 \item{progress_bar}{Logical. Show progress bar when matching? Defaults to
-TRUE; should be changed to FALSE if used in a markdown report.}
+\code{TRUE}; should be changed to \code{FALSE} if used in a markdown report.}
 }
 \value{
 Match results from WCVP bound to the original data from \code{names_df}.
@@ -54,9 +55,11 @@ taxon name, but must be supplied in the order you want them joined
 (e.g. \code{c("genus", "species", "infra_rank", "infra")}).
 
 Fuzzy matching uses a combination of phonetic and edit distance matching,
-and can optionally be turned off.
+and can optionally be turned off using \code{fuzzy=FALSE}.
 
-The WCVP can be loaded for matching from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.
+The WCVP can be loaded for matching from \verb{[rWCVPdata::wcvp_names]}.
+
+See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 }
 \examples{
 wcvp_names <- rWCVPdata::wcvp_names

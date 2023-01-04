@@ -1,12 +1,12 @@
 #' Plot distribution maps for species, genera or families
 #'
-#' @param range sf object of the type output by [wcvp_distribution()].
-#' @param crop.map Logical. Crop map extent to distribution? Defaults to FALSE.
-#' @param native Logical. Include native range? Defaults to TRUE.
-#' @param introduced Logical. Include introduced range? Defaults to TRUE.
-#' @param extinct Logical. Include extinct range? Defaults to TRUE.
+#' @param range Simple features (`sf`) data frame of the type output by [`wcvp_distribution()`].
+#' @param crop_map Logical. Crop map extent to distribution? Defaults to `FALSE`.
+#' @param native Logical. Include native range? Defaults to `TRUE`.
+#' @param introduced Logical. Include introduced range? Defaults to `TRUE`.
+#' @param extinct Logical. Include extinct range? Defaults to `TRUE`.
 #' @param location_doubtful Logical. Include occurrences that are thought to be
-#'     doubtful? Defaults to TRUE.
+#'     doubtful? Defaults to `TRUE`.
 #'
 #' @import ggplot2 dplyr
 #' @importFrom rlang .data
@@ -17,24 +17,24 @@
 #' @details The colour scheme mirrors that used by Plants of the World (POWO;
 #' https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 #'
-#' @return A [ggplot2::ggplot] of the distribution.
+#' @return A [`ggplot2::ggplot`] of the distribution.
 #'
 #' @examples
-#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"))
 #' p
 #' # now only the native range, and cropped to range extent
-#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"),
-#' introduced=FALSE, crop.map=TRUE)
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"),
+#' introduced=FALSE, crop_map=TRUE)
 #' p
 #' # now with different colours
 #' # note that this taxon only has native and introduced occurrences, so only two colours are needed
-#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon.rank="genus"))
+#' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank="genus"))
 #' p +
 #' # for polygons
 #'   ggplot2::scale_fill_manual(values=c("red", "blue")) +
 #' # for points (islands)
-#'   ggplot2::scale_colour_manual(values=c("red", "blue")) # for points (islands)
-wcvp_distribution_map <- function(range, crop.map=FALSE, native=TRUE, introduced=TRUE,
+#'   ggplot2::scale_colour_manual(values=c("red", "blue"))
+wcvp_distribution_map <- function(range, crop_map=FALSE, native=TRUE, introduced=TRUE,
                               extinct=TRUE, location_doubtful=TRUE){
  occurrence_type <- NULL
 
@@ -47,7 +47,7 @@ wcvp_distribution_map <- function(range, crop.map=FALSE, native=TRUE, introduced
   bbox <- st_bbox(range)
   range.area <- ((bbox[3] - bbox[1]) * (bbox[4] - bbox[2]))
 
-  if (crop.map) {
+  if (crop_map) {
     crop_details <- calculate_map_crop_(range, range.area, bbox)
     range <- crop_details$range
     range.area <- crop_details$range.area
@@ -57,7 +57,7 @@ wcvp_distribution_map <- function(range, crop.map=FALSE, native=TRUE, introduced
 
   p <- powo_map(range, range.centroids)
 
-  if (crop.map) {
+  if (crop_map) {
     p <- p + coord_sf(xlim=crop_details$xlims, ylim=crop_details$ylims, expand=FALSE)
   } else {
     p <- p + coord_sf(expand=FALSE)
@@ -68,8 +68,8 @@ wcvp_distribution_map <- function(range, crop.map=FALSE, native=TRUE, introduced
 
 #' Plot a POWO style map for given range and range centroids.
 #'
-#' @param range_sf A simple features data frame of range polygons
-#' @param centroids_sf A simple features data frame of range centroids
+#' @param range_sf A simple features (`sf`) data frame of range polygons
+#' @param centroids_sf A simple features (`sf`) data frame of range centroids
 #'
 #' @return A ggplot map of the range
 #'

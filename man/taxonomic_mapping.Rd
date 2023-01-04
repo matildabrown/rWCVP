@@ -8,7 +8,7 @@
 A data frame with 457 rows and 3 variables: \code{family, order} and \code{higher_classification}
 }
 \source{
-Fern and lycophyte taxonomy from PPG I (2016; \url{https://doi.org/10.1111/jse.12229}). Angiosperm taxonomy from APG IV (2016;; \url{https://doi.org/10.1111/boj.12385}). Gymnosperm taxonomy from Forest et al (2018; \url{https://doi.org/10.1038/s41598-018-24365-4})
+Fern and lycophyte taxonomy from PPG I (2016; \url{https://doi.org/10.1111/jse.12229}). Angiosperm taxonomy from APG IV (2016; \url{https://doi.org/10.1111/boj.12385}). Gymnosperm taxonomy from Forest et al (2018; \url{https://doi.org/10.1038/s41598-018-24365-4})
 }
 \usage{
 taxonomic_mapping

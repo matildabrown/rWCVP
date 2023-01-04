@@ -6,7 +6,7 @@
 \usage{
 wcvp_occ_mat(
   taxon = NULL,
-  taxon.rank = c("species", "genus", "family", "order", "higher"),
+  taxon_rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
   native = TRUE,
   introduced = TRUE,
@@ -19,7 +19,7 @@ wcvp_occ_mat(
 \arguments{
 \item{taxon}{Character. One or many taxa to be included. Defaults to NULL (all species)}
 
-\item{taxon.rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
+\item{taxon_rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
@@ -45,10 +45,10 @@ of all species that are present in the \code{area}, plus one variable for each W
 Generate occurrence matrix for taxa and areas
 }
 \details{
-See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.
+See \href{https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html}{here} for an example of how this output can be formatted for publication.
 }
 \examples{
-wcvp_occ_mat(taxon="Poa", taxon.rank="genus",
+wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
 area=c("TAS", "VIC","NSW"), introduced=FALSE)
 
 

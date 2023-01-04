@@ -6,9 +6,9 @@
 \usage{
 wcvp_summary(
   taxon = NULL,
-  taxon.rank = c("species", "genus", "family", "order", "higher"),
+  taxon_rank = c("species", "genus", "family", "order", "higher"),
   area = NULL,
-  grouping.var = c("area_code_l3", "genus", "family", "order", "higher"),
+  grouping_var = c("area_code_l3", "genus", "family", "order", "higher"),
   hybrids = FALSE,
   wcvp_names = NULL,
   wcvp_distributions = NULL
@@ -17,11 +17,11 @@ wcvp_summary(
 \arguments{
 \item{taxon}{Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).}
 
-\item{taxon.rank}{Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
+\item{taxon_rank}{Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
 \item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
-\item{grouping.var}{Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.}
+\item{grouping_var}{Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.}
 
 \item{hybrids}{Logical. Include hybrid species in counts? Defaults to FALSE.}
 
@@ -38,11 +38,11 @@ Data.frame with filtered data, or a \code{gt} table
 Generate a summary table from the WCVP
 }
 \details{
-Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon.rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon_rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 }
 \examples{
-ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping.var="family")
+ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var="family")
 wcvp_summary_gt(ferns)
 
 }

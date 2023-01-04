@@ -7,12 +7,13 @@
 wcvp_match_exact(names_df, wcvp_names, name_col, author_col = NULL, id_col)
 }
 \arguments{
-\item{names_df}{a data frame of names for matching.}
+\item{names_df}{Data frame of names for matching.}
 
-\item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+\item{wcvp_names}{Data frame of taxonomic names from WCVP version 7 or later.
+If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 
-\item{name_col}{the column in \code{names_df} that has the taxon name for matching.}
+\item{name_col}{Character. The column in \code{names_df} that has the taxon name
+for matching.}
 
 \item{author_col}{the column in \code{names_df} that has the name authority, to aid
 matching. Set to \code{NULL} to match with no author string.}

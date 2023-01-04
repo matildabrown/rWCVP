@@ -6,7 +6,7 @@
 \usage{
 wcvp_distribution(
   taxon,
-  taxon.rank = c("species", "genus", "family", "order", "higher"),
+  taxon_rank = c("species", "genus", "family", "order", "higher"),
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -16,36 +16,41 @@ wcvp_distribution(
 )
 }
 \arguments{
-\item{taxon}{Character. The taxon to be mapped.}
+\item{taxon}{Character. The taxon to be mapped. Must be provided.}
 
-\item{taxon.rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in \code{taxon}.}
+\item{taxon_rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in \code{taxon}.}
 
-\item{native}{Logical. Include native range? Defaults to TRUE.}
+\item{native}{Logical. Include native range? Defaults to \code{TRUE}.}
 
-\item{introduced}{Logical. Include introduced range? Defaults to TRUE.}
+\item{introduced}{Logical. Include introduced range? Defaults to \code{TRUE}.}
 
-\item{extinct}{Logical. Include extinct range? Defaults to TRUE.}
+\item{extinct}{Logical. Include extinct range? Defaults to \code{TRUE}.}
 
 \item{location_doubtful}{Logical. Include occurrences that are thought to be
-doubtful? Defaults to TRUE.}
+doubtful? Defaults to \code{TRUE}.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL} (the default), distributions will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
 }
 \value{
-sf data.frame containing the range polygon/s of the taxon.
+Simple features (\code{sf}) data frame containing the range polygon/s of the taxon.
 }
 \description{
 Generate spatial distribution objects for species, genera or families
 }
 \details{
-Where \code{taxon.rank} is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}. To plot extinctions, introductions or doubtful occurrences within the native range, the \code{wcvp_summary} and \code{wcvp_occ_mat} functions can be used.
+Where \code{taxon_rank} is higher than species, the distribution of the whole
+group will be returned, not individual species within that group. This also applies when
+toggling options - for example, introduced occurrences will only be included if they are
+outside the native range, regardless of whether \code{native=TRUE} or \code{native=FALSE}.
+To identify extinctions, introductions or doubtful occurrences within the native range,
+the \code{wcvp_summary} and \code{wcvp_occ_mat} functions can be used.
 }
 \examples{
-r <- wcvp_distribution("Callitris", taxon.rank="genus")
+r <- wcvp_distribution("Callitris", taxon_rank="genus")
 p <- wcvp_distribution_map(r)
 p
 }
