@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -134,15 +134,15 @@ because the table will fit on a portrait-oriented page). Let’s see if
 there are some nice-sized example genera, using the
 <code>wcvp_summary</code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrtaceae"</span>, taxon.rank<span class="op">=</span><span class="st">"family"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>, </span>
-<span>              grouping.var <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrtaceae"</span>, taxon_rank<span class="op">=</span><span class="st">"family"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>, </span>
+<span>              grouping_var <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/wcvp_summary_gt.html">wcvp_summary_gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="hheijajwwm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hjtmbitpra" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#hheijajwwm .gt_table {
+#hjtmbitpra .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -167,7 +167,7 @@ there are some nice-sized example genera, using the
   border-left-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_heading {
+#hjtmbitpra .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -179,7 +179,7 @@ there are some nice-sized example genera, using the
   border-right-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_title {
+#hjtmbitpra .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -191,7 +191,7 @@ there are some nice-sized example genera, using the
   border-bottom-width: 0;
 }
 
-#hheijajwwm .gt_subtitle {
+#hjtmbitpra .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -203,13 +203,13 @@ there are some nice-sized example genera, using the
   border-top-width: 0;
 }
 
-#hheijajwwm .gt_bottom_border {
+#hjtmbitpra .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_col_headings {
+#hjtmbitpra .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -224,7 +224,7 @@ there are some nice-sized example genera, using the
   border-right-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_col_heading {
+#hjtmbitpra .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -244,7 +244,7 @@ there are some nice-sized example genera, using the
   overflow-x: hidden;
 }
 
-#hheijajwwm .gt_column_spanner_outer {
+#hjtmbitpra .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -256,15 +256,15 @@ there are some nice-sized example genera, using the
   padding-right: 4px;
 }
 
-#hheijajwwm .gt_column_spanner_outer:first-child {
+#hjtmbitpra .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hheijajwwm .gt_column_spanner_outer:last-child {
+#hjtmbitpra .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hheijajwwm .gt_column_spanner {
+#hjtmbitpra .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -276,7 +276,7 @@ there are some nice-sized example genera, using the
   width: 100%;
 }
 
-#hheijajwwm .gt_group_heading {
+#hjtmbitpra .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -301,7 +301,7 @@ there are some nice-sized example genera, using the
   vertical-align: middle;
 }
 
-#hheijajwwm .gt_empty_group_heading {
+#hjtmbitpra .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -316,15 +316,15 @@ there are some nice-sized example genera, using the
   vertical-align: middle;
 }
 
-#hheijajwwm .gt_from_md > :first-child {
+#hjtmbitpra .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hheijajwwm .gt_from_md > :last-child {
+#hjtmbitpra .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hheijajwwm .gt_row {
+#hjtmbitpra .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -343,7 +343,7 @@ there are some nice-sized example genera, using the
   overflow-x: hidden;
 }
 
-#hheijajwwm .gt_stub {
+#hjtmbitpra .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -356,7 +356,7 @@ there are some nice-sized example genera, using the
   padding-right: 5px;
 }
 
-#hheijajwwm .gt_stub_row_group {
+#hjtmbitpra .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -370,11 +370,11 @@ there are some nice-sized example genera, using the
   vertical-align: top;
 }
 
-#hheijajwwm .gt_row_group_first td {
+#hjtmbitpra .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hheijajwwm .gt_summary_row {
+#hjtmbitpra .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -384,16 +384,16 @@ there are some nice-sized example genera, using the
   padding-right: 5px;
 }
 
-#hheijajwwm .gt_first_summary_row {
+#hjtmbitpra .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_first_summary_row.thick {
+#hjtmbitpra .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hheijajwwm .gt_last_summary_row {
+#hjtmbitpra .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -403,7 +403,7 @@ there are some nice-sized example genera, using the
   border-bottom-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_grand_summary_row {
+#hjtmbitpra .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -413,7 +413,7 @@ there are some nice-sized example genera, using the
   padding-right: 5px;
 }
 
-#hheijajwwm .gt_first_grand_summary_row {
+#hjtmbitpra .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -423,11 +423,11 @@ there are some nice-sized example genera, using the
   border-top-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_striped {
+#hjtmbitpra .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hheijajwwm .gt_table_body {
+#hjtmbitpra .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -436,7 +436,7 @@ there are some nice-sized example genera, using the
   border-bottom-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_footnotes {
+#hjtmbitpra .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -450,7 +450,7 @@ there are some nice-sized example genera, using the
   border-right-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_footnote {
+#hjtmbitpra .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -459,7 +459,7 @@ there are some nice-sized example genera, using the
   padding-right: 5px;
 }
 
-#hheijajwwm .gt_sourcenotes {
+#hjtmbitpra .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -473,7 +473,7 @@ there are some nice-sized example genera, using the
   border-right-color: #D3D3D3;
 }
 
-#hheijajwwm .gt_sourcenote {
+#hjtmbitpra .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -481,64 +481,64 @@ there are some nice-sized example genera, using the
   padding-right: 5px;
 }
 
-#hheijajwwm .gt_left {
+#hjtmbitpra .gt_left {
   text-align: left;
 }
 
-#hheijajwwm .gt_center {
+#hjtmbitpra .gt_center {
   text-align: center;
 }
 
-#hheijajwwm .gt_right {
+#hjtmbitpra .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hheijajwwm .gt_font_normal {
+#hjtmbitpra .gt_font_normal {
   font-weight: normal;
 }
 
-#hheijajwwm .gt_font_bold {
+#hjtmbitpra .gt_font_bold {
   font-weight: bold;
 }
 
-#hheijajwwm .gt_font_italic {
+#hjtmbitpra .gt_font_italic {
   font-style: italic;
 }
 
-#hheijajwwm .gt_super {
+#hjtmbitpra .gt_super {
   font-size: 65%;
 }
 
-#hheijajwwm .gt_footnote_marks {
+#hjtmbitpra .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#hheijajwwm .gt_asterisk {
+#hjtmbitpra .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hheijajwwm .gt_indent_1 {
+#hjtmbitpra .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hheijajwwm .gt_indent_2 {
+#hjtmbitpra .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hheijajwwm .gt_indent_3 {
+#hjtmbitpra .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hheijajwwm .gt_indent_4 {
+#hjtmbitpra .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hheijajwwm .gt_indent_5 {
+#hjtmbitpra .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -727,15 +727,15 @@ there are some nice-sized example genera, using the
 are distributed across the 5 areas. We can use the same function, but
 limit our taxon and change our grouping variable to area.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Calycolpus"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>,</span>
-<span>              grouping.var <span class="op">=</span> <span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Calycolpus"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>,</span>
+<span>              grouping_var <span class="op">=</span> <span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/wcvp_summary_gt.html">wcvp_summary_gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="pzsfggfhgs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uleljimvbx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#pzsfggfhgs .gt_table {
+#uleljimvbx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -760,7 +760,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-left-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_heading {
+#uleljimvbx .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -772,7 +772,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-right-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_title {
+#uleljimvbx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -784,7 +784,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-bottom-width: 0;
 }
 
-#pzsfggfhgs .gt_subtitle {
+#uleljimvbx .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -796,13 +796,13 @@ limit our taxon and change our grouping variable to area.</p>
   border-top-width: 0;
 }
 
-#pzsfggfhgs .gt_bottom_border {
+#uleljimvbx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_col_headings {
+#uleljimvbx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -817,7 +817,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-right-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_col_heading {
+#uleljimvbx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,7 +837,7 @@ limit our taxon and change our grouping variable to area.</p>
   overflow-x: hidden;
 }
 
-#pzsfggfhgs .gt_column_spanner_outer {
+#uleljimvbx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,15 +849,15 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 4px;
 }
 
-#pzsfggfhgs .gt_column_spanner_outer:first-child {
+#uleljimvbx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pzsfggfhgs .gt_column_spanner_outer:last-child {
+#uleljimvbx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pzsfggfhgs .gt_column_spanner {
+#uleljimvbx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -869,7 +869,7 @@ limit our taxon and change our grouping variable to area.</p>
   width: 100%;
 }
 
-#pzsfggfhgs .gt_group_heading {
+#uleljimvbx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -894,7 +894,7 @@ limit our taxon and change our grouping variable to area.</p>
   vertical-align: middle;
 }
 
-#pzsfggfhgs .gt_empty_group_heading {
+#uleljimvbx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -909,15 +909,15 @@ limit our taxon and change our grouping variable to area.</p>
   vertical-align: middle;
 }
 
-#pzsfggfhgs .gt_from_md > :first-child {
+#uleljimvbx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pzsfggfhgs .gt_from_md > :last-child {
+#uleljimvbx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pzsfggfhgs .gt_row {
+#uleljimvbx .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -936,7 +936,7 @@ limit our taxon and change our grouping variable to area.</p>
   overflow-x: hidden;
 }
 
-#pzsfggfhgs .gt_stub {
+#uleljimvbx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -949,7 +949,7 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 5px;
 }
 
-#pzsfggfhgs .gt_stub_row_group {
+#uleljimvbx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -963,11 +963,11 @@ limit our taxon and change our grouping variable to area.</p>
   vertical-align: top;
 }
 
-#pzsfggfhgs .gt_row_group_first td {
+#uleljimvbx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pzsfggfhgs .gt_summary_row {
+#uleljimvbx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -977,16 +977,16 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 5px;
 }
 
-#pzsfggfhgs .gt_first_summary_row {
+#uleljimvbx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_first_summary_row.thick {
+#uleljimvbx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pzsfggfhgs .gt_last_summary_row {
+#uleljimvbx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -996,7 +996,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_grand_summary_row {
+#uleljimvbx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1006,7 +1006,7 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 5px;
 }
 
-#pzsfggfhgs .gt_first_grand_summary_row {
+#uleljimvbx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1016,11 +1016,11 @@ limit our taxon and change our grouping variable to area.</p>
   border-top-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_striped {
+#uleljimvbx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pzsfggfhgs .gt_table_body {
+#uleljimvbx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1029,7 +1029,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_footnotes {
+#uleljimvbx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1043,7 +1043,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-right-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_footnote {
+#uleljimvbx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1052,7 +1052,7 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 5px;
 }
 
-#pzsfggfhgs .gt_sourcenotes {
+#uleljimvbx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1066,7 +1066,7 @@ limit our taxon and change our grouping variable to area.</p>
   border-right-color: #D3D3D3;
 }
 
-#pzsfggfhgs .gt_sourcenote {
+#uleljimvbx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1074,64 +1074,64 @@ limit our taxon and change our grouping variable to area.</p>
   padding-right: 5px;
 }
 
-#pzsfggfhgs .gt_left {
+#uleljimvbx .gt_left {
   text-align: left;
 }
 
-#pzsfggfhgs .gt_center {
+#uleljimvbx .gt_center {
   text-align: center;
 }
 
-#pzsfggfhgs .gt_right {
+#uleljimvbx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pzsfggfhgs .gt_font_normal {
+#uleljimvbx .gt_font_normal {
   font-weight: normal;
 }
 
-#pzsfggfhgs .gt_font_bold {
+#uleljimvbx .gt_font_bold {
   font-weight: bold;
 }
 
-#pzsfggfhgs .gt_font_italic {
+#uleljimvbx .gt_font_italic {
   font-style: italic;
 }
 
-#pzsfggfhgs .gt_super {
+#uleljimvbx .gt_super {
   font-size: 65%;
 }
 
-#pzsfggfhgs .gt_footnote_marks {
+#uleljimvbx .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#pzsfggfhgs .gt_asterisk {
+#uleljimvbx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pzsfggfhgs .gt_indent_1 {
+#uleljimvbx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pzsfggfhgs .gt_indent_2 {
+#uleljimvbx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pzsfggfhgs .gt_indent_3 {
+#uleljimvbx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pzsfggfhgs .gt_indent_4 {
+#uleljimvbx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pzsfggfhgs .gt_indent_5 {
+#uleljimvbx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1201,15 +1201,15 @@ limit our taxon and change our grouping variable to area.</p>
 <p>Hmm, maybe a bit too small - it only occurs in 3 of the 5 regions.
 What about <em>Myrciaria</em>?</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrciaria"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>, </span>
-<span>              grouping.var<span class="op">=</span><span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrciaria"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span>, </span>
+<span>              grouping_var<span class="op">=</span><span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/wcvp_summary_gt.html">wcvp_summary_gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="ttylpmujyw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jmsowajpnd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ttylpmujyw .gt_table {
+#jmsowajpnd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1234,7 +1234,7 @@ What about <em>Myrciaria</em>?</p>
   border-left-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_heading {
+#jmsowajpnd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1246,7 +1246,7 @@ What about <em>Myrciaria</em>?</p>
   border-right-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_title {
+#jmsowajpnd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1258,7 +1258,7 @@ What about <em>Myrciaria</em>?</p>
   border-bottom-width: 0;
 }
 
-#ttylpmujyw .gt_subtitle {
+#jmsowajpnd .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -1270,13 +1270,13 @@ What about <em>Myrciaria</em>?</p>
   border-top-width: 0;
 }
 
-#ttylpmujyw .gt_bottom_border {
+#jmsowajpnd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_col_headings {
+#jmsowajpnd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1291,7 +1291,7 @@ What about <em>Myrciaria</em>?</p>
   border-right-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_col_heading {
+#jmsowajpnd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1311,7 +1311,7 @@ What about <em>Myrciaria</em>?</p>
   overflow-x: hidden;
 }
 
-#ttylpmujyw .gt_column_spanner_outer {
+#jmsowajpnd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1323,15 +1323,15 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 4px;
 }
 
-#ttylpmujyw .gt_column_spanner_outer:first-child {
+#jmsowajpnd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ttylpmujyw .gt_column_spanner_outer:last-child {
+#jmsowajpnd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ttylpmujyw .gt_column_spanner {
+#jmsowajpnd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1343,7 +1343,7 @@ What about <em>Myrciaria</em>?</p>
   width: 100%;
 }
 
-#ttylpmujyw .gt_group_heading {
+#jmsowajpnd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1368,7 +1368,7 @@ What about <em>Myrciaria</em>?</p>
   vertical-align: middle;
 }
 
-#ttylpmujyw .gt_empty_group_heading {
+#jmsowajpnd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1383,15 +1383,15 @@ What about <em>Myrciaria</em>?</p>
   vertical-align: middle;
 }
 
-#ttylpmujyw .gt_from_md > :first-child {
+#jmsowajpnd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ttylpmujyw .gt_from_md > :last-child {
+#jmsowajpnd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ttylpmujyw .gt_row {
+#jmsowajpnd .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1410,7 +1410,7 @@ What about <em>Myrciaria</em>?</p>
   overflow-x: hidden;
 }
 
-#ttylpmujyw .gt_stub {
+#jmsowajpnd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1423,7 +1423,7 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 5px;
 }
 
-#ttylpmujyw .gt_stub_row_group {
+#jmsowajpnd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,11 +1437,11 @@ What about <em>Myrciaria</em>?</p>
   vertical-align: top;
 }
 
-#ttylpmujyw .gt_row_group_first td {
+#jmsowajpnd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ttylpmujyw .gt_summary_row {
+#jmsowajpnd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1451,16 +1451,16 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 5px;
 }
 
-#ttylpmujyw .gt_first_summary_row {
+#jmsowajpnd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_first_summary_row.thick {
+#jmsowajpnd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ttylpmujyw .gt_last_summary_row {
+#jmsowajpnd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1470,7 +1470,7 @@ What about <em>Myrciaria</em>?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_grand_summary_row {
+#jmsowajpnd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1480,7 +1480,7 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 5px;
 }
 
-#ttylpmujyw .gt_first_grand_summary_row {
+#jmsowajpnd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1490,11 +1490,11 @@ What about <em>Myrciaria</em>?</p>
   border-top-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_striped {
+#jmsowajpnd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ttylpmujyw .gt_table_body {
+#jmsowajpnd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1503,7 +1503,7 @@ What about <em>Myrciaria</em>?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_footnotes {
+#jmsowajpnd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1517,7 +1517,7 @@ What about <em>Myrciaria</em>?</p>
   border-right-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_footnote {
+#jmsowajpnd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1526,7 +1526,7 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 5px;
 }
 
-#ttylpmujyw .gt_sourcenotes {
+#jmsowajpnd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1540,7 +1540,7 @@ What about <em>Myrciaria</em>?</p>
   border-right-color: #D3D3D3;
 }
 
-#ttylpmujyw .gt_sourcenote {
+#jmsowajpnd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1548,64 +1548,64 @@ What about <em>Myrciaria</em>?</p>
   padding-right: 5px;
 }
 
-#ttylpmujyw .gt_left {
+#jmsowajpnd .gt_left {
   text-align: left;
 }
 
-#ttylpmujyw .gt_center {
+#jmsowajpnd .gt_center {
   text-align: center;
 }
 
-#ttylpmujyw .gt_right {
+#jmsowajpnd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ttylpmujyw .gt_font_normal {
+#jmsowajpnd .gt_font_normal {
   font-weight: normal;
 }
 
-#ttylpmujyw .gt_font_bold {
+#jmsowajpnd .gt_font_bold {
   font-weight: bold;
 }
 
-#ttylpmujyw .gt_font_italic {
+#jmsowajpnd .gt_font_italic {
   font-style: italic;
 }
 
-#ttylpmujyw .gt_super {
+#jmsowajpnd .gt_super {
   font-size: 65%;
 }
 
-#ttylpmujyw .gt_footnote_marks {
+#jmsowajpnd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ttylpmujyw .gt_asterisk {
+#jmsowajpnd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ttylpmujyw .gt_indent_1 {
+#jmsowajpnd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ttylpmujyw .gt_indent_2 {
+#jmsowajpnd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ttylpmujyw .gt_indent_3 {
+#jmsowajpnd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ttylpmujyw .gt_indent_4 {
+#jmsowajpnd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ttylpmujyw .gt_indent_5 {
+#jmsowajpnd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1681,7 +1681,7 @@ are enough occurrences to make it interesting.</p>
 <p>Generating an occurrence matrix for this genus is as simple as using
 the <code>generate_occurence_matrix</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrciaria"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>, </span>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrciaria"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, </span>
 <span>                                area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">m</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 23 × 7</span></span></span>
@@ -1745,12 +1745,12 @@ package. Let’s do the following:</p>
 <span>        <span class="op">}</span></span>
 <span>      <span class="op">)</span></span>
 <span><span class="va">m_gt</span></span></code></pre></div>
-<div id="hbenlhyvap" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tpsnzsspid" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#hbenlhyvap .gt_table {
+#tpsnzsspid .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1775,7 +1775,7 @@ package. Let’s do the following:</p>
   border-left-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_heading {
+#tpsnzsspid .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1787,7 +1787,7 @@ package. Let’s do the following:</p>
   border-right-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_title {
+#tpsnzsspid .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1799,7 +1799,7 @@ package. Let’s do the following:</p>
   border-bottom-width: 0;
 }
 
-#hbenlhyvap .gt_subtitle {
+#tpsnzsspid .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1811,13 +1811,13 @@ package. Let’s do the following:</p>
   border-top-width: 0;
 }
 
-#hbenlhyvap .gt_bottom_border {
+#tpsnzsspid .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_col_headings {
+#tpsnzsspid .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1832,7 +1832,7 @@ package. Let’s do the following:</p>
   border-right-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_col_heading {
+#tpsnzsspid .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1852,7 +1852,7 @@ package. Let’s do the following:</p>
   overflow-x: hidden;
 }
 
-#hbenlhyvap .gt_column_spanner_outer {
+#tpsnzsspid .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1864,15 +1864,15 @@ package. Let’s do the following:</p>
   padding-right: 4px;
 }
 
-#hbenlhyvap .gt_column_spanner_outer:first-child {
+#tpsnzsspid .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hbenlhyvap .gt_column_spanner_outer:last-child {
+#tpsnzsspid .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hbenlhyvap .gt_column_spanner {
+#tpsnzsspid .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1884,7 +1884,7 @@ package. Let’s do the following:</p>
   width: 100%;
 }
 
-#hbenlhyvap .gt_group_heading {
+#tpsnzsspid .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1909,7 +1909,7 @@ package. Let’s do the following:</p>
   vertical-align: middle;
 }
 
-#hbenlhyvap .gt_empty_group_heading {
+#tpsnzsspid .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1924,15 +1924,15 @@ package. Let’s do the following:</p>
   vertical-align: middle;
 }
 
-#hbenlhyvap .gt_from_md > :first-child {
+#tpsnzsspid .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hbenlhyvap .gt_from_md > :last-child {
+#tpsnzsspid .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hbenlhyvap .gt_row {
+#tpsnzsspid .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1951,7 +1951,7 @@ package. Let’s do the following:</p>
   overflow-x: hidden;
 }
 
-#hbenlhyvap .gt_stub {
+#tpsnzsspid .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1964,7 +1964,7 @@ package. Let’s do the following:</p>
   padding-right: 5px;
 }
 
-#hbenlhyvap .gt_stub_row_group {
+#tpsnzsspid .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1978,11 +1978,11 @@ package. Let’s do the following:</p>
   vertical-align: top;
 }
 
-#hbenlhyvap .gt_row_group_first td {
+#tpsnzsspid .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hbenlhyvap .gt_summary_row {
+#tpsnzsspid .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1992,16 +1992,16 @@ package. Let’s do the following:</p>
   padding-right: 5px;
 }
 
-#hbenlhyvap .gt_first_summary_row {
+#tpsnzsspid .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_first_summary_row.thick {
+#tpsnzsspid .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hbenlhyvap .gt_last_summary_row {
+#tpsnzsspid .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2011,7 +2011,7 @@ package. Let’s do the following:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_grand_summary_row {
+#tpsnzsspid .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2021,7 +2021,7 @@ package. Let’s do the following:</p>
   padding-right: 5px;
 }
 
-#hbenlhyvap .gt_first_grand_summary_row {
+#tpsnzsspid .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2031,11 +2031,11 @@ package. Let’s do the following:</p>
   border-top-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_striped {
+#tpsnzsspid .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hbenlhyvap .gt_table_body {
+#tpsnzsspid .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2044,7 +2044,7 @@ package. Let’s do the following:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_footnotes {
+#tpsnzsspid .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2058,7 +2058,7 @@ package. Let’s do the following:</p>
   border-right-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_footnote {
+#tpsnzsspid .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2067,7 +2067,7 @@ package. Let’s do the following:</p>
   padding-right: 5px;
 }
 
-#hbenlhyvap .gt_sourcenotes {
+#tpsnzsspid .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2081,7 +2081,7 @@ package. Let’s do the following:</p>
   border-right-color: #D3D3D3;
 }
 
-#hbenlhyvap .gt_sourcenote {
+#tpsnzsspid .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2089,64 +2089,64 @@ package. Let’s do the following:</p>
   padding-right: 5px;
 }
 
-#hbenlhyvap .gt_left {
+#tpsnzsspid .gt_left {
   text-align: left;
 }
 
-#hbenlhyvap .gt_center {
+#tpsnzsspid .gt_center {
   text-align: center;
 }
 
-#hbenlhyvap .gt_right {
+#tpsnzsspid .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hbenlhyvap .gt_font_normal {
+#tpsnzsspid .gt_font_normal {
   font-weight: normal;
 }
 
-#hbenlhyvap .gt_font_bold {
+#tpsnzsspid .gt_font_bold {
   font-weight: bold;
 }
 
-#hbenlhyvap .gt_font_italic {
+#tpsnzsspid .gt_font_italic {
   font-style: italic;
 }
 
-#hbenlhyvap .gt_super {
+#tpsnzsspid .gt_super {
   font-size: 65%;
 }
 
-#hbenlhyvap .gt_footnote_marks {
+#tpsnzsspid .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#hbenlhyvap .gt_asterisk {
+#tpsnzsspid .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hbenlhyvap .gt_indent_1 {
+#tpsnzsspid .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hbenlhyvap .gt_indent_2 {
+#tpsnzsspid .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hbenlhyvap .gt_indent_3 {
+#tpsnzsspid .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hbenlhyvap .gt_indent_4 {
+#tpsnzsspid .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hbenlhyvap .gt_indent_5 {
+#tpsnzsspid .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2398,15 +2398,15 @@ see from the summary table that only one species is introduced), so
 let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 (Level 2 Region).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Northern Europe"</span><span class="op">)</span>, </span>
-<span>              grouping.var <span class="op">=</span> <span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Northern Europe"</span><span class="op">)</span>, </span>
+<span>              grouping_var <span class="op">=</span> <span class="st">"area_code_l3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/wcvp_summary_gt.html">wcvp_summary_gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="qktqorvhqo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rfmivvtzri" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qktqorvhqo .gt_table {
+#rfmivvtzri .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2431,7 +2431,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-left-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_heading {
+#rfmivvtzri .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2443,7 +2443,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-right-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_title {
+#rfmivvtzri .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2455,7 +2455,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-bottom-width: 0;
 }
 
-#qktqorvhqo .gt_subtitle {
+#rfmivvtzri .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -2467,13 +2467,13 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-top-width: 0;
 }
 
-#qktqorvhqo .gt_bottom_border {
+#rfmivvtzri .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_col_headings {
+#rfmivvtzri .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2488,7 +2488,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-right-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_col_heading {
+#rfmivvtzri .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2508,7 +2508,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   overflow-x: hidden;
 }
 
-#qktqorvhqo .gt_column_spanner_outer {
+#rfmivvtzri .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2520,15 +2520,15 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 4px;
 }
 
-#qktqorvhqo .gt_column_spanner_outer:first-child {
+#rfmivvtzri .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qktqorvhqo .gt_column_spanner_outer:last-child {
+#rfmivvtzri .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qktqorvhqo .gt_column_spanner {
+#rfmivvtzri .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2540,7 +2540,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   width: 100%;
 }
 
-#qktqorvhqo .gt_group_heading {
+#rfmivvtzri .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2565,7 +2565,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   vertical-align: middle;
 }
 
-#qktqorvhqo .gt_empty_group_heading {
+#rfmivvtzri .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2580,15 +2580,15 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   vertical-align: middle;
 }
 
-#qktqorvhqo .gt_from_md > :first-child {
+#rfmivvtzri .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qktqorvhqo .gt_from_md > :last-child {
+#rfmivvtzri .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qktqorvhqo .gt_row {
+#rfmivvtzri .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2607,7 +2607,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   overflow-x: hidden;
 }
 
-#qktqorvhqo .gt_stub {
+#rfmivvtzri .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2620,7 +2620,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 5px;
 }
 
-#qktqorvhqo .gt_stub_row_group {
+#rfmivvtzri .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2634,11 +2634,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   vertical-align: top;
 }
 
-#qktqorvhqo .gt_row_group_first td {
+#rfmivvtzri .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qktqorvhqo .gt_summary_row {
+#rfmivvtzri .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2648,16 +2648,16 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 5px;
 }
 
-#qktqorvhqo .gt_first_summary_row {
+#rfmivvtzri .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_first_summary_row.thick {
+#rfmivvtzri .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qktqorvhqo .gt_last_summary_row {
+#rfmivvtzri .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2667,7 +2667,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-bottom-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_grand_summary_row {
+#rfmivvtzri .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2677,7 +2677,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 5px;
 }
 
-#qktqorvhqo .gt_first_grand_summary_row {
+#rfmivvtzri .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2687,11 +2687,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-top-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_striped {
+#rfmivvtzri .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qktqorvhqo .gt_table_body {
+#rfmivvtzri .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2700,7 +2700,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-bottom-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_footnotes {
+#rfmivvtzri .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2714,7 +2714,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-right-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_footnote {
+#rfmivvtzri .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2723,7 +2723,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 5px;
 }
 
-#qktqorvhqo .gt_sourcenotes {
+#rfmivvtzri .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2737,7 +2737,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   border-right-color: #D3D3D3;
 }
 
-#qktqorvhqo .gt_sourcenote {
+#rfmivvtzri .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2745,64 +2745,64 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
   padding-right: 5px;
 }
 
-#qktqorvhqo .gt_left {
+#rfmivvtzri .gt_left {
   text-align: left;
 }
 
-#qktqorvhqo .gt_center {
+#rfmivvtzri .gt_center {
   text-align: center;
 }
 
-#qktqorvhqo .gt_right {
+#rfmivvtzri .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qktqorvhqo .gt_font_normal {
+#rfmivvtzri .gt_font_normal {
   font-weight: normal;
 }
 
-#qktqorvhqo .gt_font_bold {
+#rfmivvtzri .gt_font_bold {
   font-weight: bold;
 }
 
-#qktqorvhqo .gt_font_italic {
+#rfmivvtzri .gt_font_italic {
   font-style: italic;
 }
 
-#qktqorvhqo .gt_super {
+#rfmivvtzri .gt_super {
   font-size: 65%;
 }
 
-#qktqorvhqo .gt_footnote_marks {
+#rfmivvtzri .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#qktqorvhqo .gt_asterisk {
+#rfmivvtzri .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qktqorvhqo .gt_indent_1 {
+#rfmivvtzri .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qktqorvhqo .gt_indent_2 {
+#rfmivvtzri .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qktqorvhqo .gt_indent_3 {
+#rfmivvtzri .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qktqorvhqo .gt_indent_4 {
+#rfmivvtzri .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qktqorvhqo .gt_indent_5 {
+#rfmivvtzri .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2812,7 +2812,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 <td colspan="7" class="gt_heading gt_title gt_font_normal" style><b> Poa of Northern Europe </b></td>
     </tr>
 <tr>
-<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 29<br>Number of regionally endemic species: 0</td>
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 23<br>Number of regionally endemic species: 0</td>
     </tr>
 </thead>
 <thead class="gt_col_headings"><tr>
@@ -2836,11 +2836,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 </tr>
 <tr>
 <td class="gt_row gt_left">FIN</td>
-<td class="gt_row gt_right">17</td>
+<td class="gt_row gt_right">16</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">18</td>
+<td class="gt_row gt_right" style="font-weight: bold;">17</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">FOR</td>
@@ -2852,11 +2852,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 </tr>
 <tr>
 <td class="gt_row gt_left">GRB</td>
-<td class="gt_row gt_right">15</td>
+<td class="gt_row gt_right">12</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">3</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">18</td>
+<td class="gt_row gt_right" style="font-weight: bold;">15</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">ICE</td>
@@ -2864,7 +2864,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">12</td>
+<td class="gt_row gt_right" style="font-weight: bold;">11</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">IRE</td>
@@ -2876,11 +2876,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 </tr>
 <tr>
 <td class="gt_row gt_left">NOR</td>
-<td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">17</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">20</td>
+<td class="gt_row gt_right" style="font-weight: bold;">18</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">SVA</td>
@@ -2892,11 +2892,11 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 </tr>
 <tr>
 <td class="gt_row gt_left">SWE</td>
-<td class="gt_row gt_right">21</td>
+<td class="gt_row gt_right">17</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">22</td>
+<td class="gt_row gt_right" style="font-weight: bold;">18</td>
 </tr>
 </tbody>
 </table>
@@ -2904,7 +2904,7 @@ let’s look at a more invasive group - <em>Poa</em> in Northern Europe
 <p>A few more there to work with. First, let’s look at the native
 species only:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>,</span>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>,</span>
 <span>                                area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Northern Europe"</span><span class="op">)</span>, </span>
 <span>                                introduced<span class="op">=</span><span class="cn">FALSE</span>, extinct<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>                                location_doubtful<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
@@ -2929,7 +2929,7 @@ formatting as before, but also adding a heading - the <code>html</code>
 function makes it possiible to italicise our genus name and
 everything!</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>,</span>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_occ_mat.html">wcvp_occ_mat</a></span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>,</span>
 <span>                                area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Northern Europe"</span><span class="op">)</span>, </span>
 <span>                                native<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                                introduced<span class="op">=</span><span class="cn">TRUE</span>, extinct<span class="op">=</span><span class="cn">FALSE</span>, </span>
@@ -2940,12 +2940,12 @@ everything!</p>
 <span>  <span class="fu">occ_mat_theme</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="co">#the theme we defined above</span></span>
 <span>  <span class="co">#add a header</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title<span class="op">=</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"Introduced &lt;em&gt;Poa&lt;/em&gt; species in Northern Europe"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<div id="yxkmhfmrzs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ihewgzbvfm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#yxkmhfmrzs .gt_table {
+#ihewgzbvfm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2970,7 +2970,7 @@ everything!</p>
   border-left-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_heading {
+#ihewgzbvfm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2982,7 +2982,7 @@ everything!</p>
   border-right-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_title {
+#ihewgzbvfm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2994,7 +2994,7 @@ everything!</p>
   border-bottom-width: 0;
 }
 
-#yxkmhfmrzs .gt_subtitle {
+#ihewgzbvfm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3006,13 +3006,13 @@ everything!</p>
   border-top-width: 0;
 }
 
-#yxkmhfmrzs .gt_bottom_border {
+#ihewgzbvfm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_col_headings {
+#ihewgzbvfm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3027,7 +3027,7 @@ everything!</p>
   border-right-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_col_heading {
+#ihewgzbvfm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3047,7 +3047,7 @@ everything!</p>
   overflow-x: hidden;
 }
 
-#yxkmhfmrzs .gt_column_spanner_outer {
+#ihewgzbvfm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3059,15 +3059,15 @@ everything!</p>
   padding-right: 4px;
 }
 
-#yxkmhfmrzs .gt_column_spanner_outer:first-child {
+#ihewgzbvfm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yxkmhfmrzs .gt_column_spanner_outer:last-child {
+#ihewgzbvfm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yxkmhfmrzs .gt_column_spanner {
+#ihewgzbvfm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3079,7 +3079,7 @@ everything!</p>
   width: 100%;
 }
 
-#yxkmhfmrzs .gt_group_heading {
+#ihewgzbvfm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3104,7 +3104,7 @@ everything!</p>
   vertical-align: middle;
 }
 
-#yxkmhfmrzs .gt_empty_group_heading {
+#ihewgzbvfm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3119,15 +3119,15 @@ everything!</p>
   vertical-align: middle;
 }
 
-#yxkmhfmrzs .gt_from_md > :first-child {
+#ihewgzbvfm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yxkmhfmrzs .gt_from_md > :last-child {
+#ihewgzbvfm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yxkmhfmrzs .gt_row {
+#ihewgzbvfm .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3146,7 +3146,7 @@ everything!</p>
   overflow-x: hidden;
 }
 
-#yxkmhfmrzs .gt_stub {
+#ihewgzbvfm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3159,7 +3159,7 @@ everything!</p>
   padding-right: 5px;
 }
 
-#yxkmhfmrzs .gt_stub_row_group {
+#ihewgzbvfm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3173,11 +3173,11 @@ everything!</p>
   vertical-align: top;
 }
 
-#yxkmhfmrzs .gt_row_group_first td {
+#ihewgzbvfm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yxkmhfmrzs .gt_summary_row {
+#ihewgzbvfm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3187,16 +3187,16 @@ everything!</p>
   padding-right: 5px;
 }
 
-#yxkmhfmrzs .gt_first_summary_row {
+#ihewgzbvfm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_first_summary_row.thick {
+#ihewgzbvfm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yxkmhfmrzs .gt_last_summary_row {
+#ihewgzbvfm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3206,7 +3206,7 @@ everything!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_grand_summary_row {
+#ihewgzbvfm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3216,7 +3216,7 @@ everything!</p>
   padding-right: 5px;
 }
 
-#yxkmhfmrzs .gt_first_grand_summary_row {
+#ihewgzbvfm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3226,11 +3226,11 @@ everything!</p>
   border-top-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_striped {
+#ihewgzbvfm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yxkmhfmrzs .gt_table_body {
+#ihewgzbvfm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3239,7 +3239,7 @@ everything!</p>
   border-bottom-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_footnotes {
+#ihewgzbvfm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3253,7 +3253,7 @@ everything!</p>
   border-right-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_footnote {
+#ihewgzbvfm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3262,7 +3262,7 @@ everything!</p>
   padding-right: 5px;
 }
 
-#yxkmhfmrzs .gt_sourcenotes {
+#ihewgzbvfm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3276,7 +3276,7 @@ everything!</p>
   border-right-color: #D3D3D3;
 }
 
-#yxkmhfmrzs .gt_sourcenote {
+#ihewgzbvfm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3284,64 +3284,64 @@ everything!</p>
   padding-right: 5px;
 }
 
-#yxkmhfmrzs .gt_left {
+#ihewgzbvfm .gt_left {
   text-align: left;
 }
 
-#yxkmhfmrzs .gt_center {
+#ihewgzbvfm .gt_center {
   text-align: center;
 }
 
-#yxkmhfmrzs .gt_right {
+#ihewgzbvfm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yxkmhfmrzs .gt_font_normal {
+#ihewgzbvfm .gt_font_normal {
   font-weight: normal;
 }
 
-#yxkmhfmrzs .gt_font_bold {
+#ihewgzbvfm .gt_font_bold {
   font-weight: bold;
 }
 
-#yxkmhfmrzs .gt_font_italic {
+#ihewgzbvfm .gt_font_italic {
   font-style: italic;
 }
 
-#yxkmhfmrzs .gt_super {
+#ihewgzbvfm .gt_super {
   font-size: 65%;
 }
 
-#yxkmhfmrzs .gt_footnote_marks {
+#ihewgzbvfm .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#yxkmhfmrzs .gt_asterisk {
+#ihewgzbvfm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yxkmhfmrzs .gt_indent_1 {
+#ihewgzbvfm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yxkmhfmrzs .gt_indent_2 {
+#ihewgzbvfm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yxkmhfmrzs .gt_indent_3 {
+#ihewgzbvfm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yxkmhfmrzs .gt_indent_4 {
+#ihewgzbvfm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yxkmhfmrzs .gt_indent_5 {
+#ihewgzbvfm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3456,12 +3456,12 @@ say we want to look at occurrences across the US-Canadian border:</p>
 <span>  <span class="co">#add a header</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title<span class="op">=</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;em&gt;Fritillaria&lt;/em&gt; species in Northwest USA and Southwest Canada"</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">m_gt</span></span></code></pre></div>
-<div id="kgpkhteyem" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="plawbfrofz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kgpkhteyem .gt_table {
+#plawbfrofz .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3486,7 +3486,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-left-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_heading {
+#plawbfrofz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3498,7 +3498,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-right-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_title {
+#plawbfrofz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3510,7 +3510,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-bottom-width: 0;
 }
 
-#kgpkhteyem .gt_subtitle {
+#plawbfrofz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3522,13 +3522,13 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-top-width: 0;
 }
 
-#kgpkhteyem .gt_bottom_border {
+#plawbfrofz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_col_headings {
+#plawbfrofz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3543,7 +3543,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-right-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_col_heading {
+#plawbfrofz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3563,7 +3563,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   overflow-x: hidden;
 }
 
-#kgpkhteyem .gt_column_spanner_outer {
+#plawbfrofz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3575,15 +3575,15 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 4px;
 }
 
-#kgpkhteyem .gt_column_spanner_outer:first-child {
+#plawbfrofz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kgpkhteyem .gt_column_spanner_outer:last-child {
+#plawbfrofz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kgpkhteyem .gt_column_spanner {
+#plawbfrofz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3595,7 +3595,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   width: 100%;
 }
 
-#kgpkhteyem .gt_group_heading {
+#plawbfrofz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3620,7 +3620,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   vertical-align: middle;
 }
 
-#kgpkhteyem .gt_empty_group_heading {
+#plawbfrofz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3635,15 +3635,15 @@ say we want to look at occurrences across the US-Canadian border:</p>
   vertical-align: middle;
 }
 
-#kgpkhteyem .gt_from_md > :first-child {
+#plawbfrofz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kgpkhteyem .gt_from_md > :last-child {
+#plawbfrofz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kgpkhteyem .gt_row {
+#plawbfrofz .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3662,7 +3662,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   overflow-x: hidden;
 }
 
-#kgpkhteyem .gt_stub {
+#plawbfrofz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3675,7 +3675,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 5px;
 }
 
-#kgpkhteyem .gt_stub_row_group {
+#plawbfrofz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3689,11 +3689,11 @@ say we want to look at occurrences across the US-Canadian border:</p>
   vertical-align: top;
 }
 
-#kgpkhteyem .gt_row_group_first td {
+#plawbfrofz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kgpkhteyem .gt_summary_row {
+#plawbfrofz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3703,16 +3703,16 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 5px;
 }
 
-#kgpkhteyem .gt_first_summary_row {
+#plawbfrofz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_first_summary_row.thick {
+#plawbfrofz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kgpkhteyem .gt_last_summary_row {
+#plawbfrofz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3722,7 +3722,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_grand_summary_row {
+#plawbfrofz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3732,7 +3732,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 5px;
 }
 
-#kgpkhteyem .gt_first_grand_summary_row {
+#plawbfrofz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3742,11 +3742,11 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-top-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_striped {
+#plawbfrofz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kgpkhteyem .gt_table_body {
+#plawbfrofz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3755,7 +3755,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_footnotes {
+#plawbfrofz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3769,7 +3769,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-right-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_footnote {
+#plawbfrofz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3778,7 +3778,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 5px;
 }
 
-#kgpkhteyem .gt_sourcenotes {
+#plawbfrofz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3792,7 +3792,7 @@ say we want to look at occurrences across the US-Canadian border:</p>
   border-right-color: #D3D3D3;
 }
 
-#kgpkhteyem .gt_sourcenote {
+#plawbfrofz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3800,64 +3800,64 @@ say we want to look at occurrences across the US-Canadian border:</p>
   padding-right: 5px;
 }
 
-#kgpkhteyem .gt_left {
+#plawbfrofz .gt_left {
   text-align: left;
 }
 
-#kgpkhteyem .gt_center {
+#plawbfrofz .gt_center {
   text-align: center;
 }
 
-#kgpkhteyem .gt_right {
+#plawbfrofz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kgpkhteyem .gt_font_normal {
+#plawbfrofz .gt_font_normal {
   font-weight: normal;
 }
 
-#kgpkhteyem .gt_font_bold {
+#plawbfrofz .gt_font_bold {
   font-weight: bold;
 }
 
-#kgpkhteyem .gt_font_italic {
+#plawbfrofz .gt_font_italic {
   font-style: italic;
 }
 
-#kgpkhteyem .gt_super {
+#plawbfrofz .gt_super {
   font-size: 65%;
 }
 
-#kgpkhteyem .gt_footnote_marks {
+#plawbfrofz .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kgpkhteyem .gt_asterisk {
+#plawbfrofz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kgpkhteyem .gt_indent_1 {
+#plawbfrofz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kgpkhteyem .gt_indent_2 {
+#plawbfrofz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kgpkhteyem .gt_indent_3 {
+#plawbfrofz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kgpkhteyem .gt_indent_4 {
+#plawbfrofz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kgpkhteyem .gt_indent_5 {
+#plawbfrofz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3975,12 +3975,12 @@ and which are in Canada. We could use the data included in
 <span>        table.font.size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>        table_body.hlines.color <span class="op">=</span> <span class="st">"transparent"</span>,</span>
 <span>        <span class="op">)</span></span></code></pre></div>
-<div id="nontjwrbha" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="phabiwsizs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#nontjwrbha .gt_table {
+#phabiwsizs .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4005,7 +4005,7 @@ and which are in Canada. We could use the data included in
   border-left-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_heading {
+#phabiwsizs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4017,7 +4017,7 @@ and which are in Canada. We could use the data included in
   border-right-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_title {
+#phabiwsizs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4029,7 +4029,7 @@ and which are in Canada. We could use the data included in
   border-bottom-width: 0;
 }
 
-#nontjwrbha .gt_subtitle {
+#phabiwsizs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4041,13 +4041,13 @@ and which are in Canada. We could use the data included in
   border-top-width: 0;
 }
 
-#nontjwrbha .gt_bottom_border {
+#phabiwsizs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_col_headings {
+#phabiwsizs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4062,7 +4062,7 @@ and which are in Canada. We could use the data included in
   border-right-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_col_heading {
+#phabiwsizs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4082,7 +4082,7 @@ and which are in Canada. We could use the data included in
   overflow-x: hidden;
 }
 
-#nontjwrbha .gt_column_spanner_outer {
+#phabiwsizs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4094,15 +4094,15 @@ and which are in Canada. We could use the data included in
   padding-right: 4px;
 }
 
-#nontjwrbha .gt_column_spanner_outer:first-child {
+#phabiwsizs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nontjwrbha .gt_column_spanner_outer:last-child {
+#phabiwsizs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nontjwrbha .gt_column_spanner {
+#phabiwsizs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4114,7 +4114,7 @@ and which are in Canada. We could use the data included in
   width: 100%;
 }
 
-#nontjwrbha .gt_group_heading {
+#phabiwsizs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4139,7 +4139,7 @@ and which are in Canada. We could use the data included in
   vertical-align: middle;
 }
 
-#nontjwrbha .gt_empty_group_heading {
+#phabiwsizs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4154,15 +4154,15 @@ and which are in Canada. We could use the data included in
   vertical-align: middle;
 }
 
-#nontjwrbha .gt_from_md > :first-child {
+#phabiwsizs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nontjwrbha .gt_from_md > :last-child {
+#phabiwsizs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nontjwrbha .gt_row {
+#phabiwsizs .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4181,7 +4181,7 @@ and which are in Canada. We could use the data included in
   overflow-x: hidden;
 }
 
-#nontjwrbha .gt_stub {
+#phabiwsizs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4194,7 +4194,7 @@ and which are in Canada. We could use the data included in
   padding-right: 5px;
 }
 
-#nontjwrbha .gt_stub_row_group {
+#phabiwsizs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4208,11 +4208,11 @@ and which are in Canada. We could use the data included in
   vertical-align: top;
 }
 
-#nontjwrbha .gt_row_group_first td {
+#phabiwsizs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nontjwrbha .gt_summary_row {
+#phabiwsizs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4222,16 +4222,16 @@ and which are in Canada. We could use the data included in
   padding-right: 5px;
 }
 
-#nontjwrbha .gt_first_summary_row {
+#phabiwsizs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_first_summary_row.thick {
+#phabiwsizs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nontjwrbha .gt_last_summary_row {
+#phabiwsizs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4241,7 +4241,7 @@ and which are in Canada. We could use the data included in
   border-bottom-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_grand_summary_row {
+#phabiwsizs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4251,7 +4251,7 @@ and which are in Canada. We could use the data included in
   padding-right: 5px;
 }
 
-#nontjwrbha .gt_first_grand_summary_row {
+#phabiwsizs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4261,11 +4261,11 @@ and which are in Canada. We could use the data included in
   border-top-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_striped {
+#phabiwsizs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nontjwrbha .gt_table_body {
+#phabiwsizs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4274,7 +4274,7 @@ and which are in Canada. We could use the data included in
   border-bottom-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_footnotes {
+#phabiwsizs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4288,7 +4288,7 @@ and which are in Canada. We could use the data included in
   border-right-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_footnote {
+#phabiwsizs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4297,7 +4297,7 @@ and which are in Canada. We could use the data included in
   padding-right: 5px;
 }
 
-#nontjwrbha .gt_sourcenotes {
+#phabiwsizs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4311,7 +4311,7 @@ and which are in Canada. We could use the data included in
   border-right-color: #D3D3D3;
 }
 
-#nontjwrbha .gt_sourcenote {
+#phabiwsizs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4319,64 +4319,64 @@ and which are in Canada. We could use the data included in
   padding-right: 5px;
 }
 
-#nontjwrbha .gt_left {
+#phabiwsizs .gt_left {
   text-align: left;
 }
 
-#nontjwrbha .gt_center {
+#phabiwsizs .gt_center {
   text-align: center;
 }
 
-#nontjwrbha .gt_right {
+#phabiwsizs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nontjwrbha .gt_font_normal {
+#phabiwsizs .gt_font_normal {
   font-weight: normal;
 }
 
-#nontjwrbha .gt_font_bold {
+#phabiwsizs .gt_font_bold {
   font-weight: bold;
 }
 
-#nontjwrbha .gt_font_italic {
+#phabiwsizs .gt_font_italic {
   font-style: italic;
 }
 
-#nontjwrbha .gt_super {
+#phabiwsizs .gt_super {
   font-size: 65%;
 }
 
-#nontjwrbha .gt_footnote_marks {
+#phabiwsizs .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#nontjwrbha .gt_asterisk {
+#phabiwsizs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nontjwrbha .gt_indent_1 {
+#phabiwsizs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nontjwrbha .gt_indent_2 {
+#phabiwsizs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nontjwrbha .gt_indent_3 {
+#phabiwsizs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nontjwrbha .gt_indent_4 {
+#phabiwsizs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nontjwrbha .gt_indent_5 {
+#phabiwsizs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4428,12 +4428,12 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
 <span>              columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">IDA</span>, <span class="va">MNT</span>, <span class="va">ORE</span>, <span class="va">WAS</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label<span class="op">=</span><span class="st">"Canada"</span>,</span>
 <span>              columns<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ABT</span>, <span class="va">BRC</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<div id="pqbsbydayc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fjrxbyvzen" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#pqbsbydayc .gt_table {
+#fjrxbyvzen .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4458,7 +4458,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-left-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_heading {
+#fjrxbyvzen .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4470,7 +4470,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-right-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_title {
+#fjrxbyvzen .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4482,7 +4482,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-bottom-width: 0;
 }
 
-#pqbsbydayc .gt_subtitle {
+#fjrxbyvzen .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4494,13 +4494,13 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-top-width: 0;
 }
 
-#pqbsbydayc .gt_bottom_border {
+#fjrxbyvzen .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_col_headings {
+#fjrxbyvzen .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4515,7 +4515,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-right-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_col_heading {
+#fjrxbyvzen .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4535,7 +4535,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   overflow-x: hidden;
 }
 
-#pqbsbydayc .gt_column_spanner_outer {
+#fjrxbyvzen .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4547,15 +4547,15 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 4px;
 }
 
-#pqbsbydayc .gt_column_spanner_outer:first-child {
+#fjrxbyvzen .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pqbsbydayc .gt_column_spanner_outer:last-child {
+#fjrxbyvzen .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pqbsbydayc .gt_column_spanner {
+#fjrxbyvzen .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4567,7 +4567,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   width: 100%;
 }
 
-#pqbsbydayc .gt_group_heading {
+#fjrxbyvzen .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4592,7 +4592,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   vertical-align: middle;
 }
 
-#pqbsbydayc .gt_empty_group_heading {
+#fjrxbyvzen .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4607,15 +4607,15 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   vertical-align: middle;
 }
 
-#pqbsbydayc .gt_from_md > :first-child {
+#fjrxbyvzen .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pqbsbydayc .gt_from_md > :last-child {
+#fjrxbyvzen .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pqbsbydayc .gt_row {
+#fjrxbyvzen .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4634,7 +4634,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   overflow-x: hidden;
 }
 
-#pqbsbydayc .gt_stub {
+#fjrxbyvzen .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4647,7 +4647,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 5px;
 }
 
-#pqbsbydayc .gt_stub_row_group {
+#fjrxbyvzen .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4661,11 +4661,11 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   vertical-align: top;
 }
 
-#pqbsbydayc .gt_row_group_first td {
+#fjrxbyvzen .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pqbsbydayc .gt_summary_row {
+#fjrxbyvzen .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4675,16 +4675,16 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 5px;
 }
 
-#pqbsbydayc .gt_first_summary_row {
+#fjrxbyvzen .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_first_summary_row.thick {
+#fjrxbyvzen .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pqbsbydayc .gt_last_summary_row {
+#fjrxbyvzen .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4694,7 +4694,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-bottom-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_grand_summary_row {
+#fjrxbyvzen .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4704,7 +4704,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 5px;
 }
 
-#pqbsbydayc .gt_first_grand_summary_row {
+#fjrxbyvzen .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4714,11 +4714,11 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-top-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_striped {
+#fjrxbyvzen .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pqbsbydayc .gt_table_body {
+#fjrxbyvzen .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4727,7 +4727,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-bottom-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_footnotes {
+#fjrxbyvzen .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4741,7 +4741,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-right-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_footnote {
+#fjrxbyvzen .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4750,7 +4750,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 5px;
 }
 
-#pqbsbydayc .gt_sourcenotes {
+#fjrxbyvzen .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4764,7 +4764,7 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   border-right-color: #D3D3D3;
 }
 
-#pqbsbydayc .gt_sourcenote {
+#fjrxbyvzen .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4772,64 +4772,64 @@ Enter <code><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="e
   padding-right: 5px;
 }
 
-#pqbsbydayc .gt_left {
+#fjrxbyvzen .gt_left {
   text-align: left;
 }
 
-#pqbsbydayc .gt_center {
+#fjrxbyvzen .gt_center {
   text-align: center;
 }
 
-#pqbsbydayc .gt_right {
+#fjrxbyvzen .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pqbsbydayc .gt_font_normal {
+#fjrxbyvzen .gt_font_normal {
   font-weight: normal;
 }
 
-#pqbsbydayc .gt_font_bold {
+#fjrxbyvzen .gt_font_bold {
   font-weight: bold;
 }
 
-#pqbsbydayc .gt_font_italic {
+#fjrxbyvzen .gt_font_italic {
   font-style: italic;
 }
 
-#pqbsbydayc .gt_super {
+#fjrxbyvzen .gt_super {
   font-size: 65%;
 }
 
-#pqbsbydayc .gt_footnote_marks {
+#fjrxbyvzen .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#pqbsbydayc .gt_asterisk {
+#fjrxbyvzen .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pqbsbydayc .gt_indent_1 {
+#fjrxbyvzen .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pqbsbydayc .gt_indent_2 {
+#fjrxbyvzen .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pqbsbydayc .gt_indent_3 {
+#fjrxbyvzen .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pqbsbydayc .gt_indent_4 {
+#fjrxbyvzen .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pqbsbydayc .gt_indent_5 {
+#fjrxbyvzen .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

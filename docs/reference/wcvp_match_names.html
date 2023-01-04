@@ -18,7 +18,7 @@ on any remaining unmatched names."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -84,28 +84,30 @@ on any remaining unmatched names.</p>
 <span>  id_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  author_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  join_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fuzzy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  fuzzy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  progress_bar <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>names_df</dt>
-<dd><p>a data frame of names for matching.</p></dd>
+<dd><p>Data frame of names for matching.</p></dd>
 
 
 <dt>wcvp_names</dt>
-<dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code>, names will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+<dd><p>Data frame of taxonomic names from WCVP version 7 or later.
+If <code>NULL</code> (the default), names will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 
 <dt>name_col</dt>
-<dd><p>the column in <code>names_df</code> that has the taxon name for matching.</p></dd>
+<dd><p>Character. The column in <code>names_df</code> that has the taxon name
+for matching.</p></dd>
 
 
 <dt>id_col</dt>
-<dd><p>a column in <code>names_df</code> with a unique ID for each name. Will be
-created from the row number if not provided.</p></dd>
+<dd><p>Character. A column in <code>names_df</code> with a unique ID for each
+name. Will be created from the row number if not provided.</p></dd>
 
 
 <dt>author_col</dt>
@@ -114,13 +116,18 @@ matching. Set to <code>NULL</code> to match with no author string.</p></dd>
 
 
 <dt>join_cols</dt>
-<dd><p>a character vector of name parts to make the taxon name,
+<dd><p>Character. A vector of name parts to make the taxon name,
 if <code>name_col</code> is not provided.</p></dd>
 
 
 <dt>fuzzy</dt>
-<dd><p>whether or not fuzzy matching should be used for names that could
-not be matched exactly.</p></dd>
+<dd><p>Logical; whether or not fuzzy matching should be used for names
+that could not be matched exactly.</p></dd>
+
+
+<dt>progress_bar</dt>
+<dd><p>Logical. Show progress bar when matching? Defaults to
+<code>TRUE</code>; should be changed to <code>FALSE</code> if used in a markdown report.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -137,8 +144,9 @@ unless a column specifying the author string is provided (as <code>author_col</c
 taxon name, but must be supplied in the order you want them joined
 (e.g. <code>c("genus", "species", "infra_rank", "infra")</code>).</p>
 <p>Fuzzy matching uses a combination of phonetic and edit distance matching,
-and can optionally be turned off.</p>
-<p>The WCVP can be loaded for matching from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p>
+and can optionally be turned off using <code>fuzzy=FALSE</code>.</p>
+<p>The WCVP can be loaded for matching from <code>[rWCVPdata::wcvp_names]</code>.</p>
+<p>See <a href="https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html" class="external-link">here</a> for an example workflow.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -159,15 +167,15 @@ and can optionally be turned off.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using the `scientificName` column</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No author information supplied - matching on taxon name only</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Exact matching 20 names</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Exact matching  names</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 11 of 20 names</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 11 of  names</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Fuzzy matching 9 names</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■                          </span>  17% | ETA: 29s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 15s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA: 11s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■                          </span>  17% | ETA: 12s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 12s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA: 10s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■      </span>  83% | ETA:  5s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -208,14 +216,14 @@ and can optionally be turned off.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Exact matching 20 names</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 11 of 15 names</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 11 of 20 names</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Fuzzy matching 9 names</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■                          </span>  17% | ETA: 18s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 15s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA: 11s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■      </span>  83% | ETA:  5s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■                          </span>  17% | ETA: 13s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 11s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA:  9s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■      </span>  83% | ETA:  4s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 7 of 9 names</span>

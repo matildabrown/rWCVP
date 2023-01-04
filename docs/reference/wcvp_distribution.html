@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_distribution</span><span class="op">(</span></span>
 <span>  <span class="va">taxon</span>,</span>
-<span>  taxon.rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
+<span>  taxon_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
 <span>  native <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  introduced <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  extinct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -90,59 +90,59 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>taxon</dt>
-<dd><p>Character. The taxon to be mapped.</p></dd>
+<dd><p>Character. The taxon to be mapped. Must be provided.</p></dd>
 
 
-<dt>taxon.rank</dt>
+<dt>taxon_rank</dt>
 <dd><p>Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value in <code>taxon</code>.</p></dd>
 
 
 <dt>native</dt>
-<dd><p>Logical. Include native range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include native range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>introduced</dt>
-<dd><p>Logical. Include introduced range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include introduced range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>extinct</dt>
-<dd><p>Logical. Include extinct range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include extinct range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>location_doubtful</dt>
 <dd><p>Logical. Include occurrences that are thought to be
-doubtful? Defaults to TRUE.</p></dd>
+doubtful? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>wcvp_names</dt>
 <dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code>, names will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+If <code>NULL</code> (the default), names will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 
 <dt>wcvp_distributions</dt>
 <dd><p>A data frame of distributions from WCVP version 7 or later.
-If <code>NULL</code>, distributions will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+If <code>NULL</code> (the default), distributions will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>sf data.frame containing the range polygon/s of the taxon.</p>
+<p>Simple features (<code>sf</code>) data frame containing the range polygon/s of the taxon.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Where <code>taxon.rank</code> is higher than species, the distribution of the whole group will be returned, not individual species within that group. This also applies when toggling options - for example, introduced occurrences will only be included if they are outside the native range, regardless of whether <code>native=TRUE</code> or <code>native=FALSE</code>. To plot extinctions, introductions or doubtful occurrences within the native range, the <code>wcvp_summary</code> and <code>wcvp_occ_mat</code> functions can be used.</p>
+    <p>Where <code>taxon_rank</code> is higher than species, the distribution of the whole
+group will be returned, not individual species within that group. This also applies when
+toggling options - for example, introduced occurrences will only be included if they are
+outside the native range, regardless of whether <code>native=TRUE</code> or <code>native=FALSE</code>.
+To identify extinctions, introductions or doubtful occurrences within the native range,
+the <code>wcvp_summary</code> and <code>wcvp_occ_mat</code> functions can be used.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution</span><span class="op">(</span><span class="st">"Callitris"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not using the latest version of WCVP.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> You should either:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> update `rWCVPdata`</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> download the latest WCVP from</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;</span><a href="http://sftp.kew.org/pub/data-repositories/WCVP/wcvp_v9_jun_2022.zip" class="external-link"><span style="color: #0000BB; font-style: italic;">http://sftp.kew.org/pub/data-repositories/WCVP/wcvp_v9_jun_2022.zip</span></a><span style="color: #0000BB; font-style: italic;">&gt;</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution</span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="wcvp_distribution_map.html">wcvp_distribution_map</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-plt img"><img src="wcvp_distribution-1.png" alt="" width="700" height="433"></span>

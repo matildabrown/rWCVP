@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -77,17 +77,19 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_checklist</span><span class="op">(</span></span>
 <span>  taxon <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  taxon.rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
+<span>  taxon_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
 <span>  area <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  synonyms <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  render.report <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  render_report <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  native <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  introduced <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  extinct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  location_doubtful <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  report.filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  report.dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  report.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alphabetical"</span>, <span class="st">"taxonomic"</span><span class="op">)</span>,</span>
+<span>  hybrids <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  infraspecies <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  report_filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  report_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  report_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alphabetical"</span>, <span class="st">"taxonomic"</span><span class="op">)</span>,</span>
 <span>  wcvp_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  wcvp_distributions <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -99,7 +101,7 @@
 <dd><p>Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).</p></dd>
 
 
-<dt>taxon.rank</dt>
+<dt>taxon_rank</dt>
 <dd><p>Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in <code>taxon</code>. Must be specified unless taxon is <code>NULL</code>.</p></dd>
 
 
@@ -111,8 +113,8 @@
 <dd><p>Logical. Include synonyms in checklist (see Details)? Defaults to <code>TRUE</code>.</p></dd>
 
 
-<dt>render.report</dt>
-<dd><p>Logical. Render the checklist as a markdown report? Defaults to FALSE.</p></dd>
+<dt>render_report</dt>
+<dd><p>Logical. Render the checklist as a markdown report? Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>native</dt>
@@ -131,46 +133,56 @@
 <dd><p>Logical. Include species occurrences flagged as <code>location_doubtful</code>? Defaults to <code>TRUE</code>.</p></dd>
 
 
-<dt>report.filename</dt>
+<dt>hybrids</dt>
+<dd><p>Logical. Include hybrid species in checklist? Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt>infraspecies</dt>
+<dd><p>Logical. Include hybrid species in checklist? Defaults to <code>TRUE</code>.</p></dd>
+
+
+<dt>report_filename</dt>
 <dd><p>Character. Name for the HTML file. Defaults to taxon_area_type.html</p></dd>
 
 
-<dt>report.dir</dt>
+<dt>report_dir</dt>
 <dd><p>Character. Directory for the HTML file to be saved in. Must be provided by user.</p></dd>
 
 
-<dt>report.type</dt>
-<dd><p>Character; one of "alphabetical" or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?</p></dd>
+<dt>report_type</dt>
+<dd><p>Character; one of "alphabetical" (the default) or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?</p></dd>
 
 
 <dt>wcvp_names</dt>
 <dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code>, names will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+If <code>NULL</code> (the default), names will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 
 <dt>wcvp_distributions</dt>
 <dd><p>A data frame of distributions from WCVP version 7 or later.
-If <code>NULL</code>, distributions will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+If <code>NULL</code> (the default), distributions will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>Data.frame with filtered data and, if render.report=TRUE. a report HTML file.</p>
+<p>Data frame with filtered data and, if <code>render_report=TRUE</code>. a report HTML file.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>The <code>synonyms</code> argument can be used to limit names to those that are Accepted. If <code>synonyms = TRUE</code> then invalid, illegitimate and other non-accepted names are also included (i.e., the checklist is not limited to names for which <code>taxon_status == "Synonym"</code>).
-Two styles of checklist are supported in <code>rWCVP</code> - alphabetical and taxonomic. In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name. For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).</p>
+Two styles of checklist are supported in <code>rWCVP</code> - alphabetical and taxonomic.
+In an alphabetical checklist, all names are arranged alphabetically with accepted names in bold, and synonyms are followed by their accepted name.
+For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#These examples take &gt;10 seconds to run.</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrtaceae"</span>, taxon.rank<span class="op">=</span><span class="st">"family"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Ferns"</span>, taxon.rank<span class="op">=</span><span class="st">"higher"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"New Zealand"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrtaceae"</span>, taxon_rank<span class="op">=</span><span class="st">"family"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Ferns"</span>, taxon_rank<span class="op">=</span><span class="st">"higher"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"New Zealand"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

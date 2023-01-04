@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -139,15 +139,15 @@ the data in the slot named <code>$Summary</code>. It’s this
 <span><span class="co">#&gt;  $ Taxon                               : NULL</span></span>
 <span><span class="co">#&gt;  $ Area                                : chr "the world"</span></span>
 <span><span class="co">#&gt;  $ Grouping_variable                   : chr "area_code_l3"</span></span>
-<span><span class="co">#&gt;  $ Total_number_of_species             : num 351038</span></span>
+<span><span class="co">#&gt;  $ Total_number_of_species             : num 344124</span></span>
 <span><span class="co">#&gt;  $ Number_of_regionally_endemic_species: NULL</span></span>
 <span><span class="co">#&gt;  $ Summary                             : tibble [369 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ area_code_l3: chr [1:369] "KEN" "TAN" "UGA" "AZO" ...</span></span>
-<span><span class="co">#&gt;   ..$ Native      : num [1:369] 6363 9682 4722 540 1622 ...</span></span>
-<span><span class="co">#&gt;   ..$ Endemic     : num [1:369] 446 1553 63 68 649 ...</span></span>
-<span><span class="co">#&gt;   ..$ Introduced  : num [1:369] 492 524 298 363 709 233 521 10 173 345 ...</span></span>
+<span><span class="co">#&gt;   ..$ Native      : num [1:369] 6355 9674 4718 527 1516 ...</span></span>
+<span><span class="co">#&gt;   ..$ Endemic     : num [1:369] 443 1550 63 59 550 73 117 3 11 50 ...</span></span>
+<span><span class="co">#&gt;   ..$ Introduced  : num [1:369] 490 523 297 353 697 229 512 10 171 343 ...</span></span>
 <span><span class="co">#&gt;   ..$ Extinct     : num [1:369] 3 4 1 2 7 3 1 0 5 9 ...</span></span>
-<span><span class="co">#&gt;   ..$ Total       : num [1:369] 6869 10229 5028 908 2344 ...</span></span>
+<span><span class="co">#&gt;   ..$ Total       : num [1:369] 6859 10220 5023 885 2226 ...</span></span>
 <span><span class="co">#&gt;   ..$ region      : chr [1:369] "East Tropical Africa" "East Tropical Africa" "East Tropical Africa" "Macaronesia" ...</span></span></code></pre></div>
 <p>We could display this using <code>wcvp_summary_gt</code> but that’s
 going to be a big table, so let’s skip straight to plotting.</p>
@@ -242,12 +242,12 @@ produce a table of the top ten.</p>
 <span>    decimals <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Joining, by = c("LEVEL3_NAM", "LEVEL3_COD", "LEVEL2_COD", "LEVEL1_COD")</span></span></code></pre></div>
-<div id="gsyopzrqmk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hadlkwetmg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gsyopzrqmk .gt_table {
+#hadlkwetmg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -272,7 +272,7 @@ produce a table of the top ten.</p>
   border-left-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_heading {
+#hadlkwetmg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -284,7 +284,7 @@ produce a table of the top ten.</p>
   border-right-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_title {
+#hadlkwetmg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -296,7 +296,7 @@ produce a table of the top ten.</p>
   border-bottom-width: 0;
 }
 
-#gsyopzrqmk .gt_subtitle {
+#hadlkwetmg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -308,13 +308,13 @@ produce a table of the top ten.</p>
   border-top-width: 0;
 }
 
-#gsyopzrqmk .gt_bottom_border {
+#hadlkwetmg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_col_headings {
+#hadlkwetmg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -329,7 +329,7 @@ produce a table of the top ten.</p>
   border-right-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_col_heading {
+#hadlkwetmg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -349,7 +349,7 @@ produce a table of the top ten.</p>
   overflow-x: hidden;
 }
 
-#gsyopzrqmk .gt_column_spanner_outer {
+#hadlkwetmg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -361,15 +361,15 @@ produce a table of the top ten.</p>
   padding-right: 4px;
 }
 
-#gsyopzrqmk .gt_column_spanner_outer:first-child {
+#hadlkwetmg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gsyopzrqmk .gt_column_spanner_outer:last-child {
+#hadlkwetmg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gsyopzrqmk .gt_column_spanner {
+#hadlkwetmg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -381,7 +381,7 @@ produce a table of the top ten.</p>
   width: 100%;
 }
 
-#gsyopzrqmk .gt_group_heading {
+#hadlkwetmg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -406,7 +406,7 @@ produce a table of the top ten.</p>
   vertical-align: middle;
 }
 
-#gsyopzrqmk .gt_empty_group_heading {
+#hadlkwetmg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -421,15 +421,15 @@ produce a table of the top ten.</p>
   vertical-align: middle;
 }
 
-#gsyopzrqmk .gt_from_md > :first-child {
+#hadlkwetmg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gsyopzrqmk .gt_from_md > :last-child {
+#hadlkwetmg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gsyopzrqmk .gt_row {
+#hadlkwetmg .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -448,7 +448,7 @@ produce a table of the top ten.</p>
   overflow-x: hidden;
 }
 
-#gsyopzrqmk .gt_stub {
+#hadlkwetmg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -461,7 +461,7 @@ produce a table of the top ten.</p>
   padding-right: 5px;
 }
 
-#gsyopzrqmk .gt_stub_row_group {
+#hadlkwetmg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -475,11 +475,11 @@ produce a table of the top ten.</p>
   vertical-align: top;
 }
 
-#gsyopzrqmk .gt_row_group_first td {
+#hadlkwetmg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gsyopzrqmk .gt_summary_row {
+#hadlkwetmg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -489,16 +489,16 @@ produce a table of the top ten.</p>
   padding-right: 5px;
 }
 
-#gsyopzrqmk .gt_first_summary_row {
+#hadlkwetmg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_first_summary_row.thick {
+#hadlkwetmg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gsyopzrqmk .gt_last_summary_row {
+#hadlkwetmg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -508,7 +508,7 @@ produce a table of the top ten.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_grand_summary_row {
+#hadlkwetmg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -518,7 +518,7 @@ produce a table of the top ten.</p>
   padding-right: 5px;
 }
 
-#gsyopzrqmk .gt_first_grand_summary_row {
+#hadlkwetmg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -528,11 +528,11 @@ produce a table of the top ten.</p>
   border-top-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_striped {
+#hadlkwetmg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gsyopzrqmk .gt_table_body {
+#hadlkwetmg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -541,7 +541,7 @@ produce a table of the top ten.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_footnotes {
+#hadlkwetmg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -555,7 +555,7 @@ produce a table of the top ten.</p>
   border-right-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_footnote {
+#hadlkwetmg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -564,7 +564,7 @@ produce a table of the top ten.</p>
   padding-right: 5px;
 }
 
-#gsyopzrqmk .gt_sourcenotes {
+#hadlkwetmg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -578,7 +578,7 @@ produce a table of the top ten.</p>
   border-right-color: #D3D3D3;
 }
 
-#gsyopzrqmk .gt_sourcenote {
+#hadlkwetmg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -586,64 +586,64 @@ produce a table of the top ten.</p>
   padding-right: 5px;
 }
 
-#gsyopzrqmk .gt_left {
+#hadlkwetmg .gt_left {
   text-align: left;
 }
 
-#gsyopzrqmk .gt_center {
+#hadlkwetmg .gt_center {
   text-align: center;
 }
 
-#gsyopzrqmk .gt_right {
+#hadlkwetmg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gsyopzrqmk .gt_font_normal {
+#hadlkwetmg .gt_font_normal {
   font-weight: normal;
 }
 
-#gsyopzrqmk .gt_font_bold {
+#hadlkwetmg .gt_font_bold {
   font-weight: bold;
 }
 
-#gsyopzrqmk .gt_font_italic {
+#hadlkwetmg .gt_font_italic {
   font-style: italic;
 }
 
-#gsyopzrqmk .gt_super {
+#hadlkwetmg .gt_super {
   font-size: 65%;
 }
 
-#gsyopzrqmk .gt_footnote_marks {
+#hadlkwetmg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gsyopzrqmk .gt_asterisk {
+#hadlkwetmg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gsyopzrqmk .gt_indent_1 {
+#hadlkwetmg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gsyopzrqmk .gt_indent_2 {
+#hadlkwetmg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gsyopzrqmk .gt_indent_3 {
+#hadlkwetmg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gsyopzrqmk .gt_indent_4 {
+#hadlkwetmg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gsyopzrqmk .gt_indent_5 {
+#hadlkwetmg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -657,7 +657,7 @@ produce a table of the top ten.</p>
 <tr class="gt_row_group_first">
 <td rowspan="2" class="gt_row gt_left gt_stub_row_group">PACIFIC</td>
 <td class="gt_row gt_left">Hawaii</td>
-<td class="gt_row gt_right">92.1%</td>
+<td class="gt_row gt_right">91.6%</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">New Caledonia</td>
@@ -670,11 +670,11 @@ produce a table of the top ten.</p>
 </tr>
 <tr>
 <td class="gt_row gt_left">Cape Provinces</td>
-<td class="gt_row gt_right">67.9%</td>
+<td class="gt_row gt_right">67.8%</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">St.Helena</td>
-<td class="gt_row gt_right">62.2%</td>
+<td class="gt_row gt_right">61.7%</td>
 </tr>
 <tr class="gt_row_group_first">
 <td rowspan="3" class="gt_row gt_left gt_stub_row_group">ASIA-TROPICAL</td>
@@ -692,12 +692,12 @@ produce a table of the top ten.</p>
 <tr class="gt_row_group_first">
 <td rowspan="1" class="gt_row gt_left gt_stub_row_group">AUSTRALASIA</td>
 <td class="gt_row gt_left">Western Australia</td>
-<td class="gt_row gt_right">67.3%</td>
+<td class="gt_row gt_right">67.2%</td>
 </tr>
 <tr class="gt_row_group_first">
 <td rowspan="1" class="gt_row gt_left gt_stub_row_group">SOUTHERN AMERICA</td>
 <td class="gt_row gt_left">Juan Fernández Is.</td>
-<td class="gt_row gt_right">51.9%</td>
+<td class="gt_row gt_right">51.3%</td>
 </tr>
 </tbody>
 </table>

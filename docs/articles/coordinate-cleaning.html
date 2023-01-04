@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@ with rWCVP</h1>
                         <h4 data-toc-skip class="author">Matilda
 Brown</h4>
             
-            <h4 data-toc-skip class="date">22 September, 2022</h4>
+            <h4 data-toc-skip class="date">04 January, 2023</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/matildabrown/rWCVP/blob/HEAD/vignettes/articles/coordinate-cleaning.Rmd" class="external-link"><code>vignettes/articles/coordinate-cleaning.Rmd</code></a></small>
       <div class="hidden name"><code>coordinate-cleaning.Rmd</code></div>
@@ -138,7 +138,7 @@ GBIF.</p>
 <span>                          hasCoordinate<span class="op">=</span><span class="cn">TRUE</span>, hasGeospatialIssue<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="st">"of"</span>, <span class="va">gbif_response</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">count</span>, <span class="st">"records downloaded."</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "1000 of 3505 records downloaded."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "1000 of 3468 records downloaded."</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="preparing-the-occurrences">Preparing the occurrences<a class="anchor" aria-label="anchor" href="#preparing-the-occurrences"></a>
@@ -171,12 +171,12 @@ one for coordinates in degrees longitude and latitude.</p>
 <p>Now we can use <code>rWCVP</code> to download the native distribution
 of our species.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">native_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris rhomboidea"</span>, taxon.rank<span class="op">=</span><span class="st">"species"</span>,</span>
+<code class="sourceCode R"><span><span class="va">native_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris rhomboidea"</span>, taxon_rank<span class="op">=</span><span class="st">"species"</span>,</span>
 <span>                                introduced<span class="op">=</span><span class="cn">FALSE</span>, extinct<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>                                location_doubtful<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>And take a look at it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_distribution_map.html">wcvp_distribution_map</a></span><span class="op">(</span><span class="va">native_range</span>, crop.map<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> </span>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_distribution_map.html">wcvp_distribution_map</a></span><span class="op">(</span><span class="va">native_range</span>, crop_map<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="coordinate-cleaning_files/figure-html/plot-native-1.png" width="700"></p>
 <p>And how do our occurrence records map onto the range?</p>

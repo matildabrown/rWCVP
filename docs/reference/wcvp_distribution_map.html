@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_distribution_map</span><span class="op">(</span></span>
 <span>  <span class="va">range</span>,</span>
-<span>  crop.map <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  crop_map <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  native <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  introduced <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  extinct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -88,35 +88,35 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>range</dt>
-<dd><p>sf object of the type output by <code><a href="wcvp_distribution.html">wcvp_distribution()</a></code>.</p></dd>
+<dd><p>Simple features (<code>sf</code>) data frame of the type output by <code><a href="wcvp_distribution.html">wcvp_distribution()</a></code>.</p></dd>
 
 
-<dt>crop.map</dt>
-<dd><p>Logical. Crop map extent to distribution? Defaults to FALSE.</p></dd>
+<dt>crop_map</dt>
+<dd><p>Logical. Crop map extent to distribution? Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>native</dt>
-<dd><p>Logical. Include native range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include native range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>introduced</dt>
-<dd><p>Logical. Include introduced range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include introduced range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>extinct</dt>
-<dd><p>Logical. Include extinct range? Defaults to TRUE.</p></dd>
+<dd><p>Logical. Include extinct range? Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>location_doubtful</dt>
 <dd><p>Logical. Include occurrences that are thought to be
-doubtful? Defaults to TRUE.</p></dd>
+doubtful? Defaults to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A <a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot</a> of the distribution.</p>
+<p>A <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot</a></code> of the distribution.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -126,22 +126,22 @@ https://powo.science.kew.org/), where green is native, purple is introduced, red
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-plt img"><img src="wcvp_distribution_map-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># now only the native range, and cropped to range extent</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>introduced<span class="op">=</span><span class="cn">FALSE</span>, crop.map<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>introduced<span class="op">=</span><span class="cn">FALSE</span>, crop_map<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-plt img"><img src="wcvp_distribution_map-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># now with different colours</span></span></span>
 <span class="r-in"><span><span class="co"># note that this taxon only has native and introduced occurrences, so only two colours are needed</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">+</span></span></span>
 <span class="r-in"><span><span class="co"># for polygons</span></span></span>
 <span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span><span class="co"># for points (islands)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="co"># for points (islands)</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for 'fill' is already present. Adding another scale for 'fill', which</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> will replace the existing scale.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for 'colour' is already present. Adding another scale for 'colour',</span>

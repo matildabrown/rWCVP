@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_occ_mat</span><span class="op">(</span></span>
 <span>  taxon <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  taxon.rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
+<span>  taxon_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"higher"</span><span class="op">)</span>,</span>
 <span>  area <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  native <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  introduced <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -94,7 +94,7 @@
 <dd><p>Character. One or many taxa to be included. Defaults to NULL (all species)</p></dd>
 
 
-<dt>taxon.rank</dt>
+<dt>taxon_rank</dt>
 <dd><p>Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in <code>taxon</code>. Must be specified unless taxon is <code>NULL</code>.</p></dd>
 
 
@@ -139,12 +139,12 @@ If <code>NULL</code>, distributions will be loaded from <a href="https://rdrr.io
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>See vignette "Generating occurrence matrices with rWCVP" for an example of how this output can be formatted for publication.</p>
+    <p>See <a href="https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html" class="external-link">here</a> for an example of how this output can be formatted for publication.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">wcvp_occ_mat</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon.rank<span class="op">=</span><span class="st">"genus"</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">wcvp_occ_mat</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>,</span></span>
 <span class="r-in"><span>area<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TAS"</span>, <span class="st">"VIC"</span>,<span class="st">"NSW"</span><span class="op">)</span>, introduced<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 37 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    plant_name_id taxon_name          NSW   TAS   VIC</span>

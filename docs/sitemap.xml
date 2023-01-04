@@ -34,22 +34,7 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/reference/exact_match.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fuzzy_match.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generate_checklist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generate_occurrence_matrix.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_area_name.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_distribution.html</loc>
   </url>
   <url>
     <loc>/reference/get_wgsrpd3_codes.html</loc>
@@ -58,13 +43,7 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/match_names.html</loc>
-  </url>
-  <url>
     <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_distribution.html</loc>
   </url>
   <url>
     <loc>/reference/powo_map.html</loc>
@@ -74,12 +53,6 @@
   </url>
   <url>
     <loc>/reference/redlist_example.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary_table.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary_table_gt.html</loc>
   </url>
   <url>
     <loc>/reference/taxonomic_mapping.html</loc>
@@ -104,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/wcvp_occ_mat.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wcvp_reformat.html</loc>
   </url>
   <url>
     <loc>/reference/wcvp_summary.html</loc>

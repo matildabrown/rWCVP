@@ -18,7 +18,7 @@ The WCVP can be loaded for matching from rWCVPdata::wcvp_names."><!-- mathjax --
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rWCVP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@ The WCVP can be loaded for matching from <a href="https://rdrr.io/pkg/rWCVPdata/
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_match_fuzzy</span><span class="op">(</span><span class="va">names_df</span>, <span class="va">wcvp_names</span>, <span class="va">name_col</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcvp_match_fuzzy</span><span class="op">(</span><span class="va">names_df</span>, <span class="va">wcvp_names</span>, <span class="va">name_col</span>, progress_bar <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">phonetic_match</span><span class="op">(</span><span class="va">names_df</span>, <span class="va">wcvp_names</span>, <span class="va">name_col</span><span class="op">)</span></span>
 <span></span>
@@ -87,16 +87,22 @@ The WCVP can be loaded for matching from <a href="https://rdrr.io/pkg/rWCVPdata/
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>names_df</dt>
-<dd><p>a data frame of names for matching.</p></dd>
+<dd><p>Data frame of names for matching.</p></dd>
 
 
 <dt>wcvp_names</dt>
-<dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code>, names will be loaded from <a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a>.</p></dd>
+<dd><p>Data frame of taxonomic names from WCVP version 7 or later.
+If <code>NULL</code> (the default), names will be loaded from <code><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">rWCVPdata::wcvp_names</a></code>.</p></dd>
 
 
 <dt>name_col</dt>
-<dd><p>the column in <code>names_df</code> that has the taxon name for matching.</p></dd>
+<dd><p>Character. The column in <code>names_df</code> that has the taxon name
+for matching.</p></dd>
+
+
+<dt>progress_bar</dt>
+<dd><p>Logical. Show progress bar when matching? Defaults to
+<code>TRUE</code>; should be changed to <code>FALSE</code> if used in a markdown report.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -109,7 +115,7 @@ If <code>NULL</code>, names will be loaded from <a href="https://rdrr.io/pkg/rWC
     <h2>Details</h2>
     <p>The <code>wcvp_match_fuzzy</code> function uses phonetic matching first and then finds
 the closest match based on edit distance for any remaining names.</p>
-<p>Phonetic matching uses <a href="https://rdrr.io/pkg/phonics/man/metaphone.html" class="external-link">phonics::metaphone</a> encoding with a maximum
+<p>Phonetic matching uses <a href="https://jameshoward.us/phonics-in-r/reference/metaphone.html" class="external-link">phonics::metaphone</a> encoding with a maximum
 code length of 20.</p>
 <p>Edit distance matching finds the closest match based on Levenshtein similarity,
 calculated by <a href="https://rdrr.io/pkg/RecordLinkage/man/strcmp.html" class="external-link">RecordLinkage::levenshteinSim</a>.</p>
@@ -126,8 +132,8 @@ calculated by <a href="https://rdrr.io/pkg/RecordLinkage/man/strcmp.html" class=
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">wcvp_names</a></span></span></span>
 <span class="r-in"><span><span class="fu">wcvp_match_fuzzy</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, <span class="st">"scientificName"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■                          </span>  17% | ETA: 29s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 17s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA: 12s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 14s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% | ETA: 10s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■      </span>  83% | ETA:  5s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -173,18 +179,18 @@ calculated by <a href="https://rdrr.io/pkg/RecordLinkage/man/strcmp.html" class=
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rWCVPdata/man/wcvp_names.html" class="external-link">wcvp_names</a></span></span></span>
 <span class="r-in"><span><span class="fu">edit_match</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, <span class="st">"scientificName"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■                             </span>   5% | ETA:  2m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■                           </span>  15% | ETA:  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■                         </span>  20% | ETA:  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■                       </span>  25% | ETA: 49s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■                      </span>  30% | ETA: 45s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  35% | ETA: 45s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■                   </span>  40% | ETA: 40s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span>  45% | ETA: 39s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 35s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■               </span>  55% | ETA: 32s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■             </span>  60% | ETA: 28s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  65% | ETA: 26s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■                             </span>   5% | ETA: 46s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■                           </span>  15% | ETA: 46s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■                         </span>  20% | ETA: 50s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■                       </span>  25% | ETA: 44s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■                      </span>  30% | ETA: 43s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  35% | ETA: 39s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■                   </span>  40% | ETA: 36s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span>  45% | ETA: 38s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 33s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■               </span>  55% | ETA: 30s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■             </span>  60% | ETA: 26s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  65% | ETA: 25s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■          </span>  70% | ETA: 22s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■         </span>  75% | ETA: 18s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■       </span>  80% | ETA: 14s</span>
