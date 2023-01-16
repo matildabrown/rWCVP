@@ -38,7 +38,8 @@ Suggests:
     testthat (>= 3.0.0),
     spdep
 VignetteBuilder: knitr
-URL: https://github.com/matildabrown/rWCVP
+URL: https://github.com/matildabrown/rWCVP,
+    https://matildabrown.github.io/rWCVP/
 BugReports: https://github.com/matildabrown/rWCVP/issues
 Config/testthat/edition: 3
 Remotes: 

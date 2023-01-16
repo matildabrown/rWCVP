@@ -3,9 +3,10 @@
 ^LICENSE\.md$
 ^\.github$
 ^README\.Rmd$
-^vignettes$
 ^docs$
 ^inst\extdata$
 ^man_backup\$
 ^inst\extdata\rl_assessment_details_20220725_version2022-1.csv$
 ^CRAN-SUBMISSION$
+^_pkgdown\.yml$
+^pkgdown$
