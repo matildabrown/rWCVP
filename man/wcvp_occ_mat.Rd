@@ -32,10 +32,10 @@ wcvp_occ_mat(
 \item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 }
 \value{
 A data.frame containing the \code{taxon_name} and \code{plant_name_id}

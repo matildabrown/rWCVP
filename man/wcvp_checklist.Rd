@@ -53,10 +53,10 @@ wcvp_checklist(
 \item{report_type}{Character; one of "alphabetical" (the default) or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL} (the default), distributions will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
 }
 \value{
 Data frame with filtered data and, if \code{render_report=TRUE}. a report HTML file.

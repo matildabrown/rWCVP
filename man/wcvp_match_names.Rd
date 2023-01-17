@@ -19,7 +19,7 @@ wcvp_match_names(
 \item{names_df}{Data frame of names for matching.}
 
 \item{wcvp_names}{Data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
 
 \item{name_col}{Character. The column in \code{names_df} that has the taxon name
 for matching.}
@@ -57,7 +57,7 @@ taxon name, but must be supplied in the order you want them joined
 Fuzzy matching uses a combination of phonetic and edit distance matching,
 and can optionally be turned off using \code{fuzzy=FALSE}.
 
-The WCVP can be loaded for matching from \verb{[rWCVPdata::wcvp_names]}.
+The WCVP can be loaded for matching from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.
 
 See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 }

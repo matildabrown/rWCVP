@@ -8,9 +8,9 @@
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to \code{TRUE}.
 #' @param location_doubtful Logical. Include species occurrences flagged as \code{location_doubtful}? Defaults to \code{TRUE}.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`].
+#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
-#'   If `NULL` (the default), distributions will be loaded from [`rWCVPdata::wcvp_names`].
+#'   If `NULL` (the default), distributions will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
 #' @param synonyms Logical. Include synonyms in checklist (see Details)? Defaults to \code{TRUE}.
 #' @param hybrids Logical. Include hybrid species in checklist? Defaults to `FALSE`.
 #' @param infraspecies Logical. Include hybrid species in checklist? Defaults to `TRUE`.

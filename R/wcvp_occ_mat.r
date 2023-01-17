@@ -8,9 +8,9 @@
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
 #' @param location_doubtful Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
-#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #'
 #' @details See \href{https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html}{here} for an example of how this output can be formatted for publication.
 #'

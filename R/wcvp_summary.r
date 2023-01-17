@@ -6,9 +6,9 @@
 #' @param grouping_var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
 #' @param hybrids Logical. Include hybrid species in counts? Defaults to FALSE.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
-#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon_rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table

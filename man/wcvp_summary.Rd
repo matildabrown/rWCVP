@@ -26,10 +26,10 @@ wcvp_summary(
 \item{hybrids}{Logical. Include hybrid species in counts? Defaults to FALSE.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 }
 \value{
 Data.frame with filtered data, or a \code{gt} table
