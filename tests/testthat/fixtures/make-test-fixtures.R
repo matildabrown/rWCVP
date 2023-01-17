@@ -1,4 +1,26 @@
+library(rWCVPdata)
 library(dplyr)
+
+fixture_dir <- "tests/testthat/fixtures"
+
+# wcvp extracts ----
+## names ----
+names <- rWCVPdata::wcvp_names
+
+wcvp_names_extract <- names |>
+  filter(genus == "Poa" | genus == "Myrcia")
+
+saveRDS(wcvp_names_extract, file=file.path(fixture_dir, "wcvp_names_extract.rds"))
+
+## distributions ----
+distributions <- rWCVPdata::wcvp_distributions
+
+wcvp_distributions_extract <- distributions |>
+  filter(plant_name_id %in% wcvp_names_extract$plant_name_id)
+
+saveRDS(wcvp_distributions_extract, file=file.path(fixture_dir, "wcvp_distributions_extract.rds"))
+
+# match data ----
 
 match_data <- tibble(
   taxonId=c("taxon1", "taxon2", "taxon3", "taxon4", "taxon5", "taxon6", "taxon7"),
@@ -18,6 +40,8 @@ match_data <- tibble(
               NA_character_),
   assessmentId = 1:7
 )
+
+saveRDS(match_data, file=file.path(fixture_dir, "match_data.rds"))
 
 lookup_data <- tibble(
   plant_name_id=c("435194-wcs", "130999-wcs", "130998-wcs", "534944-wcs",
@@ -45,3 +69,4 @@ lookup_data <- tibble(
                            "658189-az", "662772-az"),
   homotypic_synonym=c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
 )
+saveRDS(lookup_data, file=file.path(fixture_dir, "lookup_data.rds"))
