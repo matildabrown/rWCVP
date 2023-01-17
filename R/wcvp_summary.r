@@ -86,9 +86,9 @@ wcvp_summary <- function(taxon=NULL,
                                 , by="plant_name_id") %>%
       mutate(occurrence_type = .data$reg_occ_type,
              endemic = .data$area_endemic) %>%
-      select(-c(.data$continent_code_l1, .data$continent, .data$region_code_l2,
-                .data$region, .data$area_code_l3, .data$area, .data$introduced,
-                .data$extinct, .data$location_doubtful, .data$reg_occ_type)) %>%
+      select(-c("continent_code_l1", "continent", "region_code_l2",
+                "region", "area_code_l3", "area", "introduced",
+                "extinct", "location_doubtful", "reg_occ_type")) %>%
       unique()
 
   }
@@ -99,12 +99,12 @@ wcvp_summary <- function(taxon=NULL,
                         n.sp= c(nrow(unique(df %>%
                                               filter(.data$taxon_status == "Accepted",
                                                      .data$taxon_rank == "Species") %>%
-                                              select(.data$taxon_name))),
+                                              select("taxon_name"))),
                                 nrow(unique(df %>%
                                               filter(.data$taxon_status == "Accepted",
                                                      .data$taxon_rank == "Species",
                                                      .data$area_endemic == 1) %>%
-                                              select(.data$taxon_name))))) %>%
+                                              select("taxon_name"))))) %>%
     tidyr::pivot_wider(names_from=.data$cat, values_from = .data$n.sp)
 
 
@@ -126,26 +126,26 @@ wcvp_summary <- function(taxon=NULL,
                             filter(.data$taxon_status == "Accepted",
                                    .data$taxon_rank == "Species",
                                    .data$occurrence_type=="native" ) %>%
-                            select(.data$taxon_name)))
+                            select("taxon_name")))
     endemic <- nrow(unique(df_split[[i]] %>%
                              filter(.data$taxon_status == "Accepted",
                                     .data$taxon_rank == "Species",
                                     .data$endemic ==1 ) %>%
-                             select(.data$taxon_name)))
+                             select("taxon_name")))
     introduced <- nrow(unique(df_split[[i]] %>%
                                 filter(.data$taxon_status == "Accepted",
                                        .data$taxon_rank == "Species",
                                        .data$occurrence_type=="introduced" ) %>%
-                                select((.data$taxon_name))))
+                                select("taxon_name")))
     extinct <- nrow(unique(df_split[[i]] %>%
                              filter(.data$taxon_status == "Accepted",
                                     .data$taxon_rank == "Species",
                                     .data$occurrence_type=="extinct" ) %>%
-                             select(.data$taxon_name)))
+                             select("taxon_name")))
     total <- nrow(unique(df_split[[i]] %>%
                            filter(.data$taxon_status == "Accepted",
                                   .data$taxon_rank == "Species") %>%
-                           select(.data$taxon_name)))
+                           select("taxon_name")))
 
     summ_split[[i]] <- data.frame(group = df_split[[i]][1,grouping_var],
                                   cat=c("Native",
@@ -179,10 +179,10 @@ res <- summ %>%
                               Total=rep(0, times=length(zeroareas))
                               )
     res <- res %>% bind_rows(data_blanks) %>%
-   left_join(rWCVP::wgsrpd_mapping %>% select(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$LEVEL3_COD),by = c("area_code_l3"="LEVEL3_COD")) %>%
+   left_join(rWCVP::wgsrpd_mapping %>% select("LEVEL1_NAM", "LEVEL2_NAM", "LEVEL3_COD"),by = c("area_code_l3"="LEVEL3_COD")) %>%
    arrange(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$area_code_l3) %>%
    rename(region = .data$LEVEL2_NAM) %>%
-   select(-.data$LEVEL1_NAM) %>%
+   select(-"LEVEL1_NAM") %>%
    group_by(.data$region) %>%
    unique() %>%
    stats::na.omit()

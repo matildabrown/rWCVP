@@ -114,7 +114,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
            match_edit_distance=ifelse(is.na(.data$match_type), NA_real_, .data$match_edit_distance)) %>%
     add_count(.data[[name_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
-    select(-.data$n)
+    select(-"n")
 
   matches %>%
     format_output_(original_cols=original_names) %>%
@@ -154,7 +154,7 @@ edit_match <- function(names_df, wcvp_names, name_col){
 
   matches <-
     matches %>%
-    unnest(.data$match_info)
+    unnest("match_info")
 
   matches %>%
     left_join(

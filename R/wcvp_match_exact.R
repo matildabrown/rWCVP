@@ -59,7 +59,7 @@ wcvp_match_exact <- function(names_df, wcvp_names, name_col, author_col=NULL, id
            match_edit_distance=ifelse(is.na(.data$taxon_name), NA_real_, 0)) %>%
     add_count(.data[[id_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
-    select(-.data$n)
+    select(-"n")
 
   matches %>%
     format_output_(original_cols=original_names)

@@ -94,7 +94,7 @@ if (synonyms==FALSE) message("Generating a checklist of accepted species names o
 # get the full dataset to work with
 df <- left_join(wcvp_names, wcvp_distributions,by = "plant_name_id") %>%
       left_join(wcvp_names %>%
-                     select(.data$plant_name_id, accepted_name=.data$taxon_name),
+                     select("plant_name_id", "accepted_name"="taxon_name"),
                    by=c("accepted_plant_name_id"="plant_name_id"))
 
 #replace Unknown with blank in publication info
@@ -146,7 +146,7 @@ if (!is.null(area)){
     tidyr::pivot_wider(names_from = .data$in_geography, values_from = .data$counts) %>%
     filter(!is.na(.data$in.geography.TRUE)) %>%
     mutate(area_endemic = as.numeric(is.na(.data$in.geography.FALSE))) %>%
-    select(-c(.data$in.geography.FALSE, .data$in.geography.TRUE))
+    select(-c("in.geography.FALSE", "in.geography.TRUE"))
 
   df_sp <- df_summ$plant_name_id
 
