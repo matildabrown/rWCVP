@@ -22,8 +22,10 @@
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' }
 #'
 #' @family name matching functions
 #'
@@ -83,9 +85,11 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' phonetic_match(redlist_example, wcvp_names, "scientificName")
-#'
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  phonetic_match(redlist_example, wcvp_names, "scientificName")
+#' }
+#' 
 phonetic_match <- function(names_df, wcvp_names, name_col){
   original_names <- colnames(names_df)
   wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen=20, clean=FALSE)
@@ -135,9 +139,11 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' edit_match(redlist_example, wcvp_names, "scientificName")
-#'
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  edit_match(redlist_example, wcvp_names, "scientificName")
+#' }
+#' 
 edit_match <- function(names_df, wcvp_names, name_col){
   withr::local_options(list(cli.progress_show_after=2, cli.progress_clear=FALSE))
 
