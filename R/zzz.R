@@ -28,7 +28,7 @@
 }
 
 .wcvp_fresh <- function() {
-  wcvp_fresh <- rWCVPdata::check_wcvp_version(silent=TRUE)
+  wcvp_fresh <- rWCVPdata::wcvp_check_version(silent=TRUE)
   if (rlang::env_has(.pkgenv, "wcvp_fresh")) {
     return(invisible(NULL))
   } else {
@@ -38,7 +38,7 @@
   if (!wcvp_fresh) {
     msg <- NULL
     withCallingHandlers(
-      rWCVPdata::check_wcvp_version(),
+      rWCVPdata::wcvp_check_version(),
       message=function(m) {
         msg <<- conditionMessage(m)
         tryInvokeRestart("muffleMessage")

@@ -28,14 +28,16 @@ Exact matching of names to the WCVP, optionally using the author string to
 refine results.
 }
 \examples{
-wcvp_names <- rWCVPdata::wcvp_names
+\dontrun{
+ wcvp_names <- rWCVPdata::wcvp_names
 
-# including author string
-wcvp_match_exact(redlist_example, wcvp_names, "scientificName", author_col="authority",
-id_col = "assessmentId")
+ # including author string
+ wcvp_match_exact(redlist_example, wcvp_names, "scientificName", author_col="authority",
+ id_col = "assessmentId")
 
-# without author string
-wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
+ # without author string
+ wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
+}
 
 }
 \seealso{
