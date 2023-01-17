@@ -37,13 +37,20 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
   taxon_rank <- match.arg(taxon_rank)
 
   if(!is.null(taxon)){
-  if(taxon_rank == "order" &
-     !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(taxon_rank == "higher" &
-     !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
-   }
+    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+      cli_abort(c(
+        "Taxon not found.",
+        "Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`"
+      ))
+    }
+
+    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+      cli_abort(c(
+       "Taxon not found.",
+       "Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'"
+      ))
+    }
+  }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
@@ -54,7 +61,6 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
   show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
 
   suppressMessages(sf::sf_use_s2(FALSE))
-  wgsrpd3 <- rWCVPdata::wgsrpd3
 
   if(is.null(wcvp_distributions)){
     wcvp_distributions <- rWCVPdata::wcvp_distributions
@@ -78,21 +84,21 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
     right_join(wcvp_distributions, by="plant_name_id")
 
   range_cols <- c("area_code_l3", "introduced", "extinct", "location_doubtful")
-  if(taxon_rank=="species"){
+  if(taxon_rank == "species"){
     df <- filter(df, .data$taxon_name %in% taxon)
   }
-  if(taxon_rank=="genus"){
+  if(taxon_rank == "genus"){
     df <- filter(df, .data$genus %in% taxon)
   }
-  if(taxon_rank=="family"){
+  if(taxon_rank == "family"){
     df <- filter(df, .data$family %in% taxon)
   }
 
-  if(taxon_rank=="order"){
+  if(taxon_rank == "order"){
     df <- filter(df, .data$order %in% taxon)
   }
 
-  if(taxon_rank=="higher"){
+  if(taxon_rank == "higher"){
     df <- filter(df, .data$higher %in% taxon)
   }
   df <- select(df, all_of(range_cols))
@@ -103,12 +109,12 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
 
   wgsrpd3 %>%
     mutate(occurrence_type=case_when(
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, "area_code_l3"] ~ "location_doubtful",
+      .data$LEVEL3_COD %in% df[df$location_doubtful == 1,]$area_code_l3 ~ "location_doubtful",
       .data$LEVEL3_COD %in% df[df$location_doubtful == 0 &
                                  df$extinct == 0 &
-                                 df$introduced == 0, "area_code_l3"] ~ "native",
-      .data$LEVEL3_COD %in% df[df$extinct == 1, "area_code_l3"] ~ "extinct",
-      .data$LEVEL3_COD %in% df[df$introduced == 1, "area_code_l3"] ~ "introduced"
+                                 df$introduced == 0,]$area_code_l3 ~ "native",
+      .data$LEVEL3_COD %in% df[df$extinct == 1,]$area_code_l3 ~ "extinct",
+      .data$LEVEL3_COD %in% df[df$introduced == 1,]$area_code_l3 ~ "introduced"
     )) %>%
     filter(.data$occurrence_type %in% show_types)
 

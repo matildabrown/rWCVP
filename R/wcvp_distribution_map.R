@@ -76,15 +76,13 @@ wcvp_distribution_map <- function(range, crop_map=FALSE, native=TRUE, introduced
 #' @import ggplot2
 #' @export
 powo_map <- function(range_sf, centroids_sf) {
-  world <- rWCVPdata::wgsrpd3
-  coast <- rWCVPdata::coast
-
+  world <- wgsrpd3
+  
   color_breaks <- unique(range_sf$occurrence_type)
 
-  ggplot(world) +
+  p <- ggplot(world) +
     geom_sf(fill="white", col="gray90") +
     geom_sf(data=range_sf, aes_(fill=~occurrence_type), col="gray90") +
-    geom_sf(data=coast, fill="transparent", col="#89c7d5") +
     geom_sf(data=centroids_sf, aes_(col=~occurrence_type), size=2)+
     scale_fill_powo(breaks=color_breaks, name="Status") +
     scale_colour_powo(breaks=color_breaks) +
@@ -95,6 +93,12 @@ powo_map <- function(range_sf, centroids_sf) {
           axis.text = element_blank(),
           axis.ticks = element_blank())
 
+  if (rlang::is_installed("rWCVPdata")) {
+    coast <- rWCVPdata::coast
+    p <- p + geom_sf(data=coast, fill="transparent", col="#89c7d5")
+  }
+
+  p
 }
 
 #' POWO colour palette for range maps
