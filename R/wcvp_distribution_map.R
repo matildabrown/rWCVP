@@ -76,7 +76,7 @@ wcvp_distribution_map <- function(range, crop_map=FALSE, native=TRUE, introduced
 #' @import ggplot2
 #' @export
 powo_map <- function(range_sf, centroids_sf) {
-  world <- wgsrpd3
+  world <- rWCVP::wgsrpd3
   
   color_breaks <- unique(range_sf$occurrence_type)
 

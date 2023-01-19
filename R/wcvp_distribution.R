@@ -107,7 +107,7 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
     cli_abort("No distribution for that taxon. Are the rank and spelling both correct?")
   }
 
-  wgsrpd3 %>%
+  rWCVP::wgsrpd3 %>%
     mutate(occurrence_type=case_when(
       .data$LEVEL3_COD %in% df[df$location_doubtful == 1,]$area_code_l3 ~ "location_doubtful",
       .data$LEVEL3_COD %in% df[df$location_doubtful == 0 &
