@@ -7,7 +7,7 @@
 wcvp_occ_mat(
   taxon = NULL,
   taxon_rank = c("species", "genus", "family", "order", "higher"),
-  area = NULL,
+  area_codes = NULL,
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -21,7 +21,7 @@ wcvp_occ_mat(
 
 \item{taxon_rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
-\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
+\item{area_codes}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
 \item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.}
 

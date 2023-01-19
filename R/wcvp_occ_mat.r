@@ -2,7 +2,7 @@
 #'
 #' @param taxon Character. One or many taxa to be included. Defaults to NULL (all species)
 #' @param taxon_rank Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
-#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
+#' @param area_codes Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param native Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.
 #' @param introduced Logical. Include species occurrences flagged as introduced? Defaults to TRUE.
 #' @param extinct Logical. Include species occurrences flagged as extinct? Defaults to TRUE.
@@ -28,14 +28,14 @@
 #' area=c("TAS", "VIC","NSW"), introduced=FALSE)
 #'
 #'
-wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","order","higher"), area=NULL,
+wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","order","higher"), area_codes=NULL,
                           native=TRUE, introduced=TRUE,
                           extinct=TRUE, location_doubtful=TRUE,
                           wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
   taxon.rank <- match.arg(taxon_rank)
-  input.area <- area
+  input.area <- area_codes
 
   if(!is.null(taxon)){
   if(taxon.rank == "order" &
