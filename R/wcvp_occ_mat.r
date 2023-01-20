@@ -34,16 +34,19 @@ wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","
                           wcvp_names=NULL,
                           wcvp_distributions=NULL){
 
-  taxon.rank <- match.arg(taxon_rank)
-  input.area <- area_codes
+  taxon_rank <- match.arg(taxon_rank)
 
-  if(!is.null(taxon)){
-  if(taxon.rank == "order" &
-     !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(taxon.rank == "higher" &
-     !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+  if (! is.null(taxon)) {
+    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank can be viewed using",
+                  "{.code unique(taxonomic_mapping$order)}"))
+    }
+    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank are:",
+                  "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"))
+    }
   }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
@@ -59,56 +62,45 @@ wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
 
-  if (is.null(input.area)) {
+  if (is.null(area_codes)) {
     cli_alert_info("No area specified. Generating global occurrence matrix.")
-    input.area <- unique(rWCVP::wgsrpd_mapping$LEVEL3_COD)
+    area_codes <- unique(rWCVP::wgsrpd_mapping$LEVEL3_COD)
   }
+
   if (is.null(taxon)) cli_alert_info("No taxon specified. Generating occurrence matrix for all species.")
 
   wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
                  "family", "genus","species")
+  checklist <- suppressMessages(
+    wcvp_checklist(
+      taxon=taxon,
+      taxon_rank=taxon_rank,
+      area_codes=area_codes,
+      synonyms=FALSE,
+      infraspecies=FALSE,
+      native=native,
+      introduced=introduced,
+      extinct=extinct,
+      location_doubtful=location_doubtful
+    )
+  )
 
-  df <- wcvp_names %>%
-    select(all_of(wcvp_cols)) %>%
-    left_join(wcvp_distributions, by="plant_name_id") %>%
-    filter(.data$taxon_status %in% c("Accepted"),#not sure if should include unplaced names here
-           .data$taxon_rank == "Species")
+  occurrences <- checklist %>%
+    filter(.data$area_code_l3 %in% area_codes) %>%
+    distinct(.data$plant_name_id, .data$taxon_name, .data$area_code_l3) %>%
+    mutate(present = 1)
 
-  if(taxon.rank %in% c("order","higher")) {
-    df <- right_join(rWCVP::taxonomic_mapping, df, by="family")
-  }
+  if(nrow(occurrences) == 0) cli_abort("No occurrences in the input geography.")
 
-  if(!is.null(taxon)){
-    if(taxon.rank =="species"){
-        df <- filter(df, .data$taxon_name %in% taxon)
-    } else {
-    if  (!taxon %in% df[,taxon.rank]) cli_abort("Taxon not found. Are the rank and spelling correct?")
-    df <- df %>% filter(df[,taxon.rank] %in% taxon)
-    }
-  }
+  missing_areas <- setdiff(area_codes, occurrences$area_code_l3)
+  missing_mat <- matrix(0, nrow=n_distinct(occurrences$plant_name_id),
+                        ncol=length(missing_areas))
+  colnames(missing_mat) <- missing_areas
 
-  if(! native) df <- filter(df, .data$introduced == 1)
-  if(! introduced) df <- filter(df, .data$introduced == 0)
-  if(! extinct) df <- filter(df, .data$extinct == 0)
-  if(! location_doubtful) df <- filter(df, .data$location_doubtful == 0)
-
-  data_blank <- data.frame(t(data.frame(row.names = input.area, val=rep(0, times=length(input.area)))))
-
-  species_total <- df %>%
-    filter(.data$area_code_l3 %in% input.area) %>%
-    select("plant_name_id", "taxon_name", "area_code_l3") %>%
-    mutate(present = 1) %>%
+  occ_mat <- occurrences %>%
     pivot_wider(names_from="area_code_l3", values_from="present", values_fill=0) %>%
-    distinct() %>%
-    bind_rows(data_blank) %>% #add the zero-entry columns
-    filter(!is.na(.data$taxon_name))
+    bind_cols(as_tibble(missing_mat))
 
-  if(nrow(species_total)==0) cli_abort("No occurrences in the input geography.")
-
-  species_total[is.na(species_total)] <- 0
-  colorder <- c(1,2,order(colnames(species_total[,3:ncol(species_total)]))+2)
-  species_total <- species_total[,colorder] #rearrange area columns alphabetically
-
-  return(species_total)
-
+  occ_mat %>%
+    select("plant_name_id", "taxon_name", order(colnames(occ_mat)))
 }
