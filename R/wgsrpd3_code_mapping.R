@@ -62,7 +62,6 @@ get_wgsrpd3_codes <- function(geography, include_equatorial=NULL) {
 }
 
 
-
 #' Get area description from vector of area codes
 #'
 #' @param area_codes Character vector containing the set of codes to be mapped to a name.
@@ -70,140 +69,56 @@ get_wgsrpd3_codes <- function(geography, include_equatorial=NULL) {
 #' @return Character. Either a vector of length one, with a name for the set of
 #' Level 3 areas, or (if no name exists for that set of areas) the input vector of codes.
 #' @details Usually used as an inverse function for \code{get_wgsrpd3_codes}. Useful for condensing sets of codes for e.g. file names, plotting and table formatting.
+#'
+#' @import dplyr
+#' @import tidyr
+#'
 #' @export
 #'
 #' @examples get_area_name(get_wgsrpd3_codes("Brazil"))
 get_area_name <- function(area_codes){
 
-
   wgsrpd_mapping <- rWCVP::wgsrpd_mapping
-  global <- unique(wgsrpd_mapping$LEVEL3_COD[order(wgsrpd_mapping$LEVEL3_COD)])
-  nhi <-   c("ABT", "AFG", "ALA", "ALB", "ALG", "ALT", "ALU", "AMU", "AND",
-             "ARI", "ARK", "ARU", "ASK", "ASS", "AUT", "AZO", "BAH", "BAL",
-             "BAN", "BEN", "BER", "BGM", "BKN", "BLR", "BLT", "BLZ", "BOR",
-             "BRC", "BRY", "BUL", "BZN", "CAF", "CAL", "CAY", "CBD", "CHA",
-             "CHC", "CHH", "CHI", "CHM", "CHN", "CHQ", "CHS", "CHT", "CHX",
-             "CLM", "CMN", "CNT", "CNY", "COL", "CON", "COR", "COS", "CPI",
-             "CRL", "CTA", "CUB", "CVI", "CYP", "CZE", "DEL", "DEN", "DJI",
-             "DOM", "EAI", "ECU", "EGY", "EHM", "ELS", "EQG", "ERI", "ETH",
-             "FIN", "FLA", "FOR", "FRA", "FRG", "GAB", "GAL", "GAM", "GEO",
-             "GER", "GGI", "GHA", "GIL", "GNB", "GNL", "GRB", "GRC", "GST",
-             "GUA", "GUI", "GUY", "HAI", "HAW", "HBI", "HON", "HUN", "ICE",
-             "IDA", "ILL", "IND", "INI", "IOW", "IRE", "IRK", "IRN", "IRQ",
-             "ITA", "IVO", "JAM", "JAP", "KAM", "KAN", "KAZ", "KEN", "KGZ",
-             "KHA", "KOR", "KRA", "KRI", "KRY", "KTY", "KUR", "KUW", "KZN",
-             "LAB", "LAO", "LBR", "LBS", "LBY", "LDV", "LEE", "LIN", "LOU",
-             "MAG", "MAI", "MAN", "MAS", "MCS", "MDR", "MDV", "MIC", "MIN",
-             "MLI", "MLY", "MNT", "MOL", "MON", "MOR", "MRN", "MRS", "MRY",
-             "MSI", "MSO", "MTN", "MXC", "MXE", "MXG", "MXI", "MXN", "MXS",
-             "MXT", "MYA", "NBR", "NCA", "NCB", "NCS", "NDA", "NEB", "NEP",
-             "NET", "NEV", "NFL", "NGA", "NGR", "NIC", "NLA", "NNS", "NOR",
-             "NSC", "NUN", "NWH", "NWJ", "NWM", "NWT", "NWY", "OGA", "OHI",
-             "OKL", "OMA", "ONT", "ORE", "PAK", "PAL", "PAN", "PEI", "PEN",
-             "PHI", "POL", "POR", "PRM", "PUE", "QUE", "RHO", "ROM", "RUC",
-             "RUE", "RUN", "RUS", "RUW", "SAK", "SAR", "SAS", "SAU", "SCA",
-             "SCS", "SDA", "SEL", "SEN", "SIC", "SIE", "SIN", "SOC", "SOM",
-             "SPA", "SPA", "SRL", "SUD", "SUL", "SUM", "SUR", "SVA", "SWC",
-             "SWE", "SWI", "TAI", "TCI", "TCS", "TEN", "TEX", "THA", "TKM",
-             "TOG", "TRT", "TUE", "TUN", "TUR", "TVA", "TZK", "UGA", "UKR",
-             "UTA", "UZB", "VEN", "VER", "VIE", "VNA", "VRG", "WAK", "WAS",
-             "WDC", "WHM", "WIN", "WIS", "WSA", "WSB", "WVA", "WYO", "YAK",
-             "YEM", "YUG", "YUK", "ZAI")
-  nhe <-  c("ABT", "AFG", "ALA", "ALB", "ALG", "ALT", "ALU", "AMU", "AND",
-            "ARI", "ARK", "ARU", "ASK", "ASS", "AUT", "AZO", "BAH", "BAL",
-            "BAN", "BEN", "BER", "BGM", "BKN", "BLR", "BLT", "BLZ", "BRC",
-            "BRY", "BUL", "CAF", "CAL", "CAY", "CBD", "CHA", "CHC", "CHH",
-            "CHI", "CHM", "CHN", "CHQ", "CHS", "CHT", "CHX", "CMN", "CNT",
-            "CNY", "COL", "COR", "COS", "CPI", "CRL", "CTA", "CUB", "CVI",
-            "CYP", "CZE", "DEL", "DEN", "DJI", "DOM", "EAI", "EGY", "EHM",
-            "ELS", "EQG", "ERI", "ETH", "FIN", "FLA", "FOR", "FRA", "FRG",
-            "GAM", "GEO", "GER", "GHA", "GNB", "GNL", "GRB", "GRC", "GST",
-            "GUA", "GUI", "GUY", "HAI", "HAW", "HBI", "HON", "HUN", "ICE",
-            "IDA", "ILL", "IND", "INI", "IOW", "IRE", "IRK", "IRN", "IRQ",
-            "ITA", "IVO", "JAM", "JAP", "KAM", "KAN", "KAZ", "KGZ", "KHA",
-            "KOR", "KRA", "KRI", "KRY", "KTY", "KUR", "KUW", "KZN", "LAB",
-            "LAO", "LBR", "LBS", "LBY", "LDV", "LEE", "LOU", "MAG", "MAI",
-            "MAN", "MAS", "MCS", "MDR", "MIC", "MIN", "MLI", "MLY", "MNT",
-            "MON", "MOR", "MRN", "MRS", "MRY", "MSI", "MSO", "MTN", "MXC",
-            "MXE", "MXG", "MXI", "MXN", "MXS", "MXT", "MYA", "NBR", "NCA",
-            "NCB", "NCS", "NDA", "NEB", "NEP", "NET", "NEV", "NFL", "NGA",
-            "NGR", "NIC", "NLA", "NNS", "NOR", "NSC", "NUN", "NWH", "NWJ",
-            "NWM", "NWT", "NWY", "OGA", "OHI", "OKL", "OMA", "ONT", "ORE",
-            "PAK", "PAL", "PAN", "PEI", "PEN", "PHI", "POL", "POR", "PRM",
-            "PUE", "QUE", "RHO", "ROM", "RUC", "RUE", "RUN", "RUS", "RUW",
-            "SAK", "SAR", "SAS", "SAU", "SCA", "SCS", "SDA", "SEL", "SEN",
-            "SIC", "SIE", "SIN", "SOC", "SPA", "SPA", "SRL", "SUD", "SUR",
-            "SVA", "SWC", "SWE", "SWI", "TAI", "TCI", "TCS", "TEN", "TEX",
-            "THA", "TKM", "TOG", "TRT", "TUE", "TUN", "TUR", "TVA", "TZK",
-            "UKR", "UTA", "UZB", "VEN", "VER", "VIE", "VNA", "VRG", "WAK",
-            "WAS", "WDC", "WHM", "WIN", "WIS", "WSA", "WSB", "WVA", "WYO",
-            "YAK", "YEM", "YUG", "YUK")
-  shi <-  c("AGE", "AGS", "AGW", "ALD", "ANG", "ANT", "ASC", "ASP", "ATP",
-            "BIS", "BOL", "BOR", "BOT", "BOU", "BUR", "BZC", "BZE", "BZL",
-            "BZN", "BZS", "CAB", "CGS", "CKI", "CLC", "CLM", "CLN", "CLS",
-            "COM", "CON", "COO", "CPP", "CPV", "CRZ", "CTM", "DSV", "EAS",
-            "ECU", "FAL", "FIJ", "GAB", "GAL", "GGI", "GIL", "HMD", "JAW",
-            "JNF", "KEG", "KEN", "KER", "LES", "LIN", "LSI", "MAQ", "MAU",
-            "MCI", "MDG", "MDV", "MLW", "MOL", "MOZ", "MPE", "MRQ", "NAM",
-            "NAT", "NFK", "NRU", "NSW", "NTA", "NUE", "NWC", "NWG", "NZN",
-            "NZS", "OFS", "PAR", "PER", "PHX", "PIT", "QLD", "REU", "ROD",
-            "RWA", "SAM", "SCI", "SCZ", "SEY", "SGE", "SOA", "SOL", "SOM",
-            "SSA", "STH", "SUL", "SUM", "SWZ", "TAN", "TAS", "TDC", "TOK",
-            "TON", "TUA", "TUB", "TUV", "TVL", "UGA", "URU", "VAN", "VIC",
-            "WAL", "WAU", "XMS", "ZAI", "ZAM", "ZIM")
-  she <-  c("AGE", "AGS", "AGW", "ALD", "ANG", "ANT", "ASC", "ASP", "ATP",
-            "BIS", "BOL", "BOT", "BOU", "BUR", "BZC", "BZE", "BZL", "BZS",
-            "CAB", "CGS", "CKI", "CLC", "CLN", "CLS", "COM", "COO", "CPP",
-            "CPV", "CRZ", "CTM", "DSV", "EAS", "FAL", "FIJ", "HMD", "JAW",
-            "JNF", "KEG", "KER", "LES", "LSI", "MAQ", "MAU", "MCI", "MDG",
-            "MLW", "MOZ", "MPE", "MRQ", "NAM", "NAT", "NFK", "NRU", "NSW",
-            "NTA", "NUE", "NWC", "NWG", "NZN", "NZS", "OFS", "PAR", "PER",
-            "PHX", "PIT", "QLD", "REU", "ROD", "RWA", "SAM", "SCI", "SCZ",
-            "SEY", "SGE", "SOA", "SOL", "SSA", "STH", "SWZ", "TAN", "TAS",
-            "TDC", "TOK", "TON", "TUA", "TUB", "TUV", "TVL", "URU", "VAN",
-            "VIC", "WAL", "WAU", "XMS", "ZAM", "ZIM")
+  global <- sort(unique(wgsrpd_mapping$LEVEL3_COD))
 
- if(identical(area_codes[order(area_codes)],nhi)) return( "Northern Hemisphere (incl. equatorial Level 3 areas)")
- if(identical(area_codes[order(area_codes)],nhe)) return( "Northern Hemisphere (excl. equatorial Level 3 areas)")
- if(identical(area_codes[order(area_codes)],shi)) return( "Southern Hemisphere (incl. equatorial Level 3 areas)")
- if(identical(area_codes[order(area_codes)],she)) return( "Southern Hemisphere (excl. equatorial Level 3 areas)")
- if(identical(area_codes[order(area_codes)],global)) return( "Global")
 
-  levelnames <- c(LEVEL3_NAM = "Area (Level 3)",
-                  COUNTRY = "Country (Gallagher)",
-                  LEVEL2_NAM = "Region (Level 2)",
-                  LEVEL1_NAM = "Continent (Level 1)",
-                  HEMISPHERE = "Hemisphere"
+  if(setequal(area_codes, hemispheres$north_with_eq)) return( "Northern Hemisphere (incl. equatorial Level 3 areas)")
+  if(setequal(area_codes, hemispheres$north_without_eq)) return( "Northern Hemisphere (excl. equatorial Level 3 areas)")
+  if(setequal(area_codes, hemispheres$south_with_eq)) return( "Southern Hemisphere (incl. equatorial Level 3 areas)")
+  if(setequal(area_codes, hemispheres$south_without_eq)) return( "Southern Hemisphere (excl. equatorial Level 3 areas)")
+  if(setequal(area_codes, global)) return( "Global")
+
+  level_names <- c(
+    LEVEL3_NAM = "Area (Level 3)",
+    COUNTRY = "Country (Gallagher)",
+    LEVEL2_NAM = "Region (Level 2)",
+    LEVEL1_NAM = "Continent (Level 1)",
+    HEMISPHERE = "Hemisphere"
   )
 
-  levelvals <- wgsrpd_mapping %>%
-    dplyr::filter(.data$LEVEL3_COD %in% area_codes) %>%
-    dplyr::summarise(dplyr::across(1:8, function(x){length(unique(x))})) %>%
-    t() %>%
-    data.frame() %>%
-    purrr::set_names("n") %>%
-    dplyr::filter(n==1)
+  area_mapping <- filter(wgsrpd_mapping, .data$LEVEL3_COD %in% area_codes)
 
-  bestlevel <- names(levelnames)[which(names(levelnames) %in% rownames(levelvals))][1]
-  if(is.na(bestlevel)) {
+  levels_covered <- area_mapping %>%
+    summarise(across(everything(), n_distinct)) %>%
+    pivot_longer(everything(), names_to="level", values_to="n") %>%
+    filter(n == 1)
+
+  best_level <- intersect(names(level_names), levels_covered$level)[1]
+  if(is.na(best_level)) {
     cli_alert_info("No higher level name found. Returning original vector of area codes.")
     return(area_codes)
   }
 
-  bestlevelval <- wgsrpd_mapping %>%
-    dplyr::filter(.data$LEVEL3_COD %in% area_codes) %>%
-    dplyr::select(dplyr::any_of(bestlevel)) %>%
-    unique() %>%
-    dplyr::pull()
+  best_level_value <- unique(area_mapping[[best_level]])
 
- allcodesforname <-  wgsrpd_mapping %>%
-    dplyr::filter(dplyr::if_any(bestlevel) %in% bestlevelval) %>%
-    dplyr::arrange(.data$LEVEL3_COD) %>%
-    dplyr::pull(.data$LEVEL3_COD)
+ all_codes <-  wgsrpd_mapping %>%
+    filter(if_any(all_of(best_level), ~.x %in% best_level_value)) %>%
+    arrange(.data$LEVEL3_COD) %>%
+    pull(.data$LEVEL3_COD)
 
 
-  if(identical(allcodesforname, area_codes[order(area_codes)])) {
-    return(bestlevelval)
+  if(setequal(all_codes, area_codes)) {
+    return(best_level_value)
   } else {
     cli_alert_info("No higher level name found. Returning original area codes as string.")
     return(paste(area_codes, collapse = "-"))
