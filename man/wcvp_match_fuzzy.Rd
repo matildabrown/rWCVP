@@ -16,7 +16,7 @@ edit_match(names_df, wcvp_names, name_col)
 \item{names_df}{Data frame of names for matching.}
 
 \item{wcvp_names}{Data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL} (the default), names will be loaded from \code{\link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
 
 \item{name_col}{Character. The column in \code{names_df} that has the taxon name
 for matching.}
@@ -29,7 +29,7 @@ Match results from WCVP bound to the original data from \code{names_df}.
 }
 \description{
 Fuzzy matching to names in the WCVP using phonetic matching and edit distance.
-The WCVP can be loaded for matching from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.
+The WCVP can be loaded for matching from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.
 }
 \details{
 The \code{wcvp_match_fuzzy} function uses phonetic matching first and then finds
@@ -42,14 +42,20 @@ Edit distance matching finds the closest match based on Levenshtein similarity,
 calculated by \link[RecordLinkage:strcmp]{RecordLinkage::levenshteinSim}.
 }
 \examples{
-wcvp_names <- rWCVPdata::wcvp_names
-wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+\dontrun{
+ wcvp_names <- rWCVPdata::wcvp_names
+ wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+}
 
-wcvp_names <- rWCVPdata::wcvp_names
-phonetic_match(redlist_example, wcvp_names, "scientificName")
+\dontrun{
+ wcvp_names <- rWCVPdata::wcvp_names
+ phonetic_match(redlist_example, wcvp_names, "scientificName")
+}
 
-wcvp_names <- rWCVPdata::wcvp_names
-edit_match(redlist_example, wcvp_names, "scientificName")
+\dontrun{
+ wcvp_names <- rWCVPdata::wcvp_names
+ edit_match(redlist_example, wcvp_names, "scientificName")
+}
 
 }
 \seealso{

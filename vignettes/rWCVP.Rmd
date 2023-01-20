@@ -31,8 +31,12 @@ For the functions in rWCVP to work, you need to have access to a copy of the WCV
 
 One way to load the WCVP is to install the associated data package, rWCVPdata:
 
-```{r install-data, eval=FALSE}
-remotes::install_github("matildabrown/rWCVPdata")
+```{r install-data}
+if (! require(rWCVPdata)) {
+  install.packages("rWCVPdata", 
+                   repos=c("https://matildabrown.github.io/drat",
+                           "https://cloud.r-project.org"))
+}
 
 # taxonomy data
 names <- rWCVPdata::wcvp_names
@@ -47,7 +51,7 @@ If the data package isn't available, or you'd prefer to use a different version 
 names <- read_csv("/path/to/wcvp_names.csv")
 distributions <- read_csv("/path/to/wcvp_distributions.csv")
 
-checklist <- wcvp_checklist("Acacia", taxon.rank="genus", area="CPP",
+checklist <- wcvp_checklist("Acacia", taxon_rank="genus", area_codes="CPP",
                                 wcvp_names=names, wcvp_distributions=distributions)
 ```
 
@@ -64,7 +68,7 @@ These arguments can be combined in the `wcvp_checklist`, `wcvp_occ_mat`, and `wc
 
 ```{r filter-example}
 checklist <- wcvp_checklist("Myrtaceae", taxon_rank="family", 
-                                area=c("BZC", "BZN", "BZS", "BZE", "BZL"))
+                            area_codes=c("BZC", "BZN", "BZS", "BZE", "BZL"))
 ```
 
 ### A note on filtering by taxon

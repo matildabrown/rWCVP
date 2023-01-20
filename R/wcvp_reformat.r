@@ -14,8 +14,11 @@
 #' @importFrom rlang .data
 
 wcvp_reformat <- function(wcvp_local, version=NULL){
-  if(version != 9 &
-     version != "v9") cli::cli_abort("This function currently only supports v9.")
+  rlang::check_installed("rWCVPdata", reason="to use the data set `wcvp_names`")
+
+  if(version != 9 & version != "v9") {
+    cli::cli_abort("This function currently only supports v9.")
+  }
 
   colnames(wcvp_local)
 

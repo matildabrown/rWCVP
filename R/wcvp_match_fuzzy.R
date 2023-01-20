@@ -1,11 +1,11 @@
 #' Fuzzy (approximate) matching to the WCVP.
 #'
 #' Fuzzy matching to names in the WCVP using phonetic matching and edit distance.
-#' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names].
+#' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #'
 #' @param names_df Data frame of names for matching.
 #' @param wcvp_names Data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`].
+#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
 #' @param name_col Character. The column in `names_df` that has the taxon name
 #' for matching.
 #' @param progress_bar Logical. Show progress bar when matching? Defaults to
@@ -22,8 +22,10 @@
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' }
 #'
 #' @family name matching functions
 #'
@@ -83,9 +85,11 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' phonetic_match(redlist_example, wcvp_names, "scientificName")
-#'
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  phonetic_match(redlist_example, wcvp_names, "scientificName")
+#' }
+#' 
 phonetic_match <- function(names_df, wcvp_names, name_col){
   original_names <- colnames(names_df)
   wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen=20, clean=FALSE)
@@ -114,7 +118,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
            match_edit_distance=ifelse(is.na(.data$match_type), NA_real_, .data$match_edit_distance)) %>%
     add_count(.data[[name_col]]) %>%
     mutate(multiple_matches=.data$n > 1) %>%
-    select(-.data$n)
+    select(-"n")
 
   matches %>%
     format_output_(original_cols=original_names) %>%
@@ -135,9 +139,11 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #' @export
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
-#' edit_match(redlist_example, wcvp_names, "scientificName")
-#'
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
+#'  edit_match(redlist_example, wcvp_names, "scientificName")
+#' }
+#' 
 edit_match <- function(names_df, wcvp_names, name_col){
   withr::local_options(list(cli.progress_show_after=2, cli.progress_clear=FALSE))
 
@@ -154,7 +160,7 @@ edit_match <- function(names_df, wcvp_names, name_col){
 
   matches <-
     matches %>%
-    unnest(.data$match_info)
+    unnest("match_info")
 
   matches %>%
     left_join(

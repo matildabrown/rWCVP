@@ -2,14 +2,16 @@
 #'
 #' @param taxon Character. Taxon to be included. Defaults to NULL (no taxonomic filter; all taxa).
 #' @param taxon_rank Character. One of "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.
-#' @param area Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
+#' @param area_codes Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).
 #' @param grouping_var Character; one of \code{"area_code_l3", "genus", "family","order"} or \code{"higher"} specifying how the summary should be arranged. Defaults to \code{area_code_l3}.
 #' @param hybrids Logical. Include hybrid species in counts? Defaults to FALSE.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names].
+#'   If `NULL`, names will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
-#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names].
-#' @details Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon_rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
+#'   If `NULL`, distributions will be loaded from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
+#' @details
+#'  Valid values for rank 'higher' are 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'.
+#'  Note that grouping variable (if taxonomic) should be of a lower level than \code{taxon} and \code{taxon_rank} to produce a meaningful summary (i.e., it does not make sense to group a genus by genus, family or higher classification).
 #' Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 #' @return Data.frame with filtered data, or a \code{gt} table
 #'
@@ -23,7 +25,7 @@
 #'
 wcvp_summary <- function(taxon=NULL,
                           taxon_rank=c("species", "genus", "family","order","higher"), #species makes no sense
-                          area=NULL,
+                          area_codes=NULL,
                           grouping_var = c("area_code_l3","genus","family","order","higher"),
                           hybrids = FALSE,
                           wcvp_names=NULL,wcvp_distributions=NULL){
@@ -31,13 +33,17 @@ wcvp_summary <- function(taxon=NULL,
   taxon_rank <- match.arg(taxon_rank)
   grouping_var <- match.arg(grouping_var)
 
-  if(!is.null(taxon)){
-  if(taxon_rank == "order" &
-     !taxon %in% rWCVP::taxonomic_mapping$order) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`")
-  if(taxon_rank == "higher" &
-     !taxon %in% rWCVP::taxonomic_mapping$higher) cli_abort(
-       "Taxon not found. Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'")
+  if (! is.null(taxon)) {
+    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank can be viewed using",
+                  "{.code unique(taxonomic_mapping$order)}"))
+    }
+    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank are:",
+                  "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"))
+    }
   }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
@@ -48,169 +54,104 @@ wcvp_summary <- function(taxon=NULL,
   if (is.null(wcvp_distributions)) {
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
+
   if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
+  if (is.null(area_codes)) cli_alert_info("No area specified. Generating global summary.")
+  if (is.null(taxon)) cli_alert_info("No taxon specified. Generating summary of all species.")
 
-  if (is.null(area)) message("No area specified. Generating global summary.")
-  if (is.null(taxon)) message("No taxon specified. Generating summary of all species.")
-
-  df <- suppressMessages(wcvp_checklist(taxon=taxon, taxon_rank=taxon_rank,
-                                        area=area, hybrids=hybrids,
-                                        wcvp_names = wcvp_names, wcvp_distributions = wcvp_distributions))
-  input.area <- area
-
-
-  if(!"in_geography" %in% colnames(df)) {
-    df$in_geography <- 1
-    df$area_endemic <- 1
-  }
-
-  df <- df %>% filter(.data$taxon_rank=="Species",
-                      .data$taxon_status =="Accepted",
-                      .data$in_geography == TRUE)
-
-  if(grouping_var %in% c("order", "higher")){
-    if(!grouping_var %in% colnames(df)) right_join(rWCVP::taxonomic_mapping, df, by="family")
-  }
-
-  if(grouping_var %in% c("genus", "family", "order", "higher") & length(input.area>1)){
-    cli_alert_info("Aggregating occurrence types across input areas - see {.fun ?wcvp_summary} for details.")
-    occ_type_levels <- c("native", "introduced", "extinct", "location_doubful")
-    df <- df %>% left_join(df %>%
-                                  mutate(occurrence_type_num = as.numeric(factor(.data$occurrence_type, levels=occ_type_levels))) %>%
-                                  group_by(.data$plant_name_id) %>%
-                                  summarise(reg_occ_type = min(.data$occurrence_type_num)) %>%
-                                  mutate(reg_occ_type = occ_type_levels[.data$reg_occ_type])
-                                , by="plant_name_id") %>%
-      mutate(occurrence_type = .data$reg_occ_type,
-             endemic = .data$area_endemic) %>%
-      select(-c(.data$continent_code_l1, .data$continent, .data$region_code_l2,
-                .data$region, .data$area_code_l3, .data$area, .data$introduced,
-                .data$extinct, .data$location_doubtful, .data$reg_occ_type)) %>%
-      unique()
-
-  }
-
-
-  summ_df <- data.frame(area_code_l3="Region",
-                        cat=c("Total", "Endemic (to region)"),
-                        n.sp= c(nrow(unique(df %>%
-                                              filter(.data$taxon_status == "Accepted",
-                                                     .data$taxon_rank == "Species") %>%
-                                              select(.data$taxon_name))),
-                                nrow(unique(df %>%
-                                              filter(.data$taxon_status == "Accepted",
-                                                     .data$taxon_rank == "Species",
-                                                     .data$area_endemic == 1) %>%
-                                              select(.data$taxon_name))))) %>%
-    tidyr::pivot_wider(names_from=.data$cat, values_from = .data$n.sp)
-
-
-
-  if(is.null(input.area)) {
-    r.end.text <- NULL
-    input.area <- unique(df$area_code_l3)
-
+  if(is.null(area_codes)) {
+    area_codes <- unique(rWCVP::wgsrpd3$LEVEL3_COD)
+    area_name <- "the world"
   } else {
-    r.end.text <- as.numeric(summ_df[1,3])
+    area_name <- get_area_name(area_codes)
   }
 
-  df_split <- df %>%
-    group_by_at(grouping_var) %>%
-    group_split()
-  summ_split <- list()
-  for(i in 1:length(df_split)){
-    native <- nrow(unique(df_split[[i]] %>%
-                            filter(.data$taxon_status == "Accepted",
-                                   .data$taxon_rank == "Species",
-                                   .data$occurrence_type=="native" ) %>%
-                            select(.data$taxon_name)))
-    endemic <- nrow(unique(df_split[[i]] %>%
-                             filter(.data$taxon_status == "Accepted",
-                                    .data$taxon_rank == "Species",
-                                    .data$endemic ==1 ) %>%
-                             select(.data$taxon_name)))
-    introduced <- nrow(unique(df_split[[i]] %>%
-                                filter(.data$taxon_status == "Accepted",
-                                       .data$taxon_rank == "Species",
-                                       .data$occurrence_type=="introduced" ) %>%
-                                select((.data$taxon_name))))
-    extinct <- nrow(unique(df_split[[i]] %>%
-                             filter(.data$taxon_status == "Accepted",
-                                    .data$taxon_rank == "Species",
-                                    .data$occurrence_type=="extinct" ) %>%
-                             select(.data$taxon_name)))
-    total <- nrow(unique(df_split[[i]] %>%
-                           filter(.data$taxon_status == "Accepted",
-                                  .data$taxon_rank == "Species") %>%
-                           select(.data$taxon_name)))
+  checklist <- suppressMessages(
+    wcvp_checklist(
+      taxon=taxon,
+      taxon_rank=taxon_rank,
+      area_codes=area_codes,
+      hybrids=hybrids,
+      wcvp_names=wcvp_names,
+      wcvp_distributions=wcvp_distributions
+    )
+  )
 
-    summ_split[[i]] <- data.frame(group = df_split[[i]][1,grouping_var],
-                                  cat=c("Native",
-                                        "Endemic",
-                                        "Introduced",
-                                        "Extinct",
-                                        "Total"),
-                                  n.sp=c(native,
-                                         endemic,
-                                         introduced,
-                                         extinct,
-                                         total))
+  if(!"in_geography" %in% colnames(checklist)) {
+    checklist$in_geography <- TRUE
+    checklist$area_endemic <- TRUE
   }
 
-  summ <- do.call(rbind, summ_split)
+  checklist <- checklist %>%
+    filter(.data$taxon_rank=="Species",
+           .data$taxon_status == "Accepted",
+           .data$in_geography) %>%
+    filter(.data$area_code_l3 %in% area_codes)
 
+  occ_type_levels <- c("native", "introduced", "extinct", "location_doubful")
+  checklist$occurrence_type <- factor(checklist$occurrence_type, levels=occ_type_levels, ordered=TRUE)
 
+  if (grouping_var %in% c("order", "higher") & ! grouping_var %in% colnames(checklist)) {
+    checklist <- right_join(rWCVP::taxonomic_mapping, checklist, by="family")
+  }
 
-res <- summ %>%
-  tidyr::pivot_wider(names_from = .data$cat, values_from = .data$n.sp)
+  if (grouping_var %in% c("genus", "family", "order", "higher")) {
+    cli_alert_info("Aggregating occurrence types across input area ({.val {area_name}}) - see {.fun ?wcvp_summary} for details.")
 
+    checklist <- checklist %>%
+      group_by(.data$plant_name_id) %>%
+      slice_min(order_by=.data$occurrence_type, n=1, with_ties=FALSE) %>%
+      ungroup()
+  }
 
+  total_species <- n_distinct(checklist$taxon_name)
 
-  if(grouping_var== "area_code_l3") {
-    zeroareas <- input.area[!input.area %in% res$area_code_l3]
-    data_blanks <- data.frame(area_code_l3 = zeroareas,
-                              Native=rep(0, times=length(zeroareas)),
-                              Endemic=rep(0, times=length(zeroareas)),
-                              Introduced=rep(0, times=length(zeroareas)),
-                              Extinct=rep(0, times=length(zeroareas)),
-                              Total=rep(0, times=length(zeroareas))
-                              )
-    res <- res %>% bind_rows(data_blanks) %>%
-   left_join(rWCVP::wgsrpd_mapping %>% select(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$LEVEL3_COD),by = c("area_code_l3"="LEVEL3_COD")) %>%
-   arrange(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$area_code_l3) %>%
-   rename(region = .data$LEVEL2_NAM) %>%
-   select(-.data$LEVEL1_NAM) %>%
-   group_by(.data$region) %>%
-   unique() %>%
-   stats::na.omit()
+  summary_types <- checklist %>%
+    group_by(across(all_of(c(grouping_var, "occurrence_type")))) %>%
+    summarise(n=n_distinct(.data$taxon_name), .groups="drop") %>%
+    complete(.data$occurrence_type, !!sym(grouping_var), fill=list(n=0)) %>%
+    pivot_wider(names_from="occurrence_type", values_from="n", values_fill=0,
+                names_glue="{stringr::str_to_title(occurrence_type)}")
+
+  if (grouping_var == "area_code_l3") {
+    summary_endemic <- checklist %>%
+      group_by(across(all_of(grouping_var))) %>%
+      summarise(Endemic=sum(.data$endemic))
+
+    regional_endemics <- checklist %>%
+      distinct(.data$plant_name_id, .keep_all=TRUE) %>%
+      filter(.data$area_endemic) %>%
+      nrow()
   } else {
-     res <- res %>% arrange(vars(grouping_var))
-   }
+    summary_endemic <- checklist %>%
+      group_by(across(all_of(grouping_var))) %>%
+      summarise(Endemic=sum(.data$area_endemic))
 
-if(is.null(area)){
-  output.area <- "the world"
-} else {
-  output.area <- get_area_name(input.area)
+    regional_endemics <- sum(checklist$area_endemic, na.rm=TRUE)
   }
 
+  summary_total <- checklist %>%
+    group_by(across(all_of(grouping_var))) %>%
+    summarise(
+      Total=n_distinct(.data$taxon_name)
+    )
 
-x <- list(
-  Taxon = taxon,
-  Area = output.area,
-  Grouping_variable = grouping_var,
-  Total_number_of_species = as.numeric(summ_df[1,2]),
-  Number_of_regionally_endemic_species = r.end.text,
-  Summary = res %>% ungroup()
-)
+  summary <- summary_types %>%
+    left_join(summary_endemic, by=grouping_var) %>%
+    left_join(summary_total, by=grouping_var) %>%
+    select(all_of(grouping_var), "Native", "Endemic", "Introduced", "Extinct", "Total")
 
-
-
-
-  return(x)
-
+  list(
+    Taxon=taxon,
+    Area=area_name,
+    Grouping_variable=grouping_var,
+    Total_number_of_species=total_species,
+    Number_of_regionally_endemic_species=regional_endemics,
+    Summary=summary
+  )
 }
 
 

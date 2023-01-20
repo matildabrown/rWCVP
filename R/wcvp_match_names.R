@@ -23,7 +23,7 @@
 #'  Fuzzy matching uses a combination of phonetic and edit distance matching,
 #'  and can optionally be turned off using `fuzzy=FALSE`.
 #'
-#'  The WCVP can be loaded for matching from `[rWCVPdata::wcvp_names]`.
+#'  The WCVP can be loaded for matching from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
 #'
 #'  See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 #'
@@ -37,16 +37,18 @@
 #' @import cli
 #'
 #' @examples
-#' wcvp_names <- rWCVPdata::wcvp_names
+#' \dontrun{
+#'  wcvp_names <- rWCVPdata::wcvp_names
 #'
-#' # without author
-#' wcvp_match_names(redlist_example, wcvp_names, name_col="scientificName",
+#'  # without author
+#'  wcvp_match_names(redlist_example, wcvp_names, name_col="scientificName",
 #'             id_col="assessmentId")
 #'
-#' # with author
-#' wcvp_match_names(redlist_example, wcvp_names, name_col="scientificName",
+#'  # with author
+#'  wcvp_match_names(redlist_example, wcvp_names, name_col="scientificName",
 #'             id_col="assessmentId", author_col="authority")
-#'
+#' }
+#' 
 #' @family name matching functions
 #'
 wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, author_col=NULL,

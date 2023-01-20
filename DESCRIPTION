@@ -14,7 +14,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Imports: 
     cli,
     dplyr,
@@ -37,6 +37,8 @@ Suggests:
     knitr,
     testthat (>= 3.0.0),
     spdep
+Additional_repositories:
+  https://matildabrown.github.io/drat
 VignetteBuilder: knitr
 URL: https://github.com/matildabrown/rWCVP,
     https://matildabrown.github.io/rWCVP/
@@ -45,3 +47,5 @@ Config/testthat/edition: 3
 Remotes: 
     github::matildabrown/rWCVPdata
 Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 2.10)

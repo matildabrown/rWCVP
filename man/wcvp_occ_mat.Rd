@@ -7,7 +7,7 @@
 wcvp_occ_mat(
   taxon = NULL,
   taxon_rank = c("species", "genus", "family", "order", "higher"),
-  area = NULL,
+  area_codes = NULL,
   native = TRUE,
   introduced = TRUE,
   extinct = TRUE,
@@ -21,7 +21,7 @@ wcvp_occ_mat(
 
 \item{taxon_rank}{Character. One of "species", "genus", "family", "order" or "higher", giving the rank of the value/s in \code{taxon}. Must be specified unless taxon is \code{NULL}.}
 
-\item{area}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
+\item{area_codes}{Character. One or many WGSPRD level 3 region codes. Defaults to \code{NULL} (global).}
 
 \item{native}{Logical. Include species occurrences not flagged as introduced, extinct or doubtful? Defaults to TRUE.}
 
@@ -32,10 +32,10 @@ wcvp_occ_mat(
 \item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \link[rWCVPdata:wcvp_names]{rWCVPdata::wcvp_names}.}
+If \code{NULL}, distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
 }
 \value{
 A data.frame containing the \code{taxon_name} and \code{plant_name_id}
