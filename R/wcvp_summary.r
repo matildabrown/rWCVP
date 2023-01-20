@@ -33,21 +33,22 @@ wcvp_summary <- function(taxon=NULL,
   taxon_rank <- match.arg(taxon_rank)
   grouping_var <- match.arg(grouping_var)
 
-
-  if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
-    cli_abort(c("Taxon not found.",
-                "Possible values for this taxonomic rank can be viewed using",
-                "{.code unique(taxonomic_mapping$order)}"))
-  }
-  if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
-    cli_abort(c("Taxon not found.",
-                "Possible values for this taxonomic rank are:",
-                "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"))
+  if (! is.null(taxon)) {
+    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank can be viewed using",
+                  "{.code unique(taxonomic_mapping$order)}"))
+    }
+    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+      cli_abort(c("Taxon not found.",
+                  "Possible values for this taxonomic rank are:",
+                  "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"))
+    }
   }
 
   if (is.null(wcvp_names) | is.null(wcvp_distributions)) {
     .wcvp_available()
-    #.wcvp_fresh()
+    .wcvp_fresh()
   }
 
   if (is.null(wcvp_distributions)) {
@@ -78,7 +79,6 @@ wcvp_summary <- function(taxon=NULL,
       wcvp_distributions=wcvp_distributions
     )
   )
-
 
   if(!"in_geography" %in% colnames(checklist)) {
     checklist$in_geography <- TRUE
@@ -143,32 +143,6 @@ wcvp_summary <- function(taxon=NULL,
     left_join(summary_endemic, by=grouping_var) %>%
     left_join(summary_total, by=grouping_var) %>%
     select(all_of(grouping_var), "Native", "Endemic", "Introduced", "Extinct", "Total")
-
-  if (grouping_var == "area_code_l3") {
-    summary$area_code_l3 <- factor(summary$area_code_l3, levels=area_codes)
-
-    summary <- summary %>%
-      complete(.data$area_code_l3) %>%
-      replace_na(list(
-        Native=0,
-        Endemic=0,
-        Introduced=0,
-        Extinct=0,
-        Total=0
-      ))
-
-    summary <- summary %>%
-      left_join(
-        rWCVP::wgsrpd_mapping %>%
-          distinct(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$LEVEL3_COD),
-        by=c("area_code_l3"="LEVEL3_COD")
-      ) %>%
-      arrange(.data$LEVEL1_NAM, .data$LEVEL2_NAM, .data$area_code_l3) %>%
-      select(-"LEVEL1_NAM") %>%
-      rename("region"="LEVEL2_NAM")
-  } else {
-     summary <- arrange(summary, across(all_of(grouping_var)))
-  }
 
   list(
     Taxon=taxon,
