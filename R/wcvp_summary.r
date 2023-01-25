@@ -183,7 +183,7 @@ wcvp_summary_gt <- function(x){
     tab_sub <- paste0("Total number of species: ", as.numeric(x$Total_number_of_species))
   }
 
-  if(x$Grouping_variable =="area_code_l3") colnames(x$Summary)[colnames(x$Summary)=="area_code_l3"] <- "area"
+  if(x$Grouping_variable =="area_code_l3") colnames(x$Summary)[colnames(x$Summary)=="area_code_l3"] <- "region"
   colnames(x$Summary) <- str_to_sentence(colnames(x$Summary))
 
   if(x$Grouping_variable =="area_code_l3") {
