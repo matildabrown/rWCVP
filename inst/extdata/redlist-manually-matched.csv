@@ -1,201 +1,91 @@
 scientific_name,authority,category,original_match_type,resolved_match_type,manually_entered_name,Notes
 Actinodaphne leiantha,Hook.f.,DD,Fuzzy (edit distance),Manually matched,Actinodaphne leiophylla,NA
-Agelanthus patelii,Polhill & Timberlake,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Angraecum scroticalcar,(Verlynde & Ramandimbisoa) Hermans & Verlynde,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Angraecum edmundi,(Bosser ex Verlynde &amp; Ramandimbisoa) Hermans &amp; Verynde,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Angraecum scroticalcar,(Verlynde &amp; Ramandimbisoa) Hermans &amp; Verlynde,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
 Bembicia uniflora,(H.Perrier) Capuron,LC,Fuzzy (edit distance),Manually matched,Bembiciopsis uniflora,NA
+Bursera zapoteca,Rzed. &amp; Medina,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
 Camellia dongnaiensis,Orel,CR,Fuzzy (phonetic),Manually matched,Camellia dongnaicensis,NA
 Carex caespitosa,Nees,LC,Fuzzy (phonetic),Manually matched,Carex cespitosa,NA
 Carex macrostyla,Lapeyr.,LC,Fuzzy (phonetic),Manually matched,Carex macrostylos,NA
-Carex phylloscirpoides,"Saldivia, S.Gebauer, Mart√≠n-Bravo & Jim.-Mej√≠as",CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia adamsiana,M.G.Gilbert,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia arenarioides,M.G.Gilbert,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia chimanimaniensis,M.G.Gilbert ined.,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia mucheveensis,M.G.Gilbert,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia mwinilungensis,M.G.Gilbert,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia robinsonii,M.G.Gilbert,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Citharexylum ligustrinum,Van Houtte,NT,Fuzzy (edit distance),Manually matched,Citharexylum ligustrifolium,NA
+Conophytum hermarium,(S.A.Hammer) S.A.Hammer,CR,Fuzzy (edit distance),Manually matched,Conophytum smorenskaduenseÔøΩsubsp.ÔøΩhermarium,NA
 Crataegus sericea,Dzekov,DD,Fuzzy (phonetic),Manually matched,Crataegus monogyna var. sericea,NA
-Ctenodon marginatus,"(Benth.) D.B.O.S.Cardoso, P.L.R.Moraes & H.C.Lima",LC,Fuzzy (edit distance),Manually matched,Aeschynomene marginata,NA
-Ctenodon mucronulatus,(Benth. ex Hemsl.) A. Delgado,LC,Fuzzy (edit distance),Manually matched,Drepanocarpus mucronulatus,NA
 Cyanotis namuliensis,Faden ined.,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Cybianthus pittieri,G.Agostini & Pipoly,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Dalbergia benthamiana,"(Kuntze) E.V.Williams, Govaerts & Vatanpar.",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Dalbergia gloveri,"Q. Luke, ined.",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Dalbergia obcordata,"N.Wilding, Phillipson & Crameri",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros ambanjensis,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros arenicola,"A.G.Linan, G.E.Schatz & Lowry",VU,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros bardotiae,"H.N.Rakouth, G.E.Schatz & Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros beankensis,"A.G.Linan, G.E.Schatz & Lowry",LC,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros beberonnii,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros betamponensis,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros crassifolia,"A.G.Linan, G.E.Schatz & Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros crassipedicellata,G.E.Schatz & Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros darainensis,G.E.Schatz & Lowry,EN,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros falyi,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros fasimainty,G.E.Schatz & Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros grandiflora,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Cybianthus pittieri,G.Agostini &amp; Pipoly,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Dalbergia benthamiana,"(Kuntze) E.V.Williams, Govaerts &amp; Vatanpar.",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Dalbergia obcordata,"N.Wilding, Phillipson &amp; Crameri",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros amborelloides,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros andohahelensis,G.E.Schatz &amp; Lowry,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros antsirananae,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros arenicola,"A.G.Linan, G.E.Schatz &amp; Lowry",VU,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros bardotiae,"H.N.Rakouth, G.E.Schatz &amp; Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros beankensis,"A.G.Linan, G.E.Schatz &amp; Lowry",LC,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros beberonnii,G.E.Schatz &amp; Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros courrierensis,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros crassipedicellata,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros falyi,G.E.Schatz &amp; Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros fasimainty,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros grandiflora,G.E.Schatz &amp; Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros littoralis,Capuron ex G.E.Schatz &amp; Lowry,VU,Fuzzy (phonetic),New/undescribed species,NA,NA
 Diospyros lowryi,G.E.Schatz,EN,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros malandy,"H.N.Rakouth, Randrianaivo, G.E.Schatz & Lowry",EN,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros mandenensis,"H.N.Rakouth, G.E.Schatz & Lowry",VU,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros melanocarpa,G.E.Schatz & Lowry.,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros mimusops,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros nitidifolia,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros obscurinerva,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros olivieri,"A.G.Linan, G.E.Schatz & Lowry",CR,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros orbicularis,G.E.Schatz & Lowry,VU,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros orientalis,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros pascalii,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros phillipsonii,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros plicaticalyx,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros pseudolanceolata,G.E.Schatz & Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros quadrangularis,G.E.Schatz & Lowry,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros ramisonii,G.E.Schatz & Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros ratovosonii,"H.N.Rakouth, G.E.Schatz & Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros retusa,"H.N.Rakouth, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros sennenni,G.E.Schatz & Lowry,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros tampolensis,"H.N.Rakouth, G.E.Schatz & Lowry",CR,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros malandy,"H.N.Rakouth, Randrianaivo, G.E.Schatz &amp; Lowry",EN,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros mandenensis,"H.N.Rakouth, G.E.Schatz &amp; Lowry",VU,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros manongarivensis,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros mimusops,G.E.Schatz &amp; Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros obscurinerva,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros olivieri,"A.G.Linan, G.E.Schatz &amp; Lowry",CR,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros orbicularis,G.E.Schatz &amp; Lowry,VU,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros orientalis,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (phonetic),New/undescribed species,NA,NA
+Diospyros pascalii,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros plicaticalyx,"A.G.Linan, G.E.Schatz &amp; Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros pseudolanceolata,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros pubiramulis,"A.G.Linan, G.E.Schatz &amp; Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros quadrangularis,G.E.Schatz &amp; Lowry,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros ramisonii,G.E.Schatz &amp; Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros ratovosonii,"H.N.Rakouth, G.E.Schatz &amp; Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Diospyros taikintana,G.E.Schatz &amp; Lowry,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
 Drimia porphyrostachys,(Baker) A.G.Mill.,DD,Fuzzy (edit distance),No valid match found,NA,NA
-Eucalyptus alatissima,(Brooker & Hopper) D.Nicolle,LC,Fuzzy (edit distance),Manually matched,Eucalyptus kingsmillii subsp. alatissima,NA
+Echinopsis haematacantha,(Speg.) D.R.Hunt,LC,Fuzzy (phonetic),Manually matched,Echinopsis haematantha,NA
+Elymus alopex,B. Salomon,LC,Fuzzy (edit distance),No valid match found,NA,NA
+Eucalyptus alatissima,(Brooker &amp; Hopper) D.Nicolle,LC,Fuzzy (edit distance),Manually matched,Eucalyptus kingsmillii subsp. alatissima,NA
 Eugenia arianae,Barroso,CR,Fuzzy (edit distance),No valid match found,NA,"Barazilian Myrt, not sure"
+Eugenia tabouensis,Aubrev.,VU,Fuzzy (edit distance),No valid match found,NA,NA
+Euphorbia neorugosa,Bruyns,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
 Euphorbia neospinescens,Bruyns,CR,Fuzzy (edit distance),No valid match found,NA,NA
+Freziera velutina,A.L.Weitzman,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
 Geissanthus pinchinchana,(Lundell) Pipoly,EN,Fuzzy (edit distance),No valid match found,NA,Ecuadorian Primulac - maybe Geissanthus pichinchae but different author string
 Grewia androyensis,Capuron,LC,Fuzzy (edit distance),No valid match found,NA,In GBIF
 Grewia barorum,Capuron,LC,Fuzzy (edit distance),No valid match found,NA,In GBIF
 Grewia delphinensis,Capuron,VU,Fuzzy (edit distance),No valid match found,NA,In GBIF
-Grewia mahafaliensis,Capuron,EN,Fuzzy (edit distance),No valid match found,NA,In GBIF
-Guettarda wayaensis,R.O.Gardner,CR,Fuzzy (edit distance),No valid match found,NA,in IPNI- published 1997 https://www.tandfonline.com/doi/abs/10.1080/0028825X.1987.10410172
-Hebepetalum humiriifolia,(Planch.) Benth.,LC,Fuzzy (edit distance),No valid match found,NA,NA
-Heliotropium aff. wagneri,[non Vierh.],VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum forbesii,(Ridl.) Lowry & G.M.Plunkett,LC,Fuzzy (edit distance),Manually matched,Schefflera forbesii,NA
-Heptapleurum hellwigianum,(Harms) Lowry & G.M.Plunkett,DD,Fuzzy (edit distance),Manually matched,Schefflera hellwigiana,NA
-Heptapleurum insculptum,(Frodin) Lowry & G.M.Plunkett,VU,Fuzzy (edit distance),Manually matched,Schefflera insculpta,NA
-Heptapleurum insigne,(C.N.Ho) Lowry & G.M.Plunkett,EN,Fuzzy (edit distance),Manually matched,Schefflera insignis,NA
-Heptapleurum ischyrocephalum,(Harms) Lowry & G.M.Plunkett,VU,Fuzzy (edit distance),Manually matched,Schefflera ischyrocephala,NA
-Heptapleurum kuchingense,(Merr.) Lowry & G.M.Plunkett,CR,Fuzzy (edit distance),Manually matched,Schefflera kuchingensis,NA
-Heptapleurum leiophyllum,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera leiophylla,NA
-Heptapleurum leroyianum,(C.B.Shang) Lowry & G.M.Plunkett,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum littoreum,(Seem.) Lowry & G.M.Plunkett,LC,Fuzzy (edit distance),Manually matched,Schefflera littorea,NA
-Heptapleurum lucescens,(Blume) Lowry & G.M.Plunkett,LC,Fuzzy (edit distance),Manually matched,Schefflera lucescens,NA
-Heptapleurum macranthum,(Merr.) G.M.Plunkett & Lowry,CR,Fuzzy (phonetic),New/undescribed species,NA,NA
-Heptapleurum merrillii,(Elmer) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),Manually matched,Schefflera merrillii,NA
-Heptapleurum minutipetiolatum,(Frodin) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),Manually matched,Schefflera minutipetiolata,NA
-Heptapleurum mitragerum,"(Frodin & Puad) Puad, T.J.Barkman, G.M.Plunkett & Lowry",LC,Fuzzy (edit distance),Manually matched,Schefflera mitragera,NA
-Heptapleurum monticola,(Ridl.) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera monticola,NA
-Heptapleurum morobeanum,(Harms) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera morobeana,NA
-Heptapleurum multifoliolatum,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (phonetic),Manually matched,Schefflera multifoliolata,NA
-Heptapleurum multinervium,(H.L.Li) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera multinervia,NA
-Heptapleurum oblongifolium,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum obtusifolium,(Merr.) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),Manually matched,Schefflera obtusifolia,NA
-Heptapleurum octandrum,(Ridl.) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera octandra,NA
-Heptapleurum oligodon,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera oligodon,NA
-Heptapleurum pachystylum,(Harms) G.M.Plunkett & Lowry,NT,Fuzzy (edit distance),Manually matched,Schefflera pachystyla,NA
-Heptapleurum pacoense,(Grushv. & Skvortsova) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum pagiophyllum,(Harms) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera pagiophylla,NA
-Heptapleurum palmiforme,(Grushv. & Skvortsova) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera palmiformis,NA
-Heptapleurum papuanum,(Ridl.) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera papuana,NA
-Heptapleurum philippinense,G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum polyastrum,(Harms) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera polyastra,NA
-Heptapleurum polychaetum,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera polychaeta,NA
-Heptapleurum reticulatum,(Philipson) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera reticulata,NA
-Heptapleurum rudolfii,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera rudolfi,NA
-Heptapleurum schumannianum,(Harms) G.M.Plunkett & Lowry,NT,Fuzzy (edit distance),Manually matched,Schefflera schumanniana,NA
-Heptapleurum scytinophyllum,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum secundum,(Philipson) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera secunda,NA
-Heptapleurum sepikianum,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera sepikiana,NA
-Heptapleurum serpentinicola,Puad & Frodin,VU,Fuzzy (edit distance),Manually matched,Schefflera serpentinicola,NA
-Heptapleurum setulosum,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum simbuense,(Frodin) G.M.Plunkett & Lowry,VU,Fuzzy (phonetic),Manually matched,Schefflera simbuensis,NA
-Heptapleurum stellulatum,(Merr.) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Heptapleurum stolleanum,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera stolleana,NA
-Heptapleurum stramineum,(Frodin) G.M.Plunkett & Lowry,NT,Fuzzy (edit distance),Manually matched,Schefflera straminea,NA
-Heptapleurum taiwanianum,(Nakai) G.M.Plunkett & Lowry,LR/lc,Fuzzy (edit distance),Manually matched,Schefflera taiwaniana,NA
-Heptapleurum tanyrhachis,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera tanyrhachis,NA
-Heptapleurum thaumasianthum,(Harms) G.M.Plunkett & Lowry,VU,Fuzzy (edit distance),Manually matched,Schefflera thaumasiantha,NA
-Heptapleurum urdanetense,(Elmer) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),Manually matched,Schefflera urdanetensis,NA
-Heptapleurum yatesii,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera yatesii,NA
-Hieracium sprucei,Arv.-Touv.,DD,Fuzzy (edit distance),No valid match found,NA,Ecuadorian Asterac
-Leichhardtia micrantha,"(Guillaumin) Liede, G√¢tebl√© & Meve",DD,Fuzzy (edit distance),Manually matched,Marsdenia micrantha,NA
-Leichhardtia speciosa,"(Baill.) Liede, G√¢tebl√© & Meve",VU,Fuzzy (edit distance),Manually matched,Marsdenia speciosa,NA
-Leptolaena villosa,"(F.G√©rard) Hong-Wa, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),Manually matched,Xerochlamys villosa,NA
-Liparis bemarahensis,Hermans,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Liparis bosseri,Hermans,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Liparis magnifica,Hermans,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Melhania milleri,Abedin,DD,Fuzzy (edit distance),No valid match found,NA,Socotran Malvac
-Mespilodaphne paradoxa,(Mez) Hammel,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Miconia curvitheca,Posada-Herrera & Humberto Mend.,LC,Fuzzy (edit distance),No valid match found,NA,in IPNI
-Myodocarpus angustialatus,Lowry ined.,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Myoporum stellatum,(G.L.Webster) O.Deg. & I.Deg.,CR,Fuzzy (edit distance),No valid match found,NA,in IPNI
-Myosotis retusifolia,R.Afonso,DD,Fuzzy (edit distance),No valid match found,NA,"Franco, J. D. A., & Afonso, M. L. (1994). Nova flora de Portugal. II (I).†Escolar Editora, Lisboa."
-Myrcia megaphylla,M.F.Santos & Sobral,CR,Fuzzy (edit distance),No valid match found,NA,https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.222.2.2
-Myrcia revoluta,"T.Fernandes, D.F.Lima & J.M.A.Braga",CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Myrcia tocantinensis,Glaz. ex P.O.Rosa & Proen√ßa,NT,Fuzzy (edit distance),New/undescribed species,NA,NA
-Phalaenopsis arunachalensis,K.Gogoi & Rinya,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Piper seychellarum,J.Gerlach,VU,Fuzzy (edit distance),No valid match found,NA,?
-Prunus klokovii,(Sobko),DD,Fuzzy (edit distance),Manually matched,Cerasus klokovii,NA
-Pycnandra viridiflora,Swenson & Munzinger,CR,Fuzzy (edit distance),No valid match found,NA,"Swenson, U., & Munzinger, J. (2009). Revision of Pycnandra subgenus Pycnandra (Sapotaceae), a genus endemic to New Caledonia.†Australian Systematic Botany,†22(6), 437-465."
-Pyrostria sp. nov.,ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Quercus mexiae,L.M.Gonz√°lez,DD,Fuzzy (phonetic),No valid match found,NA,"Gonz·Lez-ViLLarreaL, L. M. (2018). Dos nuevas especies de encinos (Quercus: Fagaceae), adicionales para la Flora de Jalisco y ¡reas Colindantes, en el Occidente de MÈxico.†Ibugana,†9, 47-71."
-Sesamothamnus leistneranus,Giess ex Ihlenf.,LC,Fuzzy (edit distance),No valid match found,NA,Namibian
-Sterculia multiovula,E.L.Taylor ex Mondrag√≥n,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Stryphnodendron harbesonii,Elm.,VU,Fuzzy (edit distance),No valid match found,NA,Phillippines legume
-Terminalia pabstii,Marq. & C.Valente,EN,Fuzzy (edit distance),Manually matched,Buchenavia pabstii,NA
-Ternstroemia huberi,B.M.Boom,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Tetrachyron orizabense,(Klatt) Wussow & Urbatsch,NT,Fuzzy (edit distance),Manually matched,Tetrachyron orizabaensis,NA
-Trichilia deminuta,D.Penn.,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Vantanea aracaensis,(Nees & Mart.) Benth.,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Angraecum edmundi,(Bosser ex Verlynde & Ramandimbisoa) Hermans & Verynde,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Bursera zapoteca,Rzed. & Medina,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia aloicola,M.G.Gilbert,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia cordifolia,M.G.Gilbert,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Ceropegia spatuliloba,M.G.Gilbert,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Conophytum hermarium,(S.A.Hammer) S.A.Hammer,CR,Fuzzy (edit distance),Manually matched,Conophytum smorenskaduense†subsp.†hermarium,NA
-Ctenodon racemosus,"(Vogel) D.B.O.S.Cardoso, Filardi & H.C.Lima",LC,Fuzzy (edit distance),Manually matched,Aeschynomene racemosa,Vogel
-Diospyros amborelloides,G.E.Schatz & Lowry,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros andohahelensis,G.E.Schatz & Lowry,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros callmanderi,G.E.Schatz & Lowry,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros courrierensis,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros littoralis,Capuron ex G.E.Schatz & Lowry,VU,Fuzzy (phonetic),New/undescribed species,NA,NA
-Diospyros manongarivensis,"A.G.Linan, G.E.Schatz & Lowry",EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros pubiramulis,"A.G.Linan, G.E.Schatz & Lowry",VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Diospyros taikintana,G.E.Schatz & Lowry,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Elymus alopex,B. Salomon,LC,Fuzzy (edit distance),No valid match found,NA,NA
-Eugenia tabouensis,Aubrev.,VU,Fuzzy (edit distance),No valid match found,NA,NA
-Euphorbia neorugosa,Bruyns,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
-Freziera velutina,A.L.Weitzman,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
-Gossia ngaensis,N.Snow,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
 Grewia milleri,S.Abedin,VU,Fuzzy (edit distance),No valid match found,NA,NA
-Heptapleurum hirsutum,(Philipson) Lowry & G.M.Plunkett,VU,Fuzzy (edit distance),Manually matched,Schefflera hirsuta,NA
-Heptapleurum hunsteinianum,(Harms) Lowry & G.M.Plunkett,DD,Fuzzy (edit distance),Manually matched,Schefflera hunsteiniana,NA
-Heptapleurum kontumense,(Bui) Lowry & G.M.Plunkett,EN,Fuzzy (edit distance),Manually matched,Schefflera kontumensis,NA
-Heptapleurum koresii,(P.Royen) Lowry & G.M.Plunkett,VU,Fuzzy (edit distance),Manually matched,Schefflera koresii†,NA
-Heptapleurum kuborense,(Frodin) Lowry & G.M.Plunkett,VU,Fuzzy (edit distance),Manually matched,Schefflera kuborensis,NA
-Heptapleurum marlipoense,(C.J.Tseng & C.Ho) G.M.Plunkett & Lowry,CR,Fuzzy (edit distance),Manually matched,Schefflera marlipoensis,NA
-Heptapleurum megalanthum,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera megalantha,NA
-Heptapleurum multiramosum,(Elmer) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera multiramosa,NA
-Heptapleurum nabirense,(Philipson) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera nabirensis,NA
-Heptapleurum oreopolum,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera oreopola,NA
-Heptapleurum ovoideum,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera ovoidea,NA
-Heptapleurum palawanense,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera palawanensis,NA
-Heptapleurum polycladum,(Frodin) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera polyclada,NA
-Heptapleurum santosii,(Merr.) G.M.Plunkett & Lowry,EN,Fuzzy (edit distance),Manually matched,Schefflera santosii,NA
-Heptapleurum shweliense,(W.W.Sm.) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera shweliensis,NA
-Heptapleurum spaniodon,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera spaniodon,NA
-Heptapleurum stenopetalum,(Harms) G.M.Plunkett & Lowry,DD,Fuzzy (edit distance),Manually matched,Schefflera stenopetala,NA
-Heptapleurum stenophyllum,(Harms) G.M.Plunkett & Lowry,LC,Fuzzy (edit distance),Manually matched,Schefflera stenophylla,NA
 Ixora regalis,De Block,LC,Fuzzy (edit distance),No valid match found,NA,NA
-Linaria vettonica,"Luce√±o, Mazuecos & P.Vargas",CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Liparis laurentii,Hermans & Nusb.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Magnolia llanganatensis,A.V√°zquez & D.A.Neill,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Leucas spiculifera,(Balf.f.) Guerke,LC,Fuzzy (edit distance),Manually matched,Leucas spiculifolia,NA
+Liparis bemarahensis,Hermans,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Liparis laurentii,Hermans &amp; Nusb.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Liparis magnifica,Hermans,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Macrothelypteris vandervekenii,Pic.Serm.,LC,Fuzzy (edit distance),No valid match found,NA,NA
 Micromeria remota,Balf.f.,LC,Fuzzy (edit distance),No valid match found,NA,NA
-Myrcia depauperata,Glaz. ex P.O.Rosa & Proen√ßa,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Myrcia siriacoana,Glaz. ex P.O.Rosa & Proen√ßa,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Myodocarpus angustialatus,Lowry ined.,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Myosotis retusifolia,R.Afonso,DD,Fuzzy (edit distance),No valid match found,NA,"Franco, J. D. A., & Afonso, M. L. (1994). Nova flora de Portugal. II (I).†Escolar Editora, Lisboa."
+Myrcia megaphylla,M.F.Santos &amp; Sobral,CR,Fuzzy (edit distance),No valid match found,NA,https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.222.2.2
 Ochna emarginata,(Tiegh.) ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
-Polyscias nothisii,Lowry  & G.M.Plunkett ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Piper seychellarum,J.Gerlach,VU,Fuzzy (edit distance),No valid match found,NA,?
+Polyscias nothisii,Lowry  &amp; G.M.Plunkett ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
 Pouteria brevipedicellata,(P.Royen) ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
 Prunus boissieri,Kurtto,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Prunus klokovii,(Sobko),DD,Fuzzy (edit distance),Manually matched,Cerasus klokovii,NA
 Psychotria volii,R.O.Gardner,CR,Fuzzy (edit distance),No valid match found,NA,https://www.tandfonline.com/doi/abs/10.1080/0028825X.1987.10410172
-Quercus centenaria,L.M.Gonz√°lez,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
+Pycnandra viridiflora,Swenson &amp; Munzinger,CR,Fuzzy (edit distance),No valid match found,NA,"Swenson, U., & Munzinger, J. (2009). Revision of Pycnandra subgenus Pycnandra (Sapotaceae), a genus endemic to New Caledonia.†Australian Systematic Botany,†22(6), 437-465."
+Pyrostria sp. nov.,ined.,EN,Fuzzy (edit distance),New/undescribed species,NA,NA
+Quercus centenaria,L.M.GonzÔøΩlez,DD,Fuzzy (edit distance),New/undescribed species,NA,NA
+Quercus mexiae,L.M.GonzÔøΩlez,DD,Fuzzy (phonetic),No valid match found,NA,"Gonz·Lez-ViLLarreaL, L. M. (2018). Dos nuevas especies de encinos (Quercus: Fagaceae), adicionales para la Flora de Jalisco y ¡reas Colindantes, en el Occidente de MÈxico.†Ibugana,†9, 47-71."
 Sacoglottis glomerata,Mart.,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
-Terminalia igaratensis,(N.F.Mattos) Gere & Boatwr.,EN,Fuzzy (edit distance),Manually matched,Buchenavia igarataensis,NA
-Vepris laurifolia,(Hutch. & Dalziel) O.Lachenaud,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
-Virotia azurea,H.C. Hopkins & Pillon,VU,Fuzzy (edit distance),New/undescribed species,NA,NA
+Sesamothamnus leistneranus,Giess ex Ihlenf.,LC,Fuzzy (edit distance),No valid match found,NA,Namibian
+Sterculia multiovula,E.L.Taylor ex MondragÔøΩn,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
+Stryphnodendron harbesonii,Elm.,VU,Fuzzy (edit distance),No valid match found,NA,Phillippines legume
+Terminalia igaratensis,(N.F.Mattos) Gere &amp; Boatwr.,EN,Fuzzy (edit distance),Manually matched,Buchenavia igarataensis,NA
+Terminalia pabstii,Marq. &amp; C.Valente,EN,Fuzzy (edit distance),Manually matched,Buchenavia pabstii,NA
+Tetrachyron orizabense,(Klatt) Wussow &amp; Urbatsch,NT,Fuzzy (edit distance),Manually matched,Tetrachyron orizabaensis,NA
+Trichilia deminuta,D.Penn.,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
+Vantanea aracaensis,(Nees &amp; Mart.) Benth.,LC,Fuzzy (edit distance),New/undescribed species,NA,NA
+Vepris laurifolia,(Hutch. &amp; Dalziel) O.Lachenaud,CR,Fuzzy (edit distance),New/undescribed species,NA,NA
+Virotia azurea,H.C. Hopkins &amp; Pillon,VU,Fuzzy (edit distance),New/undescribed species,NA,NA

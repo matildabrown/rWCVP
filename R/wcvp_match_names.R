@@ -48,7 +48,7 @@
 #'  wcvp_match_names(redlist_example, wcvp_names, name_col="scientificName",
 #'             id_col="assessmentId", author_col="authority")
 #' }
-#' 
+#'
 #' @family name matching functions
 #'
 wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NULL, author_col=NULL,
@@ -133,24 +133,20 @@ wcvp_match_names <- function(names_df, wcvp_names=NULL, name_col=NULL, id_col=NU
 
   cli_alert_success("Found {n_matched} of {n_names1} names")
 
-  #_____________________________________________________________________________
-  # 3. Fuzzy matching  ####
+  # 3. Use fuzzy maching on remaining names ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
-  if(fuzzy){
-
-
+  if(fuzzy & nrow(unmatched) > 0){
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
-    wcvp_match_fuzzyes <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col=name_col, progress_bar=progress_bar)
+    fuzzy_matches <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col=name_col, progress_bar=progress_bar)
 
-    cli_alert_success("Found {sum(!is.na(unique(wcvp_match_fuzzyes$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
+    cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
 
-    matches <- bind_rows(matches, wcvp_match_fuzzyes)
+    matches <- bind_rows(matches, fuzzy_matches)
   }
-#_____________________________________________________________________________
-#
-#   # Compilation of matched results  ####
+
+  # 4. Compile results ####
   unmatched <- filter(names_df, ! .data[[id_col]] %in% matches[[id_col]])
-  if(nrow(unmatched)>0) unmatched$match_type <- "No match found"
+  if(nrow(unmatched) > 0) unmatched$match_type <- "No match found"
 
   matches <-
     matches %>%

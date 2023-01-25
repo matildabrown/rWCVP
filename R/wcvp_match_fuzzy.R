@@ -32,7 +32,7 @@
 wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE){
 
   # check for duplicated names
-  if(length(which(duplicated(names_df[,name_col]))==TRUE)>10){
+  if(sum(duplicated(names_df[[name_col]])) > 10){
     cli::cli_alert_warning("Fuzzy matching is very slow for data with repeated names. \nWe recommend matching a unique set of names to the WCVP, \nthen attaching the resolved matches to the original data using e.g. `*_join` functions.")
     invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
   }
@@ -89,7 +89,7 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 #'  wcvp_names <- rWCVPdata::wcvp_names
 #'  phonetic_match(redlist_example, wcvp_names, "scientificName")
 #' }
-#' 
+#'
 phonetic_match <- function(names_df, wcvp_names, name_col){
   original_names <- colnames(names_df)
   wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen=20, clean=FALSE)
@@ -143,7 +143,7 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #'  wcvp_names <- rWCVPdata::wcvp_names
 #'  edit_match(redlist_example, wcvp_names, "scientificName")
 #' }
-#' 
+#'
 edit_match <- function(names_df, wcvp_names, name_col){
   withr::local_options(list(cli.progress_show_after=2, cli.progress_clear=FALSE))
 
@@ -206,7 +206,7 @@ edit_match_name_ <- function(name, lookup) {
   }
 
   if (length(best_name_id) == 0) {
-    best_name_id <- NA_character_
+    best_name_id <- NA_real_
     best_name <- NA_character_
     best_similarity <- NA_real_
     match_type <- NA_character_
