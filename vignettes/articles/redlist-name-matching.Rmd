@@ -3,7 +3,7 @@
 ---
 title: "Matching names to WCVP with rWCVP"
 author: "Matilda Brown"
-date: "2023-01-25"
+date: "2023-01-26"
 ---
 
 
@@ -32,14 +32,9 @@ We're using a download of plant assessments from version 2022-1 of the Red List,
 
 ```r
 redlist <- read_csv(
-  "../../inst/extdata/rl_assessment_details_20220725_version2022-1.csv",
+  "../../inst/extdata/redlist-summary_2022-1.csv",
   col_types=cols(.default=col_character())
 )
-
-redlist <- redlist %>%
-  #filter out the bryophytes
-  filter(phylum == "TRACHEOPHYTA") %>%
-  select(scientific_name, authority, category)
 
 glimpse(redlist)
 #> Rows: 61,015
