@@ -102,7 +102,7 @@ for matching.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>wcvp_match_fuzzy</code> function uses phonetic matching first and then finds
 the closest match based on edit distance for any remaining names.</p>
-<p>Phonetic matching uses <a href="https://rdrr.io/pkg/phonics/man/metaphone.html" class="external-link">phonics::metaphone</a> encoding with a maximum
+<p>Phonetic matching uses <a href="https://jameshoward.us/phonics-in-r/reference/metaphone.html" class="external-link">phonics::metaphone</a> encoding with a maximum
 code length of 20.</p>
 <p>Edit distance matching finds the closest match based on Levenshtein similarity,
 calculated by <a href="https://rdrr.io/pkg/RecordLinkage/man/strcmp.html" class="external-link">RecordLinkage::levenshteinSim</a>.</p>

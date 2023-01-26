@@ -79,7 +79,7 @@
                         <h4 data-toc-skip class="author">Matilda
 Brown</h4>
             
-            <h4 data-toc-skip class="date">2023-01-25</h4>
+            <h4 data-toc-skip class="date">2023-01-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/matildabrown/rWCVP/blob/HEAD/vignettes/articles/redlist-name-matching.Rmd" class="external-link"><code>vignettes/articles/redlist-name-matching.Rmd</code></a></small>
       <div class="d-none name"><code>redlist-name-matching.Rmd</code></div>
@@ -115,14 +115,9 @@ List of Threatened Species (Red List) to accepted names in the WCVP.</p>
 the Red List, which we made through <a href="https://www.iucnredlist.org/" class="external-link">their website</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">redlist</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
-<span>  <span class="st">"../../inst/extdata/rl_assessment_details_20220725_version2022-1.csv"</span>,</span>
+<span>  <span class="st">"../../inst/extdata/redlist-summary_2022-1.csv"</span>,</span>
 <span>  col_types<span class="op">=</span><span class="fu">cols</span><span class="op">(</span>.default<span class="op">=</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">redlist</span> <span class="op">&lt;-</span> <span class="va">redlist</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co">#filter out the bryophytes</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phylum</span> <span class="op">==</span> <span class="st">"TRACHEOPHYTA"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">scientific_name</span>, <span class="va">authority</span>, <span class="va">category</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">glimpse</span><span class="op">(</span><span class="va">redlist</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 61,015</span></span>
