@@ -13,10 +13,10 @@
 #'
 #' @importFrom rlang .data
 
-wcvp_reformat <- function(wcvp_local, version=NULL){
-  rlang::check_installed("rWCVPdata", reason="to use the data set `wcvp_names`")
+wcvp_reformat <- function(wcvp_local, version = NULL) {
+  rlang::check_installed("rWCVPdata", reason = "to use the data set `wcvp_names`")
 
-  if(version != 9 & version != "v9") {
+  if (version != 9 & version != "v9") {
     cli::cli_abort("This function currently only supports v9.")
   }
 
@@ -24,19 +24,18 @@ wcvp_reformat <- function(wcvp_local, version=NULL){
 
   colnames(rWCVPdata::wcvp_names)
 
-  test <- wcvp_local %>%  dplyr::rename(
-  plant_name_id=.data$kew_id,
-  taxon_authors=.data$authors,
-  taxon_rank=.data$rank,
-  taxon_status=.data$taxonomic_status,
-  accepted_plant_name_id=.data$accepted_kew_id,
-  parent_plant_name_id=.data$parent_kew_id,
-  basionym_plant_name_id=.data$original_name_id
+  test <- wcvp_local %>% dplyr::rename(
+    plant_name_id = .data$kew_id,
+    taxon_authors = .data$authors,
+    taxon_rank = .data$rank,
+    taxon_status = .data$taxonomic_status,
+    accepted_plant_name_id = .data$accepted_kew_id,
+    parent_plant_name_id = .data$parent_kew_id,
+    basionym_plant_name_id = .data$original_name_id
   )
 
   emptycols <- setdiff(colnames(rWCVPdata::wcvp_names), colnames(test))
 
-  test[,emptycols] <- NA
-  test <- test[,colnames(rWCVPdata::wcvp_names)]
-
+  test[, emptycols] <- NA
+  test <- test[, colnames(rWCVPdata::wcvp_names)]
 }

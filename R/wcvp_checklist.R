@@ -33,35 +33,34 @@
 #' @export
 #'
 #' @examples
-#' #These examples take >10 seconds to run.
+#' # These examples take >10 seconds to run.
 #' \dontrun{
-#' wcvp_checklist(taxon="Myrtaceae", taxon_rank="family", area=get_wgsrpd3_codes("Brazil"))
-#' wcvp_checklist(taxon="Ferns", taxon_rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+#' wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
+#' wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
 #' }
-wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","order","higher"), area_codes=NULL,
-                               synonyms=TRUE, render_report=FALSE,
-                               native=TRUE, introduced = TRUE,
-                               extinct = TRUE, location_doubtful = TRUE,
-                               hybrids = FALSE,
-                               infraspecies = TRUE,
-                               report_filename=NULL, report_dir=NULL,
-                               report_type=c("alphabetical", "taxonomic"),
-                               wcvp_names=NULL,
-                               wcvp_distributions=NULL) {
-
-## input checks ----
+wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "family", "order", "higher"), area_codes = NULL,
+                           synonyms = TRUE, render_report = FALSE,
+                           native = TRUE, introduced = TRUE,
+                           extinct = TRUE, location_doubtful = TRUE,
+                           hybrids = FALSE,
+                           infraspecies = TRUE,
+                           report_filename = NULL, report_dir = NULL,
+                           report_type = c("alphabetical", "taxonomic"),
+                           wcvp_names = NULL,
+                           wcvp_distributions = NULL) {
+  ## input checks ----
   report_type <- match.arg(report_type)
   taxon_rank <- match.arg(taxon_rank)
 
-  if(!is.null(taxon)){
-    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+  if (!is.null(taxon)) {
+    if (taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
       cli_abort(c(
-         "Taxon not found.",
-         "Possible values for this taxonomic rank can be viewed using",
-         "{.code unique(taxonomic_mapping$order)}"
+        "Taxon not found.",
+        "Possible values for this taxonomic rank can be viewed using",
+        "{.code unique(taxonomic_mapping$order)}"
       ))
     }
-    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+    if (taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
       cli_abort(c(
         "Taxon not found.",
         "Possible values for this taxonomic rank are:",
@@ -70,7 +69,7 @@ wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family"
     }
   }
 
-  if(render_report & is.null(report_dir)) {
+  if (render_report & is.null(report_dir)) {
     cli_abort("Must provide a directory to save report, using 'report_dir'.")
   }
 
@@ -82,79 +81,79 @@ wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family"
     .wcvp_fresh()
   }
 
-  if(is.null(wcvp_distributions)){
+  if (is.null(wcvp_distributions)) {
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
 
-  if(is.null(wcvp_names)){
+  if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
-  if(!is.null(taxon)){
-    if(taxon_rank %in% c("order","higher")) {
-      wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
+  if (!is.null(taxon)) {
+    if (taxon_rank %in% c("order", "higher")) {
+      wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family")
     }
   }
 
-## input alerts
+  ## input alerts
   if (is.null(area_codes)) cli_alert_info("No area specified. Generating global checklist.")
   if (is.null(taxon)) cli_alert_info("No taxon specified. Generating checklist for all species.")
-  if (! synonyms) cli_alert_info("Generating a checklist of accepted species names only. Use {.code synonyms = TRUE} to include all names")
+  if (!synonyms) cli_alert_info("Generating a checklist of accepted species names only. Use {.code synonyms = TRUE} to include all names")
 
-## filter checklist names ----
-# prune early if possible, to reduce computation time
-  if (! synonyms) wcvp_names <- filter(wcvp_names, .data$taxon_status == "Accepted")
+  ## filter checklist names ----
+  # prune early if possible, to reduce computation time
+  if (!synonyms) wcvp_names <- filter(wcvp_names, .data$taxon_status == "Accepted")
 
-#filter by taxon
-  if(!is.null(taxon)) {
+  # filter by taxon
+  if (!is.null(taxon)) {
     wcvp_names <- filter(wcvp_names, if_any(all_of(taxon_rank)) %in% taxon)
   }
 
-#filter out hybrids and infraspecies depending on input
-  if(! hybrids){
+  # filter out hybrids and infraspecies depending on input
+  if (!hybrids) {
     wcvp_names <- filter(wcvp_names, is.na(.data$genus_hybrid), is.na(.data$species_hybrid))
   }
 
-  if(! infraspecies){
+  if (!infraspecies) {
     wcvp_names <- filter(wcvp_names, is.na(.data$infraspecific_rank), is.na(.data$infraspecies))
   }
 
-  if(nrow(wcvp_names) == 0) cli_abort("No occurrences. Are the rank and spelling correct?")
+  if (nrow(wcvp_names) == 0) cli_abort("No occurrences. Are the rank and spelling correct?")
 
-## distribution calculations ----
+  ## distribution calculations ----
   distribution <- filter(wcvp_distributions, .data$plant_name_id %in% wcvp_names$plant_name_id)
 
-  if(nrow(distribution) == 0) cli_abort("No occurrences. Are the rank, geography and spelling all correct?")
+  if (nrow(distribution) == 0) cli_abort("No occurrences. Are the rank, geography and spelling all correct?")
 
   distribution <- distribution %>%
-    mutate(occurrence_type=case_when(
-      .data$location_doubtful ==1 ~ "location_doubtful",
-      .data$extinct==1 ~ "extinct",
-      .data$introduced==1 ~ "introduced",
+    mutate(occurrence_type = case_when(
+      .data$location_doubtful == 1 ~ "location_doubtful",
+      .data$extinct == 1 ~ "extinct",
+      .data$introduced == 1 ~ "introduced",
       TRUE ~ "native",
     )) %>%
     select(-c("extinct", "location_doubtful", "introduced")) %>%
     filter(.data$occurrence_type %in% show_types)
 
-  if(nrow(distribution) == 0) cli_abort("No occurrences after filtering by occurrence type.")
+  if (nrow(distribution) == 0) cli_abort("No occurrences after filtering by occurrence type.")
 
   endemics <- distribution %>%
     group_by(.data$plant_name_id) |>
-    summarise(endemic=n() == 1, .groups="drop")
+    summarise(endemic = n() == 1, .groups = "drop")
 
-  if (! is.null(area_codes)) {
+  if (!is.null(area_codes)) {
     regional_endemics <- distribution %>%
       group_by(.data$plant_name_id) %>%
       summarise(
-        area_endemic=n() == sum(.data$area_code_l3 %in% area_codes, na.rm=TRUE),
-        in_geography=any(.data$area_code_l3 %in% area_codes),
-        .groups="drop"
+        area_endemic = n() == sum(.data$area_code_l3 %in% area_codes, na.rm = TRUE),
+        in_geography = any(.data$area_code_l3 %in% area_codes),
+        .groups = "drop"
       ) %>%
       filter(.data$in_geography)
 
     endemics <- endemics %>%
-      inner_join(regional_endemics, by="plant_name_id") %>%
-      replace_na(list(in_geography=FALSE))
+      inner_join(regional_endemics, by = "plant_name_id") %>%
+      replace_na(list(in_geography = FALSE))
   } else {
     endemics$area_endemic <- NA
     endemics$in_geography <- TRUE
@@ -162,35 +161,36 @@ wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family"
   }
 
   distribution <- distribution %>%
-    inner_join(endemics, by="plant_name_id")
+    inner_join(endemics, by = "plant_name_id")
 
-## build checklist ----
+  ## build checklist ----
   checklist <- wcvp_names %>%
     left_join(
-      wcvp_names %>% select("plant_name_id", "accepted_name"="taxon_name"),
-      by=c("accepted_plant_name_id"="plant_name_id")
+      wcvp_names %>% select("plant_name_id", "accepted_name" = "taxon_name"),
+      by = c("accepted_plant_name_id" = "plant_name_id")
     )
 
   checklist$place_of_publication <- replace_na(checklist$place_of_publication, "Unknown")
 
   checklist <- checklist %>%
-    inner_join(distribution, by="plant_name_id")
+    inner_join(distribution, by = "plant_name_id")
 
-# filter out genus-level names
+  # filter out genus-level names
   checklist <- filter(checklist, .data$taxon_rank != "Genus")
 
   checklist <- checklist %>%
     arrange(.data$family, .data$genus, .data$species, .data$infraspecies) %>%
-    relocate("accepted_name", .after="accepted_plant_name_id") %>%
-    relocate("in_geography", .after="occurrence_type")
+    relocate("accepted_name", .after = "accepted_plant_name_id") %>%
+    relocate("in_geography", .after = "occurrence_type")
 
-## render report ----
+  ## render report ----
   if (render_report) {
-
     if (length(unique(checklist$plant_name_id)) > 5000) {
-      cli_alert_warning(c("Checklist longer than 5,000 names",
-                          "Rendering will be very slow (many hours) and might exceed available memory.",
-                          "Consider setting {.code synonyms=FALSE} or generating chunked checklists (e.g. by family)."))
+      cli_alert_warning(c(
+        "Checklist longer than 5,000 names",
+        "Rendering will be very slow (many hours) and might exceed available memory.",
+        "Consider setting {.code synonyms=FALSE} or generating chunked checklists (e.g. by family)."
+      ))
       invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
     }
 
@@ -200,10 +200,10 @@ wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family"
 
     if (is.null(report_filename)) {
       area_name <- NULL
-      if (! is.null(area_codes)) {
-        area_name <- paste(get_area_name(area_codes), collapse="-")
+      if (!is.null(area_codes)) {
+        area_name <- paste(get_area_name(area_codes), collapse = "-")
       }
-      report_filename <- paste(taxon, area_name, report_type, "checklist.html", sep="_")
+      report_filename <- paste(taxon, area_name, report_type, "checklist.html", sep = "_")
       report_filename <- gsub(" ", "_", report_filename)
       report_filename <- sub("_$", "", report_filename)
       report_filename <- sub("^_", "", report_filename)
@@ -214,34 +214,38 @@ wcvp_checklist <- function(taxon=NULL, taxon_rank=c("species", "genus", "family"
       cli_alert_info("Saving report as: {.file {report_filename}}")
 
       param_list <- list(
-        version="New Phytologist Special Issue",
-        taxa=taxon,
-        area_delim=area_codes,
-        mydata=checklist,
-        synonyms=synonyms
+        version = "New Phytologist Special Issue",
+        taxa = taxon,
+        area_delim = area_codes,
+        mydata = checklist,
+        synonyms = synonyms
       )
 
       suppressWarnings(
         rmarkdown::render(system.file("rmd", "checklist.Rmd", package = "rWCVP"),
-                          quiet=TRUE,
-                          params=param_list,
-                          output_file=file.path(report_dir, report_filename))
+          quiet = TRUE,
+          params = param_list,
+          output_file = file.path(report_dir, report_filename)
+        )
       )
     }
 
     if (report_type == "taxonomic") {
       cli_alert_info("Saving report as: {.file {report_filename}}")
 
-      param_list <- list(version="New Phytologist Special Issue",
-                         taxa=taxon,
-                         area_delim=area_codes,
-                         mydata=checklist,
-                         synonyms=synonyms)
+      param_list <- list(
+        version = "New Phytologist Special Issue",
+        taxa = taxon,
+        area_delim = area_codes,
+        mydata = checklist,
+        synonyms = synonyms
+      )
 
       suppressWarnings(
         rmarkdown::render(system.file("rmd", "checklist_tax.Rmd", package = "rWCVP"),
-                          quiet=TRUE,
-                          output_file=file.path(report_dir, report_filename))
+          quiet = TRUE,
+          output_file = file.path(report_dir, report_filename)
+        )
       )
     }
   }

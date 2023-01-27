@@ -24,28 +24,32 @@
 #' @import cli
 #' @export
 #'
-#' @examples wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
-#' area=c("TAS", "VIC","NSW"), introduced=FALSE)
+#' @examples wcvp_occ_mat(
+#'   taxon = "Poa", taxon_rank = "genus",
+#'   area = c("TAS", "VIC", "NSW"), introduced = FALSE
+#' )
 #'
-#'
-wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","order","higher"), area_codes=NULL,
-                          native=TRUE, introduced=TRUE,
-                          extinct=TRUE, location_doubtful=TRUE,
-                          wcvp_names=NULL,
-                          wcvp_distributions=NULL){
-
+wcvp_occ_mat <- function(taxon = NULL, taxon_rank = c("species", "genus", "family", "order", "higher"), area_codes = NULL,
+                         native = TRUE, introduced = TRUE,
+                         extinct = TRUE, location_doubtful = TRUE,
+                         wcvp_names = NULL,
+                         wcvp_distributions = NULL) {
   taxon_rank <- match.arg(taxon_rank)
 
-  if (! is.null(taxon)) {
-    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
-      cli_abort(c("Taxon not found.",
-                  "Possible values for this taxonomic rank can be viewed using",
-                  "{.code unique(taxonomic_mapping$order)}"))
+  if (!is.null(taxon)) {
+    if (taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+      cli_abort(c(
+        "Taxon not found.",
+        "Possible values for this taxonomic rank can be viewed using",
+        "{.code unique(taxonomic_mapping$order)}"
+      ))
     }
-    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
-      cli_abort(c("Taxon not found.",
-                  "Possible values for this taxonomic rank are:",
-                  "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"))
+    if (taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+      cli_abort(c(
+        "Taxon not found.",
+        "Possible values for this taxonomic rank are:",
+        "{.val 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'}"
+      ))
     }
   }
 
@@ -69,19 +73,21 @@ wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","
 
   if (is.null(taxon)) cli_alert_info("No taxon specified. Generating occurrence matrix for all species.")
 
-  wcvp_cols <- c("plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
-                 "family", "genus","species")
+  wcvp_cols <- c(
+    "plant_name_id", "taxon_name", "taxon_rank", "taxon_status",
+    "family", "genus", "species"
+  )
   checklist <- suppressMessages(
     wcvp_checklist(
-      taxon=taxon,
-      taxon_rank=taxon_rank,
-      area_codes=area_codes,
-      synonyms=FALSE,
-      infraspecies=FALSE,
-      native=native,
-      introduced=introduced,
-      extinct=extinct,
-      location_doubtful=location_doubtful
+      taxon = taxon,
+      taxon_rank = taxon_rank,
+      area_codes = area_codes,
+      synonyms = FALSE,
+      infraspecies = FALSE,
+      native = native,
+      introduced = introduced,
+      extinct = extinct,
+      location_doubtful = location_doubtful
     )
   )
 
@@ -90,15 +96,17 @@ wcvp_occ_mat <- function(taxon=NULL, taxon_rank=c("species", "genus", "family","
     distinct(.data$plant_name_id, .data$taxon_name, .data$area_code_l3) %>%
     mutate(present = 1)
 
-  if(nrow(occurrences) == 0) cli_abort("No occurrences in the input geography.")
+  if (nrow(occurrences) == 0) cli_abort("No occurrences in the input geography.")
 
   missing_areas <- setdiff(area_codes, occurrences$area_code_l3)
-  missing_mat <- matrix(0, nrow=n_distinct(occurrences$plant_name_id),
-                        ncol=length(missing_areas))
+  missing_mat <- matrix(0,
+    nrow = n_distinct(occurrences$plant_name_id),
+    ncol = length(missing_areas)
+  )
   colnames(missing_mat) <- missing_areas
 
   occ_mat <- occurrences %>%
-    pivot_wider(names_from="area_code_l3", values_from="present", values_fill=0) %>%
+    pivot_wider(names_from = "area_code_l3", values_from = "present", values_fill = 0) %>%
     bind_cols(as_tibble(missing_mat))
 
   occ_mat %>%

@@ -15,10 +15,14 @@ test_that("hybrid removal keeps valid letters", {
 })
 
 test_that("infra standardisation works", {
-  names <- c("genus species ssp thing", "genus species var thing",
-             "genus species forma thing")
-  correct <- c("genus species subsp. thing", "genus species var. thing",
-               "genus species f. thing")
+  names <- c(
+    "genus species ssp thing", "genus species var thing",
+    "genus species forma thing"
+  )
+  correct <- c(
+    "genus species subsp. thing", "genus species var. thing",
+    "genus species f. thing"
+  )
   expect_true(all(standardise_infras_(names) == correct))
 })
 

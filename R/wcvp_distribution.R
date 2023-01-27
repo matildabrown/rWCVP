@@ -26,28 +26,27 @@
 #' @export
 #'
 #' @examples
-#' r <- wcvp_distribution("Callitris", taxon_rank="genus")
+#' r <- wcvp_distribution("Callitris", taxon_rank = "genus")
 #' p <- wcvp_distribution_map(r)
 #' p
-wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","order","higher"), native=TRUE, introduced=TRUE,
-                              extinct=TRUE, location_doubtful=TRUE,
-                              wcvp_names=NULL,
-                              wcvp_distributions=NULL){
-
+wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family", "order", "higher"), native = TRUE, introduced = TRUE,
+                              extinct = TRUE, location_doubtful = TRUE,
+                              wcvp_names = NULL,
+                              wcvp_distributions = NULL) {
   taxon_rank <- match.arg(taxon_rank)
 
-  if(!is.null(taxon)){
-    if(taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
+  if (!is.null(taxon)) {
+    if (taxon_rank == "order" & !taxon %in% rWCVP::taxonomic_mapping$order) {
       cli_abort(c(
         "Taxon not found.",
         "Possible values for this taxonomic rank can be viewed using `unique(taxonomic_mapping$order)`"
       ))
     }
 
-    if(taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
+    if (taxon_rank == "higher" & !taxon %in% rWCVP::taxonomic_mapping$higher) {
       cli_abort(c(
-       "Taxon not found.",
-       "Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'"
+        "Taxon not found.",
+        "Possible values for this taxonomic rank are: 'Angiosperms', 'Gymnosperms', 'Ferns' and 'Lycophytes'"
       ))
     }
   }
@@ -62,60 +61,61 @@ wcvp_distribution <- function(taxon, taxon_rank=c("species", "genus", "family","
 
   suppressMessages(sf::sf_use_s2(FALSE))
 
-  if(is.null(wcvp_distributions)){
+  if (is.null(wcvp_distributions)) {
     wcvp_distributions <- rWCVPdata::wcvp_distributions
   }
 
-  if(is.null(wcvp_names)){
+  if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
   }
 
-  if(taxon_rank %in% c("order","higher")) {
-    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by="family")
+  if (taxon_rank %in% c("order", "higher")) {
+    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family")
   }
 
-  if(length(taxon)>1) {
+  if (length(taxon) > 1) {
     cli_abort("'taxon' argument must be a single name")
   }
-  wcvp_cols <- c("plant_name_id", "taxon_rank", "taxon_status","higher", "order",
-                 "family", "genus", "species", "taxon_name", "taxon_authors")
+  wcvp_cols <- c(
+    "plant_name_id", "taxon_rank", "taxon_status", "higher", "order",
+    "family", "genus", "species", "taxon_name", "taxon_authors"
+  )
   df <- wcvp_names %>%
     select(any_of(wcvp_cols)) %>%
-    right_join(wcvp_distributions, by="plant_name_id")
+    right_join(wcvp_distributions, by = "plant_name_id")
 
   range_cols <- c("area_code_l3", "introduced", "extinct", "location_doubtful")
-  if(taxon_rank == "species"){
+  if (taxon_rank == "species") {
     df <- filter(df, .data$taxon_name %in% taxon)
   }
-  if(taxon_rank == "genus"){
+  if (taxon_rank == "genus") {
     df <- filter(df, .data$genus %in% taxon)
   }
-  if(taxon_rank == "family"){
+  if (taxon_rank == "family") {
     df <- filter(df, .data$family %in% taxon)
   }
 
-  if(taxon_rank == "order"){
+  if (taxon_rank == "order") {
     df <- filter(df, .data$order %in% taxon)
   }
 
-  if(taxon_rank == "higher"){
+  if (taxon_rank == "higher") {
     df <- filter(df, .data$higher %in% taxon)
   }
   df <- select(df, all_of(range_cols))
 
-  if(nrow(df) == 0) {
+  if (nrow(df) == 0) {
     cli_abort("No distribution for that taxon. Are the rank and spelling both correct?")
   }
 
   rWCVP::wgsrpd3 %>%
-    mutate(occurrence_type=case_when(
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 1,]$area_code_l3 ~ "location_doubtful",
+    mutate(occurrence_type = case_when(
+      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, ]$area_code_l3 ~ "location_doubtful",
       .data$LEVEL3_COD %in% df[df$location_doubtful == 0 &
-                                 df$extinct == 0 &
-                                 df$introduced == 0,]$area_code_l3 ~ "native",
-      .data$LEVEL3_COD %in% df[df$extinct == 1,]$area_code_l3 ~ "extinct",
-      .data$LEVEL3_COD %in% df[df$introduced == 1,]$area_code_l3 ~ "introduced"
+        df$extinct == 0 &
+        df$introduced == 0, ]$area_code_l3 ~ "native",
+      .data$LEVEL3_COD %in% df[df$extinct == 1, ]$area_code_l3 ~ "extinct",
+      .data$LEVEL3_COD %in% df[df$introduced == 1, ]$area_code_l3 ~ "introduced"
     )) %>%
     filter(.data$occurrence_type %in% show_types)
-
 }

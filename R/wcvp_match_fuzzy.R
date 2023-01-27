@@ -23,16 +23,15 @@
 #'
 #' @examples
 #' \dontrun{
-#'  wcvp_names <- rWCVPdata::wcvp_names
-#'  wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
 #' }
 #'
 #' @family name matching functions
 #'
-wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE){
-
+wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE) {
   # check for duplicated names
-  if(sum(duplicated(names_df[[name_col]])) > 10){
+  if (sum(duplicated(names_df[[name_col]])) > 10) {
     cli::cli_alert_warning("Fuzzy matching is very slow for data with repeated names. \nWe recommend matching a unique set of names to the WCVP, \nthen attaching the resolved matches to the original data using e.g. `*_join` functions.")
     invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
   }
@@ -41,7 +40,7 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 
   phonetic_matches <-
     names_df %>%
-    phonetic_match(wcvp_species, name_col=name_col) %>%
+    phonetic_match(wcvp_species, name_col = name_col) %>%
     filter(!is.na(.data$wcvp_id))
 
   matched_names <- phonetic_matches[[name_col]]
@@ -54,22 +53,21 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
     return(phonetic_matches)
   }
 
-  if(progress_bar==TRUE){
-    edit_matches <- edit_match(unmatched, wcvp_species, name_col=name_col)
+  if (progress_bar == TRUE) {
+    edit_matches <- edit_match(unmatched, wcvp_species, name_col = name_col)
   } else {
-    edit_matches <- suppressMessages(edit_match(unmatched, wcvp_species, name_col=name_col))
+    edit_matches <- suppressMessages(edit_match(unmatched, wcvp_species, name_col = name_col))
   }
 
 
-  if(nrow(phonetic_matches)>0){
+  if (nrow(phonetic_matches) > 0) {
     return(
       phonetic_matches %>%
-      bind_rows(edit_matches)
+        bind_rows(edit_matches)
     )
   } else {
     return(edit_matches)
   }
-
 }
 
 #' @rdname wcvp_match_fuzzy
@@ -86,43 +84,48 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 #'
 #' @examples
 #' \dontrun{
-#'  wcvp_names <- rWCVPdata::wcvp_names
-#'  phonetic_match(redlist_example, wcvp_names, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' phonetic_match(redlist_example, wcvp_names, "scientificName")
 #' }
 #'
-phonetic_match <- function(names_df, wcvp_names, name_col){
+phonetic_match <- function(names_df, wcvp_names, name_col) {
   original_names <- colnames(names_df)
-  wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen=20, clean=FALSE)
+  wcvp_names$mp <- metaphone(wcvp_names$taxon_name, maxCodeLen = 20, clean = FALSE)
 
   matches <-
     names_df %>%
-    mutate(sanitised_=sanitise_names_(.data[[name_col]])) %>%
-    mutate(mp=metaphone(.data$sanitised_, maxCodeLen=20, clean=FALSE)) %>%
-    left_join(wcvp_names, by="mp", suffix=c("", "_wcvp_names"))
+    mutate(sanitised_ = sanitise_names_(.data[[name_col]])) %>%
+    mutate(mp = metaphone(.data$sanitised_, maxCodeLen = 20, clean = FALSE)) %>%
+    left_join(wcvp_names, by = "mp", suffix = c("", "_wcvp_names"))
 
   matches <-
     matches %>%
     mutate(
-      match_similarity=levenshteinSim(.data$sanitised_, .data$taxon_name),
-      match_similarity=round(.data$match_similarity, 3)) %>%
+      match_similarity = levenshteinSim(.data$sanitised_, .data$taxon_name),
+      match_similarity = round(.data$match_similarity, 3)
+    ) %>%
     rowwise() %>%
-    mutate(match_edit_distance=adist(.data$sanitised_, .data$taxon_name)[,1]) %>%
+    mutate(match_edit_distance = adist(.data$sanitised_, .data$taxon_name)[, 1]) %>%
     ungroup()
 
   matches <-
     matches %>%
-    mutate(match_type=case_when(.data$match_similarity > 0.9 ~ "Fuzzy (phonetic)",
-                                .data$match_similarity >= 0.75 ~ "Fuzzy (phonetic)",
-                                TRUE ~ NA_character_)) %>%
-    mutate(match_similarity=ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity),
-           match_edit_distance=ifelse(is.na(.data$match_type), NA_real_, .data$match_edit_distance)) %>%
+    mutate(match_type = case_when(
+      .data$match_similarity > 0.9 ~ "Fuzzy (phonetic)",
+      .data$match_similarity >= 0.75 ~ "Fuzzy (phonetic)",
+      TRUE ~ NA_character_
+    )) %>%
+    mutate(
+      match_similarity = ifelse(.data$match_similarity < 0.75, NA_real_, .data$match_similarity),
+      match_edit_distance = ifelse(is.na(.data$match_type), NA_real_, .data$match_edit_distance)
+    ) %>%
     add_count(.data[[name_col]]) %>%
-    mutate(multiple_matches=.data$n > 1) %>%
+    mutate(multiple_matches = .data$n > 1) %>%
     select(-"n")
 
   matches %>%
-    format_output_(original_cols=original_names) %>%
-    mutate(across(starts_with("wcvp_"), ~ifelse(is.na(.data$match_type), NA, .x)))
+    format_output_(original_cols = original_names) %>%
+    mutate(across(starts_with("wcvp_"), ~ ifelse(is.na(.data$match_type), NA, .x)))
 }
 
 #' @rdname wcvp_match_fuzzy
@@ -140,23 +143,25 @@ phonetic_match <- function(names_df, wcvp_names, name_col){
 #'
 #' @examples
 #' \dontrun{
-#'  wcvp_names <- rWCVPdata::wcvp_names
-#'  edit_match(redlist_example, wcvp_names, "scientificName")
+#' wcvp_names <- rWCVPdata::wcvp_names
+#' edit_match(redlist_example, wcvp_names, "scientificName")
 #' }
 #'
-edit_match <- function(names_df, wcvp_names, name_col){
-  withr::local_options(list(cli.progress_show_after=2, cli.progress_clear=FALSE))
+edit_match <- function(names_df, wcvp_names, name_col) {
+  withr::local_options(list(cli.progress_show_after = 2, cli.progress_clear = FALSE))
 
   original_names <- colnames(names_df)
   names_df <-
     names_df %>%
     filter(!is.na(.data[[name_col]])) %>%
-    mutate(sanitised_=sanitise_names_(.data[[name_col]]))
+    mutate(sanitised_ = sanitise_names_(.data[[name_col]]))
 
   matches <-
     names_df %>%
-    mutate(match_info=map(cli_progress_along(.data$sanitised_, "Matching"),
-                          ~edit_match_name_(.data$sanitised_[.x], wcvp_names)))
+    mutate(match_info = map(
+      cli_progress_along(.data$sanitised_, "Matching"),
+      ~ edit_match_name_(.data$sanitised_[.x], wcvp_names)
+    ))
 
   matches <-
     matches %>%
@@ -165,10 +170,10 @@ edit_match <- function(names_df, wcvp_names, name_col){
   matches %>%
     left_join(
       wcvp_names,
-      by=c("plant_name_id", "taxon_name"),
-      suffix=c("", "_wcvp")
+      by = c("plant_name_id", "taxon_name"),
+      suffix = c("", "_wcvp")
     ) %>%
-    format_output_(original_cols=original_names)
+    format_output_(original_cols = original_names)
 }
 
 #' Match a name to a lookup table using Levenshtein similarity (edit distance).
@@ -216,11 +221,11 @@ edit_match_name_ <- function(name, lookup) {
   }
 
   data.frame(
-    taxon_name=best_name,
-    plant_name_id=best_name_id,
-    match_similarity=best_similarity,
-    match_edit_distance=as.vector(adist(name, best_name)),
-    match_type=match_type,
-    multiple_matches=length(best_name_id) > 1
+    taxon_name = best_name,
+    plant_name_id = best_name_id,
+    match_similarity = best_similarity,
+    match_edit_distance = as.vector(adist(name, best_name)),
+    match_type = match_type,
+    multiple_matches = length(best_name_id) > 1
   )
 }
