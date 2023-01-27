@@ -82,6 +82,8 @@ wcvp_occ_mat <- function(taxon = NULL, taxon_rank = c("species", "genus", "famil
       taxon = taxon,
       taxon_rank = taxon_rank,
       area_codes = area_codes,
+      wcvp_names = wcvp_names,
+      wcvp_distributions = wcvp_distributions,
       synonyms = FALSE,
       infraspecies = FALSE,
       native = native,
