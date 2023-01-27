@@ -34,6 +34,9 @@
     <a class="dropdown-item" href="../articles/redlist-name-matching.html">UNKNOWN TITLE</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -102,12 +105,12 @@ doubtful? Defaults to <code>TRUE</code>.</p></dd>
 
 <dt>wcvp_names</dt>
 <dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
+If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
 
 
 <dt>wcvp_distributions</dt>
 <dd><p>A data frame of distributions from WCVP version 7 or later.
-If <code>NULL</code> (the default), distributions will be loaded from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
+If <code>NULL</code> (the default), distributions will be loaded from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -128,10 +131,11 @@ the <code>wcvp_summary</code> and <code>wcvp_occ_mat</code> functions can be use
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution</span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution</span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="wcvp_distribution_map.html">wcvp_distribution_map</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
-<span class="r-plt img"><img src="wcvp_distribution-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

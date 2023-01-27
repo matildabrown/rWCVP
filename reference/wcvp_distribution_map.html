@@ -34,6 +34,9 @@
     <a class="dropdown-item" href="../articles/redlist-name-matching.html">UNKNOWN TITLE</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -112,27 +115,24 @@ https://powo.science.kew.org/), where green is native, purple is introduced, red
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
-<span class="r-plt img"><img src="wcvp_distribution_map-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># now only the native range, and cropped to range extent</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>introduced<span class="op">=</span><span class="cn">FALSE</span>, crop_map<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  introduced <span class="op">=</span> <span class="cn">FALSE</span>, crop_map <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
-<span class="r-plt img"><img src="wcvp_distribution_map-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># now with different colours</span></span></span>
 <span class="r-in"><span><span class="co"># note that this taxon only has native and introduced occurrences, so only two colours are needed</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">+</span></span></span>
-<span class="r-in"><span><span class="co"># for polygons</span></span></span>
-<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span><span class="co"># for points (islands)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">fill</span> is already present.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">fill</span>, which will replace the existing scale.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">colour</span> is already present.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span>
-<span class="r-plt img"><img src="wcvp_distribution_map-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>  <span class="co"># for polygons</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="co"># for points (islands)</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

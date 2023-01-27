@@ -34,6 +34,9 @@
     <a class="dropdown-item" href="../articles/redlist-name-matching.html">UNKNOWN TITLE</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -141,12 +144,12 @@
 
 <dt>wcvp_names</dt>
 <dd><p>A data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
+If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
 
 
 <dt>wcvp_distributions</dt>
 <dd><p>A data frame of distributions from WCVP version 7 or later.
-If <code>NULL</code> (the default), distributions will be loaded from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
+If <code>NULL</code> (the default), distributions will be loaded from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -165,10 +168,10 @@ For a taxonomic checklist, names are grouped by their accepted names, and synony
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#These examples take &gt;10 seconds to run.</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># These examples take &gt;10 seconds to run.</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Myrtaceae"</span>, taxon_rank<span class="op">=</span><span class="st">"family"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon<span class="op">=</span><span class="st">"Ferns"</span>, taxon_rank<span class="op">=</span><span class="st">"higher"</span>, area<span class="op">=</span><span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"New Zealand"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"Myrtaceae"</span>, taxon_rank <span class="op">=</span> <span class="st">"family"</span>, area <span class="op">=</span> <span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Brazil"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_checklist</span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"Ferns"</span>, taxon_rank <span class="op">=</span> <span class="st">"higher"</span>, area <span class="op">=</span> <span class="fu"><a href="get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"New Zealand"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

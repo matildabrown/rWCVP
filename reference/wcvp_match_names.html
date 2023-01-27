@@ -36,6 +36,9 @@ on any remaining unmatched names."><!-- mathjax --><script src="https://cdnjs.cl
     <a class="dropdown-item" href="../articles/redlist-name-matching.html">UNKNOWN TITLE</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -84,7 +87,7 @@ on any remaining unmatched names.</p>
 
 <dt>wcvp_names</dt>
 <dd><p>Data frame of taxonomic names from WCVP version 7 or later.
-If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
+If <code>NULL</code> (the default), names will be loaded from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p></dd>
 
 
 <dt>name_col</dt>
@@ -132,7 +135,7 @@ taxon name, but must be supplied in the order you want them joined
 (e.g. <code>c("genus", "species", "infra_rank", "infra")</code>).</p>
 <p>Fuzzy matching uses a combination of phonetic and edit distance matching,
 and can optionally be turned off using <code>fuzzy=FALSE</code>.</p>
-<p>The WCVP can be loaded for matching from <a href="https://matildabrown.github.io/rWCVPdata"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p>
+<p>The WCVP can be loaded for matching from <a href="https://matildabrown.github.io/rWCVPdata/"><code><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">rWCVPdata::wcvp_names</a></code></a>.</p>
 <p>See <a href="https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html">here</a> for an example workflow.</p>
     </div>
     <div class="section level2">
@@ -145,15 +148,19 @@ and can optionally be turned off using <code>fuzzy=FALSE</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">wcvp_names</a></span></span></span>
+<span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">wcvp_names</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="co"># without author</span></span></span>
-<span class="r-in"><span> <span class="fu">wcvp_match_names</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, name_col<span class="op">=</span><span class="st">"scientificName"</span>,</span></span>
-<span class="r-in"><span>            id_col<span class="op">=</span><span class="st">"assessmentId"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># without author</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_match_names</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>,</span></span>
+<span class="r-in"><span>  name_col <span class="op">=</span> <span class="st">"scientificName"</span>,</span></span>
+<span class="r-in"><span>  id_col <span class="op">=</span> <span class="st">"assessmentId"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="co"># with author</span></span></span>
-<span class="r-in"><span> <span class="fu">wcvp_match_names</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, name_col<span class="op">=</span><span class="st">"scientificName"</span>,</span></span>
-<span class="r-in"><span>            id_col<span class="op">=</span><span class="st">"assessmentId"</span>, author_col<span class="op">=</span><span class="st">"authority"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># with author</span></span></span>
+<span class="r-in"><span><span class="fu">wcvp_match_names</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>,</span></span>
+<span class="r-in"><span>  name_col <span class="op">=</span> <span class="st">"scientificName"</span>,</span></span>
+<span class="r-in"><span>  id_col <span class="op">=</span> <span class="st">"assessmentId"</span>, author_col <span class="op">=</span> <span class="st">"authority"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
