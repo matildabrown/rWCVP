@@ -106,10 +106,13 @@ of the WCVP.</p>
 <p>One way to load the WCVP is to install the associated data package,
 rWCVPdata:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/">rWCVPdata</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span>, </span>
-<span>                   repos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://matildabrown.github.io/drat"</span>,</span>
-<span>                           <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/">rWCVPdata</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span>,</span>
+<span>    repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="st">"https://matildabrown.github.io/drat"</span>,</span>
+<span>      <span class="st">"https://cloud.r-project.org"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># taxonomy data</span></span>
@@ -125,8 +128,10 @@ checklist:</p>
 <code class="sourceCode R"><span><span class="va">names</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"/path/to/wcvp_names.csv"</span><span class="op">)</span></span>
 <span><span class="va">distributions</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"/path/to/wcvp_distributions.csv"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_checklist.html">wcvp_checklist</a></span><span class="op">(</span><span class="st">"Acacia"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, area_codes<span class="op">=</span><span class="st">"CPP"</span>,</span>
-<span>                                wcvp_names<span class="op">=</span><span class="va">names</span>, wcvp_distributions<span class="op">=</span><span class="va">distributions</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_checklist.html">wcvp_checklist</a></span><span class="op">(</span><span class="st">"Acacia"</span>,</span>
+<span>  taxon_rank <span class="op">=</span> <span class="st">"genus"</span>, area_codes <span class="op">=</span> <span class="st">"CPP"</span>,</span>
+<span>  wcvp_names <span class="op">=</span> <span class="va">names</span>, wcvp_distributions <span class="op">=</span> <span class="va">distributions</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><strong>Be careful if you’re using your own WCVP version!</strong>
 The structure of the WCVP tables sometimes changes between versions.
 rWCVP should be set up to work with the latest version of WCVP, and any
@@ -152,8 +157,10 @@ you want to focus on.</li>
 outputs for focal taxa in a desired area. For example, Myrtaceae species
 in Brazil:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_checklist.html">wcvp_checklist</a></span><span class="op">(</span><span class="st">"Myrtaceae"</span>, taxon_rank<span class="op">=</span><span class="st">"family"</span>, </span>
-<span>                            area_codes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BZC"</span>, <span class="st">"BZN"</span>, <span class="st">"BZS"</span>, <span class="st">"BZE"</span>, <span class="st">"BZL"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcvp_checklist.html">wcvp_checklist</a></span><span class="op">(</span><span class="st">"Myrtaceae"</span>,</span>
+<span>  taxon_rank <span class="op">=</span> <span class="st">"family"</span>,</span>
+<span>  area_codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BZC"</span>, <span class="st">"BZN"</span>, <span class="st">"BZS"</span>, <span class="st">"BZE"</span>, <span class="st">"BZL"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="a-note-on-filtering-by-taxon">A note on filtering by taxon<a class="anchor" aria-label="anchor" href="#a-note-on-filtering-by-taxon"></a>
 </h3>
@@ -162,7 +169,7 @@ rank the name you’re providing is using the <code>taxon.rank</code>
 argument.</p>
 <p>For example, making a summary table for the genus <em>Poa</em>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poa"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $Taxon</span></span>
 <span><span class="co">#&gt; [1] "Poa"</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -212,7 +219,7 @@ taxonomies, based on APG IV.</p>
 these higher taxonomic ranks.</p>
 <p>For example, making a summary table for all Poales:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poales"</span>, taxon_rank<span class="op">=</span><span class="st">"order"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poales"</span>, taxon_rank <span class="op">=</span> <span class="st">"order"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $Taxon</span></span>
 <span><span class="co">#&gt; [1] "Poales"</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -264,7 +271,7 @@ a region to a vector of WGSRPD level 3 codes.</p>
 <p>This can be input directly into functions that filter the WCVP by
 area.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poa"</span>, taxon_rank<span class="op">=</span><span class="st">"genus"</span>, area<span class="op">=</span><span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Southern Hemisphere"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wcvp_summary.html">wcvp_summary</a></span><span class="op">(</span><span class="st">"Poa"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span>, area <span class="op">=</span> <span class="fu"><a href="../reference/get_wgsrpd3_codes.html">get_wgsrpd3_codes</a></span><span class="op">(</span><span class="st">"Southern Hemisphere"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $Taxon</span></span>
 <span><span class="co">#&gt; [1] "Poa"</span></span>
 <span><span class="co">#&gt; </span></span>
