@@ -176,9 +176,10 @@ wcvp_summary <- function(taxon = NULL,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var = "family")
 #' wcvp_summary_gt(ferns)
-#'
+#' }
 wcvp_summary_gt <- function(x) {
   if (is.null(x$Taxon)) x$Taxon <- "Plants"
   tab_title <- paste("<b>", x$Taxon, "of", x$Area, "</b>")
