@@ -29,7 +29,7 @@ get_wgsrpd3_codes <- function(geography, include_equatorial = NULL) {
   }
 
   matchlevel <- levelnames[which(names(levelnames) %in% colnames(wgsrpd_mapping[which(wgsrpd_mapping == geography |
-    wgsrpd_mapping == toupper(geography), arr.ind = T)[, 2] %>%
+    wgsrpd_mapping == toupper(geography), arr.ind = TRUE)[, 2] %>%
     unique()]))]
 
   if (length(matchlevel) == 0) {

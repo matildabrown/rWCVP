@@ -84,7 +84,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
   cli_alert_info("Using the {.var {label_col}} column{?s}")
 
   if (is.null(id_col)) {
-    names_df$internal_id <- 1:nrow(names_df)
+    names_df$internal_id <- seq_len(nrow(names_df))
     id_col <- "internal_id"
   }
 
@@ -110,7 +110,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
   }
 
   # set up id col for returned df
-  names_df$row_order <- 1:nrow(names_df)
+  names_df$row_order <- seq_len(nrow(names_df))
 
   unmatched <- names_df
 

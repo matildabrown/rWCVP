@@ -185,7 +185,7 @@ df_split <- df %>%
   dplyr::group_by(area_code_l3) %>% 
   dplyr::group_split()
 summ_split <- list()
-for(i in 1:length(df_split)){
+for(i in seq_along(df_split)){
   native <- nrow(unique(df_split[[i]] %>% 
                        dplyr::filter(taxon_status == "Accepted",
                               taxon_rank == "Species",
