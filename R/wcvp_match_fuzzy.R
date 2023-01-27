@@ -1,11 +1,11 @@
 #' Fuzzy (approximate) matching to the WCVP.
 #'
 #' Fuzzy matching to names in the WCVP using phonetic matching and edit distance.
-#' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata).
+#' The WCVP can be loaded for matching from [rWCVPdata::wcvp_names](https://matildabrown.github.io/rWCVPdata/).
 #'
 #' @param names_df Data frame of names for matching.
 #' @param wcvp_names Data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
+#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata/).
 #' @param name_col Character. The column in `names_df` that has the taxon name
 #' for matching.
 #' @param progress_bar Logical. Show progress bar when matching? Defaults to

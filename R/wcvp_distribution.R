@@ -8,9 +8,9 @@
 #' @param location_doubtful Logical. Include occurrences that are thought to be
 #'     doubtful? Defaults to `TRUE`.
 #' @param wcvp_names A data frame of taxonomic names from WCVP version 7 or later.
-#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
+#'   If `NULL` (the default), names will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata/).
 #' @param wcvp_distributions A data frame of distributions from WCVP version 7 or later.
-#'   If `NULL` (the default), distributions will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
+#'   If `NULL` (the default), distributions will be loaded from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata/).
 #'
 #' @details Where \code{taxon_rank} is higher than species, the distribution of the whole
 #' group will be returned, not individual species within that group. This also applies when
@@ -26,9 +26,11 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' r <- wcvp_distribution("Callitris", taxon_rank = "genus")
 #' p <- wcvp_distribution_map(r)
 #' p
+#' }
 wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family", "order", "higher"), native = TRUE, introduced = TRUE,
                               extinct = TRUE, location_doubtful = TRUE,
                               wcvp_names = NULL,

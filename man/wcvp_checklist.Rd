@@ -53,10 +53,10 @@ wcvp_checklist(
 \item{report_type}{Character; one of "alphabetical" (the default) or "taxonomic". Should the generated checklist be sorted alphabetically, or by taxonomic status?}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata/}{\code{rWCVPdata::wcvp_names}}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL} (the default), distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata/}{\code{rWCVPdata::wcvp_names}}.}
 }
 \value{
 Data frame with filtered data and, if \code{render_report=TRUE}. a report HTML file.
@@ -71,9 +71,9 @@ In an alphabetical checklist, all names are arranged alphabetically with accepte
 For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 }
 \examples{
-#These examples take >10 seconds to run.
+# These examples take >10 seconds to run.
 \dontrun{
-wcvp_checklist(taxon="Myrtaceae", taxon_rank="family", area=get_wgsrpd3_codes("Brazil"))
-wcvp_checklist(taxon="Ferns", taxon_rank="higher", area=get_wgsrpd3_codes("New Zealand"))
+wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
+wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
 }
 }

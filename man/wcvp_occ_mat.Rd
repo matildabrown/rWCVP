@@ -32,10 +32,10 @@ wcvp_occ_mat(
 \item{location_doubtful}{Logical. Include species occurrences flagged as location doubtful? Defaults to TRUE.}
 
 \item{wcvp_names}{A data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL}, names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
+If \code{NULL}, names will be loaded from \href{https://matildabrown.github.io/rWCVPdata/}{rWCVPdata::wcvp_names}.}
 
 \item{wcvp_distributions}{A data frame of distributions from WCVP version 7 or later.
-If \code{NULL}, distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{rWCVPdata::wcvp_names}.}
+If \code{NULL}, distributions will be loaded from \href{https://matildabrown.github.io/rWCVPdata/}{rWCVPdata::wcvp_names}.}
 }
 \value{
 A data.frame containing the \code{taxon_name} and \code{plant_name_id}
@@ -48,8 +48,11 @@ Generate occurrence matrix for taxa and areas
 See \href{https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html}{here} for an example of how this output can be formatted for publication.
 }
 \examples{
-wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
-area=c("TAS", "VIC","NSW"), introduced=FALSE)
-
+\dontrun{
+wcvp_occ_mat(
+  taxon = "Poa", taxon_rank = "genus",
+  area = c("TAS", "VIC", "NSW"), introduced = FALSE
+)
+}
 
 }

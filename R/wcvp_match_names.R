@@ -23,7 +23,7 @@
 #'  Fuzzy matching uses a combination of phonetic and edit distance matching,
 #'  and can optionally be turned off using `fuzzy=FALSE`.
 #'
-#'  The WCVP can be loaded for matching from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata).
+#'  The WCVP can be loaded for matching from [`rWCVPdata::wcvp_names`](https://matildabrown.github.io/rWCVPdata/).
 #'
 #'  See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 #'

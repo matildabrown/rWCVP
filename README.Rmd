@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-rWCVP is a package for accessing and using plant name and distribution data from the [World Checklist of Vascular Plants](https://wcvp.science.kew.org/)
+rWCVP is a package for accessing and using plant name and distribution data from the [World Checklist of Vascular Plants](https://powo.science.kew.org//)
 
 ## Installation
 

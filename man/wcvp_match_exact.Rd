@@ -10,7 +10,7 @@ wcvp_match_exact(names_df, wcvp_names, name_col, author_col = NULL, id_col)
 \item{names_df}{Data frame of names for matching.}
 
 \item{wcvp_names}{Data frame of taxonomic names from WCVP version 7 or later.
-If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata}{\code{rWCVPdata::wcvp_names}}.}
+If \code{NULL} (the default), names will be loaded from \href{https://matildabrown.github.io/rWCVPdata/}{\code{rWCVPdata::wcvp_names}}.}
 
 \item{name_col}{Character. The column in \code{names_df} that has the taxon name
 for matching.}
@@ -29,14 +29,16 @@ refine results.
 }
 \examples{
 \dontrun{
- wcvp_names <- rWCVPdata::wcvp_names
+wcvp_names <- rWCVPdata::wcvp_names
 
- # including author string
- wcvp_match_exact(redlist_example, wcvp_names, "scientificName", author_col="authority",
- id_col = "assessmentId")
+# including author string
+wcvp_match_exact(redlist_example, wcvp_names, "scientificName",
+  author_col = "authority",
+  id_col = "assessmentId"
+)
 
- # without author string
- wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
+# without author string
+wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
 }
 
 }

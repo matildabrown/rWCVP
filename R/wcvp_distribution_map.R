@@ -20,6 +20,7 @@
 #' @return A [`ggplot2::ggplot`] of the distribution.
 #'
 #' @examples
+#' \dontrun{
 #' p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank = "genus"))
 #' p
 #' # now only the native range, and cropped to range extent
@@ -35,6 +36,8 @@
 #'   ggplot2::scale_fill_manual(values = c("red", "blue")) +
 #'   # for points (islands)
 #'   ggplot2::scale_colour_manual(values = c("red", "blue"))
+#'   }
+#'
 wcvp_distribution_map <- function(range, crop_map = FALSE, native = TRUE, introduced = TRUE,
                                   extinct = TRUE, location_doubtful = TRUE) {
   occurrence_type <- NULL
