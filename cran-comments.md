@@ -3,7 +3,9 @@
 We have moved the non-mainstream dependency rWCVPdata to a drat repository and 
     listed this in Additional repositories in the DESCRIPTION.
 We have made sure that the vignettes folder is included in the build.
-Examples are tagged with 'dontrun' because the simplest syntax requires rWCVPdata
+Examples are tagged with 'dontrun' because they take >10seconds to run, and the
+    simplest syntax requires rWCVPdata (we have added this where it was missed in 
+    the previous submission)
 
 
 ## R CMD check results
