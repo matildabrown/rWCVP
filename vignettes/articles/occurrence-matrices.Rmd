@@ -35,569 +35,6 @@ wcvp_summary(taxon="Myrtaceae", taxon_rank="family", area=get_wgsrpd3_codes("Bra
   wcvp_summary_gt()
 ```
 
-<!--html_preserve--><div id="vkzfpcszkz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#vkzfpcszkz .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#vkzfpcszkz .gt_subtitle {
-  color: #333333;
-  font-size: 12px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#vkzfpcszkz .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#vkzfpcszkz .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#vkzfpcszkz .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#vkzfpcszkz .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#vkzfpcszkz .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#vkzfpcszkz .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#vkzfpcszkz .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#vkzfpcszkz .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#vkzfpcszkz .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#vkzfpcszkz .gt_row {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: rgba(255, 255, 255, 0);
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#vkzfpcszkz .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vkzfpcszkz .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#vkzfpcszkz .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#vkzfpcszkz .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vkzfpcszkz .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#vkzfpcszkz .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vkzfpcszkz .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#vkzfpcszkz .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vkzfpcszkz .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#vkzfpcszkz .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vkzfpcszkz .gt_left {
-  text-align: left;
-}
-
-#vkzfpcszkz .gt_center {
-  text-align: center;
-}
-
-#vkzfpcszkz .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#vkzfpcszkz .gt_font_normal {
-  font-weight: normal;
-}
-
-#vkzfpcszkz .gt_font_bold {
-  font-weight: bold;
-}
-
-#vkzfpcszkz .gt_font_italic {
-  font-style: italic;
-}
-
-#vkzfpcszkz .gt_super {
-  font-size: 65%;
-}
-
-#vkzfpcszkz .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#vkzfpcszkz .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#vkzfpcszkz .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#vkzfpcszkz .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-#vkzfpcszkz .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-#vkzfpcszkz .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Myrtaceae of Brazil </b></th>
-    </tr>
-    <tr>
-      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 1127<br>Number of regionally endemic species: 878</th>
-    </tr>
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Genus</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Native</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Endemic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Introduced</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Extinct</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Accara</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr><td class="gt_row gt_left">Algrizea</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">2</td></tr>
-    <tr><td class="gt_row gt_left">Blepharocalyx</td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">3</td></tr>
-    <tr><td class="gt_row gt_left">Calycolpus</td>
-<td class="gt_row gt_right">8</td>
-<td class="gt_row gt_right">4</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
-    <tr><td class="gt_row gt_left">Calycorectes</td>
-<td class="gt_row gt_right">9</td>
-<td class="gt_row gt_right">9</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">9</td></tr>
-    <tr><td class="gt_row gt_left">Campomanesia</td>
-<td class="gt_row gt_right">41</td>
-<td class="gt_row gt_right">31</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right" style="font-weight: bold;">42</td></tr>
-    <tr><td class="gt_row gt_left">Curitiba</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr><td class="gt_row gt_left">Eugenia</td>
-<td class="gt_row gt_right">430</td>
-<td class="gt_row gt_right">338</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">431</td></tr>
-    <tr><td class="gt_row gt_left">Feijoa</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr><td class="gt_row gt_left">Myrceugenia</td>
-<td class="gt_row gt_right">34</td>
-<td class="gt_row gt_right">30</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">34</td></tr>
-    <tr><td class="gt_row gt_left">Myrcia</td>
-<td class="gt_row gt_right">440</td>
-<td class="gt_row gt_right">351</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right" style="font-weight: bold;">441</td></tr>
-    <tr><td class="gt_row gt_left">Myrcianthes</td>
-<td class="gt_row gt_right">7</td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">7</td></tr>
-    <tr><td class="gt_row gt_left">Myrciaria</td>
-<td class="gt_row gt_right">23</td>
-<td class="gt_row gt_right">15</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">23</td></tr>
-    <tr><td class="gt_row gt_left">Myrrhinium</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr><td class="gt_row gt_left">Neomitranthes</td>
-<td class="gt_row gt_right">13</td>
-<td class="gt_row gt_right">13</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">13</td></tr>
-    <tr><td class="gt_row gt_left">Pimenta</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr><td class="gt_row gt_left">Plinia</td>
-<td class="gt_row gt_right">41</td>
-<td class="gt_row gt_right">35</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">41</td></tr>
-    <tr><td class="gt_row gt_left">Psidium</td>
-<td class="gt_row gt_right">57</td>
-<td class="gt_row gt_right">36</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">57</td></tr>
-    <tr><td class="gt_row gt_left">Siphoneugena</td>
-<td class="gt_row gt_right">10</td>
-<td class="gt_row gt_right">8</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">10</td></tr>
-    <tr><td class="gt_row gt_left">Syzygium</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-  </tbody>
-</table>
-</div><!--/html_preserve-->
-*Calycolpus* looks nice and tidy - let's see how the 8 species are distributed across the 5 areas. We can use the same function, but limit our taxon and change our grouping variable to area.
-
-```r
-wcvp_summary(taxon="Calycolpus", taxon_rank="genus", area=get_wgsrpd3_codes("Brazil"),
-              grouping_var = "area_code_l3") %>% 
-  wcvp_summary_gt()
-```
-
 <!--html_preserve--><div id="awhtzcisff" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1013,15 +450,15 @@ wcvp_summary(taxon="Calycolpus", taxon_rank="genus", area=get_wgsrpd3_codes("Bra
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Calycolpus of Brazil </b></th>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Myrtaceae of Brazil </b></th>
     </tr>
     <tr>
-      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 8<br>Number of regionally endemic species: 4</th>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 1127<br>Number of regionally endemic species: 878</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Genus</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Native</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Endemic</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Introduced</th>
@@ -1030,33 +467,134 @@ wcvp_summary(taxon="Calycolpus", taxon_rank="genus", area=get_wgsrpd3_codes("Bra
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZE</td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">3</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZL</td>
+    <tr><td class="gt_row gt_left">Accara</td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZN</td>
-<td class="gt_row gt_right">5</td>
+    <tr><td class="gt_row gt_left">Algrizea</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">2</td></tr>
+    <tr><td class="gt_row gt_left">Blepharocalyx</td>
+<td class="gt_row gt_right">3</td>
 <td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">5</td></tr>
+<td class="gt_row gt_right" style="font-weight: bold;">3</td></tr>
+    <tr><td class="gt_row gt_left">Calycolpus</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
+    <tr><td class="gt_row gt_left">Calycorectes</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">9</td></tr>
+    <tr><td class="gt_row gt_left">Campomanesia</td>
+<td class="gt_row gt_right">41</td>
+<td class="gt_row gt_right">31</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right" style="font-weight: bold;">42</td></tr>
+    <tr><td class="gt_row gt_left">Curitiba</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
+    <tr><td class="gt_row gt_left">Eugenia</td>
+<td class="gt_row gt_right">430</td>
+<td class="gt_row gt_right">338</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">431</td></tr>
+    <tr><td class="gt_row gt_left">Feijoa</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
+    <tr><td class="gt_row gt_left">Myrceugenia</td>
+<td class="gt_row gt_right">34</td>
+<td class="gt_row gt_right">30</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">34</td></tr>
+    <tr><td class="gt_row gt_left">Myrcia</td>
+<td class="gt_row gt_right">440</td>
+<td class="gt_row gt_right">351</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right" style="font-weight: bold;">441</td></tr>
+    <tr><td class="gt_row gt_left">Myrcianthes</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">7</td></tr>
+    <tr><td class="gt_row gt_left">Myrciaria</td>
+<td class="gt_row gt_right">23</td>
+<td class="gt_row gt_right">15</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">23</td></tr>
+    <tr><td class="gt_row gt_left">Myrrhinium</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
+    <tr><td class="gt_row gt_left">Neomitranthes</td>
+<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">13</td></tr>
+    <tr><td class="gt_row gt_left">Pimenta</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
+    <tr><td class="gt_row gt_left">Plinia</td>
+<td class="gt_row gt_right">41</td>
+<td class="gt_row gt_right">35</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">41</td></tr>
+    <tr><td class="gt_row gt_left">Psidium</td>
+<td class="gt_row gt_right">57</td>
+<td class="gt_row gt_right">36</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">57</td></tr>
+    <tr><td class="gt_row gt_left">Siphoneugena</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">10</td></tr>
+    <tr><td class="gt_row gt_left">Syzygium</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
   </tbody>
 </table>
 </div><!--/html_preserve-->
-Hmm, maybe a bit too small - it only occurs in 3 of the 5 regions. What about *Myrciaria*? 
-
+*Calycolpus* looks nice and tidy - let's see how the 8 species are distributed across the 5 areas. We can use the same function, but limit our taxon and change our grouping variable to area.
 
 ```r
-wcvp_summary(taxon="Myrciaria", taxon_rank="genus", area=get_wgsrpd3_codes("Brazil"), 
-              grouping_var="area_code_l3") %>% 
+wcvp_summary(taxon="Calycolpus", taxon_rank="genus", area=get_wgsrpd3_codes("Brazil"),
+              grouping_var = "area_code_l3") %>% 
   wcvp_summary_gt()
 ```
 
@@ -1475,10 +1013,10 @@ wcvp_summary(taxon="Myrciaria", taxon_rank="genus", area=get_wgsrpd3_codes("Braz
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Myrciaria of Brazil </b></th>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Calycolpus of Brazil </b></th>
     </tr>
     <tr>
-      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 23<br>Number of regionally endemic species: 15</th>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 8<br>Number of regionally endemic species: 4</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
@@ -1492,114 +1030,34 @@ wcvp_summary(taxon="Myrciaria", taxon_rank="genus", area=get_wgsrpd3_codes("Braz
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZC</td>
-<td class="gt_row gt_right">6</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
     <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZE</td>
-<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">3</td>
 <td class="gt_row gt_right">2</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">13</td></tr>
+<td class="gt_row gt_right" style="font-weight: bold;">3</td></tr>
     <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZL</td>
-<td class="gt_row gt_right">16</td>
-<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">16</td></tr>
+<td class="gt_row gt_right" style="font-weight: bold;">1</td></tr>
     <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZN</td>
-<td class="gt_row gt_right">6</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZS</td>
 <td class="gt_row gt_right">5</td>
 <td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">5</td></tr>
   </tbody>
 </table>
 </div><!--/html_preserve-->
-
-Perfect! 23 species (rows) won't take up too much space, and there are enough occurrences to make it interesting. 
-
-## Generating and formatting the occurrence matrix
-Generating an occurrence matrix for this genus is as simple as using the `generate_occurence_matrix` function.  
+Hmm, maybe a bit too small - it only occurs in 3 of the 5 regions. What about *Myrciaria*? 
 
 
 ```r
-m <- wcvp_occ_mat(taxon="Myrciaria", taxon_rank="genus", 
-                                area=get_wgsrpd3_codes("Brazil"))
-m
-#> # A tibble: 23 x 7
-#>    plant_name_id taxon_name             BZC   BZE   BZL   BZN   BZS
-#>            <dbl> <chr>                <dbl> <dbl> <dbl> <dbl> <dbl>
-#>  1        473796 Myrciaria alagoana       0     1     0     0     0
-#>  2        534878 Myrciaria alta           0     0     1     0     0
-#>  3        534776 Myrciaria cambuca        0     1     1     0     0
-#>  4        131799 Myrciaria cordata        0     0     0     1     0
-#>  5        131802 Myrciaria cuspidata      1     1     1     0     1
-#>  6        131803 Myrciaria delicatula     1     0     1     0     1
-#>  7        131806 Myrciaria disticha       0     1     1     0     0
-#>  8        131810 Myrciaria dubia          1     0     0     1     0
-#>  9        491614 Myrciaria evanida        0     0     1     0     0
-#> 10        131814 Myrciaria ferruginea     0     1     1     0     0
-#> # ... with 13 more rows
-```
-
-It's OK, but we can make it much prettier using the `gt` package.
-Let's do the following: 
-
-* remove the WCVP ID column
-* change taxon_id to 'Species'
-* make species names italic
-* bold the column titles
-* reduce the space around the text and make font size 12
-* remove the internal borders
-* change the 1s and 0s into X and blank
-
-
-```r
-m_gt <- m %>% 
-  select(-plant_name_id) %>% #remove ID col
-  gt() %>% 
-  cols_label(
-    taxon_name = "Species"
-  ) %>% 
-  #make species names italic
-        tab_style(
-        style=cell_text(style="italic"),
-        locations = cells_body(
-          columns= taxon_name
-        )
-      ) %>% 
-  tab_options(
-    # some nice formatting
-        column_labels.font.weight = "bold",
-        data_row.padding = px(1),
-        table.font.size = 12,
-        table_body.hlines.color = "transparent",
-        ) %>%
-  # change the zeroes into blanks
-      text_transform(
-        locations = cells_body(),
-        fn = function(x){
-          ifelse(x == 0, "", x)
-        }
-      ) %>% 
-  # change the 1s into X
-        text_transform(
-        locations = cells_body(),
-        fn = function(x){
-          ifelse(x == 1, "X", x)
-        }
-      )
-m_gt
+wcvp_summary(taxon="Myrciaria", taxon_rank="genus", area=get_wgsrpd3_codes("Brazil"), 
+              grouping_var="area_code_l3") %>% 
+  wcvp_summary_gt()
 ```
 
 <!--html_preserve--><div id="naypkdozxr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1634,7 +1092,7 @@ m_gt
 
 #naypkdozxr .gt_heading {
   background-color: #FFFFFF;
-  text-align: center;
+  text-align: left;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
@@ -1658,7 +1116,7 @@ m_gt
 
 #naypkdozxr .gt_subtitle {
   color: #333333;
-  font-size: 85%;
+  font-size: 12px;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
@@ -1825,7 +1283,7 @@ m_gt
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
-  font-weight: initial;
+  font-weight: bold;
   text-transform: inherit;
   border-right-style: solid;
   border-right-width: 2px;
@@ -2009,6 +1467,548 @@ m_gt
 }
 
 #naypkdozxr .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Myrciaria of Brazil </b></th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 23<br>Number of regionally endemic species: 15</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Native</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Endemic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Introduced</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Extinct</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZC</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZE</td>
+<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">13</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZL</td>
+<td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">16</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZN</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">BZS</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">6</td></tr>
+  </tbody>
+</table>
+</div><!--/html_preserve-->
+
+Perfect! 23 species (rows) won't take up too much space, and there are enough occurrences to make it interesting. 
+
+## Generating and formatting the occurrence matrix
+Generating an occurrence matrix for this genus is as simple as using the `generate_occurence_matrix` function.  
+
+
+```r
+m <- wcvp_occ_mat(taxon="Myrciaria", taxon_rank="genus", 
+                                area=get_wgsrpd3_codes("Brazil"))
+m
+#> # A tibble: 23 x 7
+#>    plant_name_id taxon_name             BZC   BZE   BZL   BZN   BZS
+#>            <dbl> <chr>                <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1        473796 Myrciaria alagoana       0     1     0     0     0
+#>  2        534878 Myrciaria alta           0     0     1     0     0
+#>  3        534776 Myrciaria cambuca        0     1     1     0     0
+#>  4        131799 Myrciaria cordata        0     0     0     1     0
+#>  5        131802 Myrciaria cuspidata      1     1     1     0     1
+#>  6        131803 Myrciaria delicatula     1     0     1     0     1
+#>  7        131806 Myrciaria disticha       0     1     1     0     0
+#>  8        131810 Myrciaria dubia          1     0     0     1     0
+#>  9        491614 Myrciaria evanida        0     0     1     0     0
+#> 10        131814 Myrciaria ferruginea     0     1     1     0     0
+#> # ... with 13 more rows
+```
+
+It's OK, but we can make it much prettier using the `gt` package.
+Let's do the following: 
+
+* remove the WCVP ID column
+* change taxon_id to 'Species'
+* make species names italic
+* bold the column titles
+* reduce the space around the text and make font size 12
+* remove the internal borders
+* change the 1s and 0s into X and blank
+
+
+```r
+m_gt <- m %>% 
+  select(-plant_name_id) %>% #remove ID col
+  gt() %>% 
+  cols_label(
+    taxon_name = "Species"
+  ) %>% 
+  #make species names italic
+        tab_style(
+        style=cell_text(style="italic"),
+        locations = cells_body(
+          columns= taxon_name
+        )
+      ) %>% 
+  tab_options(
+    # some nice formatting
+        column_labels.font.weight = "bold",
+        data_row.padding = px(1),
+        table.font.size = 12,
+        table_body.hlines.color = "transparent",
+        ) %>%
+  # change the zeroes into blanks
+      text_transform(
+        locations = cells_body(),
+        fn = function(x){
+          ifelse(x == 0, "", x)
+        }
+      ) %>% 
+  # change the 1s into X
+        text_transform(
+        locations = cells_body(),
+        fn = function(x){
+          ifelse(x == 1, "X", x)
+        }
+      )
+m_gt
+```
+
+<!--html_preserve--><div id="afjgzbbvlb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#afjgzbbvlb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#afjgzbbvlb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#afjgzbbvlb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#afjgzbbvlb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#afjgzbbvlb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#afjgzbbvlb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#afjgzbbvlb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#afjgzbbvlb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#afjgzbbvlb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#afjgzbbvlb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#afjgzbbvlb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#afjgzbbvlb .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#afjgzbbvlb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#afjgzbbvlb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#afjgzbbvlb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#afjgzbbvlb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#afjgzbbvlb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#afjgzbbvlb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#afjgzbbvlb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#afjgzbbvlb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#afjgzbbvlb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#afjgzbbvlb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#afjgzbbvlb .gt_left {
+  text-align: left;
+}
+
+#afjgzbbvlb .gt_center {
+  text-align: center;
+}
+
+#afjgzbbvlb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#afjgzbbvlb .gt_font_normal {
+  font-weight: normal;
+}
+
+#afjgzbbvlb .gt_font_bold {
+  font-weight: bold;
+}
+
+#afjgzbbvlb .gt_font_italic {
+  font-style: italic;
+}
+
+#afjgzbbvlb .gt_super {
+  font-size: 65%;
+}
+
+#afjgzbbvlb .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#afjgzbbvlb .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#afjgzbbvlb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#afjgzbbvlb .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#afjgzbbvlb .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#afjgzbbvlb .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2218,544 +2218,6 @@ wcvp_summary(taxon="Poa", taxon_rank="genus", area=get_wgsrpd3_codes("Northern E
   wcvp_summary_gt()
 ```
 
-<!--html_preserve--><div id="afjgzbbvlb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#afjgzbbvlb .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#afjgzbbvlb .gt_subtitle {
-  color: #333333;
-  font-size: 12px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#afjgzbbvlb .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#afjgzbbvlb .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#afjgzbbvlb .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#afjgzbbvlb .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#afjgzbbvlb .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#afjgzbbvlb .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#afjgzbbvlb .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#afjgzbbvlb .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#afjgzbbvlb .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#afjgzbbvlb .gt_row {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: rgba(255, 255, 255, 0);
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#afjgzbbvlb .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#afjgzbbvlb .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#afjgzbbvlb .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#afjgzbbvlb .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#afjgzbbvlb .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#afjgzbbvlb .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#afjgzbbvlb .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#afjgzbbvlb .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#afjgzbbvlb .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#afjgzbbvlb .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#afjgzbbvlb .gt_left {
-  text-align: left;
-}
-
-#afjgzbbvlb .gt_center {
-  text-align: center;
-}
-
-#afjgzbbvlb .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#afjgzbbvlb .gt_font_normal {
-  font-weight: normal;
-}
-
-#afjgzbbvlb .gt_font_bold {
-  font-weight: bold;
-}
-
-#afjgzbbvlb .gt_font_italic {
-  font-style: italic;
-}
-
-#afjgzbbvlb .gt_super {
-  font-size: 65%;
-}
-
-#afjgzbbvlb .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#afjgzbbvlb .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#afjgzbbvlb .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#afjgzbbvlb .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-#afjgzbbvlb .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-#afjgzbbvlb .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Poa of Northern Europe </b></th>
-    </tr>
-    <tr>
-      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 23<br>Number of regionally endemic species: 0</th>
-    </tr>
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Native</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Endemic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Introduced</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Extinct</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">DEN</td>
-<td class="gt_row gt_right">11</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">12</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">FIN</td>
-<td class="gt_row gt_right">16</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">17</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">FOR</td>
-<td class="gt_row gt_right">8</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">GRB</td>
-<td class="gt_row gt_right">12</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">15</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">ICE</td>
-<td class="gt_row gt_right">9</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">11</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">IRE</td>
-<td class="gt_row gt_right">6</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">NOR</td>
-<td class="gt_row gt_right">17</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">18</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">SVA</td>
-<td class="gt_row gt_right">7</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">7</td></tr>
-    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">SWE</td>
-<td class="gt_row gt_right">17</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right" style="font-weight: bold;">18</td></tr>
-  </tbody>
-</table>
-</div><!--/html_preserve-->
-A few more there to work with. First, let's look at the native species only:
-
-```r
-m <- wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
-                                area=get_wgsrpd3_codes("Northern Europe"), 
-                                introduced=FALSE, extinct=FALSE, 
-                                location_doubtful=FALSE)
-m
-#> # A tibble: 20 x 11
-#>    plant_name_id taxon_name         DEN   FIN   FOR   GRB   ICE   IRE   NOR   SVA   SWE
-#>            <dbl> <chr>            <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#>  1        435004 Poa abbreviata       0     0     0     0     0     0     0     1     0
-#>  2        435078 Poa alpigena         0     1     1     0     1     0     1     1     1
-#>  3        435085 Poa alpina           0     1     1     1     1     1     1     1     1
-#>  4        435167 Poa angustifolia     1     1     0     1     0     0     1     0     1
-#>  5        435194 Poa annua            1     1     1     1     1     1     1     0     1
-#>  6        435235 Poa arctica          0     1     0     0     0     0     1     1     1
-#>  7        435458 Poa bulbosa          1     1     0     1     0     0     1     0     1
-#>  8        435622 Poa compressa        1     1     0     0     0     0     1     0     1
-#>  9        435932 Poa flexuosa         0     0     0     1     1     0     1     0     1
-#> 10        435996 Poa glauca           0     1     1     1     1     0     1     1     1
-#> 11        436089 Poa hartzii          0     0     0     0     0     0     0     1     0
-#> 12        436146 Poa humilis          1     1     1     1     1     1     1     0     1
-#> 13        436189 Poa infirma          0     0     0     1     0     0     0     0     0
-#> 14        436383 Poa lindebergii      0     1     0     0     0     0     1     0     1
-#> 15        436600 Poa nemoralis        1     1     1     1     1     1     1     0     1
-#> 16        436739 Poa palustris        1     1     0     1     0     0     1     0     1
-#> 17        436906 Poa pratensis        1     1     1     1     1     1     1     1     1
-#> 18        437092 Poa remota           1     1     0     0     0     0     1     0     1
-#> 19        437424 Poa supina           1     1     0     0     0     0     1     0     1
-#> 20        437547 Poa trivialis        1     1     1     1     1     1     1     0     1
-```
-We can format this matrix just like we did above, but let's skip that and go straight to introduced species only. We're doing all the same formatting as before, but also adding a heading - the `html` function makes it possiible to italicise our genus name and everything!
-
-
-```r
-m <- wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
-                                area=get_wgsrpd3_codes("Northern Europe"), 
-                                native=FALSE,
-                                introduced=TRUE, extinct=FALSE, 
-                                location_doubtful = FALSE)
-m %>% 
-  select(-plant_name_id) %>% #remove ID col
-  gt() %>% 
-  occ_mat_theme() %>%  #the theme we defined above
-  #add a header
-  tab_header(title=html("Introduced <em>Poa</em> species in Northern Europe")) 
-```
-
 <!--html_preserve--><div id="swbsqpbyyc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -2788,7 +2250,7 @@ m %>%
 
 #swbsqpbyyc .gt_heading {
   background-color: #FFFFFF;
-  text-align: center;
+  text-align: left;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
@@ -2812,7 +2274,7 @@ m %>%
 
 #swbsqpbyyc .gt_subtitle {
   color: #333333;
-  font-size: 85%;
+  font-size: 12px;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
@@ -2979,7 +2441,7 @@ m %>%
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
-  font-weight: initial;
+  font-weight: bold;
   text-transform: inherit;
   border-right-style: solid;
   border-right-width: 2px;
@@ -3171,103 +2633,127 @@ m %>%
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Introduced <em>Poa</em> species in Northern Europe</th>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style><b> Poa of Northern Europe </b></th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Total number of species: 23<br>Number of regionally endemic species: 0</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">DEN</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">FIN</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">FOR</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GRB</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ICE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">IRE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NOR</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">SVA</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">SWE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Native</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Endemic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Introduced</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Extinct</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa angustifolia</td>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">DEN</td>
+<td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">12</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">FIN</td>
+<td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">17</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">FOR</td>
+<td class="gt_row gt_right">8</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">GRB</td>
+<td class="gt_row gt_right">12</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">3</td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">15</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">ICE</td>
+<td class="gt_row gt_right">9</td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa chaixii</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right" style="font-weight: bold;">11</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">IRE</td>
+<td class="gt_row gt_right">6</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">2</td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">8</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">NOR</td>
+<td class="gt_row gt_right">17</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa compressa</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa flabellata</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right" style="font-weight: bold;">18</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">SVA</td>
+<td class="gt_row gt_right">7</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right" style="font-weight: bold;">7</td></tr>
+    <tr class="gt_row_group_first"><td rowspan="1" class="gt_row gt_right gt_stub_row_group" style="text-align: left;">SWE</td>
+<td class="gt_row gt_right">17</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa palustris</td>
+<td class="gt_row gt_right">1</td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa persica</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td></tr>
+<td class="gt_row gt_right" style="font-weight: bold;">18</td></tr>
   </tbody>
 </table>
 </div><!--/html_preserve-->
-
-## Bonus: adding a country spanner
-Tables created with `gt` are extremely flexible - let's say we want to look at occurrences across the US-Canadian border:
+A few more there to work with. First, let's look at the native species only:
 
 ```r
-m <- wcvp_occ_mat("Fritillaria", "genus", 
-                                area=c("WAS", "ORE", "IDA","MNT", "ABT", "BRC"))
+m <- wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
+                                area=get_wgsrpd3_codes("Northern Europe"), 
+                                introduced=FALSE, extinct=FALSE, 
+                                location_doubtful=FALSE)
+m
+#> # A tibble: 20 x 11
+#>    plant_name_id taxon_name         DEN   FIN   FOR   GRB   ICE   IRE   NOR   SVA   SWE
+#>            <dbl> <chr>            <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1        435004 Poa abbreviata       0     0     0     0     0     0     0     1     0
+#>  2        435078 Poa alpigena         0     1     1     0     1     0     1     1     1
+#>  3        435085 Poa alpina           0     1     1     1     1     1     1     1     1
+#>  4        435167 Poa angustifolia     1     1     0     1     0     0     1     0     1
+#>  5        435194 Poa annua            1     1     1     1     1     1     1     0     1
+#>  6        435235 Poa arctica          0     1     0     0     0     0     1     1     1
+#>  7        435458 Poa bulbosa          1     1     0     1     0     0     1     0     1
+#>  8        435622 Poa compressa        1     1     0     0     0     0     1     0     1
+#>  9        435932 Poa flexuosa         0     0     0     1     1     0     1     0     1
+#> 10        435996 Poa glauca           0     1     1     1     1     0     1     1     1
+#> 11        436089 Poa hartzii          0     0     0     0     0     0     0     1     0
+#> 12        436146 Poa humilis          1     1     1     1     1     1     1     0     1
+#> 13        436189 Poa infirma          0     0     0     1     0     0     0     0     0
+#> 14        436383 Poa lindebergii      0     1     0     0     0     0     1     0     1
+#> 15        436600 Poa nemoralis        1     1     1     1     1     1     1     0     1
+#> 16        436739 Poa palustris        1     1     0     1     0     0     1     0     1
+#> 17        436906 Poa pratensis        1     1     1     1     1     1     1     1     1
+#> 18        437092 Poa remota           1     1     0     0     0     0     1     0     1
+#> 19        437424 Poa supina           1     1     0     0     0     0     1     0     1
+#> 20        437547 Poa trivialis        1     1     1     1     1     1     1     0     1
+```
+We can format this matrix just like we did above, but let's skip that and go straight to introduced species only. We're doing all the same formatting as before, but also adding a heading - the `html` function makes it possiible to italicise our genus name and everything!
 
 
-m_gt <- m %>% 
+```r
+m <- wcvp_occ_mat(taxon="Poa", taxon_rank="genus",
+                                area=get_wgsrpd3_codes("Northern Europe"), 
+                                native=FALSE,
+                                introduced=TRUE, extinct=FALSE, 
+                                location_doubtful = FALSE)
+m %>% 
   select(-plant_name_id) %>% #remove ID col
   gt() %>% 
   occ_mat_theme() %>%  #the theme we defined above
   #add a header
-  tab_header(title=html("<em>Fritillaria</em> species in Northwest USA and Southwest Canada")) 
-m_gt
+  tab_header(title=html("Introduced <em>Poa</em> species in Northern Europe")) 
 ```
 
 <!--html_preserve--><div id="kjhzhtkesb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3685,102 +3171,103 @@ m_gt
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><em>Fritillaria</em> species in Northwest USA and Southwest Canada</th>
+      <th colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Introduced <em>Poa</em> species in Northern Europe</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ABT</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BRC</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">IDA</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">MNT</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ORE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">WAS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">DEN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">FIN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">FOR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GRB</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ICE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">IRE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NOR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">SVA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">SWE</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria affinis</td>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa angustifolia</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa chaixii</td>
 <td class="gt_row gt_right">X</td>
 <td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria atropurpurea</td>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa compressa</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria camschatcensis</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria eastwoodiae</td>
-<td class="gt_row gt_right"></td>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa flabellata</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria gentneri</td>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa palustris</td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria glauca</td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria pudica</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right">X</td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria purdyi</td>
-<td class="gt_row gt_right"></td>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Poa persica</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right">X</td>
-<td class="gt_row gt_right"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria recurva</td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
 <td class="gt_row gt_right"></td>
-<td class="gt_row gt_right">X</td>
 <td class="gt_row gt_right"></td></tr>
   </tbody>
 </table>
 </div><!--/html_preserve-->
 
-It would be really useful to know which of those codes are in the US and which are in Canada. We could use the data included in `rWCVP` to create a key.
+## Bonus: adding a country spanner
+Tables created with `gt` are extremely flexible - let's say we want to look at occurrences across the US-Canadian border:
 
 ```r
-wgsrpd_mapping %>% 
-  filter(LEVEL3_COD %in% c("WAS", "ORE", "IDA","MNT", "ABT", "BRC")) %>% 
-  select(LEVEL3_NAM, LEVEL3_COD, COUNTRY) %>% 
+m <- wcvp_occ_mat("Fritillaria", "genus", 
+                                area=c("WAS", "ORE", "IDA","MNT", "ABT", "BRC"))
+
+
+m_gt <- m %>% 
+  select(-plant_name_id) %>% #remove ID col
   gt() %>% 
-  #some formatting
-  tab_options(
-        column_labels.font.weight = "bold",
-        data_row.padding = px(1),
-        table.font.size = 12,
-        table_body.hlines.color = "transparent",
-        )
+  occ_mat_theme() %>%  #the theme we defined above
+  #add a header
+  tab_header(title=html("<em>Fritillaria</em> species in Northwest USA and Southwest Canada")) 
+m_gt
 ```
 
 <!--html_preserve--><div id="nyqclhqzvd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4196,43 +3683,104 @@ wgsrpd_mapping %>%
 }
 </style>
 <table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><em>Fritillaria</em> species in Northwest USA and Southwest Canada</th>
+    </tr>
+  </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">LEVEL3_NAM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">LEVEL3_COD</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">COUNTRY</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ABT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BRC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">IDA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">MNT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">ORE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">WAS</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Alberta</td>
-<td class="gt_row gt_left">ABT</td>
-<td class="gt_row gt_left">Canada</td></tr>
-    <tr><td class="gt_row gt_left">British Columbia</td>
-<td class="gt_row gt_left">BRC</td>
-<td class="gt_row gt_left">Canada</td></tr>
-    <tr><td class="gt_row gt_left">Idaho</td>
-<td class="gt_row gt_left">IDA</td>
-<td class="gt_row gt_left">United States</td></tr>
-    <tr><td class="gt_row gt_left">Montana</td>
-<td class="gt_row gt_left">MNT</td>
-<td class="gt_row gt_left">United States</td></tr>
-    <tr><td class="gt_row gt_left">Oregon</td>
-<td class="gt_row gt_left">ORE</td>
-<td class="gt_row gt_left">United States</td></tr>
-    <tr><td class="gt_row gt_left">Washington</td>
-<td class="gt_row gt_left">WAS</td>
-<td class="gt_row gt_left">United States</td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria affinis</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria atropurpurea</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria camschatcensis</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria eastwoodiae</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria gentneri</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria glauca</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria pudica</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right">X</td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria purdyi</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
+    <tr><td class="gt_row gt_left" style="font-style: italic;">Fritillaria recurva</td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right"></td>
+<td class="gt_row gt_right">X</td>
+<td class="gt_row gt_right"></td></tr>
   </tbody>
 </table>
 </div><!--/html_preserve-->
-It would really be nicer to have it on the occurrence matrix though. Enter `tab_spanner()`:
+
+It would be really useful to know which of those codes are in the US and which are in Canada. We could use the data included in `rWCVP` to create a key.
 
 ```r
-m_gt %>% 
-  tab_spanner(label="United States",
-              columns = c(IDA, MNT, ORE, WAS)) %>% 
-  tab_spanner(label="Canada",
-              columns=c(ABT, BRC)) 
+wgsrpd_mapping %>% 
+  filter(LEVEL3_COD %in% c("WAS", "ORE", "IDA","MNT", "ABT", "BRC")) %>% 
+  select(LEVEL3_NAM, LEVEL3_COD, COUNTRY) %>% 
+  gt() %>% 
+  #some formatting
+  tab_options(
+        column_labels.font.weight = "bold",
+        data_row.padding = px(1),
+        table.font.size = 12,
+        table_body.hlines.color = "transparent",
+        )
 ```
 
 <!--html_preserve--><div id="lpzwjsibiv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4648,6 +4196,458 @@ m_gt %>%
 }
 </style>
 <table class="gt_table">
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">LEVEL3_NAM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">LEVEL3_COD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">COUNTRY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Alberta</td>
+<td class="gt_row gt_left">ABT</td>
+<td class="gt_row gt_left">Canada</td></tr>
+    <tr><td class="gt_row gt_left">British Columbia</td>
+<td class="gt_row gt_left">BRC</td>
+<td class="gt_row gt_left">Canada</td></tr>
+    <tr><td class="gt_row gt_left">Idaho</td>
+<td class="gt_row gt_left">IDA</td>
+<td class="gt_row gt_left">United States</td></tr>
+    <tr><td class="gt_row gt_left">Montana</td>
+<td class="gt_row gt_left">MNT</td>
+<td class="gt_row gt_left">United States</td></tr>
+    <tr><td class="gt_row gt_left">Oregon</td>
+<td class="gt_row gt_left">ORE</td>
+<td class="gt_row gt_left">United States</td></tr>
+    <tr><td class="gt_row gt_left">Washington</td>
+<td class="gt_row gt_left">WAS</td>
+<td class="gt_row gt_left">United States</td></tr>
+  </tbody>
+</table>
+</div><!--/html_preserve-->
+It would really be nicer to have it on the occurrence matrix though. Enter `tab_spanner()`:
+
+```r
+m_gt %>% 
+  tab_spanner(label="United States",
+              columns = c(IDA, MNT, ORE, WAS)) %>% 
+  tab_spanner(label="Canada",
+              columns=c(ABT, BRC)) 
+```
+
+<!--html_preserve--><div id="zvuypkrofl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#zvuypkrofl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zvuypkrofl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zvuypkrofl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zvuypkrofl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zvuypkrofl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zvuypkrofl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zvuypkrofl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zvuypkrofl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zvuypkrofl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zvuypkrofl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zvuypkrofl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zvuypkrofl .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zvuypkrofl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zvuypkrofl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zvuypkrofl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zvuypkrofl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zvuypkrofl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zvuypkrofl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zvuypkrofl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zvuypkrofl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zvuypkrofl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zvuypkrofl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zvuypkrofl .gt_left {
+  text-align: left;
+}
+
+#zvuypkrofl .gt_center {
+  text-align: center;
+}
+
+#zvuypkrofl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zvuypkrofl .gt_font_normal {
+  font-weight: normal;
+}
+
+#zvuypkrofl .gt_font_bold {
+  font-weight: bold;
+}
+
+#zvuypkrofl .gt_font_italic {
+  font-style: italic;
+}
+
+#zvuypkrofl .gt_super {
+  font-size: 65%;
+}
+
+#zvuypkrofl .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#zvuypkrofl .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#zvuypkrofl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zvuypkrofl .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#zvuypkrofl .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#zvuypkrofl .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><em>Fritillaria</em> species in Northwest USA and Southwest Canada</th>
@@ -4744,8 +4744,3 @@ There is a lot more that can be done with `gt` - see https://gt.rstudio.com/ for
 
 
 
-NA
-NA
-NA
-NA
-NA
