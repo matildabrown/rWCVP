@@ -16,7 +16,8 @@ wcvp_summary_gt(x)
 Render a summary table from \link{wcvp_summary}
 }
 \examples{
+\dontrun{
 ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var = "family")
 wcvp_summary_gt(ferns)
-
+}
 }
