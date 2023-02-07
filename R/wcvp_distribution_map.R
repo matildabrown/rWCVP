@@ -109,7 +109,7 @@ powo_map <- function(range_sf, centroids_sf) {
 
 #' POWO colour palette for range maps
 #'
-#' Range maps displayed on the [POWO]() website have a fixed,
+#' Range maps displayed on the [POWO](https://powo.science.kew.org/) website have a fixed,
 #' discrete colour palette based on the type of taxon occurrence
 #' in a region.
 #'

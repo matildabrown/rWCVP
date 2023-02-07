@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(rWCVP)
 ```
 
-The [World Checklist of Vascular Plants (WCVP)](https://wcvp.science.kew.org) is a global consensus view of vascular plant species. It provides names, synonymy, taxonomy, and distributions for the > 340,000 vascular plant species known to science.
+The [World Checklist of Vascular Plants (WCVP)](https://powo.science.kew.org/) is a global consensus view of vascular plant species. It provides names, synonymy, taxonomy, and distributions for the > 340,000 vascular plant species known to science.
 
 We have developed rWCVP to make some common tasks that use the WCVP easier. These include standardising a list of taxon names against the WCVP, getting and mapping the distribution of a species, and creating a checklist of taxa found in a particular region.
 

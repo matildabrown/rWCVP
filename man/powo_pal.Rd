@@ -60,7 +60,7 @@ notation.
   }}
 }
 \description{
-Range maps displayed on the \url{POWO} website have a fixed,
+Range maps displayed on the \href{https://powo.science.kew.org/}{POWO} website have a fixed,
 discrete colour palette based on the type of taxon occurrence
 in a region.
 }
