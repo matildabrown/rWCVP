@@ -114,6 +114,7 @@ powo_map <- function(range_sf, centroids_sf) {
 #' in a region.
 #'
 #' @rdname powo_pal
+#' @return Character. Vector of names and HEX values to match those of [POWO](https://powo.science.kew.org/).
 #' @export
 powo_pal <- function() {
   c(

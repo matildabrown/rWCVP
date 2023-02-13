@@ -1,5 +1,67 @@
 ## Resubmission
 
+2022-02-13
+
+- VW: Please do not start the description with "An R interface to", "This 
+      package", package name, title or similar.
+-- MJMB: Emended to: A companion to the World Checklist of 
+         Vascular Plants (WCVP) - also fixes below point.
+
+- VW: Please always explain all acronyms in the description text. e.g.: WCVP
+-- MJMB: See above for fix in DESCRIPTION. We have not spelled out the acronym
+         in the documentation for every function - because this package is so 
+         closely linked to the WCVP, we assume that the user will be familiar 
+         with the acronym by the time they are using the functions in the package. 
+
+- VW: Please always write package names, software names and API (application 
+      programming interface) names in single quotes in title and description.
+      e.g: --> 'rWCVP'
+      Please note that package names are case sensitive.
+-- MJMB: Fixed - we have used quotes to wrap the entire journal article title 
+         (which includes rWCVP, though not in its own quotes) for consistency 
+         with the journal. 
+
+- VW: Please add \value to .Rd files regarding exported methods and explain the 
+      functions results in the documentation. Please write about the structure 
+      of the output (class) and also what the output means. (If a function does 
+      not return a value, please document that too, e.g.
+      \value{No return value, called for side effects} or similar) 
+      Missing Rd-tags:
+      powo_pal.Rd: \value
+-- MJMB: We have added the following to the .Rd file:
+         @return Character. Vector of names and HEX values to match those of 
+         [POWO](https://powo.science.kew.org/). 
+
+- VW: \dontrun{} should only be used if the example really cannot be executed 
+      (e.g. because of missing additional software, missing API keys, ...) by 
+      the user. That's why wrapping examples in \dontrun{} adds the comment 
+      ("# Not run:") as a warning for the user.
+      Does not seem necessary.
+      Please unwrap the examples if they are executable in < 5 sec, or replace 
+      \dontrun{} with \donttest{}.
+-- MJMB: This is necessary - most examples take >5seconds and many take >10secs.
+         Additionally, although the examples could be designed to use a
+         local copy of the WCVP (rather than 'rWCVPdata'), this would then involve 
+         bundling a version (>>10Mb) into this package. To get them to run in <5
+         seconds, we could use a toy version of the WCVP dataset, but this would not 
+         be appropriate as it would give incorrect results. Happy to add inline
+         explanations if needed. 
+
+- VW: Please do not install packages in your functions, examples or vignette.
+      This can make the functions,examples and cran-check very slow.
+-- MJMB: We have fixed this by pre-compiling the vignette, as it is not possible
+         to run the code blocks in the vignette without the full dataset (see 
+         above for issues with examples) - please let us know if there is a better
+         alternative to this fix. 
+         
+################################################################################
+
+2022-02-07
+We have updated CITATION to use bibentry() instead of citEntry()
+We have updated the link to WCVP to follow moved content (incl. https and trailing slash)
+We have also added the same link to the missing URI in powo_pal.Rd
+
+------------------
 We have moved the non-mainstream dependency rWCVPdata to a drat repository and 
     listed this in Additional repositories in the DESCRIPTION.
 We have made sure that the vignettes folder is included in the build.

@@ -11,15 +11,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  message = FALSE,
-  collapse = TRUE,
-  comment = "#>"
-)
 
-library(rWCVP)
-```
 
 The [World Checklist of Vascular Plants (WCVP)](https://powo.science.kew.org/) is a global consensus view of vascular plant species. It provides names, synonymy, taxonomy, and distributions for the > 340,000 vascular plant species known to science.
 
@@ -31,7 +23,8 @@ For the functions in rWCVP to work, you need to have access to a copy of the WCV
 
 One way to load the WCVP is to install the associated data package, rWCVPdata:
 
-```{r install-data}
+
+```r
 if (!require(rWCVPdata)) {
   install.packages("rWCVPdata",
     repos = c(
@@ -40,7 +33,9 @@ if (!require(rWCVPdata)) {
     )
   )
 }
+```
 
+```r
 # taxonomy data
 names <- rWCVPdata::wcvp_names
 
@@ -50,7 +45,8 @@ distributions <- rWCVPdata::wcvp_distributions
 
 If the data package isn't available, or you'd prefer to use a different version of the WCVP, you can provide a local copy of the data to the main functions in this package. For instance, to generate a checklist:
 
-```{r local-data, eval=FALSE}
+
+```r
 names <- read_csv("/path/to/wcvp_names.csv")
 distributions <- read_csv("/path/to/wcvp_distributions.csv")
 
@@ -71,7 +67,8 @@ Some rWCVP functions involve filtering the WCVP to generate lists or summaries o
 
 These arguments can be combined in the `wcvp_checklist`, `wcvp_occ_mat`, and `wcvp_summary` to generate outputs for focal taxa in a desired area. For example, Myrtaceae species in Brazil:
 
-```{r filter-example}
+
+```r
 checklist <- wcvp_checklist("Myrtaceae",
   taxon_rank = "family",
   area_codes = c("BZC", "BZN", "BZS", "BZE", "BZL")
@@ -83,21 +80,91 @@ checklist <- wcvp_checklist("Myrtaceae",
 When filtering by taxon, you need to tell the function what taxonomic rank the name you're providing is using the `taxon.rank` argument.
 
 For example, making a summary table for the genus *Poa*:
-```{r filter-genus}
+
+```r
 wcvp_summary("Poa", taxon_rank = "genus")
+#> $Taxon
+#> [1] "Poa"
+#> 
+#> $Area
+#> [1] "the world"
+#> 
+#> $Grouping_variable
+#> [1] "area_code_l3"
+#> 
+#> $Total_number_of_species
+#> [1] 573
+#> 
+#> $Number_of_regionally_endemic_species
+#> [1] 573
+#> 
+#> $Summary
+#> # A tibble: 280 × 6
+#>    area_code_l3 Native Endemic Introduced Extinct Total
+#>    <chr>         <int>   <int>      <int>   <int> <int>
+#>  1 ABT              21       0          5       0    26
+#>  2 AFG              23       1          0       0    23
+#>  3 AGE              13       2          5       0    18
+#>  4 AGS              24       0         10       0    34
+#>  5 AGW              34       8          3       0    37
+#>  6 ALA               6       0          3       0     9
+#>  7 ALB              17       0          0       0    17
+#>  8 ALG               8       0          1       0    11
+#>  9 ALT              30       3          1       0    31
+#> 10 ALU               7       0          3       0    10
+#> # … with 270 more rows
 ```
 
 You can provide taxon names of the ranks `species`, `genus`, `family`, `order`, or `higher`. The WCVP only provides taxonomic information up to the family rank. We have included a table called `taxonomic_mapping` to map families to orders and higher taxonomies, based on APG IV.
 
-```{r mapping-table}
+
+```r
 head(taxonomic_mapping)
+#>        higher       order          family
+#> 1 Angiosperms    Acorales       Acoraceae
+#> 2 Angiosperms Alismatales    Alismataceae
+#> 3 Angiosperms Alismatales Aponogetonaceae
+#> 4 Angiosperms Alismatales         Araceae
+#> 5 Angiosperms Alismatales      Butomaceae
+#> 6 Angiosperms Alismatales   Cymodoceaceae
 ```
 
 We use this table behind the scenes to allow you to filter using these higher taxonomic ranks.
 
 For example, making a summary table for all Poales:
-```{r gymnosperm-summary}
+
+```r
 wcvp_summary("Poales", taxon_rank = "order")
+#> $Taxon
+#> [1] "Poales"
+#> 
+#> $Area
+#> [1] "the world"
+#> 
+#> $Grouping_variable
+#> [1] "area_code_l3"
+#> 
+#> $Total_number_of_species
+#> [1] 23770
+#> 
+#> $Number_of_regionally_endemic_species
+#> [1] 23770
+#> 
+#> $Summary
+#> # A tibble: 368 × 6
+#>    area_code_l3 Native Endemic Introduced Extinct Total
+#>    <chr>         <int>   <int>      <int>   <int> <int>
+#>  1 ABT             359       0         70       0   429
+#>  2 AFG             485      16         15       0   504
+#>  3 AGE             908      31        166       0  1074
+#>  4 AGS             389      20         88       0   477
+#>  5 AGW             890     130        105       0   995
+#>  6 ALA             711       2        153       0   864
+#>  7 ALB             363       4         14       0   387
+#>  8 ALD              44       7         13       0    57
+#>  9 ALG             445      11         41       0   497
+#> 10 ALT             383       9          6       0   389
+#> # … with 358 more rows
 ```
 
 ### A note on filtering by area
@@ -108,12 +175,45 @@ The functions in rWCVP expect `area` to be provided as a vector of WGSRPD level 
 
 To make things easier, rWCVP has a function that converts the name of a region to a vector of WGSRPD level 3 codes.
 
-```{r brazil-codes}
+
+```r
 get_wgsrpd3_codes("Brazil")
+#> [1] "BZC" "BZE" "BZL" "BZN" "BZS"
 ```
 
 This can be input directly into functions that filter the WCVP by area.
 
-```{r filter-africa}
+
+```r
 wcvp_summary("Poa", taxon_rank = "genus", area = get_wgsrpd3_codes("Southern Hemisphere"))
+#> $Taxon
+#> [1] "Poa"
+#> 
+#> $Area
+#> [1] "Southern Hemisphere (incl. equatorial Level 3 areas)"
+#> 
+#> $Grouping_variable
+#> [1] "area_code_l3"
+#> 
+#> $Total_number_of_species
+#> [1] 264
+#> 
+#> $Number_of_regionally_endemic_species
+#> [1] 237
+#> 
+#> $Summary
+#> # A tibble: 74 × 6
+#>    area_code_l3 Native Endemic Introduced Extinct Total
+#>    <chr>         <int>   <int>      <int>   <int> <int>
+#>  1 AGE              13       2          5       0    18
+#>  2 AGS              24       0         10       0    34
+#>  3 AGW              34       8          3       0    37
+#>  4 ANT               0       0          1       0     1
+#>  5 ASC               0       0          1       0     1
+#>  6 ASP               2       1          3       0     5
+#>  7 ATP               8       1          3       0    11
+#>  8 BOL              31       2          3       0    34
+#>  9 BOR               2       1          0       0     2
+#> 10 BUR               3       0          0       0     3
+#> # … with 64 more rows
 ```
