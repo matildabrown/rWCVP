@@ -22,6 +22,7 @@
          with the journal. Elsewhere in the package we have used \code{code} 
          formatting
 
+
 - VW: Please add \value to .Rd files regarding exported methods and explain the 
       functions results in the documentation. Please write about the structure 
       of the output (class) and also what the output means. (If a function does 
@@ -40,19 +41,20 @@
       Does not seem necessary.
       Please unwrap the examples if they are executable in < 5 sec, or replace 
       \dontrun{} with \donttest{}.
--- MJMB: This is necessary - these examples require 'rWCVPdata' to run. 
-         Although the examples could be designed to use a local copy of the WCVP 
-         (rather than 'rWCVPdata'), this would then involve bundling a version 
-         (>>10Mb) into this package. Additionally, most examples take >5seconds 
-         and many take >10secs.To get them to run in <5 seconds, we could use a 
-         toy version of the WCVP dataset, but this would not be appropriate as 
-         it would give incorrect results. Happy to add inline explanations if 
-         needed. 
+
+-- MJMB: This is necessary - most examples take >5seconds and many take >10secs.
+         Additionally, although the examples could be designed to use a
+         local copy of the WCVP (rather than 'rWCVPdata'), this would then involve 
+         bundling a version (>>10Mb) into this package. To get them to run in <5
+         seconds, we could use a toy version of the WCVP dataset, but this would not 
+         be appropriate as it would give incorrect results. Happy to add inline
+         explanations if needed. 
+
 
 - VW: Please do not install packages in your functions, examples or vignette.
       This can make the functions,examples and cran-check very slow.
 -- MJMB: We have fixed this by pre-compiling the vignette, as it is not possible
-         to run the code blocks in the vignette without the full WCVP dataset (see 
+         to run the code blocks in the vignette without the full dataset (see 
          above for issues with examples) - please let us know if there is a better
          alternative to this fix. 
          
