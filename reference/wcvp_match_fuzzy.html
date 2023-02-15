@@ -12,7 +12,7 @@ The WCVP can be loaded for matching from rWCVPdata::wcvp_names."><!-- mathjax --
     
     <a class="navbar-brand me-2" href="../index.html">rWCVP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,20 +119,101 @@ calculated by <a href="https://rdrr.io/pkg/RecordLinkage/man/strcmp.html" class=
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># this example requires 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">wcvp_names</a></span></span></span>
 <span class="r-in"><span><span class="fu">wcvp_match_fuzzy</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, <span class="st">"scientificName"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■                         </span>  20% | ETA: 15s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■             </span>  60% | ETA: 11s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■       </span>  80% | ETA:  5s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    assessmentId scient…¹ redli…² autho…³ match…⁴ multi…⁵ match…⁶ match…⁷ wcvp_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     19<span style="text-decoration: underline;">395</span>021 Avena h… Data D… Peterm. Fuzzy … FALSE     0.8         2  <span style="text-decoration: underline;">397</span>612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     64<span style="text-decoration: underline;">135</span>503 Citrus … Least … F.M.Ba… Fuzzy … FALSE     0.882       2 2<span style="text-decoration: underline;">724</span>094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    189<span style="text-decoration: underline;">601</span>563 Croton … Endang… Caruzo… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">457</span>017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    115<span style="text-decoration: underline;">968</span>141 Cynanch… Endang… (N.E.B… Fuzzy … FALSE     0.947       1  <span style="text-decoration: underline;">503</span>650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     11<span style="text-decoration: underline;">047</span>751 Echinac… Vulner… H.S.Lo… Fuzzy … FALSE     1           0 2<span style="text-decoration: underline;">781</span>525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    198<span style="text-decoration: underline;">678</span>856 Leichha… Vulner… (Guill… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">548</span>322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    135<span style="text-decoration: underline;">836</span>392 Mouriri… Least … (Sw.) … Fuzzy … FALSE     1           0 3<span style="text-decoration: underline;">018</span>158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    146<span style="text-decoration: underline;">459</span>149 Neocuss… Least … (Sond.… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">133</span>686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13 more rows, 7 more variables: wcvp_name &lt;chr&gt;, wcvp_authors &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_rank &lt;chr&gt;, wcvp_status &lt;chr&gt;, wcvp_homotypic &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_ipni_id &lt;chr&gt;, wcvp_accepted_id &lt;dbl&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​scientificName, ²​redlistCategory, ³​authority, ⁴​match_type,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​multiple_matches, ⁶​match_similarity, ⁷​match_edit_distance</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># this example requires 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">wcvp_names</a></span></span></span>
 <span class="r-in"><span><span class="fu">phonetic_match</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, <span class="st">"scientificName"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 24 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    assessmentId scient…¹ redli…² autho…³ match…⁴ multi…⁵ match…⁶ match…⁷ wcvp_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     11<span style="text-decoration: underline;">081</span>542 Antimim… Least … (Dinte… <span style="color: #BB0000;">NA</span>      FALSE    <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     19<span style="text-decoration: underline;">395</span>021 Avena h… Data D… Peterm. Fuzzy … FALSE     0.8         2  <span style="text-decoration: underline;">397</span>612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     64<span style="text-decoration: underline;">135</span>503 Citrus … Least … F.M.Ba… Fuzzy … FALSE     0.882       2 2<span style="text-decoration: underline;">724</span>094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    189<span style="text-decoration: underline;">601</span>563 Croton … Endang… Caruzo… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">457</span>017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    115<span style="text-decoration: underline;">968</span>141 Cynanch… Endang… (N.E.B… Fuzzy … FALSE     0.947       1  <span style="text-decoration: underline;">503</span>650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     11<span style="text-decoration: underline;">047</span>751 Echinac… Vulner… H.S.Lo… Fuzzy … FALSE     1           0 2<span style="text-decoration: underline;">781</span>525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     11<span style="text-decoration: underline;">001</span>316 Geissan… Endang… (Lunde… <span style="color: #BB0000;">NA</span>      FALSE    <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    198<span style="text-decoration: underline;">678</span>856 Leichha… Vulner… (Guill… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">548</span>322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 14 more rows, 7 more variables: wcvp_name &lt;chr&gt;, wcvp_authors &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_rank &lt;chr&gt;, wcvp_status &lt;chr&gt;, wcvp_homotypic &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_ipni_id &lt;chr&gt;, wcvp_accepted_id &lt;dbl&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​scientificName, ²​redlistCategory, ³​authority, ⁴​match_type,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​multiple_matches, ⁶​match_similarity, ⁷​match_edit_distance</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># this example requires 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">wcvp_names</span> <span class="op">&lt;-</span> <span class="fu">rWCVPdata</span><span class="fu">::</span><span class="va"><a href="https://matildabrown.github.io/rWCVPdata/reference/wcvp_names.html">wcvp_names</a></span></span></span>
 <span class="r-in"><span><span class="fu">edit_match</span><span class="op">(</span><span class="va">redlist_example</span>, <span class="va">wcvp_names</span>, <span class="st">"scientificName"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■                             </span>   5% | ETA:  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■                           </span>  15% | ETA:  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■                         </span>  20% | ETA:  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■                       </span>  25% | ETA: 47s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■                      </span>  30% | ETA: 46s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  35% | ETA: 42s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■                   </span>  40% | ETA: 38s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span>  45% | ETA: 36s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA: 32s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■               </span>  55% | ETA: 29s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■             </span>  60% | ETA: 26s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  65% | ETA: 25s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■          </span>  70% | ETA: 21s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■         </span>  75% | ETA: 18s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■       </span>  80% | ETA: 14s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■     </span>  85% | ETA: 11s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■    </span>  90% | ETA:  7s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matching <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   </span>  95% | ETA:  3s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    assessmentId scient…¹ redli…² autho…³ match…⁴ multi…⁵ match…⁶ match…⁷ wcvp_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     11<span style="text-decoration: underline;">081</span>542 Antimim… Least … (Dinte… Fuzzy … FALSE     0.95        1 2<span style="text-decoration: underline;">642</span>383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     19<span style="text-decoration: underline;">395</span>021 Avena h… Data D… Peterm. Fuzzy … FALSE     0.8         2  <span style="text-decoration: underline;">397</span>612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     64<span style="text-decoration: underline;">135</span>503 Citrus … Least … F.M.Ba… Fuzzy … FALSE     0.882       2 2<span style="text-decoration: underline;">724</span>094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    189<span style="text-decoration: underline;">601</span>563 Croton … Endang… Caruzo… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">457</span>017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    115<span style="text-decoration: underline;">968</span>141 Cynanch… Endang… (N.E.B… Fuzzy … FALSE     0.947       1  <span style="text-decoration: underline;">503</span>650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     11<span style="text-decoration: underline;">047</span>751 Echinac… Vulner… H.S.Lo… Fuzzy … FALSE     1           0 2<span style="text-decoration: underline;">781</span>525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     11<span style="text-decoration: underline;">001</span>316 Geissan… Endang… (Lunde… Fuzzy … FALSE     0.875       3 2<span style="text-decoration: underline;">818</span>595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    126<span style="text-decoration: underline;">598</span>076 Juglans… Endang… Liebm.  Fuzzy … TRUE      1           0 2<span style="text-decoration: underline;">331</span>743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    198<span style="text-decoration: underline;">678</span>856 Leichha… Vulner… (Guill… Fuzzy … FALSE     1           0  <span style="text-decoration: underline;">548</span>322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13 more rows, 7 more variables: wcvp_name &lt;chr&gt;, wcvp_authors &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_rank &lt;chr&gt;, wcvp_status &lt;chr&gt;, wcvp_homotypic &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wcvp_ipni_id &lt;chr&gt;, wcvp_accepted_id &lt;dbl&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​scientificName, ²​redlistCategory, ³​authority, ⁴​match_type,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​multiple_matches, ⁶​match_similarity, ⁷​match_edit_distance</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

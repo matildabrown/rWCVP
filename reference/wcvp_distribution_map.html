@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rWCVP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,7 +115,8 @@ https://powo.science.kew.org/), where green is native, purple is introduced, red
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># these examples require 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution_map</span><span class="op">(</span><span class="fu"><a href="wcvp_distribution.html">wcvp_distribution</a></span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-in"><span><span class="co"># now only the native range, and cropped to range extent</span></span></span>
@@ -132,6 +133,12 @@ https://powo.science.kew.org/), where green is native, purple is introduced, red
 <span class="r-in"><span>  <span class="co"># for points (islands)</span></span></span>
 <span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">fill</span> is already present.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">fill</span>, which will replace the existing scale.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">colour</span> is already present.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span>
+<span class="r-plt img"><img src="wcvp_distribution_map-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>  </span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

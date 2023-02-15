@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rWCVP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,12 +133,28 @@ If <code>NULL</code>, distributions will be loaded from <a href="https://matilda
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># this example requires 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">wcvp_occ_mat</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  taxon <span class="op">=</span> <span class="st">"Poa"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span>,</span></span>
 <span class="r-in"><span>  area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TAS"</span>, <span class="st">"VIC"</span>, <span class="st">"NSW"</span><span class="op">)</span>, introduced <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 37 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    plant_name_id taxon_name          NSW   TAS   VIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        <span style="text-decoration: underline;">435</span>044 Poa affinis           1     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        <span style="text-decoration: underline;">469</span>193 Poa amplexicaulis     0     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        <span style="text-decoration: underline;">435</span>565 Poa cheelii           1     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        <span style="text-decoration: underline;">435</span>598 Poa clelandii         0     1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        <span style="text-decoration: underline;">435</span>599 Poa clivicola         1     1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        <span style="text-decoration: underline;">435</span>658 Poa costiniana        1     1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        <span style="text-decoration: underline;">435</span>661 Poa crassicaudex      0     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        <span style="text-decoration: underline;">435</span>797 Poa drummondiana      0     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        <span style="text-decoration: underline;">435</span>841 Poa ensiformis        1     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        <span style="text-decoration: underline;">435</span>878 Poa fawcettiae        1     1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

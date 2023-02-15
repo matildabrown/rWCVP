@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rWCVP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,11 +131,14 @@ the <code>wcvp_summary</code> and <code>wcvp_occ_mat</code> functions can be use
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># this example requires 'rWCVPdata'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rWCVPdata"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">wcvp_distribution</span><span class="op">(</span><span class="st">"Callitris"</span>, taxon_rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="wcvp_distribution_map.html">wcvp_distribution_map</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-plt img"><img src="wcvp_distribution-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
