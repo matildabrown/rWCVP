@@ -62,7 +62,8 @@ The WCVP can be loaded for matching from \href{https://matildabrown.github.io/rW
 See \href{https://matildabrown.github.io/rWCVP/articles/redlist-name-matching.html}{here} for an example workflow.
 }
 \examples{
-\dontrun{
+\donttest{ # these examples require 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_names <- rWCVPdata::wcvp_names
 
 # without author
@@ -76,6 +77,7 @@ wcvp_match_names(redlist_example, wcvp_names,
   name_col = "scientificName",
   id_col = "assessmentId", author_col = "authority"
 )
+}
 }
 
 }

@@ -14,7 +14,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # these examples require 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_names <- rWCVPdata::wcvp_names
 #'
 #' # including author string
@@ -25,6 +26,7 @@
 #'
 #' # without author string
 #' wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
+#' }
 #' }
 #'
 #' @family name matching functions

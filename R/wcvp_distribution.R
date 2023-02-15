@@ -26,10 +26,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' r <- wcvp_distribution("Callitris", taxon_rank = "genus")
 #' p <- wcvp_distribution_map(r)
 #' p
+#' }
 #' }
 wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family", "order", "higher"), native = TRUE, introduced = TRUE,
                               extinct = TRUE, location_doubtful = TRUE,

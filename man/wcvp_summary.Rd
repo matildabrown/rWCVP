@@ -43,9 +43,11 @@ Note that grouping variable (if taxonomic) should be of a lower level than \code
 Additionally, if the grouping variable is taxonomic then species occurrences are aggregated across the input area. This means that if a species is native to any of the input area (even if it is introduced or extinct in other parts) it is counted as 'Native'. Similarly, introduced occurrences take precedence over extinct occurrences. Note that in this type of summary table, 'Endemic' means endemic to the input area, not necessarily to a single WGSRPD Level 3 Area within the input area.
 }
 \examples{
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var = "family")
 wcvp_summary_gt(ferns)
+}
 }
 
 }

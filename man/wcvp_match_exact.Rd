@@ -28,7 +28,8 @@ Exact matching of names to the WCVP, optionally using the author string to
 refine results.
 }
 \examples{
-\dontrun{
+\donttest{ # these examples require 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_names <- rWCVPdata::wcvp_names
 
 # including author string
@@ -39,6 +40,7 @@ wcvp_match_exact(redlist_example, wcvp_names, "scientificName",
 
 # without author string
 wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assessmentId")
+}
 }
 
 }

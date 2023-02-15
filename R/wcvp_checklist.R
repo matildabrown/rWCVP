@@ -33,10 +33,12 @@
 #' @export
 #'
 #' @examples
-#' # These examples take >10 seconds to run.
-#' \dontrun{
+#' # These examples take >10 seconds to run and require 'rWCVPdata'
+#' \donttest{
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
 #' wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
+#' }
 #' }
 wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "family", "order", "higher"), area_codes = NULL,
                            synonyms = TRUE, render_report = FALSE,

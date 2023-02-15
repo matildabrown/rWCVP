@@ -22,9 +22,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_names <- rWCVPdata::wcvp_names
 #' wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
+#' }
 #' }
 #'
 #' @family name matching functions
@@ -83,9 +85,11 @@ wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_names <- rWCVPdata::wcvp_names
 #' phonetic_match(redlist_example, wcvp_names, "scientificName")
+#' }
 #' }
 #'
 phonetic_match <- function(names_df, wcvp_names, name_col) {
@@ -142,9 +146,11 @@ phonetic_match <- function(names_df, wcvp_names, name_col) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_names <- rWCVPdata::wcvp_names
 #' edit_match(redlist_example, wcvp_names, "scientificName")
+#' }
 #' }
 #'
 edit_match <- function(names_df, wcvp_names, name_col) {

@@ -50,9 +50,11 @@ To identify extinctions, introductions or doubtful occurrences within the native
 the \code{wcvp_summary} and \code{wcvp_occ_mat} functions can be used.
 }
 \examples{
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 r <- wcvp_distribution("Callitris", taxon_rank = "genus")
 p <- wcvp_distribution_map(r)
 p
+}
 }
 }

@@ -71,9 +71,11 @@ In an alphabetical checklist, all names are arranged alphabetically with accepte
 For a taxonomic checklist, names are grouped by their accepted names, and synonyms are listed beneath. Both types of checklist include author, publication and distribution information, though note that family headings are only supported in alphabetical checklists (due to the additional grouping requirement of the taxonomic format).
 }
 \examples{
-# These examples take >10 seconds to run.
-\dontrun{
+# These examples take >10 seconds to run and require 'rWCVPdata'
+\donttest{
+if(requireNamespace("rWCVPdata")){
 wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
 wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
+}
 }
 }

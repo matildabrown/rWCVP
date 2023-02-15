@@ -42,19 +42,25 @@ Edit distance matching finds the closest match based on Levenshtein similarity,
 calculated by \link[RecordLinkage:strcmp]{RecordLinkage::levenshteinSim}.
 }
 \examples{
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_names <- rWCVPdata::wcvp_names
 wcvp_match_fuzzy(redlist_example, wcvp_names, "scientificName")
 }
+}
 
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_names <- rWCVPdata::wcvp_names
 phonetic_match(redlist_example, wcvp_names, "scientificName")
 }
+}
 
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_names <- rWCVPdata::wcvp_names
 edit_match(redlist_example, wcvp_names, "scientificName")
+}
 }
 
 }

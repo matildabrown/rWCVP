@@ -25,11 +25,13 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_occ_mat(
 #'   taxon = "Poa", taxon_rank = "genus",
 #'   area = c("TAS", "VIC", "NSW"), introduced = FALSE
 #' )
+#' }
 #' }
 #'
 wcvp_occ_mat <- function(taxon = NULL, taxon_rank = c("species", "genus", "family", "order", "higher"), area_codes = NULL,

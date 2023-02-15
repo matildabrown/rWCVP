@@ -20,9 +20,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var = "family")
 #' wcvp_summary_gt(ferns)
+#' }
 #' }
 #'
 wcvp_summary <- function(taxon = NULL,
@@ -176,9 +178,11 @@ wcvp_summary <- function(taxon = NULL,
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # this example requires 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' ferns <- wcvp_summary("Ferns", "higher", get_wgsrpd3_codes("New Zealand"), grouping_var = "family")
 #' wcvp_summary_gt(ferns)
+#' }
 #' }
 wcvp_summary_gt <- function(x) {
   if (is.null(x$Taxon)) x$Taxon <- "Plants"

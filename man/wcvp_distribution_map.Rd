@@ -38,7 +38,8 @@ The colour scheme mirrors that used by Plants of the World (POWO;
 https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 }
 \examples{
-\dontrun{
+\donttest{ # these examples require 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 p <- wcvp_distribution_map(wcvp_distribution("Callitris", taxon_rank = "genus"))
 p
 # now only the native range, and cropped to range extent
@@ -54,6 +55,7 @@ p +
   ggplot2::scale_fill_manual(values = c("red", "blue")) +
   # for points (islands)
   ggplot2::scale_colour_manual(values = c("red", "blue"))
+  }
   }
 
 }

@@ -1,5 +1,29 @@
 ## Resubmission
 
+2022-02-15 (2)
+-- MJMB: Thanks so much for your help Benjamin - I've wrapped the examples in \donttest{} and if(requireNamespace("rWCVPdata")){}. Passing local checks with no errors, warnings or notes. 
+
+2022-02-15
+-- MJMB: I'm so sorry, I didn't see that a string of colours was accidentally 
+         included in the DESCRIPTION file. Please ignore previous sub. 
+
+2022-02-14
+
+- BA: You said you have the examples wrapped in \dontrun{} because they take such a long time to execute. If this is the only reason for the use of \dontrun{}, please wrap them in \donttest{} instead. This is how lengthy examples should be flagged so that the user can run them, but they won't block the testservers.
+-- MJMB: emailed BA for clarification; examples previously failed automated
+         checks, presumably because of dependency on 'rWCVPdata'. Although the 
+         data package is not required, using 'rWCVP' without it requires a local 
+         copy of the dataset which exceeds the size allowance for CRAN, so this 
+         is not a feasible alternative. Therefore, we have used \dontrun{} 
+         with the justification that the examples require additional software.
+         I apologise for not explaining this fully and in the correct order in 
+         the last submission. 
+
+- BA: Please write the reference title in normal quotes instead of single quotes. e.g.:
+"rWCVP: A companion R package to the World Checklist of Vascular Plants"
+-- MJMB: Fixed.
+
+
 2022-02-13
 
 - VW: Please do not start the description with "An R interface to", "This 

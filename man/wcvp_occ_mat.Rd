@@ -48,11 +48,13 @@ Generate occurrence matrix for taxa and areas
 See \href{https://matildabrown.github.io/rWCVP/articles/occurrence-matrices.html}{here} for an example of how this output can be formatted for publication.
 }
 \examples{
-\dontrun{
+\donttest{ # this example requires 'rWCVPdata'
+if(requireNamespace("rWCVPdata")){
 wcvp_occ_mat(
   taxon = "Poa", taxon_rank = "genus",
   area = c("TAS", "VIC", "NSW"), introduced = FALSE
 )
+}
 }
 
 }

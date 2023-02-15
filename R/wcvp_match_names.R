@@ -37,7 +37,8 @@
 #' @import cli
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{ # these examples require 'rWCVPdata'
+#' if(requireNamespace("rWCVPdata")){
 #' wcvp_names <- rWCVPdata::wcvp_names
 #'
 #' # without author
@@ -51,6 +52,7 @@
 #'   name_col = "scientificName",
 #'   id_col = "assessmentId", author_col = "authority"
 #' )
+#' }
 #' }
 #'
 #' @family name matching functions
