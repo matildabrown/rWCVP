@@ -2,7 +2,7 @@
 title: "Species checklist generated with the rWCVP package"
 output: html_document
 params: 
- version: "New Phytologist Special Issue"
+ version: "v10"
  taxa: "all species"
  area_delim: "global"
  mydata: df
@@ -136,7 +136,7 @@ df %>%
              area="") %>% 
   gt::tab_stubhead(label="CONTINENT - Region") %>% 
   gt::tab_options(
-    row_group.as_column= TRUE,
+    #row_group.as_column= TRUE,
     stub_row_group.font.weight = "bold",
     column_labels.font.weight = "bold",
     data_row.padding = gt::px(1),

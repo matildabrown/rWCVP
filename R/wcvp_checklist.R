@@ -134,7 +134,6 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
       .data$introduced == 1 ~ "introduced",
       TRUE ~ "native",
     )) %>%
-    select(-c("extinct", "location_doubtful", "introduced")) %>%
     filter(.data$occurrence_type %in% show_types)
 
   if (nrow(distribution) == 0) cli_abort("No occurrences after filtering by occurrence type.")
@@ -196,7 +195,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
       invisible(readline("Press [Enter] to continue or [Escape] to exit:"))
     }
 
-    if (report_type == "taxonomic" & n_distinct(checklist, .data$family) > 1) {
+    if (report_type == "taxonomic" & n_distinct(checklist$family) > 1) {
       cli_warn("Taxonomic checklist format does not display family information.")
     }
 
