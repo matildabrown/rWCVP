@@ -60,9 +60,6 @@ wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family"
     .wcvp_fresh()
   }
 
-  occurrence_types <- c("native", "introduced", "extinct", "location_doubtful")
-  show_types <- occurrence_types[c(native, introduced, extinct, location_doubtful)]
-
   suppressMessages(sf::sf_use_s2(FALSE))
 
   if (is.null(wcvp_distributions)) {
@@ -112,14 +109,54 @@ wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family"
     cli_abort("No distribution for that taxon. Are the rank and spelling both correct?")
   }
 
+  if (! native) {
+    df <- filter(df, .data$introduced + .data$extinct + .data$location_doubtful > 0)
+  }
+
+  if (! introduced) {
+    df <- filter(df, .data$introduced == 0)
+  }
+
+  if (! extinct) {
+    df <- filter(df, .data$extinct == 0)
+  }
+
+  if (! location_doubtful) {
+    df <- filter(df, .data$location_doubtful == 0)
+  }
+
+  df <- df %>%
+    group_by(.data$area_code_l3) %>%
+    summarise(
+      occurrence_type=determine_occurrence_type_(
+        .data$introduced, .data$extinct, .data$location_doubtful
+      ),
+      .groups="drop"
+    )
+
+
   rWCVP::wgsrpd3 %>%
-    mutate(occurrence_type = case_when(
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 1, ]$area_code_l3 ~ "location_doubtful",
-      .data$LEVEL3_COD %in% df[df$location_doubtful == 0 &
-        df$extinct == 0 &
-        df$introduced == 0, ]$area_code_l3 ~ "native",
-      .data$LEVEL3_COD %in% df[df$extinct == 1, ]$area_code_l3 ~ "extinct",
-      .data$LEVEL3_COD %in% df[df$introduced == 1, ]$area_code_l3 ~ "introduced"
-    )) %>%
-    filter(.data$occurrence_type %in% show_types)
+    inner_join(df, by=c("LEVEL3_COD"="area_code_l3"))
+}
+
+#' Utility function to determine occurrence type if there is more
+#' than one taxon in a region.
+#'
+#' @noRd
+#'
+determine_occurrence_type_ <- function(introduced, extinct, location_doubtful) {
+
+  if (any(introduced + extinct + location_doubtful == 0)) {
+    return("native")
+  }
+
+  if (any(introduced == 1)) {
+    return("introduced")
+  }
+
+  if (any(location_doubtful == 1)) {
+    return("location_doubtful")
+  }
+
+  return("extinct")
 }
