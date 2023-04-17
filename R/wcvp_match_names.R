@@ -128,7 +128,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
 
   # 2. Match within WCVP excluding authority, if not done already ####
   # (this includes names that could not be matched using authority from step 1)
-  if (!is.null(author_col)) {
+  if (!is.null(author_col) & nrow(unmatched) > 0) {
     n_names2 <- length(unique(unmatched[[name_col]]))
 
     # Match names
