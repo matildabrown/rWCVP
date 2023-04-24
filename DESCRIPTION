@@ -1,7 +1,7 @@
 Package: rWCVP
 Type: Package
 Title: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants
-Version: 1.2.4
+Version: 1.2.5
 Authors@R: c(person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre")),
              person("Barnaby","Walker",,"b.walker@kew.org",role=c("aut")))
 Maintainer: Matilda Brown <m.brown2@kew.org>
@@ -30,8 +30,7 @@ Imports:
     sf,
     stringr,
     tibble,
-    tidyr,
-    withr
+    tidyr
 Suggests: 
     rWCVPdata (>= 0.1.0),
     knitr,
@@ -44,8 +43,6 @@ URL: https://github.com/matildabrown/rWCVP,
     https://matildabrown.github.io/rWCVP/
 BugReports: https://github.com/matildabrown/rWCVP/issues
 Config/testthat/edition: 3
-Remotes: 
-    github::matildabrown/rWCVPdata
 Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 2.10)
