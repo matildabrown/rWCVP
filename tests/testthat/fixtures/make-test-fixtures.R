@@ -55,8 +55,13 @@ match_data <- tibble(
 
 saveRDS(match_data, file = file.path(fixture_dir, "match_data.rds"))
 
+lookup_taxa <- c("Poa annua", "Myrcia acuminatissima", "Myrcia acuminatissima",
+             "Myrcia acutissima", "Abutilon angulatum var. angulatum",
+             "Abutilon angulatum", "Myrcia almasensis",
+             "× Tromostapelia mutabilis var. americana", "Astragalus canadensis",
+             "Astragalus saguntinus")
 
-lookup_data <- names %>% filter(taxon_name %in% lookup_data$taxon_name) %>%
+lookup_data <- names %>% filter(taxon_name %in% lookup_taxa) %>%
   select(plant_name_id, ipni_id, taxon_name, taxon_rank, taxon_status,
          taxon_authors, family, genus, accepted_plant_name_id, homotypic_synonym) %>%
   filter(taxon_name != "Poa annua" | taxon_authors != "Schltdl. & Cham.")

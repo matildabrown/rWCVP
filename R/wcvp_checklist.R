@@ -93,7 +93,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
 
   if (!is.null(taxon)) {
     if (taxon_rank %in% c("order", "higher")) {
-      wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family")
+      wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family", multiple="all")
     }
   }
 
@@ -153,7 +153,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
       filter(.data$in_geography)
 
     endemics <- endemics %>%
-      inner_join(regional_endemics, by = "plant_name_id") %>%
+      inner_join(regional_endemics, by = "plant_name_id", multiple="all") %>%
       replace_na(list(in_geography = FALSE))
   } else {
     endemics$area_endemic <- NA
@@ -162,19 +162,19 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
   }
 
   distribution <- distribution %>%
-    inner_join(endemics, by = "plant_name_id")
+    inner_join(endemics, by = "plant_name_id", multiple="all")
 
   ## build checklist ----
   checklist <- wcvp_names %>%
     left_join(
       wcvp_names %>% select("plant_name_id", "accepted_name" = "taxon_name"),
-      by = c("accepted_plant_name_id" = "plant_name_id")
+      by = c("accepted_plant_name_id" = "plant_name_id"), multiple="all"
     )
 
   checklist$place_of_publication <- replace_na(checklist$place_of_publication, "Unknown")
 
   checklist <- checklist %>%
-    inner_join(distribution, by = "plant_name_id")
+    inner_join(distribution, by = "plant_name_id", multiple="all")
 
   # filter out genus-level names
   checklist <- filter(checklist, .data$taxon_rank != "Genus")
