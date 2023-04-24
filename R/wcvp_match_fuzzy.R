@@ -154,7 +154,6 @@ phonetic_match <- function(names_df, wcvp_names, name_col) {
 #' }
 #'
 edit_match <- function(names_df, wcvp_names, name_col) {
-  withr::local_options(list(cli.progress_show_after = 2, cli.progress_clear = FALSE))
 
   original_names <- colnames(names_df)
   names_df <-
@@ -165,8 +164,11 @@ edit_match <- function(names_df, wcvp_names, name_col) {
   matches <-
     names_df %>%
     mutate(match_info = map(
-      cli_progress_along(.data$sanitised_, "Matching"),
-      ~ edit_match_name_(.data$sanitised_[.x], wcvp_names)
+      .data$sanitised_, ~{edit_match_name_(.data$sanitised_[.x], wcvp_names)},
+      .progress = list(
+        type = "iterator",
+        format = "Matching {cli::pb_bar} {cli::pb_percent} ETA {cli::pb_eta}",
+        clear = TRUE)
     ))
 
   matches <-
