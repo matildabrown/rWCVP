@@ -37,7 +37,8 @@
 #' \donttest{
 #' if(requireNamespace("rWCVPdata")){
 #' wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
-#' wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
+#' wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand")) %>%
+#' head()
 #' }
 #' }
 wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "family", "order", "higher"), area_codes = NULL,
@@ -85,11 +86,13 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
 
   if (is.null(wcvp_distributions)) {
     wcvp_distributions <- rWCVPdata::wcvp_distributions
-  }
+    wcvp_version <- rWCVPdata::wcvp_version()
+  } else wcvp_version <- "Locally provided copy of WCVP"
 
   if (is.null(wcvp_names)) {
     wcvp_names <- rWCVPdata::wcvp_names
-  }
+    wcvp_version <- rWCVPdata::wcvp_version()
+  } else wcvp_version <- "Locally provided copy of WCVP"
 
   if (!is.null(taxon)) {
     if (taxon_rank %in% c("order", "higher")) {
@@ -139,7 +142,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
   if (nrow(distribution) == 0) cli_abort("No occurrences after filtering by occurrence type.")
 
   endemics <- distribution %>%
-    group_by(.data$plant_name_id) |>
+    group_by(.data$plant_name_id) %>%
     summarise(endemic = n() == 1, .groups = "drop")
 
   if (!is.null(area_codes)) {
@@ -179,6 +182,13 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
   # filter out genus-level names
   checklist <- filter(checklist, .data$taxon_rank != "Genus")
 
+
+  #replace in_geography with more intuitive defn
+  if(!is.null(area_codes)) {
+    checklist <- checklist %>%
+    mutate(in_geography = area_code_l3 %in% area_codes)
+  }
+
   checklist <- checklist %>%
     arrange(.data$family, .data$genus, .data$species, .data$infraspecies) %>%
     relocate("accepted_name", .after = "accepted_plant_name_id") %>%
@@ -215,7 +225,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
       cli_alert_info("Saving report as: {.file {report_filename}}")
 
       param_list <- list(
-        version = "New Phytologist Special Issue",
+        version = wcvp_version,
         taxa = taxon,
         area_delim = area_codes,
         mydata = checklist,
@@ -235,7 +245,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
       cli_alert_info("Saving report as: {.file {report_filename}}")
 
       param_list <- list(
-        version = "New Phytologist Special Issue",
+        version = wcvp_version,
         taxa = taxon,
         area_delim = area_codes,
         mydata = checklist,
