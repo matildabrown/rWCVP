@@ -75,7 +75,8 @@ For a taxonomic checklist, names are grouped by their accepted names, and synony
 \donttest{
 if(requireNamespace("rWCVPdata")){
 wcvp_checklist(taxon = "Myrtaceae", taxon_rank = "family", area = get_wgsrpd3_codes("Brazil"))
-wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand"))
+wcvp_checklist(taxon = "Ferns", taxon_rank = "higher", area = get_wgsrpd3_codes("New Zealand")) \%>\%
+head()
 }
 }
 }

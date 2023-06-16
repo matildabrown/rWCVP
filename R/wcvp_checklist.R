@@ -186,7 +186,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
   #replace in_geography with more intuitive defn
   if(!is.null(area_codes)) {
     checklist <- checklist %>%
-    mutate(in_geography = area_code_l3 %in% area_codes)
+    mutate(in_geography = .data$area_code_l3 %in% area_codes)
   }
 
   checklist <- checklist %>%
