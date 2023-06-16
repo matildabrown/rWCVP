@@ -45,13 +45,14 @@ synonyms <- params$synonyms
 |       Vascular Plants, a continuously updated resource for exploring global plant diversity. Scientific 
 |       Data, 8(1), 1-10.  
 | 
-|  Brown, M.J.M, Black, N., Govaerts, R., Nic Lughadha, E., Ondo, I., Turner, R., Walker , B.E. (2022). 
-|       rWCVP: Generating Summaries, Reports and Plots from the World Checklist of Vascular Plants. R 
-|       package version 1.0.0. https://github.com/matildabrown/rWCVP
+|  Brown, M.J.M., Walker, B.E., Black, N., Govaerts, R.H.A., Ondo, I., Turner, R. and Nic Lughadha, E. (2023), 
+|       rWCVP: a companion R package for the World Checklist of Vascular Plants. New Phytologist.    
+|       https://doi.org/10.1111/nph.18919
+| 
 
 <br>
           
-For compilers and reviewers of the dataset, see: https://wcsp.science.kew.org/compilersReviewers.do
+For compilers and reviewers of the dataset, see: https://powo.science.kew.org/compilers-and-reviewers
 
 
 ___
@@ -70,17 +71,20 @@ if(synonyms==TRUE) {
 ```{r, echo = FALSE, results = "asis"}
   cat("\n")
 if(!identical(input.area, "global"))  cat("### Geography: ", paste(get_area_name(input.area), collapse = " + "),"\n") else cat("### Geography: Global","\n")
+cat("**Empty parts of the input geography shown in light red**") 
 ```
 ```{r warning=FALSE, fig.asp=0.4822878, results="hide", message=FALSE}
 shp <- rWCVPdata::wgsrpd3
 shp$fillcol <- as.numeric(shp$LEVEL3_COD %in% input.area)+1
 if(identical(input.area,"global")) shp$fillcol <- 2
+shp$fillcol[which(shp$LEVEL3_COD %in% setdiff(shp$LEVEL3_COD, df$area_code_l3))] <- 3
 
 suppressMessages({
 suppressWarnings({
   ggplot2::ggplot(shp) +
-  ggplot2::geom_sf(fill=c("gray80","#ad2b00")[shp$fillcol], col="gray80")+
-  ggplot2::stat_sf_coordinates(col=c("gray80","#ad2b00")[shp$fillcol])+
+  ggplot2::geom_sf(fill=c("gray80","#ad2b00","#e8bbb7")[shp$fillcol],
+                   col=c("gray80","#ad2b00","#e8bbb7")[shp$fillcol])+
+  ggplot2::stat_sf_coordinates(col=c("gray80","#ad2b00","#e8bbb7")[shp$fillcol])+
   ggplot2::theme_void()+
   ggplot2::coord_sf(expand=FALSE)
   })
