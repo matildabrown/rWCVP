@@ -6,3 +6,7 @@ inst/doc
 .DS_Store
 man_backup/
 docs
+CRAN-SUBMISSION
+rWCVP.Rproj
+vignettes/articles/redlist-name-matching_cache/
+vignettes/rWCVP.Rmd.original
