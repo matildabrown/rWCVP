@@ -8,7 +8,7 @@ fixture_dir <- "tests/testthat/fixtures"
 names <- rWCVPdata::wcvp_names
 
 wcvp_names_extract <- names |>
-  filter(genus == "Poa" | genus == "Myrcia")
+  filter(genus == "Poa" | genus == "Myrcia" | genus == "Clethra")
 
 saveRDS(wcvp_names_extract, file = file.path(fixture_dir, "wcvp_names_extract.rds"))
 

@@ -62,3 +62,18 @@ test_that("match names returns original columns", {
 
   expect_true(all(colnames(match_data) %in% colnames(matches)))
 })
+
+test_that("match names works when all names match exactly", {
+  names <- tibble(original_name=c("Fagonia laevis","Dalea seemannii"),
+                  author=c("Standl.","S.Watson ex Orcutt"))
+
+  matches <- wcvp_match_names(
+    names,
+    name_col="original_name",
+    author_col="author",
+    fuzzy=TRUE,
+    progress_bar=FALSE
+  )
+
+  expect_true(all(matches$match_type == "Exact (with author)"))
+})
