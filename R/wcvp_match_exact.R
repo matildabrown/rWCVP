@@ -56,7 +56,8 @@ wcvp_match_exact <- function(names_df, wcvp_names, name_col, author_col = NULL, 
       by = join_key,
       keep = TRUE,
       na_matches = "never",
-      suffix = c("", "_wcvp")
+      suffix = c("", "_wcvp"),
+      multiple="all"
     )
 
   matches <-

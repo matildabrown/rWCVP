@@ -101,7 +101,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
   matchcols <- c(
     "match_type", "multiple_matches", "match_similarity", "match_edit_distance",
     "wcvp_id", "wcvp_name", "wcvp_authors", "wcvp_rank", "wcvp_status",
-    "wcvp_homotypic", "wcvp_ipni_id", "wcvp_accepted_id", "wcvp_author_edit_distance", "wcvp_author_lcs"
+    "wcvp_homotypic", "wcvp_ipni_id", "wcvp_accepted_id", "wcvp_author_edit_distance", "wcvp_author_lcs", "taxon_name", "taxon_authors"
   )
 
   if (length(
@@ -149,7 +149,8 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
   if (fuzzy & nrow(unmatched) > 0) {
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
     fuzzy_matches <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col = name_col, progress_bar = progress_bar)
-
+    # non needed after fixing bug in edit_match fn?
+    #fuzzy_matches[is.na(fuzzy_matches$wcvp_name),"match_type"] <- "No match found"
     cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
 
     matches <- bind_rows(matches, fuzzy_matches)

@@ -71,7 +71,7 @@ wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family"
   }
 
   if (taxon_rank %in% c("order", "higher")) {
-    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family")
+    wcvp_names <- right_join(rWCVP::taxonomic_mapping, wcvp_names, by = "family", multiple="all")
   }
 
   if (length(taxon) > 1) {
@@ -83,7 +83,7 @@ wcvp_distribution <- function(taxon, taxon_rank = c("species", "genus", "family"
   )
   df <- wcvp_names %>%
     select(any_of(wcvp_cols)) %>%
-    right_join(wcvp_distributions, by = "plant_name_id")
+    right_join(wcvp_distributions, by = "plant_name_id", multiple="all")
 
   range_cols <- c("area_code_l3", "introduced", "extinct", "location_doubtful")
   if (taxon_rank == "species") {
