@@ -95,6 +95,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     cli_alert_warning("No author information supplied - matching on taxon name only")
     n_names1 <- nrow(unique(names_df[[name_col]]))
   } else {
+    cli_alert_info("Also using the {.var {author_col}} column")
     n_names1 <- nrow(unique(cbind(names_df[[name_col]], names_df[[author_col]])))
   }
 
@@ -122,7 +123,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     unmatched %>%
     wcvp_match_exact(wcvp_names, name_col = name_col, author_col = author_col, id_col = id_col) %>%
     filter(!is.na(.data$wcvp_id))
-
+  
   # Only names without authors or those that were not matched before
   unmatched <- filter(names_df, !.data[[id_col]] %in% matches[[id_col]])
 
@@ -142,16 +143,13 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
 
   n_matched <- length(unique(matches[[name_col]]))
 
-  cli_alert_success("Found {n_matched} of {n_names1} names")
-
   # 3. Use fuzzy maching on remaining names ####
   unmatched <- filter(names_df, !.data[[id_col]] %in% matches[[id_col]])
   if (fuzzy & nrow(unmatched) > 0) {
     cli_h2("Fuzzy matching {length(unique(unmatched[[name_col]]))} name{?s}")
     fuzzy_matches <- wcvp_match_fuzzy(unmatched, wcvp_names, name_col = name_col, progress_bar = progress_bar)
-    # non needed after fixing bug in edit_match fn?
-    #fuzzy_matches[is.na(fuzzy_matches$wcvp_name),"match_type"] <- "No match found"
-    cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
+
+    # cli_alert_success("Found {sum(!is.na(unique(fuzzy_matches$wcvp_name)))} of {length(unique(unmatched[[name_col]]))} names")
 
     matches <- bind_rows(matches, fuzzy_matches)
   }
@@ -166,27 +164,29 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     arrange(.data$row_order) %>%
     select(-"row_order")
 
-  n_matched <-
-    matches %>%
-    filter(!is.na(.data$wcvp_id)) %>%
-    distinct(.data[[name_col]]) %>%
-    nrow()
+  if (is.null(author_col)) {
+    unique_matches <-
+      matches %>%
+      filter(!is.na(.data$wcvp_id)) %>%
+      distinct(.data[[name_col]], .keep_all=TRUE)
+  } else {
+    unique_matches <-
+      matches %>%
+      filter(!is.na(.data$wcvp_id)) %>%
+      distinct(.data[[name_col]], .data[[author_col]], .keep_all=TRUE)
+  }
 
-  multi_matches <-
-    matches %>%
-    distinct(.data[[name_col]], .keep_all = TRUE) %>%
-    pull(.data$multiple_matches) %>%
-    sum(na.rm = TRUE)
+  n_matched <- nrow(unique_matches)
+  multi_matches <- sum(unique_matches$multiple_matches, na.rm=TRUE)
 
   match_summary <-
-    matches %>%
-    distinct(.data[[name_col]], .keep_all = TRUE) %>%
+    unique_matches %>%
     count(.data$match_type) %>%
     filter(!is.na(.data$match_type)) %>%
     tibble::deframe()
 
   cli_h2("Matching complete!")
-  cli_alert_success("Matched {n_matched} of {length(unique(names_df[[name_col]]))} name{?s}")
+  cli_alert_success("Matched {n_matched} of {n_names1} name{?s}")
   for (i in seq_along(match_summary)) {
     cli_alert_info("{names(match_summary)[i]}: {.value {match_summary[i]}}")
   }
