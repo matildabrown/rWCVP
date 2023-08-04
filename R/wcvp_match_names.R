@@ -99,6 +99,11 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     n_names1 <- nrow(unique(cbind(names_df[[name_col]], names_df[[author_col]])))
   }
 
+  # taboo column names
+  taboonames <- colnames(names_df)[colnames(names_df) %in% colnames(wcvp_names)]
+  if(length(taboonames)!=0) cli_abort("Names cannot be the same as those in the WCVP dataset.
+Please rename: {taboonames}.")
+
   matchcols <- c(
     "match_type", "multiple_matches", "match_similarity", "match_edit_distance",
     "wcvp_id", "wcvp_name", "wcvp_authors", "wcvp_rank", "wcvp_status",
@@ -123,7 +128,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     unmatched %>%
     wcvp_match_exact(wcvp_names, name_col = name_col, author_col = author_col, id_col = id_col) %>%
     filter(!is.na(.data$wcvp_id))
-  
+
   # Only names without authors or those that were not matched before
   unmatched <- filter(names_df, !.data[[id_col]] %in% matches[[id_col]])
 
