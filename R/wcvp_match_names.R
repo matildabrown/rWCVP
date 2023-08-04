@@ -100,7 +100,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
   }
 
   # taboo column names
-  taboonames <- colnames(names_df)[colnames(names_df) %in% colnames(wcvp_names)]
+  taboonames <- c(id_col,name_col, author_col)[c(id_col,name_col, author_col) %in% colnames(wcvp_names)]
   if(length(taboonames)!=0) cli_abort("Names cannot be the same as those in the WCVP dataset.
 Please rename: {taboonames}.")
 
