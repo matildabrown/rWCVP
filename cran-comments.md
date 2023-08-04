@@ -1,4 +1,6 @@
 ## Resubmission
+2023-08-04
+-- MJMB: New version that fixes checklist report issues (see NEWS.md for other changes). Passing checks with no errors, warnings or notes. 
 
 2022-02-15 (2)
 -- MJMB: Thanks so much for your help Benjamin - I've wrapped the examples in \donttest{} and if(requireNamespace("rWCVPdata")){}. Passing local checks with no errors, warnings or notes. 
