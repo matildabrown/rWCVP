@@ -28,11 +28,31 @@
 }
 
 .wcvp_fresh <- function() {
-  wcvp_fresh <- rWCVPdata::wcvp_check_version(silent = TRUE)
+  wcvp_fresh <- try(rWCVPdata::wcvp_check_version(silent=TRUE), silent=TRUE)
+
+  timeout <- FALSE
+  if (inherits(wcvp_fresh,"try-error")) {
+    if (stringr::str_detect(wcvp_fresh[[1]], "Timeout was reached")) {
+      timeout <- TRUE
+      wcvp_fresh <- TRUE
+    } else {
+      cli::cli_abort(wcvp_fresh[[1]])
+    }
+  }
+
   if (rlang::env_has(.pkgenv, "wcvp_fresh")) {
     return(invisible(NULL))
   } else {
     .pkgenv[["wcvp_fresh"]] <- wcvp_fresh
+  }
+
+  if (timeout) {
+    cli::cli_warn(c(
+      "Unable to contact WCVP server at {.url http://sftp.kew.org/pub/data-repositories/WCVP},",
+      "please check your internet connection and the server site.",
+      "Assuming the WCVP data you have is up to date for now..."
+      )
+    )
   }
 
   if (!wcvp_fresh) {
