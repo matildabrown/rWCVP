@@ -29,9 +29,9 @@
 
 .wcvp_fresh <- function() {
   wcvp_fresh <- try(rWCVPdata::wcvp_check_version(silent=TRUE), silent=TRUE)
-  
+
   timeout <- FALSE
-  if (class(wcvp_fresh) == "try-error") {
+  if (inherits(wcvp_fresh,"try-error")) {
     if (stringr::str_detect(wcvp_fresh[[1]], "Timeout was reached")) {
       timeout <- TRUE
       wcvp_fresh <- TRUE
@@ -39,7 +39,7 @@
       cli::cli_abort(wcvp_fresh[[1]])
     }
   }
-  
+
   if (rlang::env_has(.pkgenv, "wcvp_fresh")) {
     return(invisible(NULL))
   } else {

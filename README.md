@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-  # rWCVP
+# rWCVP <a href="https://matildabrown.github.io/rWCVP/"><img src="man/figures/logo.png" align="right" height="276" /></a>
 
 <!-- badges: start -->
 <!-- badges: start -->
@@ -13,7 +13,7 @@
 
 rWCVP is a package for accessing and using plant name and distribution
 data from the [World Checklist of Vascular
-Plants](https://powo.science.kew.org/about-wcvp)
+Plants](https://powo.science.kew.org//)
 
 ## Installation
 
@@ -33,11 +33,11 @@ species.
 ``` r
 library(rWCVP)
 
-distribution <- wcvp_distribution("Myrcia guianensis", taxon_rank="species")
+distribution <- wcvp_distribution("Myrcia guianensis", taxon_rank = "species")
 
 # global map
 wcvp_distribution_map(distribution)
 
 # zoomed-in map
-wcvp_distribution_map(distribution, crop_map=TRUE)
+wcvp_distribution_map(distribution, crop_map = TRUE)
 ```
