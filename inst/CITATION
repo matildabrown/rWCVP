@@ -8,14 +8,14 @@ bibentry(bibtype = "Article",
                     person("Robert","Turner"),
                     person("Eimear","Nic Lughadha")),
          header = "To cite rWCVP, please use:",
-               note = "version 1.0.3",
+               note = "version 1.2.6",
                year = "2023",
                journal = "New Phytologist",
                title="rWCVP: A companion R package to the World Checklist of Vascular Plants.",
                textVersion  = paste("Brown M.J.M., Walker B.E., Black N., Govaerts R., Ondo I.,",
                                     "Turner R., Nic Lughadha E. (2023).",
                                     "rWCVP: A companion R package to the World Checklist of Vascular Plants.",
-                                    "New Phytologist. version 1.0.3."),
+                                    "New Phytologist, 240: 1355-1365. version 1.2.6."),
                footer = "To cite the WCVP dataset, please use: \nGovaerts, R., Nic Lughadha, E., Black, N. et al. The World Checklist of Vascular Plants, a continuously updated resource for exploring global plant diversity. Sci Data 8, 215 (2021). https://doi.org/10.1038/s41597-021-00997-6"
                )
 
