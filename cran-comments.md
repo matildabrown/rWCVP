@@ -1,4 +1,7 @@
 ## Resubmission
+2023-12-08
+-- MJMB: Fixes offline errors, mapping bugs. Passing checks with no errors, warnings or notes. 
+
 2023-08-04
 -- MJMB: New version that fixes checklist report issues (see NEWS.md for other changes). Passing checks with no errors, warnings or notes. 
 
