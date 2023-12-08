@@ -77,7 +77,9 @@ cat("**Empty parts of the input geography shown in light red**")
 shp <- rWCVPdata::wgsrpd3
 shp$fillcol <- as.numeric(shp$LEVEL3_COD %in% input.area)+1
 if(identical(input.area,"global")) shp$fillcol <- 2
-shp$fillcol[which(shp$LEVEL3_COD %in% setdiff(shp$LEVEL3_COD, df$area_code_l3))] <- 3
+shp$fillcol[which(shp$LEVEL3_COD %in% setdiff(shp$LEVEL3_COD, df$area_code_l3)
+                  & shp$fillcol==2)] <- 3
+
 
 suppressMessages({
 suppressWarnings({
