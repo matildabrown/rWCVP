@@ -111,7 +111,11 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
 
   # filter by taxon
   if (!is.null(taxon)) {
+    if (taxon_rank == "species") {
+      df <- filter(df, .data$taxon_name %in% taxon)
+    } else {
     wcvp_names <- filter(wcvp_names, if_any(all_of(taxon_rank)) %in% taxon)
+    }
   }
 
   # filter out hybrids and infraspecies depending on input
