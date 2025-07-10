@@ -6,7 +6,7 @@
 \alias{edit_match}
 \title{Fuzzy (approximate) matching to the WCVP.}
 \usage{
-wcvp_match_fuzzy(names_df, wcvp_names, name_col, progress_bar = TRUE)
+wcvp_match_fuzzy(names_df = NULL, wcvp_names, name_col, progress_bar = TRUE)
 
 phonetic_match(names_df, wcvp_names, name_col)
 

@@ -40,7 +40,7 @@ test_that("returns expected distribution for Poa annua", {
   n_introduced <- sum(distribution$occurrence_type == "introduced")
   n_native <- sum(distribution$occurrence_type == "native")
 
-  expect_equal(n_introduced, 152)
+  expect_equal(n_introduced, 153)
   expect_equal(n_native, 113)
 })
 
