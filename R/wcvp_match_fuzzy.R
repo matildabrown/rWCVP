@@ -31,7 +31,10 @@
 #'
 #' @family name matching functions
 #'
-wcvp_match_fuzzy <- function(names_df, wcvp_names, name_col, progress_bar = TRUE) {
+wcvp_match_fuzzy <- function(names_df=NULL, wcvp_names, name_col, progress_bar = TRUE) {
+
+  if(is.null(names_df)) cli_abort("Matching a vector of names is currently only supported for `wcvp_match_names`.\n Future implementation for all matching functions can be requested at {.url https://github.com/matildabrown/rWCVP/issues/}")
+
   # check for duplicated names
   if (sum(duplicated(names_df[[name_col]])) > 10) {
     cli::cli_alert_warning("Fuzzy matching is very slow for data with repeated names. \nWe recommend matching a unique set of names to the WCVP, \nthen attaching the resolved matches to the original data using e.g. `*_join` functions.")

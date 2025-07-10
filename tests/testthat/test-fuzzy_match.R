@@ -47,3 +47,10 @@ test_that("phonetic match returns NA if match is too disimilar", {
   expect_true(is.na(phonetic$match_type))
   expect_true(is.na(phonetic$wcvp_name))
 })
+
+test_that("fail for vectors data", {
+  name_vec <- c("Fagonia laevis","Dalea seemannii")
+  author_vec <- c("Standl.","S.Watson ex Orcutt")
+
+  expect_error(wcvp_match_fuzzy(name_col=name_vec))
+})
