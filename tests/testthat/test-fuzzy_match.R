@@ -54,3 +54,12 @@ test_that("fail for vectors data", {
 
   expect_error(wcvp_match_fuzzy(name_col=name_vec))
 })
+
+test_that("fuzzy match returns expected output for hybrids", {
+  names_df <-  data.frame(scientificName = c("Quercus × kinselae", "Sarracenia × readii", "Asplenium × waikomoi"),
+                              Authority = c("(C.H.Mull.) Nixon & C.H.Mull.", "C.R.Bell", "W.H.Wagner & D.D.Palmer"))
+
+  matches <- wcvp_match_fuzzy(names_df, lookup_data, name_col = "scientificName")
+
+  expect_equal(sum(matches$match_edit_distance), 3)
+})

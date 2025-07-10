@@ -59,7 +59,7 @@ lookup_taxa <- c("Poa annua", "Myrcia acuminatissima", "Myrcia acuminatissima",
              "Myrcia acutissima", "Abutilon angulatum var. angulatum",
              "Abutilon angulatum", "Myrcia almasensis",
              "× Tromostapelia mutabilis var. americana", "Astragalus canadensis",
-             "Astragalus saguntinus")
+             "Astragalus saguntinus", "Quercus × kinseliae", "Sarracenia × readei", "Asplenium × waikamoi")
 
 lookup_data <- names %>% filter(taxon_name %in% lookup_taxa) %>%
   select(plant_name_id, ipni_id, taxon_name, taxon_rank, taxon_status,
