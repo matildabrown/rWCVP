@@ -17,9 +17,13 @@ rWCVP is a package for accessing and using plant name and distribution
 data from the [World Checklist of Vascular
 Plants](https://powo.science.kew.org//)
 
-\[!WARNING\] The next version of rWCVP is currently in active
-development - we will be back on CRAN soon! In the meantime, please
+<div style="background-color:#f7e3c4;overflow: auto; width: 600px;  border-left: 5px solid #e08604; text-color: black; padding: 10px; ">
+
+:warning: **The next version of rWCVP is currently in active
+development** - we will be back on CRAN soon! In the meantime, please
 install via GitHub (see below).
+
+</div>
 
 ## Installation
 
