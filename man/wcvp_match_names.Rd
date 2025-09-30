@@ -5,7 +5,7 @@
 \title{Match names to the WCVP.}
 \usage{
 wcvp_match_names(
-  names_df,
+  names_df = NULL,
   wcvp_names = NULL,
   name_col = NULL,
   id_col = NULL,

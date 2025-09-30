@@ -31,3 +31,9 @@ test_that("sanitation removes hybrids and standardises infras", {
   name <- "x genus species var thing"
   expect_equal(sanitise_names_(name), "genus species var. thing")
 })
+
+
+test_that("sanitation removes special hybrids and standardises infras", {
+  name <- c("Quercus × kinselae", "Sarracenia × readii", "Asplenium × waikomoi")
+  expect_equal(sanitise_names_(name), c("Quercus kinselae", "Sarracenia readii", "Asplenium waikomoi"))
+})

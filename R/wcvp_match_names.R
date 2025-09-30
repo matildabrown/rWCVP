@@ -57,9 +57,9 @@
 #'
 #' @family name matching functions
 #'
-wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_col = NULL, author_col = NULL,
+wcvp_match_names <- function(names_df=NULL, wcvp_names = NULL, name_col = NULL, id_col = NULL, author_col = NULL,
                              join_cols = NULL, fuzzy = TRUE, progress_bar = TRUE) {
-  cli_h1("Matching names to WCVP")
+
   if (is.null(wcvp_names)) {
     .wcvp_available()
     .wcvp_fresh()
@@ -73,6 +73,32 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     cli_abort("Names not supplied - use either {.arg name_col} or {.arg join_cols} to supply names")
   }
 
+
+
+
+  if (is.null(names_df)){
+
+    name_input <- deparse(substitute(name_col))
+
+    if(is.null(name_col)) cli_abort("Names to match must be supplied as a vector or, if using {.arg join_cols}, as {.arg names_df}")
+
+    names_df <- data.frame(name_col)
+    name_col <- colnames(names_df)[1] <- label_col <- name_input
+
+
+    if(!is.null(author_col)){
+
+      if(length(author_col)!=nrow(names_df)) cli_abort("If passed as separate vectors, {.arg name_col} and {.arg author_col} must be the same length")
+    }
+
+    author_input <- deparse(substitute(author_col))
+
+    names_df$input_authors <- author_col
+    author_col <- colnames(names_df)[2] <- author_input
+
+  }
+
+
   # get taxon name from name parts
   if (is.null(name_col)) {
     name_col <- "original_name"
@@ -83,7 +109,9 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     label_col <- join_cols
   }
 
-  cli_alert_info("Using the {.var {label_col}} column{?s}")
+
+  cli_h1("Matching names to WCVP")
+  cli_alert_info("Using {.var {label_col}} for names")
 
   if (is.null(id_col)) {
     names_df$internal_id <- seq_len(nrow(names_df))
@@ -95,7 +123,7 @@ wcvp_match_names <- function(names_df, wcvp_names = NULL, name_col = NULL, id_co
     cli_alert_warning("No author information supplied - matching on taxon name only")
     n_names1 <- nrow(unique(names_df[[name_col]]))
   } else {
-    cli_alert_info("Also using the {.var {author_col}} column")
+    cli_alert_info("Using {.var {author_col}} for authors")
     n_names1 <- nrow(unique(cbind(names_df[[name_col]], names_df[[author_col]])))
   }
 

@@ -47,3 +47,19 @@ test_that("phonetic match returns NA if match is too disimilar", {
   expect_true(is.na(phonetic$match_type))
   expect_true(is.na(phonetic$wcvp_name))
 })
+
+test_that("fail for vectors data", {
+  name_vec <- c("Fagonia laevis","Dalea seemannii")
+  author_vec <- c("Standl.","S.Watson ex Orcutt")
+
+  expect_error(wcvp_match_fuzzy(name_col=name_vec))
+})
+
+test_that("fuzzy match returns expected output for hybrids", {
+  names_df <-  data.frame(scientificName = c("Quercus × kinselae", "Sarracenia × readii", "Asplenium × waikomoi"),
+                              Authority = c("(C.H.Mull.) Nixon & C.H.Mull.", "C.R.Bell", "W.H.Wagner & D.D.Palmer"))
+
+  matches <- wcvp_match_fuzzy(names_df, lookup_data, name_col = "scientificName")
+
+  expect_equal(sum(matches$match_edit_distance), 3)
+})
