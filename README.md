@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rWCVP <a href="https://matildabrown.github.io/rWCVP/"><img src="man/figures/logo.png" align="right" height="276" /></a>
+# rWCVP <a href="https://matildabrown.github.io/rWCVP/"><img src="man/figures/logo.png" align="right" height="276"/></a>
 
 <!-- badges: start -->
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/matildabrown/rWCVP/workflows/R-CMD-check/badge.svg)](https://github.com/matildabrown/rWCVP/actions)
+
 <!-- badges: end -->
 
 <!-- badges: end -->
@@ -15,14 +17,28 @@ rWCVP is a package for accessing and using plant name and distribution
 data from the [World Checklist of Vascular
 Plants](https://powo.science.kew.org//)
 
+<div style="background-color:#f7e3c4;overflow: auto; width: 600px;  border-left: 5px solid #e08604; text-color: black; padding: 10px; ">
+
+:warning: **The next version of rWCVP is currently in active
+development** - we will be back on CRAN soon! In the meantime, please
+install via GitHub (see below).
+
+</div>
+
 ## Installation
 
 You can install the development version of rWCVP from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("remotes")
 devtools::install_github("matildabrown/rWCVP")
+```
+
+It’s also best to install the most recent version of the accompanying
+data package, `rWCVPdata`:
+
+``` r
+devtools::install_github("matildabrown/rWCVPdata")
 ```
 
 ## Example
