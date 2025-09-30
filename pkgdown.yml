@@ -1,15 +1,14 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  coordinate-cleaning: coordinate-cleaning.html
-  custom-checklist: custom-checklist.html
-  mapping-diversity: mapping-diversity.html
-  occurrence-matrices: occurrence-matrices.html
-  redlist-name-matching: redlist-name-matching.html
+  articles/coordinate-cleaning: coordinate-cleaning.html
+  articles/custom-checklist: custom-checklist.html
+  articles/mapping-diversity: mapping-diversity.html
+  articles/occurrence-matrices: occurrence-matrices.html
+  articles/redlist-name-matching: redlist-name-matching.html
   rWCVP: rWCVP.html
-last_built: 2024-02-27T12:22Z
+last_built: 2025-09-30T14:20Z
 urls:
   reference: https://matildabrown.github.io/rWCVP/reference
   article: https://matildabrown.github.io/rWCVP/articles
-
