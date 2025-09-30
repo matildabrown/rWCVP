@@ -8,13 +8,13 @@ Maintainer: Matilda Brown <m.brown2@kew.org>
 Description: A companion to the World Checklist of 
     Vascular Plants (WCVP). It includes functions to generate maps and species lists, as 
     well as match names to the WCVP. For more details and to cite the package, see: 
-    Brown M.J.M., Walker B.E., Black N., Govaerts R., Ondo I., Turner R., Nic Lughadha E. (in press). 
-    "rWCVP: A companion R package to the World Checklist of Vascular Plants". New Phytologist.
+    Brown M.J.M., Walker B.E., Black N., Govaerts R., Ondo I., Turner R., Nic Lughadha E. (2023). 
+    "rWCVP: A companion R package to the World Checklist of Vascular Plants". New Phytologist, 240: 1355-1365.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
-RoxygenNote: >= 7.2.3
+RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
