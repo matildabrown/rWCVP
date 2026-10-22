@@ -34,8 +34,7 @@ A \code{\link[ggplot2:ggplot]{ggplot2::ggplot}} of the distribution.
 Plot distribution maps for species, genera or families
 }
 \details{
-The colour scheme mirrors that used by Plants of the World (POWO;
-https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
+The colour scheme mirrors that used by Plants of the World (POWO), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 }
 \examples{
 \donttest{ # these examples require 'rWCVPdata'

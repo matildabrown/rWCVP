@@ -4,7 +4,7 @@
 \alias{wcvp_reformat}
 \title{Reformat local versions of WCVP}
 \usage{
-wcvp_reformat(wcvp_local, version = NULL)
+wcvp_reformat(wcvp_local = NULL, version = NULL)
 }
 \arguments{
 \item{wcvp_local}{Data.frame. Local copy of the WCVP.}
@@ -16,7 +16,9 @@ A data.frame with the same variable structure as the WCVP that is
 included in the data package \code{rWCVPdata}.
 }
 \description{
-Reformat local versions of WCVP
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function has been deprecated because it was a glorified renaming function.
 }
 \details{
 Note that not all of the original variables are preserved during reformatting.
@@ -24,3 +26,7 @@ For example, publication is a single variable in v9, but split over multiple in
 the data package. It is therefore not possible to simply rename this variable.
 Variables that are present in the data package but not in v9 are filled with \code{NA}.
 }
+\examples{
+wcvp_reformat()
+}
+\keyword{internal}

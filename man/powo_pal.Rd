@@ -70,10 +70,10 @@ notation.
   }}
 }
 \value{
-Character. Vector of names and HEX values to match those of \href{https://powo.science.kew.org/}{POWO}.
+Character. Vector of names and HEX values to match those of POWO.
 }
 \description{
-Range maps displayed on the \href{https://powo.science.kew.org/}{POWO} website have a fixed,
+Range maps displayed on the POWO website have a fixed,
 discrete colour palette based on the type of taxon occurrence
 in a region.
 }

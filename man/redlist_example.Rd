@@ -14,7 +14,7 @@ A data frame with 20 rows and 4 variables:
 }
 }
 \source{
-Downloaded and sampled from \url{https://www.iucnredlist.org/}
+Downloaded and sampled from https://www.iucnredlist\if{html}{\out{<span>}}.\if{html}{\out{</span>}}org/
 }
 \usage{
 redlist_example

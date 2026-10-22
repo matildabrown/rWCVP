@@ -11,7 +11,7 @@
 #'   }
 #'
 #'
-#' @source Downloaded and sampled from \url{https://www.iucnredlist.org/}
+#' @source Downloaded and sampled from https://www.iucnredlist<span>.</span>org/
 
 "redlist_example"
 

@@ -1,3 +1,7 @@
+# rWCVP 1.3.1
+
+* Deprecated wcvp_reformat 
+
 # rWCVP 1.2.6
 
 * Add support for offline use

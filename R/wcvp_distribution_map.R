@@ -14,8 +14,7 @@
 #'
 #' @export
 #'
-#' @details The colour scheme mirrors that used by Plants of the World (POWO;
-#' https://powo.science.kew.org/), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
+#' @details The colour scheme mirrors that used by Plants of the World (POWO), where green is native, purple is introduced, red is extinct and orange is doubtful. See Examples for how to use custom colours.
 #'
 #' @return A [`ggplot2::ggplot`] of the distribution.
 #'
@@ -80,7 +79,7 @@ wcvp_distribution_map <- function(range, crop_map = FALSE, native = TRUE, introd
 #' @return A ggplot map of the range
 #'
 #' @import ggplot2
-#' @export
+
 powo_map <- function(range_sf, centroids_sf) {
   world <- rWCVP::wgsrpd3
 
@@ -111,13 +110,13 @@ powo_map <- function(range_sf, centroids_sf) {
 
 #' POWO colour palette for range maps
 #'
-#' Range maps displayed on the [POWO](https://powo.science.kew.org/) website have a fixed,
+#' Range maps displayed on the POWO website have a fixed,
 #' discrete colour palette based on the type of taxon occurrence
 #' in a region.
 #'
 #' @rdname powo_pal
-#' @return Character. Vector of names and HEX values to match those of [POWO](https://powo.science.kew.org/).
-#' @export
+#' @return Character. Vector of names and HEX values to match those of POWO.
+
 powo_pal <- function() {
   c(
     "absent" = "#ffffff",
@@ -131,19 +130,19 @@ powo_pal <- function() {
 #' @importFrom ggplot2 scale_color_manual
 #' @rdname powo_pal
 #' @inheritParams ggplot2::scale_colour_manual
-#' @export
+
 scale_color_powo <- function(...) {
   scale_color_manual(values = powo_pal(), ...)
 }
 
 #' @rdname powo_pal
-#' @export
+
 scale_colour_powo <- scale_color_powo
 
 #' @importFrom ggplot2 scale_color_manual
 #' @rdname powo_pal
 #' @inheritParams ggplot2::scale_fill_manual
-#' @export
+
 scale_fill_powo <- function(...) {
   scale_fill_manual(values = powo_pal(), ...)
 }
