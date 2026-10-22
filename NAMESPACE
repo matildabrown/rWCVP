@@ -32,17 +32,23 @@ importFrom(magrittr,"%>%")
 importFrom(phonics,metaphone)
 importFrom(purrr,map)
 importFrom(rlang,.data)
-importFrom(sf,sf_use_s2)
-importFrom(sf,st_bbox)
-importFrom(sf,st_centroid)
-importFrom(sf,st_shift_longitude)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_extract)
-importFrom(stringr,str_remove_all)
-importFrom(stringr,str_replace_all)
-importFrom(stringr,str_squish)
-importFrom(stringr,str_to_sentence)
-importFrom(tidyr,pivot_wider)
-importFrom(tidyr,unite)
-importFrom(tidyr,unnest)
+importFrom(sf,
+  sf_use_s2,
+  st_bbox,
+  st_centroid,
+  st_shift_longitude
+)
+importFrom(stringr,
+  str_detect,
+  str_extract,
+  str_remove_all,
+  str_replace_all,
+  str_squish,
+  str_to_sentence
+)
+importFrom(tidyr,
+  pivot_wider,
+  unite,
+  unnest
+)
 importFrom(utils,adist)

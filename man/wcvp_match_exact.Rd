@@ -45,8 +45,8 @@ wcvp_match_exact(redlist_example, wcvp_names, "scientificName", id_col = "assess
 
 }
 \seealso{
-Other name matching functions: 
-\code{\link{wcvp_match_fuzzy}()},
-\code{\link{wcvp_match_names}()}
+Other name matching functions:
+\code{\link[=wcvp_match_fuzzy]{wcvp_match_fuzzy()}},
+\code{\link[=wcvp_match_names]{wcvp_match_names()}}
 }
 \concept{name matching functions}

@@ -39,7 +39,7 @@ Phonetic matching uses \link[phonics:metaphone]{phonics::metaphone} encoding wit
 code length of 20.
 
 Edit distance matching finds the closest match based on Levenshtein similarity,
-calculated by \link[RecordLinkage:strcmp]{RecordLinkage::levenshteinSim}.
+calculated by \link[RecordLinkage:levenshteinSim]{RecordLinkage::levenshteinSim}.
 }
 \examples{
 \donttest{ # this example requires 'rWCVPdata'
@@ -65,8 +65,8 @@ edit_match(redlist_example, wcvp_names, "scientificName")
 
 }
 \seealso{
-Other name matching functions: 
-\code{\link{wcvp_match_exact}()},
-\code{\link{wcvp_match_names}()}
+Other name matching functions:
+\code{\link[=wcvp_match_exact]{wcvp_match_exact()}},
+\code{\link[=wcvp_match_names]{wcvp_match_names()}}
 }
 \concept{name matching functions}

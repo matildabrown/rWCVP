@@ -82,8 +82,8 @@ wcvp_match_names(redlist_example, wcvp_names,
 
 }
 \seealso{
-Other name matching functions: 
-\code{\link{wcvp_match_exact}()},
-\code{\link{wcvp_match_fuzzy}()}
+Other name matching functions:
+\code{\link[=wcvp_match_exact]{wcvp_match_exact()}},
+\code{\link[=wcvp_match_fuzzy]{wcvp_match_fuzzy()}}
 }
 \concept{name matching functions}

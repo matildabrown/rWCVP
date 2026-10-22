@@ -10,7 +10,7 @@ wcvp_summary_gt(x)
 \item{x}{List.}
 }
 \value{
-\link{gt} table
+\link[gt:gt]{gt} table
 }
 \description{
 Render a summary table from \link{wcvp_summary}
