@@ -114,7 +114,7 @@ wcvp_checklist <- function(taxon = NULL, taxon_rank = c("species", "genus", "fam
     if (taxon_rank == "species") {
       df <- filter(df, .data$taxon_name %in% taxon)
     } else {
-    wcvp_names <- filter(wcvp_names, if_any(all_of(taxon_rank)) %in% taxon)
+    wcvp_names <- filter(wcvp_names, if_any(all_of(taxon_rank), ~ .x %in% taxon))
     }
   }
 
