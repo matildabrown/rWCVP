@@ -1,5 +1,8 @@
 ## Resubmission
 
+2026-20-23
+-- MJMB: Fixed the tests & example that were dependent on rWCVPdata; all 'possible misspellings' in DESCRIPTION are correct. Passing checks (locally and on winbuilder) with no errors, warnings or notes and with a clean bill of health from checktor.
+
 2026-20-22
 -- MJMB: Finally got around to fixing links in documentation and squashed a couple bugs in the process. Passing checks with no errors, warnings or notes and with a clean bill of health from checktor. 
 
