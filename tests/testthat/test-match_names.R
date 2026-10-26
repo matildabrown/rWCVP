@@ -64,6 +64,7 @@ test_that("match names returns original columns", {
 })
 
 test_that("match names works when all names match exactly", {
+  skip_if_not_installed("rWCVPdata")
   names <- tibble(original_name=c("Fagonia laevis","Dalea seemannii"),
                   author=c("Standl.","S.Watson ex Orcutt"))
 
@@ -79,6 +80,7 @@ test_that("match names works when all names match exactly", {
 })
 
 test_that("matching works with vectors", {
+  skip_if_not_installed("rWCVPdata")
   name_vec <- c("Fagonia laevis","Dalea seemannii")
   author_vec <- c("Standl.","S.Watson ex Orcutt")
 
@@ -91,6 +93,7 @@ test_that("matching works with vectors", {
 })
 
 test_that("matching fails with vectors of different lengths", {
+  skip_if_not_installed("rWCVPdata")
    name_vec <- c("Fagonia laevis","Dalea seemannii")
    author_vec <-c("Standl.","Standl.","S.Watson ex Orcutt")
 
