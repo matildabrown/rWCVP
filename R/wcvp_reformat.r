@@ -24,7 +24,7 @@
 
 wcvp_reformat <- function(wcvp_local=NULL, version = NULL) {
   lifecycle::deprecate_warn("1.3.1", "wcvp_reformat()", "dplyr::rename()")
-  rlang::check_installed("rWCVPdata", reason = "to use the data set `wcvp_names`")
+  # rlang::check_installed("rWCVPdata", reason = "to use the data set `wcvp_names`")
 
 cli::cli_alert_info(
   "We are working on a new function which will allow rWCVP functions to be used with non-WCVP datasets."
